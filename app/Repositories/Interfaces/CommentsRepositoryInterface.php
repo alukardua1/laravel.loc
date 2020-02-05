@@ -8,7 +8,7 @@
 namespace App\Repositories\Interfaces;
 
 
-interface CustomRepositoryInterface
+interface CommentsRepositoryInterface
 {
-    public function getCustom($select = '*', $columns = '', $custom = '');
+
 }

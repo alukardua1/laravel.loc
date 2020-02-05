@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Copyright (c) by anime-free
+ * Date: 2020.
+ * User: Alukardua
+ */
 
 namespace App\Repositories;
 
@@ -10,6 +14,11 @@ use App\Repositories\Interfaces\CategoryRepositoryInterface;
 class CategoryRepository implements CategoryRepositoryInterface
 {
 
+    /**
+     * @param  null  $url
+     *
+     * @return mixed
+     */
     public function getCategory($url = null)
     {
         if ($url) {

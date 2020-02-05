@@ -1,4 +1,9 @@
 <?php
+/**
+ * Copyright (c) by anime-free
+ * Date: 2020.
+ * User: Alukardua
+ */
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -44,6 +49,7 @@ class CreateAnimesTable extends Migration
             $table->string('rating')->nullable();
             $table->string('video')->nullable();
             $table->string('tip')->nullable();
+            $table->string('posted_at')->default(1);
 
             $table->timestamps();
 

@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Copyright (c) by anime-free
+ * Date: 2020.
+ * User: Alukardua
+ */
 
 namespace App\Repositories;
 
@@ -10,6 +14,11 @@ use Auth;
 use Hash;
 use Storage;
 
+/**
+ * Class UserRepository
+ *
+ * @package App\Repositories
+ */
 class UserRepository implements UserRepositoryInterface
 {
 
@@ -40,8 +49,8 @@ class UserRepository implements UserRepositoryInterface
                     return back()->withErrors(['msg' => 'Введите правильный пароль'])->withInput();
                 }
             }
+
             $data = self::uploadAvatar($updateUser, $data, $request);
-            //dd(__METHOD__, $request);
             $result = $updateUser->update($data);
 
             return $result;
