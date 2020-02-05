@@ -7,6 +7,7 @@ use App\Repositories\AnimeRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CountryRepository;
 use App\Repositories\CustomRepository;
+use App\Repositories\StaticPageRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -27,6 +28,7 @@ class Controller extends BaseController
     protected static $userRepository;
     protected static $countryRepository;
     protected static $customRepository;
+    protected static $staticPageRepository;
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, FunctionsHelpers;
 
@@ -42,6 +44,7 @@ class Controller extends BaseController
         self::$userRepository = app(UserRepository::class);
         self::$countryRepository = app(CountryRepository::class);
         self::$customRepository = app(CustomRepository::class);
+        self::$staticPageRepository = app(StaticPageRepository::class);
 
         self::$globalCategory = self::$categoryRepository->getCategory()->get();
 
@@ -51,7 +54,6 @@ class Controller extends BaseController
         $year = self::$customRepository->getCustom('aired_season')->get();
         $tip = self::$customRepository->getCustom('tip')->get();
 
-        //dd(__METHOD__, $this->customArr($year, 'aired_season'));
         View::share([
             'categoryAll'   => self::$globalCategory,
             'carouselAnime' => self::$customRepository->getCustom('*', 'released', 'ongoing')->get(),
@@ -63,7 +65,13 @@ class Controller extends BaseController
         ]);
     }
 
-    private function customArr($arr, $keys)
+    /**
+     * @param $arr
+     * @param $keys
+     *
+     * @return array
+     */
+    private function customArr($arr, $keys): array
     {
         $result = [];
         foreach ($arr as $key => $value) {

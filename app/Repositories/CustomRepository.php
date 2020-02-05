@@ -19,7 +19,7 @@ class CustomRepository implements CustomRepositoryInterface
                 ->orderBy('created_at', 'DESC');
         } else {
             $result = Anime::select($select)
-                ->with(['getCategory'])
+                /*->with(['getCategory'])*/
                 ->orderBy('created_at', 'DESC');
         }
 

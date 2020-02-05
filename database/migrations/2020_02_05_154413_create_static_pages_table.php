@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnimeTranslateTable extends Migration
+class CreateStaticPagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateAnimeTranslateTable extends Migration
      */
     public function up()
     {
-        Schema::create('anime_translate', function (Blueprint $table) {
+        Schema::create('static_pages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('anime_id');
-            $table->unsignedBigInteger('translate_id');
+            $table->string('title')->unique();
+            $table->string('url')->unique();
+            $table->text('description')->nullable();
             $table->timestamps();
-
-            $table->foreign('anime_id')->references('id')->on('animes');
-            $table->foreign('translate_id')->references('id')->on('translates');
         });
     }
 
@@ -31,6 +29,6 @@ class CreateAnimeTranslateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anime_translate');
+        Schema::dropIfExists('static_pages');
     }
 }

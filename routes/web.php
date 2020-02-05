@@ -17,18 +17,22 @@
 
 Auth::routes();
 Route::group(['namespace' => 'Main'], function () {
+    /** Главная страница */
     Route::get('', 'AnimeController@index')->name('home');
+    /** Страница аниме */
     Route::get('anime/{anime}', 'AnimeController@view')->name('anime');
-
+    /** Страница поиска */
     Route::get('search', 'AnimeController@search')->name('search');
-
+    /** Выборки по полям */
     Route::get('tip/{tip}', 'CustomController@tip')->name('tip');
     Route::get('year/{year}', 'CustomController@year')->name('year');
-
+    /** Страница пользователя */
     Route::get('user/{user}', 'UserController@profile')->name('profile')->middleware('auth');
     Route::patch('user/{user}', 'UserController@editProfile')->name('editProfile')->middleware('auth');
-
+    /** Страница категорий */
     Route::get('category/{category}', 'CategoryController@view')->name('category');
+    /** Статическая страница */
+    Route::get('page/{page}', 'StaticPageController@view')->name('page');
 });
 
 Route::group(['namespace' => 'Admin'], function () {
