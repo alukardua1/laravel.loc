@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\FunctionsHelpers;
+use App\Repositories\MainCustomRepository;
 use App\Repositories\MainRepository;
 use App\Repositories\MainSetRepository;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -15,6 +16,8 @@ class Controller extends BaseController
 {
     protected static $mainRepository;
     protected static $mainSetRepository;
+    protected static $mainCustomRepository;
+    protected static $theme;
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, FunctionsHelpers;
 
@@ -23,14 +26,18 @@ class Controller extends BaseController
      */
     public function __construct()
     {
+        $test = '';
         self::$mainRepository = app(MainRepository::class);
         self::$mainSetRepository = app(MainSetRepository::class);
+        self::$mainCustomRepository = app(MainCustomRepository::class);
+        self::$theme = env('APP_THEME');
         $kind = FunctionsHelpers::$arrTip;
 
         View::share([
             'categoryAll'      => self::$mainRepository->getAllCategory(),
             'caruselAnimePost' => self::$mainRepository->getStatus('ongoing', 100),
-            'kind'             => FunctionsHelpers::$arrTip,
+            'tip'             => FunctionsHelpers::$arrTip,
+            'theme'            => self::$theme,
         ]);
     }
 }

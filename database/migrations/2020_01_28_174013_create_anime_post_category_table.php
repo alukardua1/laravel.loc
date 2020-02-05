@@ -15,8 +15,8 @@ class CreateAnimePostCategoryTable extends Migration
     {
         Schema::create('anime_post_category', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('anime_post_id')->unsigned();
-            $table->bigInteger('category_id')->unsigned();
+            $table->unsignedBigInteger('anime_post_id');
+            $table->unsignedBigInteger('category_id');
             $table->timestamps();
 
             $table->foreign('anime_post_id')->references('id')->on('anime_posts');

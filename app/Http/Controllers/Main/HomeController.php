@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Main;
 
 
+use App\Helpers\FunctionsHelpers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class HomeController extends Controller
     {
         $animePost = self::$mainRepository->getAllAnimePost(10);
 
-        return view('home', compact('animePost'));
+        return view(self::$theme.'/home', compact('animePost'));
     }
 
     /**
@@ -31,20 +32,12 @@ class HomeController extends Controller
     {
         $animePost = self::$mainRepository->getFullAnime($anime);
         if (empty($animePost)) {
-            return view('errors.error')->withErrors(['msg' => "Пост {$anime} не найден"]);
+            return view(self::$theme.'/errors.error')->withErrors(['msg' => "Пост {$anime} не найден"]);
         }
-        $xfield = explode('||', $animePost['xfield']);
 
-        foreach ($xfield as $value) {
-            $xfields[] = explode('|', $value);
-            foreach ($xfields as $key => $item) {
-                $result[$item[0]] = $item[1];
-            }
-        }
-        $animePost['xfield'] = $result;
-        //dd(__METHOD__, $animePost, $xfields, $item,$result);
+        $kind = FunctionsHelpers::$arrRating;
 
-        return view('full_anime', compact('animePost'));
+        return view(self::$theme.'/full_anime', compact('animePost', 'kind'));
     }
 
     /**
@@ -58,11 +51,11 @@ class HomeController extends Controller
     {
         $categories = self::$mainRepository->getCategory($category);
         if (empty($categories)) {
-            return view('errors.error')->withErrors(['msg' => "Категория {$category} не найдена"]);
+            return view(self::$theme.'/errors.error')->withErrors(['msg' => "Категория {$category} не найдена"]);
         }
         $animePost = self::$mainRepository->getCategoryAnimePost($categories, 10);
 
-        return view('home', compact('animePost', 'categories'));
+        return view(self::$theme.'/home', compact('animePost', 'categories'));
     }
 
     /**
@@ -77,9 +70,9 @@ class HomeController extends Controller
         $animePost = self::$mainRepository->getSearch($request, 10);
 
         if (empty($animePost)) {
-            return view('errors.error')->withErrors(['msg' => "Ничего не найдено"]);
+            return view(self::$theme.'/errors.error')->withErrors(['msg' => "Ничего не найдено"]);
         }
-        return view('home', compact('animePost'));
+        return view(self::$theme.'/home', compact('animePost'));
     }
 
     /**
@@ -93,6 +86,6 @@ class HomeController extends Controller
     {
         $animePost = self::$mainRepository->getCustom('kind', $custom, 10);
 
-        return view('home', compact('animePost'));
+        return view(self::$theme.'/home', compact('animePost'));
     }
 }

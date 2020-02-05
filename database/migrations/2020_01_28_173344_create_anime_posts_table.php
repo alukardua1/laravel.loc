@@ -15,16 +15,36 @@ class CreateAnimePostsTable extends Migration
     {
         Schema::create('anime_posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('country_id')->unsigned();
-            $table->bigInteger('chanal_id')->unsigned()->default(1);
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('country_id');
+            $table->unsignedBigInteger('chanal_id')->default(1);
             $table->string('title')->unique();
             $table->string('url')->unique();
+            $table->string('poster')->nullable();
             $table->text('content')->nullable();
-            $table->text('xfield')->nullable();
             $table->string('description');
             $table->string('metatitle');
             $table->text('keywords');
+            $table->string('wa_id')->nullable();
+            $table->string('shikimori_id')->nullable();
+            $table->string('kp_id')->nullable();
+            $table->string('mal_id')->nullable();
+            $table->string('anidb_id')->nullable();
+            $table->string('kind');
+            $table->string('released');
+            $table->string('japanese')->nullable();
+            $table->string('english')->nullable();
+            $table->string('romaji')->nullable();
+            $table->string('aired_season')->nullable();
+            $table->Time('delivery_time')->nullable();
+            $table->string('canal')->nullable();
+            $table->string('count_series')->nullable();
+            $table->string('duration')->nullable();
+            $table->date('aired_on')->nullable();
+            $table->date('released_on')->nullable();
+            $table->string('rating')->nullable();
+            $table->string('video')->nullable();
+            $table->string('tip')->nullable();
 
             $table->timestamps();
 

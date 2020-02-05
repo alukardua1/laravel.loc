@@ -25,9 +25,9 @@ class UserController extends Controller
         $tz = self::getTimeZone();
 
         if (empty($profile)) {
-            return view('errors.error')->withErrors(['msg' => "Пользователь {$user} не найден"]);
+            return view(self::$theme.'/errors.error')->withErrors(['msg' => "Пользователь {$user} не найден"]);
         }
-        return view('profile.profile', compact('profile', 'country', 'tz'));
+        return view(self::$theme.'/profile.profile', compact('profile', 'country', 'tz'));
     }
 
     /**

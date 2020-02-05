@@ -2,12 +2,15 @@
 
 namespace App\Providers;
 
+use App\Helpers\Test;
 use Blade;
 use Illuminate\Support\ServiceProvider;
 use Route;
 
 class BladeServiceProvider extends ServiceProvider
 {
+    use Test;
+
     /**
      * Register services.
      *
@@ -30,5 +33,12 @@ class BladeServiceProvider extends ServiceProvider
 
             return in_array(Route::currentRouteName(), $routeName, true);
         });
+
+        Blade::directive('custom', function ($expression) {
+            $test = $this->test($expression);
+
+            return $test;
+        });
+
     }
 }
