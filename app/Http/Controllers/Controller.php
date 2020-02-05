@@ -7,9 +7,6 @@ use App\Repositories\AnimeRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CountryRepository;
 use App\Repositories\CustomRepository;
-use App\Repositories\MainCustomRepository;
-use App\Repositories\MainRepository;
-use App\Repositories\MainSetRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -35,6 +32,8 @@ class Controller extends BaseController
 
     /**
      * Create a new controller instance.
+     *
+     * @param  null  $value
      */
     public function __construct()
     {
@@ -49,14 +48,32 @@ class Controller extends BaseController
         self::$paginate = env('APP_PAGINATE');
         self::$theme = env('APP_THEME');
         self::$kind = FunctionsHelpers::$arrRating;
+        $year = self::$customRepository->getCustom('aired_season')->get();
+        $tip = self::$customRepository->getCustom('tip')->get();
 
-
+        //dd(__METHOD__, $this->customArr($year, 'aired_season'));
         View::share([
-            'categoryAll'      => self::$globalCategory,
-            'caruselAnimePost' => [],
-            'tip'              => FunctionsHelpers::$arrTip,
-            'theme'            => self::$theme,
-            'kind'             => self::$kind
+            'categoryAll'   => self::$globalCategory,
+            'carouselAnime' => self::$customRepository->getCustom('*', 'released', 'ongoing')->get(),
+            'yearCustom'    => $this->customArr($year, 'aired_season'),
+            'tipRu'         => FunctionsHelpers::$arrTip,
+            'tip'           => $this->customArr($tip, 'tip'),
+            'theme'         => self::$theme,
+            'kind'          => self::$kind
         ]);
+    }
+
+    private function customArr($arr, $keys)
+    {
+        $result = [];
+        foreach ($arr as $key => $value) {
+            $result[] = $value[$keys];
+        }
+
+        $result = array_count_values($result);
+
+        krsort($result);
+
+        return $result;
     }
 }

@@ -6,5 +6,5 @@ namespace App\Repositories\Interfaces;
 
 interface CustomRepositoryInterface
 {
-    public function getCustom($columns, $custom, $paginate);
+    public function getCustom($select = '*', $columns = '', $custom = '');
 }

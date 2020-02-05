@@ -22,7 +22,8 @@ Route::group(['namespace' => 'Main'], function () {
 
     Route::get('search', 'AnimeController@search')->name('search');
 
-    Route::get('tip/{kind}', 'CustomController@tip')->name('tip');
+    Route::get('tip/{tip}', 'CustomController@tip')->name('tip');
+    Route::get('year/{year}', 'CustomController@year')->name('year');
 
     Route::get('user/{user}', 'UserController@profile')->name('profile')->middleware('auth');
     Route::patch('user/{user}', 'UserController@editProfile')->name('editProfile')->middleware('auth');

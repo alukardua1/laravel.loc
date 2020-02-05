@@ -29,4 +29,10 @@ class Anime extends Model
     {
         return $this->belongsTo(Country::class, 'country_id');
     }
+
+    public function countAnime($field)
+    {
+        dd(__METHOD__, $field);
+        return $this->hasOne(__CLASS__, $field, $field);
+    }
 }

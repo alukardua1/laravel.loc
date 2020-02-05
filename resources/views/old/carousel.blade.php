@@ -1,4 +1,4 @@
-@foreach($caruselAnimePost as $animePost)
+@foreach($carouselAnime as $animePost)
     <div class="row">
         <div class="col-md-3">
             <img

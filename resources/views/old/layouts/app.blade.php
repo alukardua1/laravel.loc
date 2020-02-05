@@ -84,7 +84,7 @@
         @available('home')
         <div class="jumbotron hoverable p-4">
             <div id="carousel" class="owl-carousel owl-theme">
-                @include($theme.'/carusel')
+                @include($theme.'/carousel')
             </div>
         </div>
         @endavailable
@@ -121,12 +121,13 @@
                                 <strong>Тип</strong>
                             </p>
                             <ul class="list-group my-4">
+
                                 @foreach($tip as $key => $value)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <a href='{{route('tip', $key)}}'>
-                                            <p class="mb-0">{{$value}}</p>
+                                            <p class="mb-0">{{$tipRu[$key]}}</p>
                                         </a>
-                                        {{--<span class="badge teal badge-pill font-small float-right">".$value."</span>--}}
+                                        <span class="badge teal badge-pill font-small float-right">{{$value}}</span>
                                     </li>
                                 @endforeach
                             </ul>
@@ -209,6 +210,7 @@
     </button>
 </div>
 @include($theme.'/category')
+@include($theme.'/year')
 {{--{include file="modules/modal-studios.tpl"}
 {include file="modules/modal-scoring.tpl"}
 {include file="modules/modal-year.tpl"}--}}
@@ -223,7 +225,5 @@
 <script src="{{ asset('theme/'.$theme.'/js/my.js') }}" defer></script>
 <script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
 <script src="https://yastatic.net/share2/share.js"></script>
-<script src="https://partnercoll.github.io/actualize.js" async></script>
-<script src="https://weblion777.github.io/hdvb.js"></script>
 </body>
 </html>

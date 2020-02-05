@@ -10,12 +10,18 @@ use App\Repositories\Interfaces\CustomRepositoryInterface;
 class CustomRepository implements CustomRepositoryInterface
 {
 
-    public function getCustom($columns, $custom, $paginate)
+    public function getCustom($select = '*', $columns = null, $custom = null)
     {
-        $result = Anime::with(['getCategory'])
-            ->where($columns, $custom)
-            ->orderBy('created_at', 'DESC')
-            ->paginate($paginate);
+        if ($columns) {
+            $result = Anime::select($select)
+                ->with(['getCategory'])
+                ->where($columns, $custom)
+                ->orderBy('created_at', 'DESC');
+        } else {
+            $result = Anime::select($select)
+                ->with(['getCategory'])
+                ->orderBy('created_at', 'DESC');
+        }
 
         return $result;
     }
