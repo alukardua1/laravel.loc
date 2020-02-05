@@ -3,21 +3,32 @@
 
 namespace App\Repositories;
 
+
 use App\Models\User;
-use App\Repositories\Interfaces\MainSetRepositoryInterface;
+use App\Repositories\Interfaces\UserRepositoryInterface;
 use Auth;
 use Hash;
 use Storage;
 
-class MainSetRepository implements MainSetRepositoryInterface
+class UserRepository implements UserRepositoryInterface
 {
+
+    public function getUsers($user)
+    {
+        $result = User::with(['getGroup:id,title', 'getCountry:id,title'])
+            ->where('login', $user)
+            ->first();
+
+        return $result;
+    }
+
     /**
      * @param  \App\Http\Requests\UserRequest  $request
      * @param                                  $user
      *
      * @return mixed
      */
-    public static function setUser($request, $user)
+    public function setUser($request, $user)
     {
         if ($request->user()) {
             $updateUser = User::where('login', $user)->first();
@@ -44,9 +55,8 @@ class MainSetRepository implements MainSetRepositoryInterface
      *
      * @return mixed
      */
-    public static function uploadAvatar($updateUser, $data, $request)
+    public function uploadAvatar($updateUser, $data, $request)
     {
-
         if (isset($data['del_foto'])) {
             $data['photo'] = '';
             Storage::delete('public/avatars'.$updateUser->photo);

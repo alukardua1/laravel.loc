@@ -16,8 +16,8 @@ class UserController extends Controller
      */
     public function profile($user)
     {
-        $profile = self::$mainRepository->getUsers($user);
-        $country = self::$mainRepository->getCountry(['id', 'title']);
+        $profile = self::$userRepository->getUsers($user);
+        $country = self::$countryRepository->getCountry(['id', 'title']);
         foreach ($country as $key => $value) {
             $result[$value['id']] = $value['title'];
         }
@@ -38,8 +38,7 @@ class UserController extends Controller
      */
     public function editProfile(UserRequest $request, $user): \Illuminate\Http\RedirectResponse
     {
-        //dd(__METHOD__, $request);
-        $result = self::$mainSetRepository::setUser($request, $user);
+        $result = self::$userRepository->setUser($request, $user);
 
         if ($result) {
             return redirect()->route('profile', $user);

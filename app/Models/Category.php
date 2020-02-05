@@ -13,4 +13,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Anime::class);
     }
+
+    public function getCategory()
+    {
+        return $this->hasOne(__CLASS__, 'id', 'id');
+    }
 }
