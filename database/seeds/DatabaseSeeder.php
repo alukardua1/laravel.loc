@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\AnimePost;
+use App\Models\Anime;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
         $this->call(GroupSeeder::class);
-        $this->call(ChanalsSeeder::class);
         $this->call(CountriesSeeder::class);
         $this->call(UsersSeeder::class);
         $this->call(CategorySeeder::class);
-        factory(AnimePost::class, 100)->create();
+        factory(Anime::class, 100)->create();
         $this->call(AnimeCategorySeeder::class);
     }
 }

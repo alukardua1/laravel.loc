@@ -85,7 +85,7 @@
                     </div>
                     <div class="col-md-8">
                             <span itemprop="sdDatePublished" class="float-xl-right url">
-                                в {{ $animePost->delivery_time }} на {{ $animePost->chanal }}
+                                в {{ $animePost->delivery_time }} на {{ $animePost->tv_canal }}
                             </span>
                     </div>
                 </div>
@@ -164,7 +164,7 @@
                     </div>
                     <div class="col-md-8">
                             <span itemprop="timeRequired" class="float-xl-right url">
-                                {{ $animePost->tip }} ({{ $animePost->count_series }} эп.) {{ $animePost->duration }} мин.
+                                {{ $tip[$animePost->tip] }} ({{ $animePost->count_series }} эп.) {{ $animePost->duration }} мин.
                             </span>
                     </div>
                 </div>

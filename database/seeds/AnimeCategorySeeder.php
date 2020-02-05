@@ -19,11 +19,11 @@ class AnimeCategorySeeder extends Seeder
             //$parentId = ($i > 4) ? rand(1, 4) : 1;
 
             $categories[] = [
-                'anime_post_id' => random_int(1, 100),
+                'anime_id' => random_int(1, 100),
                 'category_id'   => random_int(1, 10),
             ];
         }
 
-        DB::table('anime_post_category')->insert($categories);
+        DB::table('anime_category')->insert($categories);
     }
 }

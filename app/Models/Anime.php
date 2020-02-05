@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AnimePost extends Model
+class Anime extends Model
 {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -19,7 +19,7 @@ class AnimePost extends Model
      */
     public function getUsers(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -27,6 +27,6 @@ class AnimePost extends Model
      */
     public function getCountry(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Country::class, 'country_id', 'id');
+        return $this->belongsTo(Country::class, 'country_id');
     }
 }

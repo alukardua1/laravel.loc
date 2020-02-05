@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $animePost = self::$mainRepository->getAllAnimePost(10);
+        $animePost = self::$mainRepository->getAllAnime(10);
 
         return view(self::$theme.'/home', compact('animePost'));
     }
@@ -84,7 +84,7 @@ class HomeController extends Controller
      */
     public function custom($custom)
     {
-        $animePost = self::$mainRepository->getCustom('kind', $custom, 10);
+        $animePost = self::$mainRepository->getCustom('tip', $custom, 10);
 
         return view(self::$theme.'/home', compact('animePost'));
     }

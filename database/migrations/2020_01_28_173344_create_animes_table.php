@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnimePostsTable extends Migration
+class CreateAnimesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateAnimePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('anime_posts', function (Blueprint $table) {
+        Schema::create('animes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('country_id');
-            $table->unsignedBigInteger('chanal_id')->default(1);
             $table->string('title')->unique();
             $table->string('url')->unique();
             $table->string('poster')->nullable();
@@ -37,7 +36,7 @@ class CreateAnimePostsTable extends Migration
             $table->string('romaji')->nullable();
             $table->string('aired_season')->nullable();
             $table->Time('delivery_time')->nullable();
-            $table->string('canal')->nullable();
+            $table->string('tv_canal')->nullable();
             $table->string('count_series')->nullable();
             $table->string('duration')->nullable();
             $table->date('aired_on')->nullable();
@@ -50,7 +49,6 @@ class CreateAnimePostsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('country_id')->references('id')->on('countries');
-            $table->foreign('chanal_id')->references('id')->on('chanals');
         });
     }
 
@@ -61,6 +59,6 @@ class CreateAnimePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anime_posts');
+        Schema::dropIfExists('animes');
     }
 }

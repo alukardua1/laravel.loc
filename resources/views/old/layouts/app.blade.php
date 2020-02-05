@@ -123,7 +123,7 @@
                             <ul class="list-group my-4">
                                 @foreach($tip as $key => $value)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <a href='{{route('kind', $value)}}'>
+                                        <a href='{{route('tip', $key)}}'>
                                             <p class="mb-0">{{$value}}</p>
                                         </a>
                                         {{--<span class="badge teal badge-pill font-small float-right">".$value."</span>--}}

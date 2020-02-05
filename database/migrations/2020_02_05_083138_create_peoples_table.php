@@ -16,7 +16,8 @@ class CreatePeoplesTable extends Migration
         Schema::create('peoples', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
-            $table->string('foto')->nullable();
+            $table->string('url');
+            $table->string('photo')->nullable();
             $table->string('roles');
             $table->string('roles_rus');
             $table->string('eng_name')->nullable();

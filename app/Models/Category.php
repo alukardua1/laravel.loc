@@ -11,6 +11,6 @@ class Category extends Model
      */
     public function getAnime(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(AnimePost::class);
+        return $this->belongsToMany(Anime::class);
     }
 }

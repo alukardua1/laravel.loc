@@ -19,7 +19,7 @@ Auth::routes();
 Route::group(['namespace' => 'Main'], function () {
     Route::get('', 'HomeController@index')->name('home');
     Route::get('search', 'HomeController@search')->name('search');
-    Route::get('kind/{kind}', 'HomeController@custom')->name('kind');
+    Route::get('tip/{kind}', 'HomeController@custom')->name('tip');
     Route::get('anime/{anime}', 'HomeController@anime')->name('anime');
     Route::get('user/{user}', 'UserController@profile')->name('profile')->middleware('auth');
     Route::patch('user/{user}', 'UserController@editProfile')->name('editProfile')->middleware('auth');

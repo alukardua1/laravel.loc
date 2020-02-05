@@ -9,7 +9,7 @@
                     <div class="product-2">
                         <img class="img-fluid wow fadeInUp" src="{{ isset($post->poster) ?
                                      /*asset('storage/'. $post->poster)*/ asset($post->poster): asset('theme/'.$theme.'/images/no_poster.jpg')}}" alt="{title}">
-                        <span class="sale-2 z-depth-1">TV</span>
+                        <span class="sale-2 z-depth-1">{{ $tip[$post->tip] }}</span>
                     </div>
                     <a>
                         <div class="mask rgba-white-slight"></div>

@@ -13,7 +13,7 @@ interface MainRepositoryInterface
      *
      * @return mixed
      */
-    public function getAllAnimePost($paginate);
+    public function getAllAnime($paginate);
 
     /**
      * @return mixed
@@ -26,7 +26,7 @@ interface MainRepositoryInterface
      *
      * @return mixed
      */
-    public function getCategoryAnimePost($category, $paginate);
+    public function getCategoryAnime($category, $paginate);
 
     /**
      * @param $category

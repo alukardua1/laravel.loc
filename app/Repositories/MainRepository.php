@@ -4,7 +4,7 @@
 namespace App\Repositories;
 
 
-use App\Models\AnimePost;
+use App\Models\Anime;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\User;
@@ -20,9 +20,9 @@ class MainRepository implements MainRepositoryInterface
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getAllAnimePost($paginate)
+    public function getAllAnime($paginate)
     {
-        $result = AnimePost::with(['getCategory'])
+        $result = Anime::with(['getCategory'])
             ->orderBy('created_at', 'DESC')
             ->paginate($paginate);
 
@@ -50,7 +50,7 @@ class MainRepository implements MainRepositoryInterface
      *
      * @return mixed
      */
-    public function getCategoryAnimePost($category, $paginate)
+    public function getCategoryAnime($category, $paginate)
     {
         $result = $category
             ->getAnime()
@@ -86,7 +86,7 @@ class MainRepository implements MainRepositoryInterface
      */
     public function getFullAnime($anime)
     {
-        $result = AnimePost::with(['getCategory', 'getUsers:id,login', 'getCountry'])
+        $result = Anime::with(['getCategory', 'getUsers:id,login', 'getCountry'])
             ->where('url', $anime)
             ->first();
 
@@ -132,7 +132,7 @@ class MainRepository implements MainRepositoryInterface
      */
     public function getSearch(Request $request, $paginate)
     {
-        $result = AnimePost::with(['getCategory'])
+        $result = Anime::with(['getCategory'])
             ->orWhere('title', 'LIKE', '%'.$request->story.'%')
             ->orderBy('created_at', 'DESC')
             ->paginate($paginate);
@@ -150,7 +150,7 @@ class MainRepository implements MainRepositoryInterface
      */
     public function getStatus($status, $count)
     {
-        /*$result = AnimePost::with(['getCategory'])
+        /*$result = Anime::with(['getCategory'])
             ->where('status', $status)
             ->orderBy('created_at', 'DESC')
             ->limit($count)
@@ -170,11 +170,11 @@ class MainRepository implements MainRepositoryInterface
      */
     public function getCustom($columns, $custom, $paginate)
     {
-        $result = AnimePost::with(['getCategory'])
+        $result = Anime::with(['getCategory'])
             ->where($columns, $custom)
             ->orderBy('created_at', 'DESC')
             ->paginate($paginate);
-
+//dd(__METHOD__, $result, $columns, $custom, $paginate);
         return $result;
     }
 }
