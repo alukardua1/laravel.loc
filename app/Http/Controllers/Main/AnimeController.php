@@ -9,10 +9,26 @@ namespace App\Http\Controllers\Main;
 
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Repositories\Interfaces\AnimeRepositoryInterface;
 
+/**
+ * Class AnimeController
+ *
+ * @package App\Http\Controllers\Main
+ */
 class AnimeController extends Controller
 {
+    /**
+     * AnimeController constructor.
+     *
+     * @param  \App\Repositories\Interfaces\AnimeRepositoryInterface  $repository
+     */
+    public function __construct(AnimeRepositoryInterface $repository)
+    {
+        parent::__construct();
+        self::$animeRepository = $repository;
+    }
+
     /**
      * Главная страница аниме
      *

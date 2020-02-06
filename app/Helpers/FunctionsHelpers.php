@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Copyright (c) by anime-free
+ * Date: 2020.
+ * User: Alukardua
+ */
 
 namespace App\Helpers;
 
@@ -36,6 +40,7 @@ trait FunctionsHelpers
         'R-17'  => '<span class="float-xl-right">"R" - Лицам до 17 лет обязательно присутствие взрослого</span>',
         'R+'    => '<span class="float-xl-right">"R+" - Лицам до 17 лет просмотр запрещен</span>',
     ];
+
     /**
      * @var array
      */
@@ -46,6 +51,7 @@ trait FunctionsHelpers
         9  => 'осень - ',
         12 => 'зима - '
     ];
+
     /**
      * @var array
      */
@@ -82,9 +88,11 @@ trait FunctionsHelpers
     }
 
     /**
-     * @param       $arrayWords
-     * @param  int  $repeatWordCount
-     * @param  int  $minWordLength
+     * Генератор ключевых слов
+     *
+     * @param  mixed  $arrayWords
+     * @param  int    $repeatWordCount
+     * @param  int    $minWordLength
      *
      * @return array
      */

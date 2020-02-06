@@ -9,6 +9,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Anime
+ *
+ * @package App\Models
+ */
 class Anime extends Model
 {
     /**
@@ -35,6 +40,13 @@ class Anime extends Model
         return $this->belongsTo(Country::class, 'country_id');
     }
 
+    /**
+     * @todo Решить нужна ли эта функция подсчета записей
+     *
+     * @param $field
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function countAnime($field)
     {
         dd(__METHOD__, $field);

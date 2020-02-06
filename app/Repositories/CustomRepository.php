@@ -11,28 +11,32 @@ namespace App\Repositories;
 use App\Models\Anime;
 use App\Repositories\Interfaces\CustomRepositoryInterface;
 
+/**
+ * Class CustomRepository
+ *
+ * @package App\Repositories
+ */
 class CustomRepository implements CustomRepositoryInterface
 {
 
     /**
-     * @param  string  $select
-     * @param  null    $columns
-     * @param  null    $custom
+     * @param  mixed   $select
+     * @param  string  $columns
+     * @param  string  $variable
      *
      * @return mixed
      */
-    public function getCustom($select = '*', $columns = null, $custom = null)
+    public function getCustom($select = '*', $columns = null, $variable = null)
     {
         if ($columns) {
             $result = Anime::select($select)
                 ->with(['getCategory'])
-                ->where($columns, $custom)
+                ->where($columns, $variable)
                 ->where('posted_at', 1)
                 ->orderBy('created_at', 'DESC');
         } else {
             $result = Anime::select($select)
                 ->where('posted_at', 1)
-                /*->with(['getCategory'])*/
                 ->orderBy('created_at', 'DESC');
         }
 

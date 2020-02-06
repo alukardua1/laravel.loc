@@ -11,12 +11,16 @@ namespace App\Repositories;
 use App\Models\Anime;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 
+/**
+ * Class AnimeRepository
+ *
+ * @package App\Repositories
+ */
 class AnimeRepository implements AnimeRepositoryInterface
 {
 
     /**
-     * @param  null  $url
-     * @param  int   $posted
+     * @param  mixed  $url
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */

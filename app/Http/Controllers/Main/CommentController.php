@@ -10,6 +10,11 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/**
+ * Class CommentController
+ *
+ * @package App\Http\Controllers\Main
+ */
 class CommentController extends Controller
 {
     //

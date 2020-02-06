@@ -1,10 +1,33 @@
 <?php
+/**
+ * Copyright (c) by anime-free
+ * Date: 2020.
+ * User: Alukardua
+ */
 
 namespace App\Providers;
 
 
-use App\Repositories\Interfaces\MainRepositoryInterface;
-use App\Repositories\MainRepository;
+use App\Repositories\AnimeRepository;
+use App\Repositories\CategoryRepository;
+use App\Repositories\CharacterRepository;
+use App\Repositories\CommentsRepository;
+use App\Repositories\CountryRepository;
+use App\Repositories\CustomRepository;
+use App\Repositories\Interfaces\AnimeRepositoryInterface;
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use App\Repositories\Interfaces\CharacterRepositoryInterface;
+use App\Repositories\Interfaces\CommentsRepositoryInterface;
+use App\Repositories\Interfaces\CountryRepositoryInterface;
+use App\Repositories\Interfaces\CustomRepositoryInterface;
+use App\Repositories\Interfaces\PeopleRepositoryInterface;
+use App\Repositories\Interfaces\StaticPageRepositoryInterface;
+use App\Repositories\Interfaces\TranslateRepositoryInterface;
+use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Repositories\PeopleRepository;
+use App\Repositories\StaticPageRepository;
+use App\Repositories\TranslateRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -17,8 +40,44 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            MainRepositoryInterface::class,
-            MainRepository::class
+            AnimeRepositoryInterface::class,
+            AnimeRepository::class
+        );
+        $this->app->bind(
+            CategoryRepositoryInterface::class,
+            CategoryRepository::class
+        );
+        $this->app->bind(
+            CharacterRepositoryInterface::class,
+            CharacterRepository::class
+        );
+        $this->app->bind(
+            CommentsRepositoryInterface::class,
+            CommentsRepository::class
+        );
+        $this->app->bind(
+            CountryRepositoryInterface::class,
+            CountryRepository::class
+        );
+        $this->app->bind(
+            CustomRepositoryInterface::class,
+            CustomRepository::class
+        );
+        $this->app->bind(
+            PeopleRepositoryInterface::class,
+            PeopleRepository::class
+        );
+        $this->app->bind(
+            StaticPageRepositoryInterface::class,
+            StaticPageRepository::class
+        );
+        $this->app->bind(
+            TranslateRepositoryInterface::class,
+            TranslateRepository::class
+        );
+        $this->app->bind(
+            UserRepositoryInterface::class,
+            UserRepository::class
         );
     }
 

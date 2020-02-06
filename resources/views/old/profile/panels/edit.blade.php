@@ -19,7 +19,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            {{Form::select('country_id', $country, (string)$profile->country_id, ['id'=>'country', 'class'=>'mdb-select md-form colorful-select dropdown-info'])}}
+            {{Form::select('country_id', (array)$countryArray, (string)$profile->country_id, ['id'=>'country', 'class'=>'mdb-select md-form colorful-select dropdown-info'])}}
             {{ Form::label('country', 'Страна проживания',['class'=>'title-info mdb-main-label']) }}
         </div>
     </div>

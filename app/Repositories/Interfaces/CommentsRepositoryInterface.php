@@ -8,6 +8,11 @@
 namespace App\Repositories\Interfaces;
 
 
+/**
+ * Interface CommentsRepositoryInterface
+ *
+ * @package App\Repositories\Interfaces
+ */
 interface CommentsRepositoryInterface
 {
 

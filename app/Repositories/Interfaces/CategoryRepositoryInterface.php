@@ -8,7 +8,17 @@
 namespace App\Repositories\Interfaces;
 
 
+/**
+ * Interface CategoryRepositoryInterface
+ *
+ * @package App\Repositories\Interfaces
+ */
 interface CategoryRepositoryInterface
 {
+    /**
+     * @param  null  $url Url default null
+     *
+     * @return mixed
+     */
     public function getCategory($url = null);
 }

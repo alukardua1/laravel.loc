@@ -1,4 +1,9 @@
 <?php
+/**
+ * Copyright (c) by anime-free
+ * Date: 2020.
+ * User: Alukardua
+ */
 
 namespace App\Providers;
 
@@ -9,7 +14,6 @@ use Route;
 
 class BladeServiceProvider extends ServiceProvider
 {
-    use Test;
 
     /**
      * Register services.
@@ -32,12 +36,6 @@ class BladeServiceProvider extends ServiceProvider
             $routeName = explode('|', $expression);
 
             return in_array(Route::currentRouteName(), $routeName, true);
-        });
-
-        Blade::directive('custom', function ($expression) {
-            $test = $this->test($expression);
-
-            return $test;
         });
 
     }

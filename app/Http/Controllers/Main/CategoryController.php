@@ -10,6 +10,11 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/**
+ * Class CategoryController
+ *
+ * @package App\Http\Controllers\Main
+ */
 class CategoryController extends Controller
 {
     /**

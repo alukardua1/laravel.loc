@@ -8,10 +8,26 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Repositories\Interfaces\StaticPageRepositoryInterface;
 
+/**
+ * Class StaticPageController
+ *
+ * @package App\Http\Controllers\Main
+ */
 class StaticPageController extends Controller
 {
+    /**
+     * StaticPageController constructor.
+     *
+     * @param  \App\Repositories\Interfaces\StaticPageRepositoryInterface  $repository
+     */
+    public function __construct(StaticPageRepositoryInterface $repository)
+    {
+        parent::__construct();
+        self::$staticPageRepository = $repository;
+    }
+
     /**
      *
      */

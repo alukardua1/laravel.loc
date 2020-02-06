@@ -8,6 +8,11 @@
 namespace App\Repositories\Interfaces;
 
 
+/**
+ * Interface PeopleRepositoryInterface
+ *
+ * @package App\Repositories\Interfaces
+ */
 interface PeopleRepositoryInterface
 {
 

@@ -11,11 +11,16 @@ namespace App\Repositories;
 use App\Models\Category;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 
+/**
+ * Class CategoryRepository
+ *
+ * @package App\Repositories
+ */
 class CategoryRepository implements CategoryRepositoryInterface
 {
 
     /**
-     * @param  null  $url
+     * @param  mixed  $url
      *
      * @return mixed
      */

@@ -10,6 +10,11 @@ namespace App\Repositories;
 
 use App\Repositories\Interfaces\TranslateRepositoryInterface;
 
+/**
+ * Class TranslateRepository
+ *
+ * @package App\Repositories
+ */
 class TranslateRepository implements TranslateRepositoryInterface
 {
 

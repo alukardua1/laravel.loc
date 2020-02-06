@@ -8,7 +8,17 @@
 namespace App\Repositories\Interfaces;
 
 
+/**
+ * Interface StaticPageRepositoryInterface
+ *
+ * @package App\Repositories\Interfaces
+ */
 interface StaticPageRepositoryInterface
 {
+    /**
+     * @param mixed $url Url static page
+     *
+     * @return mixed
+     */
     public function getStaticPage($url);
 }

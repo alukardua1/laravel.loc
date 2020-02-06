@@ -8,6 +8,11 @@
 namespace App\Repositories\Interfaces;
 
 
+/**
+ * Interface CharacterRepositoryInterface
+ *
+ * @package App\Repositories\Interfaces
+ */
 interface CharacterRepositoryInterface
 {
 

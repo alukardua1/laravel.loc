@@ -9,6 +9,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Translate
+ *
+ * @package App\Models
+ */
 class Translate extends Model
 {
     //

@@ -11,18 +11,21 @@ namespace App\Repositories;
 use App\Models\StaticPage;
 use App\Repositories\Interfaces\StaticPageRepositoryInterface;
 
+/**
+ * Class StaticPageRepository
+ *
+ * @package App\Repositories
+ */
 class StaticPageRepository implements StaticPageRepositoryInterface
 {
 
     /**
-     * @param $url
+     * @param mixed $url Url static page
      *
      * @return mixed
      */
     public function getStaticPage($url)
     {
-        $result = StaticPage::where('url', $url)->first();
-
-        return $result;
+        return StaticPage::where('url', $url)->first();
     }
 }

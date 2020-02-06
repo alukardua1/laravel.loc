@@ -8,6 +8,11 @@
 namespace App\Repositories\Interfaces;
 
 
+/**
+ * Interface TranslateRepositoryInterface
+ *
+ * @package App\Repositories\Interfaces
+ */
 interface TranslateRepositoryInterface
 {
 

@@ -10,6 +10,11 @@ namespace App\Repositories;
 
 use App\Repositories\Interfaces\PeopleRepositoryInterface;
 
+/**
+ * Class PeopleRepository
+ *
+ * @package App\Repositories
+ */
 class PeopleRepository implements PeopleRepositoryInterface
 {
 

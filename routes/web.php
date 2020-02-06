@@ -1,4 +1,9 @@
 <?php
+/**
+ * Copyright (c) by anime-free
+ * Date: 2020.
+ * User: Alukardua
+ */
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +32,8 @@ Route::group(['namespace' => 'Main'], function () {
     Route::get('tip/{tip}', 'CustomController@tip')->name('tip');
     Route::get('year/{year}', 'CustomController@year')->name('year');
     /** Страница пользователя */
-    Route::get('user/{user}', 'UserController@profile')->name('profile')->middleware('auth');
-    Route::patch('user/{user}', 'UserController@editProfile')->name('editProfile')->middleware('auth');
+    Route::get('user/{user}', 'UserController@view')->name('profile')->middleware('auth');
+    Route::patch('user/{user}', 'UserController@update')->name('editProfile')->middleware('auth');
     /** Страница категорий */
     Route::get('category/{category}', 'CategoryController@view')->name('category');
     /** Статическая страница */

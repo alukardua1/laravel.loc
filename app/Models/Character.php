@@ -10,6 +10,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Character
+ *
+ * @package App\Models
+ */
 class Character extends Model
 {
 

@@ -1,53 +1,85 @@
 <?php
+/**
+ * Copyright (c) by anime-free
+ * Date: 2020.
+ * User: Alukardua
+ */
 
 namespace App\Http\Controllers;
 
 use App\Helpers\FunctionsHelpers;
-use App\Repositories\AnimeRepository;
-use App\Repositories\CategoryRepository;
-use App\Repositories\CountryRepository;
-use App\Repositories\CustomRepository;
-use App\Repositories\StaticPageRepository;
-use App\Repositories\UserRepository;
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use App\Repositories\Interfaces\CountryRepositoryInterface;
+use App\Repositories\Interfaces\CustomRepositoryInterface;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use View;
 
+
+/**
+ * Class Controller
+ *
+ * @package App\Http\Controllers
+ */
 class Controller extends BaseController
 {
+    /**
+     * @var mixed
+     */
     protected static $theme;
+    /**
+     * @var array $kind
+     */
     protected static $kind;
+    /**
+     * @var int $paginate
+     */
     protected static $paginate;
 
+    /**
+     * @var array $globalCategory
+     */
     protected static $globalCategory;
 
+    /**
+     * @var \App\Repositories\AnimeRepository|\Illuminate\Contracts\Foundation\Application|mixed
+     */
     protected static $animeRepository;
+    /**
+     * @var \App\Repositories\CategoryRepository|\Illuminate\Contracts\Foundation\Application|mixed
+     */
     protected static $categoryRepository;
+    /**
+     * @var \App\Repositories\UserRepository|\Illuminate\Contracts\Foundation\Application|mixed
+     */
     protected static $userRepository;
+    /**
+     * @var \App\Repositories\CountryRepository|\Illuminate\Contracts\Foundation\Application|mixed
+     */
     protected static $countryRepository;
+    /**
+     * @var \App\Repositories\CustomRepository|\Illuminate\Contracts\Foundation\Application|mixed
+     */
     protected static $customRepository;
+    /**
+     * @var \App\Repositories\StaticPageRepository|\Illuminate\Contracts\Foundation\Application|mixed
+     */
     protected static $staticPageRepository;
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, FunctionsHelpers;
 
     /**
-     * Create a new controller instance.
-     *
-     * @param  null  $value
+     * Controller constructor.
      */
     public function __construct()
     {
-        self::$animeRepository = app(AnimeRepository::class);
-        self::$categoryRepository = app(CategoryRepository::class);
-        self::$userRepository = app(UserRepository::class);
-        self::$countryRepository = app(CountryRepository::class);
-        self::$customRepository = app(CustomRepository::class);
-        self::$staticPageRepository = app(StaticPageRepository::class);
+        self::$categoryRepository = app(CategoryRepositoryInterface::class);
+        self::$countryRepository = app(CountryRepositoryInterface::class);
+        self::$customRepository = app(CustomRepositoryInterface::class);
 
         self::$globalCategory = self::$categoryRepository->getCategory()->get();
-
         self::$paginate = env('APP_PAGINATE');
         self::$theme = env('APP_THEME');
         self::$kind = FunctionsHelpers::$arrRating;
@@ -66,8 +98,10 @@ class Controller extends BaseController
     }
 
     /**
-     * @param $arr
-     * @param $keys
+     * Обрабатывает поля для глобальных кустом
+     *
+     * @param array $arr
+     * @param string $keys
      *
      * @return array
      */

@@ -8,7 +8,17 @@
 namespace App\Repositories\Interfaces;
 
 
+/**
+ * Interface CountryRepositoryInterface
+ *
+ * @package App\Repositories\Interfaces
+ */
 interface CountryRepositoryInterface
 {
-    public function getCountry($selectRows);
+    /**
+     * @param array $selectColumns Load select columns
+     *
+     * @return mixed
+     */
+    public function getCountry($selectColumns);
 }

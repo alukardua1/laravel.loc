@@ -10,6 +10,11 @@ namespace App\Repositories;
 
 use App\Repositories\Interfaces\CommentsRepositoryInterface;
 
+/**
+ * Class CommentsRepository
+ *
+ * @package App\Repositories
+ */
 class CommentsRepository implements CommentsRepositoryInterface
 {
 

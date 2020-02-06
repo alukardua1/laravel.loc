@@ -11,18 +11,22 @@ namespace App\Repositories;
 use App\Models\Country;
 use App\Repositories\Interfaces\CountryRepositoryInterface;
 
+/**
+ * Class CountryRepository
+ *
+ * @package App\Repositories
+ */
 class CountryRepository implements CountryRepositoryInterface
 {
+
     /**
-     * @param $selectRows
+     * @param  array  $selectColumns
      *
      * @return mixed
      */
-    public function getCountry($selectRows)
+    public function getCountry($selectColumns)
     {
-        $result = Country::select($selectRows)
+        return Country::select($selectColumns)
             ->get();
-
-        return $result;
     }
 }
