@@ -32,7 +32,7 @@ class Controller extends BaseController
     /**
      * @var array $kind
      */
-    protected static $kind;
+    private static $kind;
     /**
      * @var int $paginate
      */
@@ -41,34 +41,27 @@ class Controller extends BaseController
     /**
      * @var array $globalCategory
      */
-    protected static $globalCategory;
+    private static $globalCategory;
 
-    /**
-     * @var \App\Repositories\AnimeRepository|\Illuminate\Contracts\Foundation\Application|mixed
-     */
-    protected static $animeRepository;
     /**
      * @var \App\Repositories\CategoryRepository|\Illuminate\Contracts\Foundation\Application|mixed
      */
     protected static $categoryRepository;
-    /**
-     * @var \App\Repositories\UserRepository|\Illuminate\Contracts\Foundation\Application|mixed
-     */
-    protected static $userRepository;
+
     /**
      * @var \App\Repositories\CountryRepository|\Illuminate\Contracts\Foundation\Application|mixed
      */
     protected static $countryRepository;
+
     /**
      * @var \App\Repositories\CustomRepository|\Illuminate\Contracts\Foundation\Application|mixed
      */
     protected static $customRepository;
-    /**
-     * @var \App\Repositories\StaticPageRepository|\Illuminate\Contracts\Foundation\Application|mixed
-     */
-    protected static $staticPageRepository;
 
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, FunctionsHelpers;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use FunctionsHelpers;
+    use ValidatesRequests;
 
     /**
      * Controller constructor.
@@ -100,8 +93,8 @@ class Controller extends BaseController
     /**
      * Обрабатывает поля для глобальных кустом
      *
-     * @param array $arr
-     * @param string $keys
+     * @param  array   $arr
+     * @param  string  $keys
      *
      * @return array
      */

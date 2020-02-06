@@ -18,7 +18,6 @@ use App\Repositories\Interfaces\CountryRepositoryInterface;
  */
 class CountryRepository implements CountryRepositoryInterface
 {
-
     /**
      * @param  array  $selectColumns
      *

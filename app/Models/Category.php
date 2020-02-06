@@ -24,7 +24,10 @@ class Category extends Model
         return $this->belongsToMany(Anime::class);
     }
 
-    public function getCategory()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function getCategory(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(__CLASS__, 'id', 'id');
     }

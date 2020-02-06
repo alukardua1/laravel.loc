@@ -18,25 +18,21 @@ use App\Repositories\Interfaces\CategoryRepositoryInterface;
  */
 class CategoryRepository implements CategoryRepositoryInterface
 {
-
     /**
-     * @param  mixed  $url
+     * @param  null  $url
      *
      * @return mixed
      */
     public function getCategory($url = null)
     {
         if ($url) {
-            $result = Category::where('url', $url)
+            return Category::where('url', $url)
                 ->select(['id', 'title', 'url'])
                 ->first()
                 ->getAnime()
                 ->with(['getCategory', 'getUsers:id,login'])
                 ->orderBy('created_at', 'DESC');
-        } else {
-            $result = Category::withCount('getAnime');
         }
-
-        return $result;
+        return Category::withCount('getAnime');
     }
 }

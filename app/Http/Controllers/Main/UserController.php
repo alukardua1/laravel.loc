@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Repositories\Interfaces\UserRepositoryInterface;
+use Illuminate\Http\RedirectResponse;
 
 /**
  * Class UserController
@@ -18,6 +19,11 @@ use App\Repositories\Interfaces\UserRepositoryInterface;
  */
 class UserController extends Controller
 {
+    /**
+     * @var \App\Repositories\Interfaces\UserRepositoryInterface
+     */
+    private static $userRepository;
+
     /**
      * UserController constructor.
      *
@@ -29,23 +35,23 @@ class UserController extends Controller
         self::$userRepository = $repository;
     }
 
+
     /**
-     * Профиль пользователя
-     *
-     * @param $user
-     *
-     * @var array $countryArray
+     * @param $userUrl
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function view($user)
+    public function view($userUrl)
     {
-        $profile = self::$userRepository->getUsers($user);
+        $profile = self::$userRepository->getUsers($userUrl);
+
+        $countryArray = $this->loadCountryTimeZone()['countryArray'];
+
+        $tz = $this->loadCountryTimeZone()['timeZone'];
+
         if (empty($profile)) {
-            return view(self::$theme.'/errors.error')->withErrors(['msg' => "Пользователь {$user} не найден"]);
+            return view(self::$theme.'/errors.profile')->withErrors(['msg' => "Пользователь {$userUrl} не найден"]);
         }
-        $countryArray = $this->loadDataUser()['countryArray'];
-        $tz = $this->loadDataUser()['timeZone'];
 
         return view(self::$theme.'/profile.profile', compact('profile', 'countryArray', 'tz'));
     }
@@ -53,7 +59,7 @@ class UserController extends Controller
     /**
      * @return array
      */
-    private function loadDataUser(): array
+    private function loadCountryTimeZone(): array
     {
         $countryArray = [];
         $countryRaw = self::$countryRepository->getCountry(['id', 'title']);
@@ -62,21 +68,22 @@ class UserController extends Controller
         }
         $timeZone = self::getTimeZone();
 
-        return ['countryArray' =>$countryArray, 'timeZone' =>$timeZone];
+        return ['countryArray' => $countryArray, 'timeZone' => $timeZone];
     }
+
 
     /**
      * @param  \App\Http\Requests\UserRequest  $request
-     * @param  \App\Models\User                $user
+     * @param                                  $currentUser
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(UserRequest $request, $user): \Illuminate\Http\RedirectResponse
+    public function update(UserRequest $request, $currentUser): RedirectResponse
     {
-        $result = self::$userRepository->setUser($request, $user);
+        $requestUser = self::$userRepository->setUsers($request, $currentUser);
 
-        if ($result) {
-            return redirect()->route('profile', $user);
+        if ($requestUser) {
+            return redirect()->route('profile', $currentUser);
         }
 
         return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();

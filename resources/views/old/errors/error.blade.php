@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends($theme.'/layouts.app')
 @section('title', $errors->first())
 @section('content')
     <div class="container">

@@ -18,26 +18,17 @@ use Illuminate\Http\Request;
 interface UserRepositoryInterface
 {
     /**
-     * @param $user
+     * @param string $userUrl Url users
      *
      * @return mixed
      */
-    public function getUsers($user);
+    public function getUsers($userUrl);
 
     /**
      * @param  \Illuminate\Http\Request  $request
-     * @param                            $user
+     * @param                            $currentUser
      *
      * @return mixed
      */
-    public function setUser(Request $request, $user);
-
-    /**
-     * @param $updateUser
-     * @param $userData
-     * @param $request
-     *
-     * @return mixed
-     */
-    public function uploadAvatar($updateUser, $userData, $request);
+    public function setUsers(Request $request, $currentUser);
 }

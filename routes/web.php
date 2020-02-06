@@ -40,7 +40,7 @@ Route::group(['namespace' => 'Main'], function () {
     Route::get('page/{page}', 'StaticPageController@view')->name('page');
 });
 
-Route::group(['namespace' => 'Admin'], function () {
-    Route::get('/administrator', 'AdminController@index')->name('admin');
+Route::group(['namespace' => 'Administrations'], function () {
+    Route::get('administrations/administrator', 'AdminController@index')->name('admin');
 });
 //Route::get('/home', 'HomeController@index')->name('home');

@@ -5,17 +5,14 @@
  * User: Alukardua
  */
 
-namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
-use App\Repositories\Interfaces\MainRepositoryInterface;
+namespace App\Http\Controllers\Administrations;
 
 /**
  * Class AdminController
  *
  * @package App\Http\Controllers\Admin
  */
-class AdminController extends Controller
+class AdminController extends AdminBaseController
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

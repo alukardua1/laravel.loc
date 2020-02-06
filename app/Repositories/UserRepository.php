@@ -10,9 +10,8 @@ namespace App\Repositories;
 
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
-use Auth;
+use App\Traits\UsersTrait;
 use Hash;
-use Storage;
 
 /**
  * Class UserRepository
@@ -22,65 +21,46 @@ use Storage;
 class UserRepository implements UserRepositoryInterface
 {
 
+    use UsersTrait;
+
     /**
-     * @param $user
+     * @param $userUrl
      *
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|mixed|object|null
      */
-    public function getUsers($user)
+    public function getUsers($userUrl)
     {
         return User::with(['getGroup:id,title', 'getCountry:id,title'])
-            ->where('login', $user)
+            ->where('login', $userUrl)
             ->first();
     }
 
     /**
-     * @param  \App\Http\Requests\UserRequest  $request
-     * @param                                  $user
+     * @param  \Illuminate\Http\Request  $request
+     * @param                            $currentUser
      *
      * @return mixed
      */
-    public function setUser($request, $user)
+    public function setUsers($request, $currentUser)
     {
+        $userSave = [];
         if ($request->user()) {
-            $updateUser = User::where('login', $user)->first();
+            $updateUser = User::where('login', $currentUser)->first();
             $requestForm = $request->all();
+
             if ($requestForm['old_password']) {
-                if (Hash::check($requestForm['old_password'], $updateUser['password'])) {
-                    $requestForm['password'] = Hash::make($requestForm['new_password']);
-                } else {
-                    return back()->withErrors(['msg' => 'Введите правильный пароль'])->withInput();
-                }
+                $this->updatePasswords($updateUser, $requestForm);
             }
 
-            $userSave = $this->uploadAvatar($updateUser, $requestForm, $request);
+            if (isset($requestForm['del_foto'])) {
+                $userSave = $this->deleteAvatar($updateUser, $requestForm);
+            }
+
+            if ($request->hasFile('photo')) {
+                $userSave = $this->uploadAvatar($updateUser, $requestForm);
+            }
+
             return $updateUser->update($userSave);
         }
-    }
-
-    /**
-     * @param $updateUser
-     * @param $userData
-     * @param $request
-     *
-     * @return mixed
-     */
-    public function uploadAvatar($updateUser, $userData, $request)
-    {
-        if (isset($userData['del_foto'])) {
-            $userData['photo'] = '';
-            Storage::delete('public/avatars'.$updateUser->photo);
-            $userData['photo'] = '';
-        } else {
-            if ($request->hasFile('photo')) {
-                $Extension = $userData['photo']->getClientOriginalExtension();
-                $fileName = 'foto_'.$updateUser['id'].'.'.$Extension;
-                Storage::putFileAs(
-                    'public/avatars', $userData['photo'], $fileName
-                );
-                $userData['photo'] = $fileName;
-            }
-        }
-        return $userData;
     }
 }

@@ -18,6 +18,11 @@ use App\Repositories\Interfaces\StaticPageRepositoryInterface;
 class StaticPageController extends Controller
 {
     /**
+     * @var \App\Repositories\Interfaces\StaticPageRepositoryInterface
+     */
+    private static $staticPageRepository;
+
+    /**
      * StaticPageController constructor.
      *
      * @param  \App\Repositories\Interfaces\StaticPageRepositoryInterface  $repository
@@ -26,14 +31,6 @@ class StaticPageController extends Controller
     {
         parent::__construct();
         self::$staticPageRepository = $repository;
-    }
-
-    /**
-     *
-     */
-    public function index()
-    {
-
     }
 
     /**

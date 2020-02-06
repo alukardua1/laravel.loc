@@ -41,13 +41,13 @@ class Anime extends Model
     }
 
     /**
-     * @todo Решить нужна ли эта функция подсчета записей
-     *
      * @param $field
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @todo Решить нужна ли эта функция подсчета записей
+     *
      */
-    public function countAnime($field)
+    public function countAnime($field): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         dd(__METHOD__, $field);
         return $this->hasOne(__CLASS__, $field, $field);

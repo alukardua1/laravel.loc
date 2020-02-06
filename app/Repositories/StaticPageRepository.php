@@ -18,9 +18,8 @@ use App\Repositories\Interfaces\StaticPageRepositoryInterface;
  */
 class StaticPageRepository implements StaticPageRepositoryInterface
 {
-
     /**
-     * @param mixed $url Url static page
+     * @param  mixed  $url
      *
      * @return mixed
      */

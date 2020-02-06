@@ -18,28 +18,24 @@ use App\Repositories\Interfaces\CustomRepositoryInterface;
  */
 class CustomRepository implements CustomRepositoryInterface
 {
-
     /**
-     * @param  mixed   $select
-     * @param  string  $columns
-     * @param  string  $variable
+     * @param  string  $select
+     * @param  null    $columns
+     * @param  null    $variable
      *
      * @return mixed
      */
     public function getCustom($select = '*', $columns = null, $variable = null)
     {
         if ($columns) {
-            $result = Anime::select($select)
+            return Anime::select($select)
                 ->with(['getCategory'])
                 ->where($columns, $variable)
                 ->where('posted_at', 1)
                 ->orderBy('created_at', 'DESC');
-        } else {
-            $result = Anime::select($select)
-                ->where('posted_at', 1)
-                ->orderBy('created_at', 'DESC');
         }
-
-        return $result;
+        return Anime::select($select)
+            ->where('posted_at', 1)
+            ->orderBy('created_at', 'DESC');
     }
 }

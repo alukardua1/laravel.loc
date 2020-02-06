@@ -12,8 +12,8 @@
             {{ Form::label('email', 'Ваш e-mail',['class'=>'title-info']) }}
         </div>
         <div class="col-sm-3 form-check" style="white-space: nowrap;">
-            {{Form::input('hidden', 'allow_email', 0)}}
-            {{Form::checkbox('allow_email', (string)$profile->allow_email, (string)$profile->allow_email , ['id'=>'materialChecked2', 'class'=>'form-check-input'])}}
+            {{--{{Form::input('hidden', 'allow_email', 0)}}--}}
+            {{Form::checkbox('allow_email', 1, (string)$profile->allow_email , ['id'=>'materialChecked2', 'class'=>'form-check-input'])}}
             {{ Form::label('materialChecked2', 'Скрыть почту',['class'=>'form-check-label title-info']) }}
         </div>
     </div>
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="col-sm-3 form-check" style="white-space: nowrap;">
-            {{Form::checkbox('del_foto', 0, null, ['id'=>'del_foto', 'class'=>'form-check-input'])}}
+            {{Form::checkbox('del_foto', 1, null, ['id'=>'del_foto', 'class'=>'form-check-input'])}}
             {{ Form::label('del_foto', 'Удалить аватар',['class'=>'form-check-label title-info']) }}
         </div>
     </div>

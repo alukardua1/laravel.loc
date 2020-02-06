@@ -18,14 +18,6 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     /**
-     * @return string
-     */
-    public function index()
-    {
-        return 'category';
-    }
-
-    /**
      * Выводит аниме по категориям
      *
      * @param $url

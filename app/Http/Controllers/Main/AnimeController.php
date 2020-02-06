@@ -19,6 +19,11 @@ use App\Repositories\Interfaces\AnimeRepositoryInterface;
 class AnimeController extends Controller
 {
     /**
+     * @var \App\Repositories\Interfaces\AnimeRepositoryInterface
+     */
+    private static $animeRepository;
+
+    /**
      * AnimeController constructor.
      *
      * @param  \App\Repositories\Interfaces\AnimeRepositoryInterface  $repository
@@ -44,16 +49,16 @@ class AnimeController extends Controller
     /**
      * Страница аниме поста
      *
-     * @param $anime
+     * @param $urlAnime
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function view($anime)
+    public function view($urlAnime)
     {
-        $animePost = self::$animeRepository->getAnime($anime)->first();
+        $animePost = self::$animeRepository->getAnime($urlAnime)->first();
 
         if (empty($animePost)) {
-            return view(self::$theme.'/errors.error')->withErrors(['msg' => "Пост {$anime} не найден"]);
+            return view(self::$theme.'/errors.error')->withErrors(['msg' => "Пост {$urlAnime} не найден"]);
         }
 
         return view(self::$theme.'/full_anime', compact('animePost'));
