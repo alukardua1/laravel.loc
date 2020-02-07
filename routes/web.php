@@ -42,5 +42,8 @@ Route::group(['namespace' => 'Main'], function () {
 
 Route::group(['namespace' => 'Administrations'], function () {
     Route::get('administrations/administrator', 'AdminController@index')->name('admin');
+    Route::get('administrations/administrator/anime', 'AdminAnimeController@index')->name('admin.anime');
+    Route::get('administrations/administrator/anime/{anime}', 'AdminAnimeController@edit')->name('admin.anime.edit');
+    Route::patch('administrations/administrator/anime/{anime}', 'AdminAnimeController@update')->name('admin.anime.update');
 });
 //Route::get('/home', 'HomeController@index')->name('home');

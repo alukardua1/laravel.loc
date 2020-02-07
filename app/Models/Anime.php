@@ -16,6 +16,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Anime extends Model
 {
+    protected $fillable = [
+        'title', 'content'
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

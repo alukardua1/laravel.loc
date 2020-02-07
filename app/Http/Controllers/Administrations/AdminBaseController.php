@@ -17,9 +17,17 @@ use Illuminate\Routing\Controller as BaseController;
 class AdminBaseController extends BaseController
 {
     /**
+     * @var mixed
+     */
+    protected static $paginate;
+
+
+
+    /**
      * AdminBaseController constructor.
      */
     public function __construct()
     {
+        self::$paginate = 50;
     }
 }
