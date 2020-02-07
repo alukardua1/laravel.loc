@@ -44,6 +44,11 @@ class Controller extends BaseController
     private static $globalCategory;
 
     /**
+     * @var \Illuminate\Contracts\Foundation\Application|mixed
+     */
+    private static $customRepository;
+
+    /**
      * @var \App\Repositories\CategoryRepository|\Illuminate\Contracts\Foundation\Application|mixed
      */
     protected static $categoryRepository;
@@ -52,11 +57,6 @@ class Controller extends BaseController
      * @var \App\Repositories\CountryRepository|\Illuminate\Contracts\Foundation\Application|mixed
      */
     protected static $countryRepository;
-
-    /**
-     * @var \App\Repositories\CustomRepository|\Illuminate\Contracts\Foundation\Application|mixed
-     */
-    protected static $customRepository;
 
     use AuthorizesRequests;
     use DispatchesJobs;
@@ -68,20 +68,22 @@ class Controller extends BaseController
      */
     public function __construct()
     {
+        self::$customRepository = app(CustomRepositoryInterface::class);
         self::$categoryRepository = app(CategoryRepositoryInterface::class);
         self::$countryRepository = app(CountryRepositoryInterface::class);
-        self::$customRepository = app(CustomRepositoryInterface::class);
 
         self::$globalCategory = self::$categoryRepository->getCategory()->get();
         self::$paginate = env('APP_PAGINATE');
         self::$theme = env('APP_THEME');
         self::$kind = FunctionsHelpers::$arrRating;
+
         $year = self::$customRepository->getCustom('aired_season')->get();
         $tip = self::$customRepository->getCustom('tip')->get();
+        $carouselAnime = self::$customRepository->getCustom('*', 'released', 'ongoing')->get();
 
         View::share([
             'categoryAll'   => self::$globalCategory,
-            'carouselAnime' => self::$customRepository->getCustom('*', 'released', 'ongoing')->get(),
+            'carouselAnime' => $carouselAnime,
             'yearCustom'    => $this->customArr($year, 'aired_season'),
             'tipRu'         => FunctionsHelpers::$arrTip,
             'tip'           => $this->customArr($tip, 'tip'),

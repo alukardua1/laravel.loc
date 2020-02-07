@@ -11,14 +11,23 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2020-02-06 02:36:03.
+    * Generated on 2020-02-06 23:25:57.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
-        'App\Repositories\Interfaces\MainRepositoryInterface' => \App\Repositories\MainRepository::class,
+        'App\Repositories\Interfaces\AnimeRepositoryInterface' => \App\Repositories\AnimeRepository::class,
+        'App\Repositories\Interfaces\CategoryRepositoryInterface' => \App\Repositories\CategoryRepository::class,
+        'App\Repositories\Interfaces\CharacterRepositoryInterface' => \App\Repositories\CharacterRepository::class,
+        'App\Repositories\Interfaces\CommentsRepositoryInterface' => \App\Repositories\CommentsRepository::class,
+        'App\Repositories\Interfaces\CountryRepositoryInterface' => \App\Repositories\CountryRepository::class,
+        'App\Repositories\Interfaces\CustomRepositoryInterface' => \App\Repositories\CustomRepository::class,
+        'App\Repositories\Interfaces\PeopleRepositoryInterface' => \App\Repositories\PeopleRepository::class,
+        'App\Repositories\Interfaces\StaticPageRepositoryInterface' => \App\Repositories\StaticPageRepository::class,
+        'App\Repositories\Interfaces\TranslateRepositoryInterface' => \App\Repositories\TranslateRepository::class,
+        'App\Repositories\Interfaces\UserRepositoryInterface' => \App\Repositories\UserRepository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -175,7 +184,16 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
-        'App\Repositories\Interfaces\MainRepositoryInterface' => \App\Repositories\MainRepository::class,
+        'App\Repositories\Interfaces\AnimeRepositoryInterface' => \App\Repositories\AnimeRepository::class,
+        'App\Repositories\Interfaces\CategoryRepositoryInterface' => \App\Repositories\CategoryRepository::class,
+        'App\Repositories\Interfaces\CharacterRepositoryInterface' => \App\Repositories\CharacterRepository::class,
+        'App\Repositories\Interfaces\CommentsRepositoryInterface' => \App\Repositories\CommentsRepository::class,
+        'App\Repositories\Interfaces\CountryRepositoryInterface' => \App\Repositories\CountryRepository::class,
+        'App\Repositories\Interfaces\CustomRepositoryInterface' => \App\Repositories\CustomRepository::class,
+        'App\Repositories\Interfaces\PeopleRepositoryInterface' => \App\Repositories\PeopleRepository::class,
+        'App\Repositories\Interfaces\StaticPageRepositoryInterface' => \App\Repositories\StaticPageRepository::class,
+        'App\Repositories\Interfaces\TranslateRepositoryInterface' => \App\Repositories\TranslateRepository::class,
+        'App\Repositories\Interfaces\UserRepositoryInterface' => \App\Repositories\UserRepository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -332,7 +350,16 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
-        'App\Repositories\Interfaces\MainRepositoryInterface' => \App\Repositories\MainRepository::class,
+        'App\Repositories\Interfaces\AnimeRepositoryInterface' => \App\Repositories\AnimeRepository::class,
+        'App\Repositories\Interfaces\CategoryRepositoryInterface' => \App\Repositories\CategoryRepository::class,
+        'App\Repositories\Interfaces\CharacterRepositoryInterface' => \App\Repositories\CharacterRepository::class,
+        'App\Repositories\Interfaces\CommentsRepositoryInterface' => \App\Repositories\CommentsRepository::class,
+        'App\Repositories\Interfaces\CountryRepositoryInterface' => \App\Repositories\CountryRepository::class,
+        'App\Repositories\Interfaces\CustomRepositoryInterface' => \App\Repositories\CustomRepository::class,
+        'App\Repositories\Interfaces\PeopleRepositoryInterface' => \App\Repositories\PeopleRepository::class,
+        'App\Repositories\Interfaces\StaticPageRepositoryInterface' => \App\Repositories\StaticPageRepository::class,
+        'App\Repositories\Interfaces\TranslateRepositoryInterface' => \App\Repositories\TranslateRepository::class,
+        'App\Repositories\Interfaces\UserRepositoryInterface' => \App\Repositories\UserRepository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -489,7 +516,16 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
-        'App\Repositories\Interfaces\MainRepositoryInterface' => \App\Repositories\MainRepository::class,
+        'App\Repositories\Interfaces\AnimeRepositoryInterface' => \App\Repositories\AnimeRepository::class,
+        'App\Repositories\Interfaces\CategoryRepositoryInterface' => \App\Repositories\CategoryRepository::class,
+        'App\Repositories\Interfaces\CharacterRepositoryInterface' => \App\Repositories\CharacterRepository::class,
+        'App\Repositories\Interfaces\CommentsRepositoryInterface' => \App\Repositories\CommentsRepository::class,
+        'App\Repositories\Interfaces\CountryRepositoryInterface' => \App\Repositories\CountryRepository::class,
+        'App\Repositories\Interfaces\CustomRepositoryInterface' => \App\Repositories\CustomRepository::class,
+        'App\Repositories\Interfaces\PeopleRepositoryInterface' => \App\Repositories\PeopleRepository::class,
+        'App\Repositories\Interfaces\StaticPageRepositoryInterface' => \App\Repositories\StaticPageRepository::class,
+        'App\Repositories\Interfaces\TranslateRepositoryInterface' => \App\Repositories\TranslateRepository::class,
+        'App\Repositories\Interfaces\UserRepositoryInterface' => \App\Repositories\UserRepository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -646,7 +682,16 @@ namespace PHPSTORM_META {
     ]));
     override(\App::make(0), map([
         '' => '@',
-        'App\Repositories\Interfaces\MainRepositoryInterface' => \App\Repositories\MainRepository::class,
+        'App\Repositories\Interfaces\AnimeRepositoryInterface' => \App\Repositories\AnimeRepository::class,
+        'App\Repositories\Interfaces\CategoryRepositoryInterface' => \App\Repositories\CategoryRepository::class,
+        'App\Repositories\Interfaces\CharacterRepositoryInterface' => \App\Repositories\CharacterRepository::class,
+        'App\Repositories\Interfaces\CommentsRepositoryInterface' => \App\Repositories\CommentsRepository::class,
+        'App\Repositories\Interfaces\CountryRepositoryInterface' => \App\Repositories\CountryRepository::class,
+        'App\Repositories\Interfaces\CustomRepositoryInterface' => \App\Repositories\CustomRepository::class,
+        'App\Repositories\Interfaces\PeopleRepositoryInterface' => \App\Repositories\PeopleRepository::class,
+        'App\Repositories\Interfaces\StaticPageRepositoryInterface' => \App\Repositories\StaticPageRepository::class,
+        'App\Repositories\Interfaces\TranslateRepositoryInterface' => \App\Repositories\TranslateRepository::class,
+        'App\Repositories\Interfaces\UserRepositoryInterface' => \App\Repositories\UserRepository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -803,7 +848,16 @@ namespace PHPSTORM_META {
     ]));
     override(\App::makeWith(0), map([
         '' => '@',
-        'App\Repositories\Interfaces\MainRepositoryInterface' => \App\Repositories\MainRepository::class,
+        'App\Repositories\Interfaces\AnimeRepositoryInterface' => \App\Repositories\AnimeRepository::class,
+        'App\Repositories\Interfaces\CategoryRepositoryInterface' => \App\Repositories\CategoryRepository::class,
+        'App\Repositories\Interfaces\CharacterRepositoryInterface' => \App\Repositories\CharacterRepository::class,
+        'App\Repositories\Interfaces\CommentsRepositoryInterface' => \App\Repositories\CommentsRepository::class,
+        'App\Repositories\Interfaces\CountryRepositoryInterface' => \App\Repositories\CountryRepository::class,
+        'App\Repositories\Interfaces\CustomRepositoryInterface' => \App\Repositories\CustomRepository::class,
+        'App\Repositories\Interfaces\PeopleRepositoryInterface' => \App\Repositories\PeopleRepository::class,
+        'App\Repositories\Interfaces\StaticPageRepositoryInterface' => \App\Repositories\StaticPageRepository::class,
+        'App\Repositories\Interfaces\TranslateRepositoryInterface' => \App\Repositories\TranslateRepository::class,
+        'App\Repositories\Interfaces\UserRepositoryInterface' => \App\Repositories\UserRepository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -960,7 +1014,16 @@ namespace PHPSTORM_META {
     ]));
     override(\app(0), map([
         '' => '@',
-        'App\Repositories\Interfaces\MainRepositoryInterface' => \App\Repositories\MainRepository::class,
+        'App\Repositories\Interfaces\AnimeRepositoryInterface' => \App\Repositories\AnimeRepository::class,
+        'App\Repositories\Interfaces\CategoryRepositoryInterface' => \App\Repositories\CategoryRepository::class,
+        'App\Repositories\Interfaces\CharacterRepositoryInterface' => \App\Repositories\CharacterRepository::class,
+        'App\Repositories\Interfaces\CommentsRepositoryInterface' => \App\Repositories\CommentsRepository::class,
+        'App\Repositories\Interfaces\CountryRepositoryInterface' => \App\Repositories\CountryRepository::class,
+        'App\Repositories\Interfaces\CustomRepositoryInterface' => \App\Repositories\CustomRepository::class,
+        'App\Repositories\Interfaces\PeopleRepositoryInterface' => \App\Repositories\PeopleRepository::class,
+        'App\Repositories\Interfaces\StaticPageRepositoryInterface' => \App\Repositories\StaticPageRepository::class,
+        'App\Repositories\Interfaces\TranslateRepositoryInterface' => \App\Repositories\TranslateRepository::class,
+        'App\Repositories\Interfaces\UserRepositoryInterface' => \App\Repositories\UserRepository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
@@ -1117,7 +1180,16 @@ namespace PHPSTORM_META {
     ]));
     override(\resolve(0), map([
         '' => '@',
-        'App\Repositories\Interfaces\MainRepositoryInterface' => \App\Repositories\MainRepository::class,
+        'App\Repositories\Interfaces\AnimeRepositoryInterface' => \App\Repositories\AnimeRepository::class,
+        'App\Repositories\Interfaces\CategoryRepositoryInterface' => \App\Repositories\CategoryRepository::class,
+        'App\Repositories\Interfaces\CharacterRepositoryInterface' => \App\Repositories\CharacterRepository::class,
+        'App\Repositories\Interfaces\CommentsRepositoryInterface' => \App\Repositories\CommentsRepository::class,
+        'App\Repositories\Interfaces\CountryRepositoryInterface' => \App\Repositories\CountryRepository::class,
+        'App\Repositories\Interfaces\CustomRepositoryInterface' => \App\Repositories\CustomRepository::class,
+        'App\Repositories\Interfaces\PeopleRepositoryInterface' => \App\Repositories\PeopleRepository::class,
+        'App\Repositories\Interfaces\StaticPageRepositoryInterface' => \App\Repositories\StaticPageRepository::class,
+        'App\Repositories\Interfaces\TranslateRepositoryInterface' => \App\Repositories\TranslateRepository::class,
+        'App\Repositories\Interfaces\UserRepositoryInterface' => \App\Repositories\UserRepository::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'Facade\IgnitionContracts\SolutionProviderRepository' => \Facade\Ignition\SolutionProviders\SolutionProviderRepository::class,
         'Facade\Ignition\DumpRecorder\DumpRecorder' => \Facade\Ignition\DumpRecorder\DumpRecorder::class,
