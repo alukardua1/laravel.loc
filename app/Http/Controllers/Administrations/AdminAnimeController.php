@@ -63,5 +63,6 @@ class AdminAnimeController extends AdminBaseController
         if ($updateAnime) {
             return redirect()->route('admin.anime.edit', $animeUrl);
         }
+        return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
     }
 }

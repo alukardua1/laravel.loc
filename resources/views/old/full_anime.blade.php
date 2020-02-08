@@ -37,7 +37,7 @@
                     <div class="col-md-12">
                         <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4">
                             <img class="img-fluid"
-                                 src="{{ isset($animePost->poster) ? asset(/*'storage/'.*/ $animePost->poster) : asset('theme/'.$theme.'/images/no_poster.jpg')}}"
+                                 src="{{ isset($animePost->poster) ? asset('storage/'. $animePost->poster) : asset('theme/'.$theme.'/images/no_poster.jpg')}}"
                                  alt="{title}">
                             <a>
                                 <div class="mask rgba-white-slight"></div>

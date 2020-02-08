@@ -1,4 +1,9 @@
 <?php
+/**
+ * Copyright (c) by anime-free
+ * Date: 2020.
+ * User: Alukardua
+ */
 
 namespace App\Http;
 
@@ -61,6 +66,7 @@ class Kernel extends HttpKernel
         'signed'           => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle'         => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'         => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'role'             => \App\Http\Middleware\IsAdmin::class
     ];
 
     /**

@@ -11,6 +11,7 @@ namespace App\Repositories;
 use App\Models\Anime;
 use App\Models\Category;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
+use App\Traits\UploadImage;
 use Illuminate\Http\Request;
 
 /**
@@ -20,6 +21,7 @@ use Illuminate\Http\Request;
  */
 class AnimeRepository implements AnimeRepositoryInterface
 {
+    use UploadImage;
 
     /**
      * @param  mixed  $url
@@ -46,13 +48,16 @@ class AnimeRepository implements AnimeRepositoryInterface
 
     public function setAnime(Request $request, $url)
     {
+        $update = [];
         $updateAnime = Anime::where('url', $url)->first();
-        $category = Category::all();
         $requestForm = $request->all();
         $updateAnime->fill($request->except('genre'));
         $updateAnime->save();
         $updateAnime->getCategory()->sync($request->genre);
-//dd(__METHOD__, $requestForm, $request, $updateAnime);
-        return $updateAnime->update($requestForm);
+        if ($request->hasFile('poster')) {
+            $update = $this->uploadImages($updateAnime, $requestForm);
+        }
+
+        return $updateAnime->update($update);
     }
 }

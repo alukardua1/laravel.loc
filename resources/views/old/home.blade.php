@@ -8,7 +8,7 @@
                 <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4">
                     <div class="product-2">
                         <img class="img-fluid wow fadeInUp" src="{{ isset($post->poster) ?
-                                     /*asset('storage/'. $post->poster)*/ asset($post->poster): asset('theme/'.$theme.'/images/no_poster.jpg')}}" alt="{title}">
+                                     asset('storage/'. $post->poster): asset('theme/'.$theme.'/images/no_poster.jpg')}}" alt="{title}">
                         <span class="sale-2 z-depth-1">{{ $tipRu[$post->tip] }}</span>
                     </div>
                     <a>
@@ -28,7 +28,7 @@
                         @endif
                     @endforeach
                 </p>
-                <p class="dark-grey-text">{{ Str::limit($post->content, 300) }}</p>
+                <p class="dark-grey-text">{!! Str::limit($post->content, 300) !!}</p>
                 <a href="{{ route('anime', $post->url) }}" class="btn btn-success">Смотреть...</a>
             </div>
         </div>

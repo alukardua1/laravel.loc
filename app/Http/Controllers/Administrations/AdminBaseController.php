@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers\Administrations;
 
+use App\Http\Middleware\IsAdmin;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
@@ -28,6 +29,8 @@ class AdminBaseController extends BaseController
      */
     public function __construct()
     {
+        $this->middleware(['role:1', 'auth']);
+        //$this->middleware(['role:1']);
         self::$paginate = 50;
     }
 }

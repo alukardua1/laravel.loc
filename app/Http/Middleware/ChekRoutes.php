@@ -1,4 +1,9 @@
 <?php
+/**
+ * Copyright (c) by anime-free
+ * Date: 2020.
+ * User: Alukardua
+ */
 
 namespace App\Http\Middleware;
 
@@ -18,7 +23,6 @@ class ChekRoutes
     public function handle($request, Closure $next)
     {
 
-        dd(__METHOD__, $request);
         if (!$request->expectsJson()) {
             return route('home');
         }
