@@ -17,7 +17,25 @@ use Illuminate\Database\Eloquent\Model;
 class Anime extends Model
 {
     protected $fillable = [
-        'title', 'content', 'poster'
+        'title',
+        'content',
+        'poster',
+        'wa_id',
+        'shikimori_id',
+        'kp_id',
+        'mal_id',
+        'anidb_id',
+        'japanese',
+        'english',
+        'romaji',
+        'url',
+        'delivery_time',
+        'tv_canal',
+        'tip',
+        'count_series',
+        'duration',
+        'aired_on',
+        'released_on',
     ];
 
     /**

@@ -164,7 +164,7 @@
                     </div>
                     <div class="col-md-8">
                             <span itemprop="timeRequired" class="float-xl-right url">
-                                {{ $tip[$animePost->tip] }} ({{ $animePost->count_series }} эп.) {{ $animePost->duration }} мин.
+                                {{ $tipRu[$animePost->tip] }} ({{ $animePost->count_series }} эп.) {{ $animePost->duration }} мин.
                             </span>
                     </div>
                 </div>

@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers\Administrations;
 
+use App\Helpers\FunctionsHelpers;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ use Illuminate\Http\Request;
  */
 class AdminAnimeController extends AdminBaseController
 {
+    use FunctionsHelpers;
     /**
      * @var \App\Repositories\CategoryRepository|\Illuminate\Contracts\Foundation\Application|mixed
      */
@@ -51,10 +53,11 @@ class AdminAnimeController extends AdminBaseController
 
     public function edit($animeUrl)
     {
+        $tip = FunctionsHelpers::$arrTip;
         $category = self::$categoryRepository->getCategory()->get();
         $animePost = self::$animeRepository->getAnime($animeUrl)->first();
 
-        return view('admin.anime.edit', compact('animePost', 'category'));
+        return view('admin.anime.edit', compact('animePost', 'category', 'tip'));
     }
 
     public function update(Request $request, $animeUrl)

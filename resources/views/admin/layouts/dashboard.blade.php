@@ -60,12 +60,12 @@
                         </div>
                     </li>
                     <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-hand-pointer-o"></i>
-                            Instruction<i class="fas fa-angle-down rotate-icon"></i></a>
+                            Категории<i class="fas fa-angle-down rotate-icon"></i></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="#" class="waves-effect">For bloggers</a>
+                                <li><a href="{{route('admin.category')}}" class="waves-effect">Редактировать</a>
                                 </li>
-                                <li><a href="#" class="waves-effect">For authors</a>
+                                <li><a href="#" class="waves-effect">Добавить</a>
                                 </li>
                             </ul>
                         </div>
@@ -185,11 +185,16 @@
 
 <script>
     $(".button-collapse").sideNav();
-</script>
-<script>
+
     $(document).ready(function() {
         $('.mdb-select').materialSelect();
     });
+
+    $('.datepicker').pickadate({
+        weekdaysShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+        firstDay: 1,
+        showMonthsShort: true
+    })
 </script>
 
 </body>
