@@ -46,7 +46,7 @@ class Controller extends BaseController
     /**
      * @var \Illuminate\Contracts\Foundation\Application|mixed
      */
-    private static $customRepository;
+    protected static $customRepository;
 
     /**
      * @var \App\Repositories\CategoryRepository|\Illuminate\Contracts\Foundation\Application|mixed

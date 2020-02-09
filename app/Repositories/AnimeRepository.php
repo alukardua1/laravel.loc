@@ -46,6 +46,14 @@ class AnimeRepository implements AnimeRepositoryInterface
             ->orderBy('created_at', 'DESC');
     }
 
+    /**
+     * @param  \Illuminate\Http\Request  $request
+     * @param                            $url
+     *
+     * @todo Попытатся перенести все в обсервер
+     *
+     * @return mixed
+     */
     public function setAnime(Request $request, $url)
     {
         $update = [];

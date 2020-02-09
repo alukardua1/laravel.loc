@@ -51,6 +51,11 @@ class AdminAnimeController extends AdminBaseController
         return view('admin.anime.index', compact('animePost'));
     }
 
+    /**
+     * @param $animeUrl
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($animeUrl)
     {
         $tip = FunctionsHelpers::$arrTip;
@@ -60,7 +65,13 @@ class AdminAnimeController extends AdminBaseController
         return view('admin.anime.edit', compact('animePost', 'category', 'tip'));
     }
 
-    public function update(Request $request, $animeUrl)
+    /**
+     * @param  \Illuminate\Http\Request  $request
+     * @param                            $animeUrl
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $animeUrl): \Illuminate\Http\RedirectResponse
     {
         $updateAnime = self::$animeRepository->setAnime($request, $animeUrl);
         if ($updateAnime) {

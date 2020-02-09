@@ -117,7 +117,7 @@
             </div>
         </div>
         <select class="mdb-select md-form">
-            {{--            @todo Решить как выводить студии--}}
+            {{--@todo Решить как выводить студии--}}
             <option value="" disabled selected>Студия выпустившая аниме</option>
             {{-- @foreach($category as $key => $value)
                  <option
