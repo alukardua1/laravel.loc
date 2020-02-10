@@ -22,11 +22,14 @@ class IsAdmin
      *
      * @return mixed
      */
-    public function handle($request, Closure $next, $group)
+    public function handle($request, Closure $next, ...$group)
     {
-        //dd($request, $next, $group, Auth::user());
-        if (Auth::user()->group_id == $group) return $next($request);
+        foreach ($group as $value) {
+            if (Auth::user()->group_id == $value) {
+                return $next($request);
+            }
+        }
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('404');
     }
 }
