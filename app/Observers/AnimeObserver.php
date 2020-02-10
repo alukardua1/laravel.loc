@@ -16,6 +16,7 @@ class AnimeObserver
     public function updating(Anime $anime)
     {
         $anime->url = Str::slug($anime->title);
+        $anime->description = $anime->title;
     }
 
     public function updated(Anime $anime)

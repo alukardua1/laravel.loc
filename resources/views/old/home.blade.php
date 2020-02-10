@@ -1,6 +1,6 @@
 @extends($theme.'/layouts.app')
-@section('title',  $categories->title ?? config('app.name'))
-@section('description', $categories->description ?? env('APP_DESCRIPTION_SITE'))
+@section('title',  $categories->title ?? config('appSecondConfig.nameSite'))
+@section('description', $categories->description ?? config('appSecondConfig.descriptionSite'))
 @section('content')
     @foreach($animePost as $post)
         <div class="row">

@@ -36,6 +36,7 @@ class Anime extends Model
         'duration',
         'aired_on',
         'released_on',
+        'rating',
     ];
 
     /**

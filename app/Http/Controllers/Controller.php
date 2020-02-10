@@ -73,9 +73,10 @@ class Controller extends BaseController
         self::$countryRepository = app(CountryRepositoryInterface::class);
 
         self::$globalCategory = self::$categoryRepository->getCategory()->get();
-        self::$paginate = env('APP_PAGINATE');
-        self::$theme = env('APP_THEME');
+        self::$paginate = config('appSecondConfig.paginate');
+        self::$theme = config('appSecondConfig.theme');
         self::$kind = FunctionsHelpers::$arrRating;
+        $nameSite = config('appSecondConfig.nameSite');
 
         $year = self::$customRepository->getCustom('aired_season')->get();
         $tip = self::$customRepository->getCustom('tip')->get();
@@ -88,7 +89,8 @@ class Controller extends BaseController
             'tipRu'         => FunctionsHelpers::$arrTip,
             'tip'           => $this->customArr($tip, 'tip'),
             'theme'         => self::$theme,
-            'kind'          => self::$kind
+            'kind'          => self::$kind,
+            'nameSite'      => $nameSite,
         ]);
     }
 

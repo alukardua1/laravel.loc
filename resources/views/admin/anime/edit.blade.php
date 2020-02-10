@@ -161,18 +161,30 @@
         <div class="row">
             <div class="col-6">
                 <div class="md-form">
-                    <input type="date" id="aired_on" name="aired_on" class="form-control" value="{{$animePost->aired_on}}">
+                    <input type="date" id="aired_on" name="aired_on" class="form-control"
+                           value="{{$animePost->aired_on}}">
                     <label for="aired_on">Выберите дату начала показа</label>
                 </div>
             </div>
             <div class="col-6">
                 <div class="md-form">
-                    <input type="date" id="released_on" class="form-control" name="released_on" value="{{$animePost->released_on}}">
+                    <input type="date" id="released_on" class="form-control" name="released_on"
+                           value="{{$animePost->released_on}}">
                     <label for="released_on">Выберите дату окончания показа</label>
                 </div>
             </div>
         </div>
-
+{{--@todo Разобратся с преобразованием " в &quot--}}
+        <select name="rating" class="mdb-select md-form">
+            <option value="" disabled selected>Возрастное ограничение</option>
+            @foreach($rating as $key => $value)
+                <option value="{{$key}}"
+                        @if($key === $animePost->rating)
+                        selected
+                    @endif
+                >{!! html_entity_decode($value) !!}</option>
+            @endforeach
+        </select>
         @endsection
         @section('footer')
             <button class="btn btn-success btn-rounded" type="submit">Save</button>

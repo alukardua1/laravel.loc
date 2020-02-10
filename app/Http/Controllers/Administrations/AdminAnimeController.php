@@ -59,10 +59,11 @@ class AdminAnimeController extends AdminBaseController
     public function edit($animeUrl)
     {
         $tip = FunctionsHelpers::$arrTip;
+        $rating = FunctionsHelpers::$arrRatings;
         $category = self::$categoryRepository->getCategory()->get();
         $animePost = self::$animeRepository->getAnime($animeUrl)->first();
 
-        return view('admin.anime.edit', compact('animePost', 'category', 'tip'));
+        return view('admin.anime.edit', compact('animePost', 'category', 'tip', 'rating'));
     }
 
     /**

@@ -1,5 +1,6 @@
 @extends($theme.'/layouts.app')
-@section('title',  $category->title ?? config('app.name'))
+@section('title',  $animePost->title ?? config('appSecondConfig.nameSite'))
+@section('description',  $animePost->description ?? config('appSecondConfig.descriptionSite'))
 @section('content')
     <article itemscope itemtype="https://schema.org/Movie">
         <div class="row">
@@ -66,16 +67,24 @@
                     </div>
                     <div class="col-md-8">
                             <span class="float-xl-right url">
-                                <a itemprop="url"
-                                   href="http://www.world-art.ru/animation/animation.php?id={{ $animePost->wa_id }}"
-                                   target="_blank" rel="nofollow">World-Art</a>,
-                                <a itemprop="url" href="https://www.kinopoisk.ru/film/{{ $animePost->kp_id }}"
-                                   target="_blank" rel="nofollow">КиноПоиск</a>,
-                                <a itemprop="url"
-                                   href="https://myanimelist.net/anime/{{ $animePost->mal_id }}"
-                                   target="_blank" rel="nofollow">MyAnimeList</a>,
-                                <a itemprop="url" href="https://anidb.net/anime/{{ $animePost->anidb_id }}"
-                                   target="_blank" rel="nofollow">AniDb</a>
+                                @if($animePost->wa_id)
+                                    <a itemprop="url"
+                                       href="http://www.world-art.ru/animation/animation.php?id={{ $animePost->wa_id }}"
+                                       target="_blank" rel="nofollow">World-Art</a>
+                                @endif
+                                @if($animePost->kp_id)
+                                   / <a itemprop="url" href="https://www.kinopoisk.ru/film/{{ $animePost->kp_id }}"
+                                       target="_blank" rel="nofollow">КиноПоиск</a>
+                                @endif
+                                @if($animePost->mal_id)
+                                   / <a itemprop="url"
+                                       href="https://myanimelist.net/anime/{{ $animePost->mal_id }}"
+                                       target="_blank" rel="nofollow">MyAnimeList</a>
+                                @endif
+                                @if($animePost->anidb_id)
+                                  / <a itemprop="url" href="https://anidb.net/anime/{{ $animePost->anidb_id }}"
+                                       target="_blank" rel="nofollow">AniDb</a>
+                                @endif
                             </span>
                     </div>
                 </div>
@@ -174,7 +183,8 @@
                     </div>
                     <div class="col-md-8">
                             <span itemprop="sdDatePublished" class="float-xl-right url">
-                                с {{ $animePost->aired_on }} по {{ $animePost->released_on }}
+                                с {{ \Carbon\Carbon::parse($animePost->aired_on)->format('d.m.Y') }}
+                                по {{ \Carbon\Carbon::parse($animePost->released_on)->format('d.m.Y') }}
                             </span>
                     </div>
                 </div>
