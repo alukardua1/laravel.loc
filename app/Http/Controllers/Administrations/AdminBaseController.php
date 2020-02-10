@@ -18,19 +18,19 @@ use Illuminate\Routing\Controller as BaseController;
 class AdminBaseController extends BaseController
 {
     /**
-     * @var mixed
+     * @var int $paginate
      */
     protected static $paginate;
 
 
-
     /**
      * AdminBaseController constructor.
+     *
+     * @uses int self::$paginate
      */
     public function __construct()
     {
         $this->middleware(['role:1', 'auth']);
-        //$this->middleware(['role:1']);
-        self::$paginate = 50;
+        self::$paginate = config('appSecondConfig.paginateAdmin');
     }
 }

@@ -37,6 +37,10 @@ class Anime extends Model
         'aired_on',
         'released_on',
         'rating',
+        'country_id',
+        'video',
+        'user_id',
+        'posted_at',
     ];
 
     /**

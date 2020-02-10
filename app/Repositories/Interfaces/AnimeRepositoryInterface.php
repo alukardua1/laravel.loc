@@ -26,5 +26,18 @@ interface AnimeRepositoryInterface
      */
     public function getAnime($url = null, $isAdmin = false);
 
-    public function setAnime(Request $request, $url);
+    /**
+     * @param  \Illuminate\Http\Request  $request
+     * @param  null                      $url
+     *
+     * @return mixed
+     */
+    public function setAnime(Request $request, $url = null);
+
+    /**
+     * @param $url
+     *
+     * @return mixed
+     */
+    public function delAnime($url);
 }

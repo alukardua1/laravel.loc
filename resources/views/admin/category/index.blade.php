@@ -7,6 +7,7 @@
             <tr>
                 <th>#</th>
                 <th>Название</th>
+                <th>Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -14,6 +15,7 @@
                     <tr>
                         <td>{{$cat->id}}</td>
                         <td><a href="{{route('admin.anime.edit', $cat->url)}}">{{$cat->title}}</a></td>
+                        <td><a href="#" aria-label="Удалить"><i class="fas fa-trash-alt"></i></a> </td>
                     @endforeach
             </tbody>
         </table>

@@ -34,7 +34,6 @@ class CreateAnimesTable extends Migration
             $table->string('kp_id')->nullable();
             $table->string('mal_id')->nullable();
             $table->string('anidb_id')->nullable();
-            $table->string('kind');
             $table->string('released');
             $table->string('japanese')->nullable();
             $table->string('english')->nullable();
@@ -43,6 +42,7 @@ class CreateAnimesTable extends Migration
             $table->Time('delivery_time')->nullable();
             $table->string('tv_canal')->nullable();
             $table->string('count_series')->nullable();
+            $table->string('current_series')->nullable();
             $table->string('duration')->nullable();
             $table->date('aired_on')->nullable();
             $table->date('released_on')->nullable();

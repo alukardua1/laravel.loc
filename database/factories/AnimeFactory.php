@@ -1,4 +1,9 @@
 <?php
+/**
+ * Copyright (c) by anime-free
+ * Date: 2020.
+ * User: Alukardua
+ */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
@@ -31,7 +36,6 @@ $factory->define(Anime::class, function (Faker $faker) {
         'description'   => substr($txt, 0, 140),
         'metatitle'     => substr($title, 0, 140),
         'keywords'      => 'test, test1, test2',
-        'kind'          => $arrRating[array_rand($arrRating)],
         'released'      => $arrReleased[array_rand($arrReleased)],
         'tip'           => $arrTip[array_rand($arrTip)],
         'country_id'    => 198,

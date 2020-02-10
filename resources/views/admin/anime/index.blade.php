@@ -9,6 +9,7 @@
                 <th>Название</th>
                 <th>Категория</th>
                 <th>Автор</th>
+                <th>Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -28,6 +29,7 @@
                             @endforeach
                         </td>
                         <td>{{$post->getUsers->login}}</td>
+                        <td><a href="{{route('admin.anime.delete', $post->url)}}" aria-label="Удалить"><i class="fas fa-trash-alt"></i></a> </td>
                     </tr>
                     @endforeach
             </tbody>

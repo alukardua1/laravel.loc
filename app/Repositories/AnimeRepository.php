@@ -50,15 +50,23 @@ class AnimeRepository implements AnimeRepositoryInterface
      * @param  \Illuminate\Http\Request  $request
      * @param                            $url
      *
-     * @todo Попытатся перенести все в обсервер
-     *
      * @return mixed
+     * @var                              $update
+     * @var                              $requestForm
+     *
+     * @var                              $updateAnime
+     * @todo Попытатся перенести все в AnimeObserver
      */
-    public function setAnime(Request $request, $url)
+    public function setAnime(Request $request, $url = null)
     {
         $update = [];
-        $updateAnime = Anime::where('url', $url)->first();
         $requestForm = $request->all();
+        if ($url)
+        {
+            $updateAnime = Anime::where('url', $url)->first();
+        }else{
+            $updateAnime = Anime::create($requestForm);
+        }
         $updateAnime->fill($request->except('genre'));
         $updateAnime->save();
         $updateAnime->getCategory()->sync($request->genre);
@@ -67,5 +75,17 @@ class AnimeRepository implements AnimeRepositoryInterface
         }
 
         return $updateAnime->update($update);
+    }
+
+    /**
+     * @param $url
+     *
+     * @return mixed
+     */
+    public function delAnime($url)
+    {
+        $deleteAnime = Anime::where('url', $url)->first();
+        $deleteAnime->getCategory()->detach();
+        return $deleteAnime->delete();
     }
 }

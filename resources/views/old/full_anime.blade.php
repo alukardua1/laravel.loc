@@ -8,8 +8,11 @@
                 <h3 class="font-weight-bold mb-3">
                     <strong>
                         {{ $animePost->title }}{{ isset($animePost->romaji) ? ' / ' .$animePost->romaji: '' }}
-                        {{-- {include
-                         file="engine/modules/title.php?tip=[xfvalue_tip]&seriya=[xfvalue_seriya]&serias_col=[xfvalue_serias-col]"}--}}
+                        @if($animePost->tip === 'tv')
+                            [1-{{$animePost->current_series}} из {{$animePost->count_series}}]
+                        @else
+                            [{{$animePost->current_series}} из {{$animePost->count_series}}]
+                        @endif
                     </strong>
                 </h3>
             </div>
@@ -73,17 +76,17 @@
                                        target="_blank" rel="nofollow">World-Art</a>
                                 @endif
                                 @if($animePost->kp_id)
-                                   / <a itemprop="url" href="https://www.kinopoisk.ru/film/{{ $animePost->kp_id }}"
-                                       target="_blank" rel="nofollow">КиноПоиск</a>
+                                    / <a itemprop="url" href="https://www.kinopoisk.ru/film/{{ $animePost->kp_id }}"
+                                         target="_blank" rel="nofollow">КиноПоиск</a>
                                 @endif
                                 @if($animePost->mal_id)
-                                   / <a itemprop="url"
-                                       href="https://myanimelist.net/anime/{{ $animePost->mal_id }}"
-                                       target="_blank" rel="nofollow">MyAnimeList</a>
+                                    / <a itemprop="url"
+                                         href="https://myanimelist.net/anime/{{ $animePost->mal_id }}"
+                                         target="_blank" rel="nofollow">MyAnimeList</a>
                                 @endif
                                 @if($animePost->anidb_id)
-                                  / <a itemprop="url" href="https://anidb.net/anime/{{ $animePost->anidb_id }}"
-                                       target="_blank" rel="nofollow">AniDb</a>
+                                    / <a itemprop="url" href="https://anidb.net/anime/{{ $animePost->anidb_id }}"
+                                         target="_blank" rel="nofollow">AniDb</a>
                                 @endif
                             </span>
                     </div>
@@ -94,7 +97,12 @@
                     </div>
                     <div class="col-md-8">
                             <span itemprop="sdDatePublished" class="float-xl-right url">
-                                в {{ $animePost->delivery_time }} на {{ $animePost->tv_canal }}
+                                @if($animePost->delivery_time)
+                                    в {{ \Carbon\Carbon::parse($animePost->delivery_time)->format('H:i') }}
+                                @endif
+                                @if($animePost->tv_canal)
+                                    на {{ $animePost->tv_canal }}
+                                @endif
                             </span>
                     </div>
                 </div>
@@ -193,7 +201,7 @@
                         <span class="title-info">Рейтинг:</span>
                     </div>
                     <div class="col-md-8">
-                        {!! $kind[$animePost->kind] !!}
+                        {!! $kind[$animePost->rating] !!}
                     </div>
                 </div>
                 <div class="row">
@@ -237,7 +245,7 @@
                     {!! $animePost->content !!}
                 </p>
             </div>
-            {{--<div class="col-md-12">
+            <div class="col-md-12">
                 <h3 class="font-weight-bold mb-3">
                     Видео
                 </h3>
@@ -247,45 +255,17 @@
                            aria-controls="home-md"
                            aria-selected="true">Плеер 1</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="profile-tab-md" data-toggle="tab" href="#player2-md" role="tab"
-                           aria-controls="profile-md"
-                           aria-selected="false">Плеер 2</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="contact-tab-md" data-toggle="tab" href="#player3-md" role="tab"
-                           aria-controls="contact-md"
-                           aria-selected="false">Плеер 3</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="contact-tab-md" data-toggle="tab" href="#player4-md" role="tab"
-                           aria-controls="contact-md"
-                           aria-selected="false">Плеер 4</a>
-                    </li>
                 </ul>
                 <div class="tab-content card pt-5" id="myTabContentMD">
                     <div class="tab-pane fade show active" id="player1-md" role="tabpanel"
                          aria-labelledby="home-tab-md">
-                        --}}{{--{hdlight-player}--}}{{--
-                    </div>
-                    <div class="tab-pane fade" id="player2-md" role="tabpanel" aria-labelledby="profile-tab-md">
-                        --}}{{-- [xfnotgiven_videocdn]Видео временно отсутствует[/xfnotgiven_videocdn]
-                         [videocdn-player]{videocdn-player}[/videocdn-player]--}}{{--
-                    </div>
-                    <div class="tab-pane fade" id="player3-md" role="tabpanel" aria-labelledby="contact-tab-md">
-                        --}}{{--[xfnotgiven_collaps]Видео временно отсутствует[/xfnotgiven_collaps]
-                        [xfgiven_collaps]
-                        <iframe src="[xfvalue_collaps]" allowfullscreen="" webkitallowfullscreen=""
-                                mozallowfullscreen="" oallowfullscreen="" msallowfullscreen="" width="795"
-                                height="497"></iframe>
-                        [/xfgiven_collaps]--}}{{--
-                    </div>
-                    <div class="tab-pane fade" id="player3-md" role="tabpanel" aria-labelledby="contact-tab-md">
-                        --}}{{--[xfnotgiven_hdvb]Видео временно отсутствует[/xfnotgiven_hdvb]
-                        [xfgiven_hdvb][hdvb="[xfvalue_hdvb]"][/xfgiven_hdvb]--}}{{--
+                        <iframe src="{{$animePost->video}}" width="100%"
+                                height="497" frameborder="0" allowfullscreen>
+                        </iframe>
+
                     </div>
                 </div>
-            </div>--}}
+            </div>
             {{--<div class="col-md-12">
                 <div class="row">
                     <div class="col-md-12">

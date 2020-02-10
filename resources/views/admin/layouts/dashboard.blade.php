@@ -9,7 +9,7 @@
     <link href="{{ asset('admin/css/mdb.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <title>Document</title>
+    <title>@yield('title' ?? 'Административная часть')</title>
 </head>
 <body class="fixed-sn light-blue-skin">
 
@@ -54,7 +54,7 @@
                             <ul>
                                 <li><a href="{{route('admin.anime')}}" class="waves-effect">Редактировать</a>
                                 </li>
-                                <li><a href="#" class="waves-effect">Добавить</a>
+                                <li><a href="{{route('admin.anime.add')}}" class="waves-effect">Добавить</a>
                                 </li>
                             </ul>
                         </div>

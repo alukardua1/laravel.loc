@@ -108,7 +108,6 @@ class Controller extends BaseController
         foreach ($arr as $key => $value) {
             $result[] = $value[$keys];
         }
-
         $result = array_count_values($result);
 
         krsort($result);
