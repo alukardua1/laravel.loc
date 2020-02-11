@@ -201,6 +201,21 @@
                 >{!! html_entity_decode($value) !!}</option>
             @endforeach
         </select>
+        <select name="released" class="mdb-select md-form">
+            <option value="" disabled selected>Завершен</option>
+            <option value="ongoing"
+                    @if('ongoing' === $animePost->released)
+                    selected
+                @endif
+            >Онгоинг
+            </option>
+            <option value="released"
+                    @if('released' === $animePost->released)
+                    selected
+                @endif
+            >Завершен
+            </option>
+        </select>
         <div class="md-form">
             <input type="text" id="video" name="video" class="form-control"
                    value="{{$animePost->video}}">

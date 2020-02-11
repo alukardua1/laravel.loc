@@ -41,19 +41,19 @@ trait FunctionsHelpers
         'R+'    => '<span class="float-xl-right">"R+" - Лицам до 17 лет просмотр запрещен</span>',
     ];
 
-	/**
-	 * Массив данных для вывода рейтинга видео
-	 *
-	 * @var array
-	 */
-	public static $arrRatings = [
-		'none'  => 'Рейтинг не указан',
-		'G'     => '"G" - Нет возрастных ограничений',
-		'PG'    => '"PG" - Рекомендуется присутствие родителей',
-		'PG-13' => "\"PG-13\" - Детям до 13 лет просмотр не желателен",
-		'R-17'  => '"R" - Лицам до 17 лет обязательно присутствие взрослого',
-		'R+'    => '"R+" - Лицам до 17 лет просмотр запрещен',
-	];
+    /**
+     * Массив данных для вывода рейтинга видео
+     *
+     * @var array
+     */
+    public static $arrRatings = [
+        'none'  => 'Рейтинг не указан',
+        'G'     => '"G" - Нет возрастных ограничений',
+        'PG'    => '"PG" - Рекомендуется присутствие родителей',
+        'PG-13' => '"PG-13" - Детям до 13 лет просмотр не желателен',
+        'R-17'  => '"R" - Лицам до 17 лет обязательно присутствие взрослого',
+        'R+'    => '"R+" - Лицам до 17 лет просмотр запрещен',
+    ];
 
     /**
      * @var array
@@ -100,38 +100,4 @@ trait FunctionsHelpers
 
         return $tz;
     }
-
-    /**
-     * Генератор ключевых слов
-     *
-     * @param  mixed  $arrayWords
-     * @param  int    $repeatWordCount
-     * @param  int    $minWordLength
-     *
-     * @return array
-     */
-//    public function keywords($arrayWords, $repeatWordCount = 2, $minWordLength = 3)
-//    {
-//        $tmpArr = [];
-//        $resultArray = [];
-//
-//        foreach ($arrayWords as $val) {
-//            if (strlen($val) >= $minWordLength) {
-//                $val = mb_strtolower($val);
-//                if (array_key_exists($val, $tmpArr)) {
-//                    $tmpArr[$val]++;
-//                } else {
-//                    $tmpArr[$val] = 1;
-//                }
-//            }
-//
-//            if ($tmpArr[$val] >= $repeatWordCount) {
-//                $resultArray[$val] = $tmpArr[$val];
-//            }
-//        }
-//
-//        arsort($resultArray);
-//
-//        return $resultArray;
-//    }
 }

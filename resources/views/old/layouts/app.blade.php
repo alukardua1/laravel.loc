@@ -82,9 +82,11 @@
             </ul>
         </div>
         @available('home')
-        <div class="jumbotron hoverable p-4">
-            <div id="carousel" class="owl-carousel owl-theme">
-                @include($theme.'/carousel')
+        <div class="card">
+            <div class="card-body">
+                <div id="carousel" class="owl-carousel owl-theme">
+                    @include($theme.'/carousel')
+                </div>
             </div>
         </div>
         @endavailable
