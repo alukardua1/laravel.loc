@@ -14,6 +14,8 @@ use Cache;
 /**
  * Trait Cache
  *
+ * @todo либо переписать, либо удалить
+ *
  * @package App\Traits
  */
 trait CacheTrait

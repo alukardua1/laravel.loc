@@ -13,7 +13,7 @@
                                     <img class="img-fluid wow fadeInUp" src="{{ isset($post->poster) ?
                                      asset('storage/'. $post->poster): asset('theme/'.$theme.'/images/no_poster.jpg')}}"
                                          alt="{{ $post->title }}">
-                                    <span class="sale-2 z-depth-1">{{ $tipRu[$post->tip] }}</span>
+                                    <span class="sale-2 z-depth-1">{{ $tipFullRu[$post->tip] }}</span>
                                 </div>
                                 <a>
                                     <div class="mask rgba-white-slight"></div>

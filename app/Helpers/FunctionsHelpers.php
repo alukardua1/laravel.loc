@@ -14,9 +14,9 @@ use IntlDateFormatter;
 trait FunctionsHelpers
 {
     /**
-     * Массив с типами
+     * Сокращенная версия массива с типами
      *
-     * @var array
+     * @var array $arrTip
      */
     public static $arrTip = [
         'tv'      => 'ТВ',
@@ -26,10 +26,25 @@ trait FunctionsHelpers
         'special' => 'Спешл',
         'music'   => 'Клип'
     ];
+
+    /**
+     * Расширенная версия массива с типами
+     *
+     * @var array $arrFullTip
+     */
+    public static $arrFullTip = [
+        'tv'      => 'Телевизионная версия',
+        'movie'   => 'Полнометражный фильм',
+        'ova'     => 'Original Video Anime',
+        'ona'     => 'Original Network Anime',
+        'special' => 'Специальный выпуск',
+        'music'   => 'Музыкальное видео'
+    ];
+
     /**
      * Массив данных для вывода рейтинга видео
      *
-     * @var array
+     * @var array $arrRating
      */
     public static $arrRating = [
         ''      => '<span class="float-xl-right">Рейтинг не указан</span>',
@@ -42,9 +57,9 @@ trait FunctionsHelpers
     ];
 
     /**
-     * Массив данных для вывода рейтинга видео
+     * Массив данных для вывода рейтинга видео в админке
      *
-     * @var array
+     * @var array $arrRatings
      */
     public static $arrRatings = [
         'none'  => 'Рейтинг не указан',
@@ -56,7 +71,9 @@ trait FunctionsHelpers
     ];
 
     /**
-     * @var array
+     * Приставка для сезона
+     *
+     * @var array $arrMsg
      */
     public static $arrMsg = [
         1  => 'зима - ',
@@ -67,7 +84,9 @@ trait FunctionsHelpers
     ];
 
     /**
-     * @var array
+     * Показывает время сеанса
+     *
+     * @var array $arrDay
      */
     public static $arrDay = [
         8  => '<span style="color: green; ">[утренний сеанс]</span>',
@@ -79,7 +98,7 @@ trait FunctionsHelpers
     /**
      * Возвращает временные зоны
      *
-     * @return array
+     * @return array getTimeZone()
      */
     public static function getTimeZone(): array
     {

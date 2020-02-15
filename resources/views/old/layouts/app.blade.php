@@ -127,7 +127,7 @@
                                 @foreach($tip as $key => $value)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <a href='{{route('tip', $key)}}'>
-                                            <p class="mb-0">{{$tipRu[$key]}}</p>
+                                            <p class="mb-0">{{$tipFullRu[$key]}}</p>
                                         </a>
                                         <span class="badge teal badge-pill font-small float-right">{{$value}}</span>
                                     </li>

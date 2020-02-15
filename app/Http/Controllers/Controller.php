@@ -87,6 +87,7 @@ class Controller extends BaseController
             'carouselAnime' => $carouselAnime,
             'yearCustom'    => $this->customArr($year, 'aired_season'),
             'tipRu'         => FunctionsHelpers::$arrTip,
+            'tipFullRu'     => FunctionsHelpers::$arrFullTip,
             'tip'           => $this->customArr($tip, 'tip'),
             'theme'         => self::$theme,
             'kind'          => self::$kind,

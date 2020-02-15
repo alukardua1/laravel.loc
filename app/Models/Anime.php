@@ -42,6 +42,7 @@ class Anime extends Model
         'user_id',
         'posted_at',
         'released',
+        'current_series',
     ];
 
     /**

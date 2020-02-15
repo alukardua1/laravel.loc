@@ -36,7 +36,7 @@ class AnimeObserver
     /**
      * @param  \App\Models\Anime  $anime
      *
-     * @todo Не забыть сменить $anime->metatitle, $anime->keywords, $anime->released, $anime->description
+     * @todo Не забыть сменить $anime->metatitle, $anime->description
      */
     public function creating(Anime $anime)
     {
@@ -58,6 +58,7 @@ class AnimeObserver
     }
 
     /**
+     * Создает ключевые слова для поста
      * @param       $contents
      * @param  int  $symbol
      * @param  int  $words
@@ -90,7 +91,7 @@ class AnimeObserver
         foreach ($keywordCache as $word) {
             if (strlen($word) >= $symbol && !is_numeric($word)) {
                 $adjective = substr($word, -2);
-                if (!in_array($adjective, $adjectivearray) && !in_array($word, $adjectivearray)) {
+                if (!in_array($adjective, $adjectivearray, true) && !in_array($word, $adjectivearray, true)) {
                     $rearray[$word] = (array_key_exists($word, $rearray)) ? ($rearray[$word] + 1) : 1;
                 }
             }
