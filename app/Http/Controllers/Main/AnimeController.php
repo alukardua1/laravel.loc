@@ -51,14 +51,23 @@ class AnimeController extends Controller
      *
      * @param $urlAnime
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return mixed \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function view($urlAnime)
     {
-        $animePost = self::$animeRepository->getAnime($urlAnime)->first();
 
+        $uri = explode('-', $urlAnime);
+        $stringUrl = preg_split("/[0-9]+-/", $urlAnime);
+
+        $animePost = self::$animeRepository->getAnime($uri[0])->first();
         if (empty($animePost)) {
-            return view(self::$theme.'/errors.error')->withErrors(['msg' => "Пост {$urlAnime} не найден"]);
+            //return view(self::$theme.'/errors.error')->withErrors(['msg' => "Пост {$urlAnime} не найден"]);
+            return abort(404);
+        }
+
+        if ($stringUrl[1] <> $animePost->url) {
+
+            return redirect('/anime/'.$animePost->id.'-'.$animePost->url);
         }
 
         return view(self::$theme.'/full_anime', compact('animePost'));

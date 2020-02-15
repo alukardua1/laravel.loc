@@ -33,7 +33,7 @@ class AnimeRepository implements AnimeRepositoryInterface
     {
         if ($url) {
             return Anime::with(['getCategory'])
-                ->where('url', $url)
+                ->where('id', $url)
                 ->orderBy('created_at', 'DESC');
         }
         if ($isAdmin) {

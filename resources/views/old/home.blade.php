@@ -37,7 +37,7 @@
                                 @endforeach
                             </p>
                             <p class="dark-grey-text">{!! Str::limit($post->content, 300) !!}</p>
-                            <a href="{{ route('anime', $post->url) }}" class="btn btn-success">Смотреть...</a>
+                            <a href="{{ route('anime', $post->id.'-'.$post->url) }}" class="btn btn-success">Смотреть...</a>
                         </div>
                     </div>
                 </div>
