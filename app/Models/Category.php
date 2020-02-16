@@ -8,6 +8,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Category
@@ -17,17 +19,17 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function getAnime(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function getAnime(): BelongsToMany
     {
         return $this->belongsToMany(Anime::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function getCategory(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function getCategory(): HasOne
     {
         return $this->hasOne(__CLASS__, 'id', 'id');
     }

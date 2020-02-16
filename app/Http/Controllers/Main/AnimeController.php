@@ -12,7 +12,6 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 

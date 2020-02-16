@@ -9,6 +9,8 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\StaticPageRepositoryInterface;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 /**
  * Class StaticPageController
@@ -18,14 +20,14 @@ use App\Repositories\Interfaces\StaticPageRepositoryInterface;
 class StaticPageController extends Controller
 {
     /**
-     * @var \App\Repositories\Interfaces\StaticPageRepositoryInterface
+     * @var StaticPageRepositoryInterface
      */
     private static $staticPageRepository;
 
     /**
      * StaticPageController constructor.
      *
-     * @param  \App\Repositories\Interfaces\StaticPageRepositoryInterface  $repository
+     * @param StaticPageRepositoryInterface $repository
      */
     public function __construct(StaticPageRepositoryInterface $repository)
     {
@@ -36,7 +38,7 @@ class StaticPageController extends Controller
     /**
      * @param $url
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function view($url)
     {
