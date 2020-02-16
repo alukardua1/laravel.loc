@@ -63,7 +63,7 @@ class AnimeRepository implements AnimeRepositoryInterface
         $update = [];
         $requestForm = $request->all();
         if ($url) {
-            $updateAnime = Anime::where('id', $url)->first();
+            $updateAnime = Anime::where('id', $url)->first()->touch();
         } else {
             $updateAnime = Anime::create($requestForm);
         }
