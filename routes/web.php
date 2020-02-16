@@ -29,8 +29,7 @@ Route::group(['namespace' => 'Main'], function () {
     /** Страница поиска */
     Route::get('search', 'AnimeController@search')->name('search');
     /** Выборки по полям */
-    Route::get('tip/{tip}', 'CustomController@tip')->name('tip');
-    Route::get('year/{year}', 'CustomController@year')->name('year');
+    Route::get('{custom}/{variable}', 'CustomController@loadCustom')->name('custom');
     /** Страница пользователя */
     Route::get('user/{user}', 'UserController@view')->name('profile')->middleware('auth');
     Route::patch('user/{user}', 'UserController@update')->name('editProfile')->middleware('auth');

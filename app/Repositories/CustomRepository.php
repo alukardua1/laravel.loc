@@ -19,6 +19,8 @@ use App\Repositories\Interfaces\CustomRepositoryInterface;
 class CustomRepository implements CustomRepositoryInterface
 {
     /**
+     * Вывод по кустом полю
+     * @todo решить проблему с ошибкой колумнс
      * @param  string  $select
      * @param  null    $columns
      * @param  null    $variable

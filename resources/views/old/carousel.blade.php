@@ -2,8 +2,9 @@
     <div class="row">
         <div class="col-md-3">
             <div class="card-img">
-                <img src="{{ isset($animePost->image) ? asset('storage/'. $animePost->image) : asset('images/no_poster.jpg')}}"
-                    class="img-fluid" alt="{{ $animePost->title }}"/>
+                <img class="img-fluid wow fadeInUp" src="{{ isset($animePost->poster) ?
+                                     asset('storage/'. $animePost->poster): asset('theme/'.$theme.'/images/no_poster.jpg')}}"
+                     alt="{{ $animePost->title }}">
             </div>
         </div>
         <div class="col-md-9">
@@ -21,8 +22,8 @@
                         @endif
                     @endforeach
                 </p>
-                <p class="text-muted">{{ Str::limit($animePost->content, 300) }}</p>
-                <a class="font-weight-bold" href="{{ route('anime', $post->url) }}">
+                <p class="text-muted">{!! Str::limit($animePost->content, 300) !!}</p>
+                <a class="font-weight-bold" href="{{ route('anime', $animePost->id.'-'.$animePost->url) }}">
                     Смотреть
                     <i class="fas fa-angle-right ml-2"></i>
                 </a>

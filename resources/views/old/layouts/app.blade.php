@@ -54,14 +54,14 @@
                             class="fas fa-medal"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/xfsearch/ongoing/"><i class="fas fa-tv"></i> Онгоинги</a>
+                    <a class="nav-link" href="{{route('custom', ['variable'=>'ongoing', 'custom'=>'released'])}}"><i class="fas fa-tv"></i> Онгоинги</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/pravoobladatelyam.html"><i class="fab fa-studiovinari"></i>
+                    <a class="nav-link" href="page/pravoobladatelyam"><i class="fab fa-studiovinari"></i>
                         Правообладателям</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/rules.html"><i class="fas fa-book"></i> Правила</a>
+                    <a class="nav-link" href="page/rules"><i class="fas fa-book"></i> Правила</a>
                 </li>
                 <li class="nav-item">
                     <a id="modalActivate" class="nav-link" data-toggle="modal" data-target="#studios"><i
@@ -126,7 +126,7 @@
 
                                 @foreach($tip as $key => $value)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <a href='{{route('tip', $key)}}'>
+                                        <a href='{{route('custom', ['variable'=>$key, 'custom'=>'tip'])}}'>
                                             <p class="mb-0">{{$tipFullRu[$key]}}</p>
                                         </a>
                                         <span class="badge teal badge-pill font-small float-right">{{$value}}</span>

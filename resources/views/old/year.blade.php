@@ -14,7 +14,7 @@
                 <ul class="list-group my-4">
                     @foreach($yearCustom as  $key=>$value)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <a href="{{ route('year', $key) }}">
+                            <a href="{{route('custom', ['variable'=>$key, 'custom'=>'aired_season'])}}">
                                 <p class="mb-0">
                                     {{ $key }}
                                 </p>
