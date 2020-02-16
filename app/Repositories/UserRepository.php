@@ -12,6 +12,9 @@ use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Traits\UsersTrait;
 use Hash;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 /**
  * Class UserRepository
@@ -26,7 +29,7 @@ class UserRepository implements UserRepositoryInterface
     /**
      * @param $userUrl
      *
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|mixed|object|null
+     * @return Builder|Model|mixed|object|null
      */
     public function getUsers($userUrl)
     {
@@ -36,7 +39,7 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param                            $currentUser
      *
      * @return mixed

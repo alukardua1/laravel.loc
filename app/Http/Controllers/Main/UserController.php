@@ -10,7 +10,9 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Repositories\Interfaces\UserRepositoryInterface;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 /**
  * Class UserController
@@ -20,14 +22,14 @@ use Illuminate\Http\RedirectResponse;
 class UserController extends Controller
 {
     /**
-     * @var \App\Repositories\Interfaces\UserRepositoryInterface
+     * @var UserRepositoryInterface
      */
     private static $userRepository;
 
     /**
      * UserController constructor.
      *
-     * @param  \App\Repositories\Interfaces\UserRepositoryInterface  $repository
+     * @param UserRepositoryInterface $repository
      */
     public function __construct(UserRepositoryInterface $repository)
     {
@@ -39,7 +41,7 @@ class UserController extends Controller
     /**
      * @param $userUrl
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function view($userUrl)
     {
@@ -73,7 +75,7 @@ class UserController extends Controller
 
 
     /**
-     * @param  \App\Http\Requests\UserRequest  $request
+     * @param UserRequest $request
      * @param                                  $currentUser
      *
      * @return RedirectResponse

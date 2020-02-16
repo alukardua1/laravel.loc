@@ -18,17 +18,17 @@ use Illuminate\Http\Request;
 interface AnimeRepositoryInterface
 {
     /**
-     * @param  null  $url  Url default null
+     * @param null $url Url default null
      *
-     * @param  bool  $isAdmin
+     * @param bool $isAdmin
      *
      * @return mixed
      */
     public function getAnime($url = null, $isAdmin = false);
 
     /**
-     * @param  \Illuminate\Http\Request  $request
-     * @param  null                      $url
+     * @param Request $request
+     * @param null $url
      *
      * @return mixed
      */
@@ -40,4 +40,11 @@ interface AnimeRepositoryInterface
      * @return mixed
      */
     public function delAnime($url);
+
+    /**
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    public function getSearch(Request $request);
 }

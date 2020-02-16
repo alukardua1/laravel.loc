@@ -20,7 +20,7 @@
                     <tr class="alert alert-danger" role="alert">
                         @endif
                         <td>{{$post->id}}</td>
-                        <td><a href="{{route('admin.anime.edit', $post->url)}}">{{$post->title}}</a></td>
+                        <td><a href="{{route('admin.anime.edit', $post->id)}}">{{$post->title}}</a></td>
                         <td>
                             @foreach($post->getCategory as $category)
                                 @if ($loop->last) {{ $category->title }} @else
@@ -29,7 +29,7 @@
                             @endforeach
                         </td>
                         <td>{{$post->getUsers->login}}</td>
-                        <td><a href="{{route('admin.anime.delete', $post->url)}}" aria-label="Удалить"><i class="fas fa-trash-alt"></i></a> </td>
+                        <td><a href="{{route('admin.anime.delete', $post->id)}}" aria-label="Удалить"><i class="fas fa-trash-alt"></i></a> </td>
                     </tr>
                     @endforeach
             </tbody>

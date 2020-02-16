@@ -1,7 +1,7 @@
 @extends('admin.layouts.dashboard')
 @section('title', 'Редактирование аниме '.$animePost->title)
 @section('content')
-    <form method="POST" action="{{ route('admin.anime.update', $animePost->url) }}"
+    <form method="POST" action="{{ route('admin.anime.update', $animePost->id) }}"
           enctype="multipart/form-data">
         @method('PATCH')
         @csrf
@@ -209,7 +209,7 @@
             @endforeach
         </select>
         <select name="released" class="mdb-select md-form">
-            <option value="" disabled selected>Завершен</option>
+            <option value="" disabled selected>Текущее состояние аниме</option>
             <option value="ongoing"
                     @if('ongoing' === $animePost->released)
                     selected
@@ -222,6 +222,20 @@
                 @endif
             >Завершен
             </option>
+        </select>
+        <select name="translate" class="mdb-select md-form">
+            {{--@todo Решить как выводить озвучку--}}
+            <option value="" disabled selected>Озвучка</option>
+            {{-- @foreach($category as $key => $value)
+                 <option
+                     value="{{$value->id}}"
+                     @foreach($animePost->getCategory as $categoryAnime)
+                     @if($value->id === $categoryAnime->id)
+                     selected
+                     @endif
+                     @endforeach
+                 >{{$value->title}}</option>
+             @endforeach--}}
         </select>
         <div class="md-form">
             <input type="text" id="video" name="video" class="form-control"

@@ -9,9 +9,10 @@ namespace App\Repositories;
 
 
 use App\Models\Anime;
-use App\Models\Category;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Traits\UploadImage;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 /**
@@ -24,12 +25,12 @@ class AnimeRepository implements AnimeRepositoryInterface
     use UploadImage;
 
     /**
-     * @param  mixed  $url
-     * @param  bool   $isAdmin
+     * @param mixed $url
+     * @param bool $isAdmin
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
-    public function getAnime($url = null, $isAdmin = false): \Illuminate\Database\Eloquent\Builder
+    public function getAnime($url = null, $isAdmin = false): Builder
     {
         if ($url) {
             return Anime::with(['getCategory'])
@@ -47,7 +48,7 @@ class AnimeRepository implements AnimeRepositoryInterface
     }
 
     /**
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param                            $url
      *
      * @return mixed
@@ -61,12 +62,12 @@ class AnimeRepository implements AnimeRepositoryInterface
     {
         $update = [];
         $requestForm = $request->all();
-        if ($url)
-        {
-            $updateAnime = Anime::where('url', $url)->first();
-        }else{
+        if ($url) {
+            $updateAnime = Anime::where('id', $url)->first();
+        } else {
             $updateAnime = Anime::create($requestForm);
         }
+        //dd(__METHOD__, $updateAnime, $url);
         $updateAnime->fill($request->except('genre'));
         $updateAnime->save();
         $updateAnime->getCategory()->sync($request->genre);
@@ -84,8 +85,25 @@ class AnimeRepository implements AnimeRepositoryInterface
      */
     public function delAnime($url)
     {
-        $deleteAnime = Anime::where('url', $url)->first();
+        $deleteAnime = Anime::where('id', $url)->first();
         $deleteAnime->getCategory()->detach();
         return $deleteAnime->delete();
+    }
+
+    /**
+     * Поиск по сайту
+     *
+     * @param Request $request
+     * @return LengthAwarePaginator|mixed
+     */
+    public function getSearch(Request $request)
+    {
+        return Anime::with(['getCategory'])
+            ->orWhere('title', 'LIKE', '%' . $request->story . '%')
+            ->orWhere('japanese', 'LIKE', '%' . $request->story . '%')
+            ->orWhere('english', 'LIKE', '%' . $request->story . '%')
+            ->orWhere('romaji', 'LIKE', '%' . $request->story . '%')
+            ->orderBy('created_at', 'DESC');
+
     }
 }

@@ -7,6 +7,9 @@
 
 namespace App\Http\Controllers\Administrations;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
+
 /**
  * Class AdminController
  *
@@ -15,7 +18,7 @@ namespace App\Http\Controllers\Administrations;
 class AdminController extends AdminBaseController
 {
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {

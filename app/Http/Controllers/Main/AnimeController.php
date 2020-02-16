@@ -10,6 +10,11 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 /**
  * Class AnimeController
@@ -19,14 +24,14 @@ use App\Repositories\Interfaces\AnimeRepositoryInterface;
 class AnimeController extends Controller
 {
     /**
-     * @var \App\Repositories\Interfaces\AnimeRepositoryInterface
+     * @var AnimeRepositoryInterface
      */
     private static $animeRepository;
 
     /**
      * AnimeController constructor.
      *
-     * @param  \App\Repositories\Interfaces\AnimeRepositoryInterface  $repository
+     * @param AnimeRepositoryInterface $repository
      */
     public function __construct(AnimeRepositoryInterface $repository)
     {
@@ -37,7 +42,7 @@ class AnimeController extends Controller
     /**
      * Главная страница аниме
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function index()
     {
@@ -65,7 +70,7 @@ class AnimeController extends Controller
             return abort(404);
         }
 
-        if ($stringUrl[1] <> $animePost->url) {
+        if ($stringUrl[1] != $animePost->url) {
 
             return redirect('/anime/'.$animePost->id.'-'.$animePost->url);
         }
@@ -73,20 +78,20 @@ class AnimeController extends Controller
         return view(self::$theme.'/full_anime', compact('animePost'));
     }
 
-//    /**
-//     * Поиск по сайту
-//     *
-//     * @param  \Illuminate\Http\Request  $request
-//     *
-//     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-//     */
-//    public function search(Request $request)
-//    {
-//        $animePost = self::$mainRepository->getSearch($request, 10);
-//
-//        if (empty($animePost)) {
-//            return view(self::$theme.'/errors.error')->withErrors(['msg' => "Ничего не найдено"]);
-//        }
-//        return view(self::$theme.'/home', compact('animePost'));
-//    }
+    /**
+     * Поиск по сайту
+     *
+     * @param  Request  $request
+     *
+     * @return Factory|View
+     */
+    public function search(Request $request)
+    {
+        $animePost = self::$animeRepository->getSearch($request)->paginate(self::$paginate);
+
+        if (empty($animePost)) {
+            return view(self::$theme.'/errors.error')->withErrors(['msg' => "Ничего не найдено"]);
+        }
+        return view(self::$theme.'/home', compact('animePost'));
+    }
 }

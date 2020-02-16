@@ -13,6 +13,9 @@
                         @else
                             [{{$animePost->current_series}} из {{$animePost->count_series}}]
                         @endif
+                        @if(Auth::user()->group_id == 1)
+                            <a target="_blank" href="{{route('admin.anime.edit', $animePost->id)}}" title="Редактировать {{$animePost->title}}"><i class="far fa-edit"></i></a>
+                        @endif
                     </strong>
                 </h3>
             </div>

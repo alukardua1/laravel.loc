@@ -138,7 +138,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 <select name="tip" class="mdb-select md-form">
                     <option value="" disabled selected>Тип аниме</option>
                     @foreach($tip as $key => $value)
@@ -146,14 +146,21 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <div class="md-form">
                     <input type="text" id="count_series" name="count_series" class="form-control"
                            value="">
                     <label for="count_series" class="title-info">Количество серий</label>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-3">
+                <div class="md-form">
+                    <input type="text" id="current_series" name="current_series" class="form-control"
+                           value="">
+                    <label for="current_series" class="title-info">Текущая серия</label>
+                </div>
+            </div>
+            <div class="col-3">
                 <div class="md-form">
                     <input type="text" id="duration" name="duration" class="form-control"
                            value="">
@@ -185,9 +192,23 @@
             @endforeach
         </select>
         <select name="released" class="mdb-select md-form">
-            <option value="" disabled selected>Завершен</option>
+            <option value="" disabled selected>Текущее состояние аниме</option>
             <option value="ongoing">Онгоинг</option>
             <option value="released">Завершен</option>
+        </select>
+        <select name="translate" class="mdb-select md-form">
+            {{--@todo Решить как выводить озвучку--}}
+            <option value="" disabled selected>Озвучка</option>
+            {{-- @foreach($category as $key => $value)
+                 <option
+                     value="{{$value->id}}"
+                     @foreach($animePost->getCategory as $categoryAnime)
+                     @if($value->id === $categoryAnime->id)
+                     selected
+                     @endif
+                     @endforeach
+                 >{{$value->title}}</option>
+             @endforeach--}}
         </select>
         <div class="md-form">
             <input type="text" id="video" name="video" class="form-control"

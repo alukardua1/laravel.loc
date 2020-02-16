@@ -8,18 +8,20 @@
 namespace App\Http\Controllers\Administrations;
 
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 class AdminCategoryController extends AdminBaseController
 {
     /**
-     * @var \App\Repositories\Interfaces\CategoryRepositoryInterface
+     * @var CategoryRepositoryInterface
      */
     protected static $categoryRepository;
 
     /**
      * AdminCategoryController constructor.
      *
-     * @param  \App\Repositories\Interfaces\CategoryRepositoryInterface  $repository
+     * @param CategoryRepositoryInterface $repository
      */
     public function __construct(CategoryRepositoryInterface $repository)
     {
@@ -28,7 +30,7 @@ class AdminCategoryController extends AdminBaseController
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {

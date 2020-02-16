@@ -19,20 +19,31 @@ use App\Repositories\Interfaces\CategoryRepositoryInterface;
 class CategoryRepository implements CategoryRepositoryInterface
 {
     /**
-     * @param  null  $url
+     * Выводит все записи категории
+     *
+     * @param null $url
      *
      * @return mixed
      */
     public function getCategory($url = null)
     {
         if ($url) {
-            return Category::where('url', $url)
+            /** @var mixed $result текущая категория */
+            $result = Category::where('url', $url)
                 ->select(['id', 'title', 'url'])
-                ->first()
-                ->getAnime()
-                ->with(['getCategory', 'getUsers:id,login'])
-                ->orderBy('created_at', 'DESC');
+                ->first();
+            if ($result) {
+                /** @var mixed $anime все записи текущей категории если найдена категория */
+                $anime = $result->getAnime()
+                    ->with(['getCategory', 'getUsers:id,login'])
+                    ->orderBy('created_at', 'DESC');
+
+                return $anime;
+            }
+            /** Возвращает ошибку 404 если категория не найдена */
+            return abort(404);
         }
+        /** Возвращает количество постов для категории */
         return Category::withCount('getAnime');
     }
 }
