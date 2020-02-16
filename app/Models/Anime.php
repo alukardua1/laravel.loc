@@ -7,7 +7,11 @@
 
 namespace App\Models;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Anime
@@ -16,6 +20,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Anime extends Model
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
         'title',
         'content',
@@ -46,25 +53,25 @@ class Anime extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function getCategory(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function getCategory(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function getUsers(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function getUsers(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function getCountry(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function getCountry(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'country_id');
     }
@@ -72,13 +79,24 @@ class Anime extends Model
     /**
      * @param $field
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      * @todo Решить нужна ли эта функция подсчета записей
      *
      */
-    public function countAnime($field): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function countAnime($field): HasOne
     {
         dd(__METHOD__, $field);
         return $this->hasOne(__CLASS__, $field, $field);
+    }
+
+    /**
+     * @return bool
+     */
+    public function favorited(): bool
+    {
+        return (bool) $this->hasMany(Favorites::class)
+            ->where('user_id', Auth::id())
+            ->where('anime_id', $this->id)
+            ->first();
     }
 }

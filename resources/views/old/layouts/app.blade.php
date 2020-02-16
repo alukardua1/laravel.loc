@@ -101,7 +101,7 @@
                 </div>
                 [/sort]--}}
                 @available('home')
-                <search></search>
+                    <search></search>
                 @endavailable
                 <section class="my-5">
                     @available('category.show')

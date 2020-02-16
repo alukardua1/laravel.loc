@@ -20,11 +20,11 @@
                 </h3>
             </div>
             <div class="col-md-1">
-                {{--@if (Auth::check())
+                @if (Auth::check())
                     <favorite
                         :post={{ $animePost->id }} :favorited={{ $animePost->favorited() ? 'true' : 'false' }}>
                     </favorite>
-                @endif--}}
+                @endif
             </div>
         </div>
         <div class="row">

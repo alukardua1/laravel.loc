@@ -7,6 +7,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -42,18 +43,23 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function getGroup(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function getGroup(): BelongsTo
     {
         return $this->belongsTo(Group::class, 'group_id', 'id');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function getCountry(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function getCountry(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'country_id', 'id');
+    }
+
+    public function favorites(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Anime::class, 'favorites')->withTimeStamps();
     }
 }

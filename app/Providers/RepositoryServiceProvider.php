@@ -14,12 +14,14 @@ use App\Repositories\CharacterRepository;
 use App\Repositories\CommentsRepository;
 use App\Repositories\CountryRepository;
 use App\Repositories\CustomRepository;
+use App\Repositories\FavoriteRepository;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CharacterRepositoryInterface;
 use App\Repositories\Interfaces\CommentsRepositoryInterface;
 use App\Repositories\Interfaces\CountryRepositoryInterface;
 use App\Repositories\Interfaces\CustomRepositoryInterface;
+use App\Repositories\Interfaces\FavoritesRepositoryInterface;
 use App\Repositories\Interfaces\PeopleRepositoryInterface;
 use App\Repositories\Interfaces\StaticPageRepositoryInterface;
 use App\Repositories\Interfaces\TranslateRepositoryInterface;
@@ -78,6 +80,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             UserRepositoryInterface::class,
             UserRepository::class
+        );
+
+        $this->app->bind(
+            FavoritesRepositoryInterface::class,
+            FavoriteRepository::class
         );
     }
 

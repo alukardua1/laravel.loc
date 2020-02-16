@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) by anime-free
+ * Date: 2020.
+ * User: Alukardua
+ */
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -20,7 +26,9 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
+Vue.component('favorite', require('./components/Favorite').default);
+Vue.component('votes', require('./components/Votes').default);
+Vue.component('search', require('./components/Search').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

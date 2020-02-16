@@ -37,6 +37,9 @@ Route::group(['namespace' => 'Main'], function () {
     Route::get('category/{category}', 'CategoryController@view')->name('category');
     /** Статическая страница */
     Route::get('page/{page}', 'StaticPageController@view')->name('page');
+
+    Route::post('/favorite/{id}', 'FavoriteController@favorite')->name('favorite_add');
+    Route::post('/unfavorite/{id}', 'FavoriteController@unFavorite')->name('favorite_del');
 });
 
 Route::group(['namespace' => 'Administrations'], function () {

@@ -6,7 +6,7 @@
         <div class="card mb-3">
             <div class="card-header">
                 <h3 class="font-weight-bold mb-3"><strong>
-                        {{ $post->title }}
+                        {{ $post->title .' / '. $post->romaji }}
                         @if($post->tip === 'tv')
                             [1-{{$post->current_series}} из {{$post->count_series}}]
                         @else
