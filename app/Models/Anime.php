@@ -11,6 +11,7 @@ use Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -94,9 +95,29 @@ class Anime extends Model
      */
     public function favorited(): bool
     {
-        return (bool) $this->hasMany(Favorites::class)
+        return (bool)$this->hasMany(Favorites::class)
             ->where('user_id', Auth::id())
             ->where('anime_id', $this->id)
             ->first();
+    }
+
+    /**
+     * @return bool
+     */
+    public function votes(): bool
+    {
+        return (bool)$this->hasMany(Vote::class)
+            ->where('user_id', Auth::id())
+            ->where('anime_id', $this->id)
+            ->first();
+    }
+
+    /**
+     * @todo Найти применение
+     * @return HasMany
+     */
+    public function voteCount()
+    {
+        return $this->hasMany(Vote::class, 'anime_id');
     }
 }

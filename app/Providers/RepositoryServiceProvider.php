@@ -26,10 +26,12 @@ use App\Repositories\Interfaces\PeopleRepositoryInterface;
 use App\Repositories\Interfaces\StaticPageRepositoryInterface;
 use App\Repositories\Interfaces\TranslateRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Repositories\Interfaces\VoteRepositoryInterface;
 use App\Repositories\PeopleRepository;
 use App\Repositories\StaticPageRepository;
 use App\Repositories\TranslateRepository;
 use App\Repositories\UserRepository;
+use App\Repositories\VoteRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -85,6 +87,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             FavoritesRepositoryInterface::class,
             FavoriteRepository::class
+        );
+        $this->app->bind(
+            VoteRepositoryInterface::class,
+            VoteRepository::class
         );
     }
 

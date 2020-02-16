@@ -8,9 +8,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Class User
+ * @package App\Models
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -58,8 +63,19 @@ class User extends Authenticatable
         return $this->belongsTo(Country::class, 'country_id', 'id');
     }
 
-    public function favorites(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    /**
+     * @return BelongsToMany
+     */
+    public function favorites(): BelongsToMany
     {
         return $this->belongsToMany(Anime::class, 'favorites')->withTimeStamps();
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function vote(): BelongsToMany
+    {
+        return $this->belongsToMany(Anime::class, 'votes')->withTimestamps();
     }
 }

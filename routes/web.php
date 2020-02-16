@@ -40,6 +40,9 @@ Route::group(['namespace' => 'Main'], function () {
 
     Route::post('/favorite/{id}', 'FavoriteController@favorite')->name('favorite_add');
     Route::post('/unfavorite/{id}', 'FavoriteController@unFavorite')->name('favorite_del');
+
+    Route::post('/plusVotes/{id}', 'VoteController@plusVotes')->name('votes_plus');
+    Route::post('/minusVotes/{id}', 'VoteController@minusVotes')->name('votes_minus');
 });
 
 Route::group(['namespace' => 'Administrations'], function () {

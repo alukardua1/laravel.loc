@@ -33,8 +33,8 @@
             </div>
             @if (Auth::check())
                 <div class="col-md-12">
-                    {{--<votes :post={{ $animePost->id }}
-                        :votes={{ $animePost->votes() ? 'true' : 'false' }}></votes>--}}
+                    <votes :post={{ $animePost->id }}
+                        :votes={{ $animePost->votes() ? 'true' : 'false' }}></votes>
                 </div>
             @endif
         </div>
