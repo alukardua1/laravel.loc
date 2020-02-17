@@ -27,7 +27,7 @@ class StaticPageController extends Controller
     /**
      * StaticPageController constructor.
      *
-     * @param StaticPageRepositoryInterface $repository
+     * @param  StaticPageRepositoryInterface  $repository
      */
     public function __construct(StaticPageRepositoryInterface $repository)
     {

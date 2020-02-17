@@ -113,8 +113,8 @@ class Anime extends Model
     }
 
     /**
-     * @todo Найти применение
      * @return HasMany
+     * @todo Найти применение
      */
     public function voteCount()
     {

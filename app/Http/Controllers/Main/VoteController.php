@@ -15,11 +15,11 @@ class VoteController extends Controller
 {
     private static $voteRepository;
 
-   public function __construct(VoteRepositoryInterface $repository)
-   {
-       parent::__construct();
-       self::$voteRepository = $repository;
-   }
+    public function __construct(VoteRepositoryInterface $repository)
+    {
+        parent::__construct();
+        self::$voteRepository = $repository;
+    }
 
     public function plusVotes($id): RedirectResponse
     {

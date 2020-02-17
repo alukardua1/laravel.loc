@@ -19,7 +19,7 @@ use Storage;
 trait UsersTrait
 {
     /**
-     * @param  array  $updateUser   Current users
+     * @param  array  $updateUser  Current users
      * @param  array  $requestForm  Request
      *
      * @return mixed Updated request
@@ -34,7 +34,9 @@ trait UsersTrait
         $fileName = 'photo_'.$updateUser->id.'.'.$Extension;
 
         Storage::putFileAs(
-            'public/avatars/'.$updateUser->login.'/', $requestForm['photo'], $fileName
+            'public/avatars/'.$updateUser->login.'/',
+            $requestForm['photo'],
+            $fileName
         );
 
         $requestForm['photo'] = $updateUser->login.'/'.$fileName;
@@ -43,7 +45,7 @@ trait UsersTrait
     }
 
     /**
-     * @param  array  $updateUser   Current users
+     * @param  array  $updateUser  Current users
      * @param  array  $requestForm  Request
      *
      * @return mixed|void Updated request
@@ -57,7 +59,7 @@ trait UsersTrait
     }
 
     /**
-     * @param  array  $updateUser   Current users
+     * @param  array  $updateUser  Current users
      * @param  array  $requestForm  Request
      *
      * @return string

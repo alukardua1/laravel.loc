@@ -25,30 +25,32 @@ class AnimeRepository implements AnimeRepositoryInterface
     use UploadImage;
 
     /**
-     * @param mixed $url
-     * @param bool $isAdmin
+     * @param  mixed  $url  Урл поста
+     * @param  bool  $isAdmin  Проверяет откуда запрос (сайт или админка)
      *
      * @return Builder
      */
     public function getAnime($url = null, $isAdmin = false): Builder
     {
         if ($url) {
+            /** выводит аниме по урл */
             return Anime::with(['getCategory'])
                 ->where('id', $url)
                 ->orderBy('created_at', 'DESC');
         }
         if ($isAdmin) {
+            /** выводит все аниме для админки */
             return Anime::with(['getCategory', 'getUsers'])
                 ->orderBy('created_at', 'DESC');
         }
-
+        /** выводит все аниме на сайте */
         return Anime::with(['getCategory', 'getUsers'])
             ->where('posted_at', 1)
             ->orderBy('created_at', 'DESC');
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @param                            $url
      *
      * @return mixed
@@ -93,17 +95,16 @@ class AnimeRepository implements AnimeRepositoryInterface
     /**
      * Поиск по сайту
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return LengthAwarePaginator|mixed
      */
     public function getSearch(Request $request)
     {
         return Anime::with(['getCategory'])
-            ->orWhere('title', 'LIKE', '%' . $request->story . '%')
-            ->orWhere('japanese', 'LIKE', '%' . $request->story . '%')
-            ->orWhere('english', 'LIKE', '%' . $request->story . '%')
-            ->orWhere('romaji', 'LIKE', '%' . $request->story . '%')
+            ->orWhere('title', 'LIKE', '%'.$request->story.'%')
+            ->orWhere('japanese', 'LIKE', '%'.$request->story.'%')
+            ->orWhere('english', 'LIKE', '%'.$request->story.'%')
+            ->orWhere('romaji', 'LIKE', '%'.$request->story.'%')
             ->orderBy('created_at', 'DESC');
-
     }
 }

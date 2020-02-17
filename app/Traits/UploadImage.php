@@ -14,13 +14,21 @@
 namespace App\Traits;
 
 
-
 use Image;
 use Storage;
 use Str;
 
+/**
+ * Trait UploadImage
+ * @package App\Traits
+ */
 trait UploadImage
 {
+    /**
+     * @param $updateAnime
+     * @param $requestForm
+     * @return mixed
+     */
     public function uploadImages($updateAnime, $requestForm)
     {
         if (file_exists('public/anime/'.$updateAnime->poster)) {
@@ -31,7 +39,9 @@ trait UploadImage
         $fileName = 'poster_'.$updateAnime->id.'.'.$Extension;
 
         Storage::putFileAs(
-            'public/anime/'.Str::slug($updateAnime->title).'/', $requestForm['poster'], $fileName
+            'public/anime/'.Str::slug($updateAnime->title).'/',
+            $requestForm['poster'],
+            $fileName
         );
 
         $requestForm['poster'] = 'anime/'.Str::slug($updateAnime->title).'/'.$fileName;

@@ -13,6 +13,10 @@ use App\Models\Category;
 use App\Models\Country;
 use App\Models\User;
 use App\Repositories\Interfaces\MainRepositoryInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class MainRepository implements MainRepositoryInterface
@@ -22,28 +26,24 @@ class MainRepository implements MainRepositoryInterface
      *
      * @param $paginate
      *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
     public function getAllAnime($paginate)
     {
-        $result = Anime::with(['getCategory'])
+        return Anime::with(['getCategory'])
             ->orderBy('created_at', 'DESC')
             ->paginate($paginate);
-
-        return $result;
     }
 
     /**
      * Получить все категории
      *
-     * @return \App\Models\Category[]|\Illuminate\Database\Eloquent\Collection
+     * @return Category[]|Collection
      */
     public function getAllCategory()
     {
-        $result = Category::withCount('getAnime')
+        return Category::withCount('getAnime')
             ->get();
-
-        return $result;
     }
 
     /**
@@ -56,13 +56,11 @@ class MainRepository implements MainRepositoryInterface
      */
     public function getCategoryAnime($category, $paginate)
     {
-        $result = $category
+        return $category
             ->getAnime()
             ->with(['getCategory', 'getUsers:id,login'])
             ->orderBy('created_at', 'DESC')
             ->paginate($paginate);
-
-        return $result;
     }
 
     /**
@@ -86,7 +84,7 @@ class MainRepository implements MainRepositoryInterface
      *
      * @param $anime
      *
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     * @return Builder|Model|object|null
      */
     public function getFullAnime($anime)
     {
@@ -102,7 +100,7 @@ class MainRepository implements MainRepositoryInterface
      *
      * @param $user
      *
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     * @return Builder|Model|object|null
      */
     public function getUsers($user)
     {
@@ -129,10 +127,10 @@ class MainRepository implements MainRepositoryInterface
     /**
      * Поиск по сайту
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param                            $paginate
      *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|mixed
+     * @return LengthAwarePaginator|mixed
      */
     public function getSearch(Request $request, $paginate)
     {
@@ -150,7 +148,7 @@ class MainRepository implements MainRepositoryInterface
      * @param $status
      * @param $count
      *
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|mixed
+     * @return Builder[]|Collection|mixed
      */
     public function getStatus($status, $count)
     {
@@ -168,9 +166,9 @@ class MainRepository implements MainRepositoryInterface
      *
      * @param $columns  string
      * @param $custom   string
-     * @param $paginate integer
+     * @param $paginate int
      *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|mixed
+     * @return LengthAwarePaginator|mixed
      */
     public function getCustom($columns, $custom, $paginate)
     {

@@ -28,8 +28,6 @@ Route::group(['namespace' => 'Main'], function () {
     Route::get('anime/{anime}', 'AnimeController@view')->name('anime');
     /** Страница поиска */
     Route::get('search', 'AnimeController@search')->name('search');
-    /** Выборки по полям */
-    Route::get('{custom}/{variable}', 'CustomController@loadCustom')->name('custom');
     /** Страница пользователя */
     Route::get('user/{user}', 'UserController@view')->name('profile')->middleware('auth');
     Route::patch('user/{user}', 'UserController@update')->name('editProfile')->middleware('auth');
@@ -37,23 +35,30 @@ Route::group(['namespace' => 'Main'], function () {
     Route::get('category/{category}', 'CategoryController@view')->name('category');
     /** Статическая страница */
     Route::get('page/{page}', 'StaticPageController@view')->name('page');
-
+    /** Избранное */
     Route::post('/favorite/{id}', 'FavoriteController@favorite')->name('favorite_add');
     Route::post('/unfavorite/{id}', 'FavoriteController@unFavorite')->name('favorite_del');
-
+    /** Голосование на сайте */
     Route::post('/plusVotes/{id}', 'VoteController@plusVotes')->name('votes_plus');
     Route::post('/minusVotes/{id}', 'VoteController@minusVotes')->name('votes_minus');
+    /** Выборки по полям */
+    Route::get('{custom}/{variable}', 'CustomController@loadCustom')->name('custom');
 });
 
 Route::group(['namespace' => 'Administrations'], function () {
     Route::get('administrations/administrator', 'AdminController@index')->name('admin');
     Route::get('administrations/administrator/anime', 'AdminAnimeController@index')->name('admin.anime');
-    Route::get('administrations/administrator/anime/edit/{anime}', 'AdminAnimeController@edit')->name('admin.anime.edit');
-    Route::patch('administrations/administrator/anime/edit/{anime}', 'AdminAnimeController@update')->name('admin.anime.update');
+    Route::get('administrations/administrator/anime/edit/{anime}',
+        'AdminAnimeController@edit')->name('admin.anime.edit');
+    Route::patch('administrations/administrator/anime/edit/{anime}',
+        'AdminAnimeController@update')->name('admin.anime.update');
     Route::get('administrations/administrator/anime/add', 'AdminAnimeController@create')->name('admin.anime.add');
     Route::patch('administrations/administrator/anime/add', 'AdminAnimeController@store')->name('admin.anime.save');
-    Route::get('administrations/administrator/anime/delete/{anime}', 'AdminAnimeController@delete')->name('admin.anime.delete');
+    Route::get('administrations/administrator/anime/delete/{anime}',
+        'AdminAnimeController@delete')->name('admin.anime.delete');
 
     Route::get('administrations/administrator/category', 'AdminCategoryController@index')->name('admin.category');
+    Route::get('administrations/administrator/category/edit/{category}',
+        'AdminCategoryController@edit')->name('admin.category.edit');
 });
 //Route::get('/home', 'HomeController@index')->name('home');

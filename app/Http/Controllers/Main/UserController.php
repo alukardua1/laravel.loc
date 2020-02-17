@@ -29,7 +29,7 @@ class UserController extends Controller
     /**
      * UserController constructor.
      *
-     * @param UserRepositoryInterface $repository
+     * @param  UserRepositoryInterface  $repository
      */
     public function __construct(UserRepositoryInterface $repository)
     {
@@ -75,7 +75,7 @@ class UserController extends Controller
 
 
     /**
-     * @param UserRequest $request
+     * @param  UserRequest  $request
      * @param                                  $currentUser
      *
      * @return RedirectResponse

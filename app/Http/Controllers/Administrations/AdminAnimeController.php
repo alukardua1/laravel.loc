@@ -43,9 +43,9 @@ class AdminAnimeController extends AdminBaseController
     /**
      * AdminAnimeController constructor.
      *
-     * @param AnimeRepositoryInterface $animeRepository
-     * @param CategoryRepositoryInterface $categoryRepository
-     * @param CountryRepositoryInterface $countryRepository
+     * @param  AnimeRepositoryInterface  $animeRepository
+     * @param  CategoryRepositoryInterface  $categoryRepository
+     * @param  CountryRepositoryInterface  $countryRepository
      */
     public function __construct(
         AnimeRepositoryInterface $animeRepository,
@@ -128,7 +128,7 @@ class AdminAnimeController extends AdminBaseController
     /**
      * Сохранение новой записи
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
@@ -144,8 +144,8 @@ class AdminAnimeController extends AdminBaseController
     /**
      * Процедура обновления записи
      *
-     * @param Request $request
-     * @param string $animeUrl
+     * @param  Request  $request
+     * @param  string  $animeUrl
      *
      * @return RedirectResponse
      * @var  mixed $updateAnime

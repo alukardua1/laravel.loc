@@ -8,9 +8,12 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\FunctionsHelpers;
+use App\Repositories\CategoryRepository;
+use App\Repositories\CountryRepository;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CountryRepositoryInterface;
 use App\Repositories\Interfaces\CustomRepositoryInterface;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -44,17 +47,17 @@ class Controller extends BaseController
     private static $globalCategory;
 
     /**
-     * @var \Illuminate\Contracts\Foundation\Application|mixed
+     * @var Application|mixed
      */
     protected static $customRepository;
 
     /**
-     * @var \App\Repositories\CategoryRepository|\Illuminate\Contracts\Foundation\Application|mixed
+     * @var CategoryRepository|Application|mixed
      */
     protected static $categoryRepository;
 
     /**
-     * @var \App\Repositories\CountryRepository|\Illuminate\Contracts\Foundation\Application|mixed
+     * @var CountryRepository|Application|mixed
      */
     protected static $countryRepository;
 
@@ -82,23 +85,25 @@ class Controller extends BaseController
         $tip = self::$customRepository->getCustom('tip')->get();
         $carouselAnime = self::$customRepository->getCustom('*', 'released', 'ongoing')->get();
 
-        View::share([
-            'categoryAll'   => self::$globalCategory,
-            'carouselAnime' => $carouselAnime,
-            'yearCustom'    => $this->customArr($year, 'aired_season'),
-            'tipRu'         => FunctionsHelpers::$arrTip,
-            'tipFullRu'     => FunctionsHelpers::$arrFullTip,
-            'tip'           => $this->customArr($tip, 'tip'),
-            'theme'         => self::$theme,
-            'kind'          => self::$kind,
-            'nameSite'      => $nameSite,
-        ]);
+        View::share(
+            [
+                'categoryAll' => self::$globalCategory,
+                'carouselAnime' => $carouselAnime,
+                'yearCustom' => $this->customArr($year, 'aired_season'),
+                'tipRu' => FunctionsHelpers::$arrTip,
+                'tipFullRu' => FunctionsHelpers::$arrFullTip,
+                'tip' => $this->customArr($tip, 'tip'),
+                'theme' => self::$theme,
+                'kind' => self::$kind,
+                'nameSite' => $nameSite,
+            ]
+        );
     }
 
     /**
      * Обрабатывает поля для глобальных кустом
      *
-     * @param  array   $arr
+     * @param  array  $arr
      * @param  string  $keys
      *
      * @return array

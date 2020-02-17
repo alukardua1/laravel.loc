@@ -21,12 +21,17 @@ class CategoryRepository implements CategoryRepositoryInterface
     /**
      * Выводит все записи категории
      *
-     * @param null $url
+     * @param  null  $url
      *
+     * @param  bool  $isAdmin
      * @return mixed
      */
-    public function getCategory($url = null)
+    public function getCategory($url = null, $isAdmin = false)
     {
+        if ($url && $isAdmin) {
+            return Category::where('url', $url)
+                ->select(['id', 'title', 'url']);
+        }
         if ($url) {
             /** @var mixed $result текущая категория */
             $result = Category::where('url', $url)

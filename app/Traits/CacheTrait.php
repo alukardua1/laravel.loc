@@ -24,8 +24,8 @@ trait CacheTrait
      * @param  string  $nameCache
      * @param  string  $columns
      * @param  string  $variable
-     * @param  array   $selectColumns
-     * @param  int     $timeCache
+     * @param  array  $selectColumns
+     * @param  int  $timeCache
      *
      * @return mixed
      */
@@ -42,9 +42,13 @@ trait CacheTrait
             return Cache::get($nameCache);
         }
 
-        return Cache::remember($nameCache, $timeCache, function () use ($columns, $customRepository, $variable, $selectColumns) {
-            return $customRepository->getCustom($selectColumns, $columns, $variable)->get();
-        });
+        return Cache::remember(
+            $nameCache,
+            $timeCache,
+            function () use ($columns, $customRepository, $variable, $selectColumns) {
+                return $customRepository->getCustom($selectColumns, $columns, $variable)->get();
+            }
+        );
     }
 
     public function addLoadCacheCategory($nameCache, $timeCache = 180)
@@ -55,8 +59,12 @@ trait CacheTrait
             return Cache::get($nameCache);
         }
 
-        return Cache::remember($nameCache, $timeCache, function () use ($categoryRepository) {
-            return $categoryRepository->getCategory()->get();
-        });
+        return Cache::remember(
+            $nameCache,
+            $timeCache,
+            function () use ($categoryRepository) {
+                return $categoryRepository->getCategory()->get();
+            }
+        );
     }
 }

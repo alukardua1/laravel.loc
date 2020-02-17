@@ -21,7 +21,7 @@ class AdminCategoryController extends AdminBaseController
     /**
      * AdminCategoryController constructor.
      *
-     * @param CategoryRepositoryInterface $repository
+     * @param  CategoryRepositoryInterface  $repository
      */
     public function __construct(CategoryRepositoryInterface $repository)
     {
@@ -37,5 +37,12 @@ class AdminCategoryController extends AdminBaseController
         $category = self::$categoryRepository->getCategory()->paginate(self::$paginate);
 
         return view('admin.category.index', compact('category'));
+    }
+
+    public function edit($url)
+    {
+        $category = self::$categoryRepository->getCategory($url, true)->first();
+
+        return view('admin.category.edit', compact('category'));
     }
 }

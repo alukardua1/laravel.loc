@@ -20,12 +20,12 @@ class CustomRepository implements CustomRepositoryInterface
 {
     /**
      * Вывод по кустом полю
-     * @todo решить проблему с ошибкой колумнс
      * @param  string  $select
-     * @param  null    $columns
-     * @param  null    $variable
+     * @param  null  $columns
+     * @param  null  $variable
      *
      * @return mixed
+     * @todo решить проблему с ошибкой колумнс
      */
     public function getCustom($select = '*', $columns = null, $variable = null)
     {

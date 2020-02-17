@@ -16,9 +16,10 @@ namespace App\Repositories\Interfaces;
 interface CategoryRepositoryInterface
 {
     /**
-     * @param  null  $url Url default null
+     * @param  null  $url  Url default null
      *
+     * @param  bool  $isAdmin
      * @return mixed
      */
-    public function getCategory($url = null);
+    public function getCategory($url = null, $isAdmin = false);
 }

@@ -30,7 +30,7 @@ class AnimeController extends Controller
     /**
      * AnimeController constructor.
      *
-     * @param AnimeRepositoryInterface $repository
+     * @param  AnimeRepositoryInterface  $repository
      */
     public function __construct(AnimeRepositoryInterface $repository)
     {
@@ -59,7 +59,6 @@ class AnimeController extends Controller
      */
     public function view($urlAnime)
     {
-
         $uri = explode('-', $urlAnime);
         $stringUrl = preg_split("/[0-9]+-/", $urlAnime);
 
@@ -70,7 +69,6 @@ class AnimeController extends Controller
         }
 
         if ($stringUrl[1] != $animePost->url) {
-
             return redirect('/anime/'.$animePost->id.'-'.$animePost->url);
         }
 

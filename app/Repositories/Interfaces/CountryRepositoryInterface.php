@@ -16,7 +16,7 @@ namespace App\Repositories\Interfaces;
 interface CountryRepositoryInterface
 {
     /**
-     * @param array $selectColumns Load select columns
+     * @param  array  $selectColumns  Load select columns
      *
      * @return mixed
      */
