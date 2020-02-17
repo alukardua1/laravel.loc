@@ -10,6 +10,7 @@ namespace App\Observers;
 use App\Helpers\FunctionsHelpers;
 use App\Models\Anime;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 
 
@@ -23,7 +24,7 @@ class AnimeObserver
     use FunctionsHelpers;
 
     /**
-     * @param  \App\Models\Anime  $anime
+     * @param  Anime  $anime
      */
     public function updating(Anime $anime)
     {
@@ -34,7 +35,7 @@ class AnimeObserver
     }
 
     /**
-     * @param  \App\Models\Anime  $anime
+     * @param  Anime  $anime
      *
      * @todo Не забыть сменить $anime->metatitle, $anime->description
      */
@@ -48,9 +49,9 @@ class AnimeObserver
     }
 
     /**
-     * @param  \App\Models\Anime  $anime
+     * @param  Anime  $anime
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function updated(Anime $anime)
     {
@@ -67,21 +68,99 @@ class AnimeObserver
      */
     private function seoKeywords($contents, $symbol = 5, $words = 35)
     {
-        $contents = @preg_replace(["'<[\/\!]*?[^<>]*?>'si", "'([\r\n])[\s]+'si", "'&[a-z0-9]{1,6};'si", "'( +)'si"],
-            ["", "\\1 ", " ", " "], strip_tags($contents));
+        $contents = @preg_replace(
+            ["'<[\/\!]*?[^<>]*?>'si", "'([\r\n])[\s]+'si", "'&[a-z0-9]{1,6};'si", "'( +)'si"],
+            ["", "\\1 ", " ", " "],
+            strip_tags($contents)
+        );
         $rearray = [
-            "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+",
-            "`", '"', "№", ";", ":", "?", "-", "=", "|", "\"", "\\", "/",
-            "[", "]", "{", "}", "'", ",", ".", "<", ">", "\r\n", "\n", "\t", "«", "»"
+            "~",
+            "!",
+            "@",
+            "#",
+            "$",
+            "%",
+            "^",
+            "&",
+            "*",
+            "(",
+            ")",
+            "_",
+            "+",
+            "`",
+            '"',
+            "№",
+            ";",
+            ":",
+            "?",
+            "-",
+            "=",
+            "|",
+            "\"",
+            "\\",
+            "/",
+            "[",
+            "]",
+            "{",
+            "}",
+            "'",
+            ",",
+            ".",
+            "<",
+            ">",
+            "\r\n",
+            "\n",
+            "\t",
+            "«",
+            "»"
         ];
         $adjectivearray = [
-            "ые", "ое", "ие", "ий", "ая", "ый", "ой", "ми", "ых", "ее", "ую", "их", "ым",
-            "как", "для", "что", "или", "это", "этих",
-            "всех", "вас", "они", "оно", "еще", "когда",
-            "где", "эта", "лишь", "уже", "вам", "нет",
-            "если", "надо", "все", "так", "его", "чем",
-            "при", "даже", "мне", "есть", "только", "очень",
-            "сейчас", "точно", "обычно"
+            "ые",
+            "ое",
+            "ие",
+            "ий",
+            "ая",
+            "ый",
+            "ой",
+            "ми",
+            "ых",
+            "ее",
+            "ую",
+            "их",
+            "ым",
+            "как",
+            "для",
+            "что",
+            "или",
+            "это",
+            "этих",
+            "всех",
+            "вас",
+            "они",
+            "оно",
+            "еще",
+            "когда",
+            "где",
+            "эта",
+            "лишь",
+            "уже",
+            "вам",
+            "нет",
+            "если",
+            "надо",
+            "все",
+            "так",
+            "его",
+            "чем",
+            "при",
+            "даже",
+            "мне",
+            "есть",
+            "только",
+            "очень",
+            "сейчас",
+            "точно",
+            "обычно"
         ];
 
         $contents = @str_replace($rearray, " ", $contents);
@@ -99,9 +178,8 @@ class AnimeObserver
         @arsort($rearray);
         $keywordCache = @array_slice($rearray, 0, $words);
         $keywords = "";
-        foreach ($keywordCache as $word => $count)
-        {
-            $keywords.= ",".$word;
+        foreach ($keywordCache as $word => $count) {
+            $keywords .= ",".$word;
         }
 
         return substr($keywords, 1);

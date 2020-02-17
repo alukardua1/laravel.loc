@@ -12,7 +12,9 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 
 /**
@@ -55,7 +57,7 @@ class AnimeController extends Controller
      *
      * @param $urlAnime
      *
-     * @return mixed \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|RedirectResponse|Redirector|View|void
      */
     public function view($urlAnime)
     {
@@ -63,8 +65,8 @@ class AnimeController extends Controller
         $stringUrl = preg_split("/[0-9]+-/", $urlAnime);
 
         $animePost = self::$animeRepository->getAnime($uri[0])->first();
+
         if (empty($animePost)) {
-            //return view(self::$theme.'/errors.error')->withErrors(['msg' => "Пост {$urlAnime} не найден"]);
             return abort(404);
         }
 
@@ -89,6 +91,7 @@ class AnimeController extends Controller
         if (empty($animePost)) {
             return view(self::$theme.'/errors.error')->withErrors(['msg' => "Ничего не найдено"]);
         }
+
         return view(self::$theme.'/home', compact('animePost'));
     }
 }

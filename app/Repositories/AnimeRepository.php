@@ -50,15 +50,12 @@ class AnimeRepository implements AnimeRepositoryInterface
     }
 
     /**
+     * @todo Попытатся перенести все в AnimeObserver
+     *
      * @param  Request  $request
-     * @param                            $url
+     * @param  null  $url
      *
      * @return mixed
-     * @var                              $update
-     * @var                              $requestForm
-     *
-     * @var                              $updateAnime
-     * @todo Попытатся перенести все в AnimeObserver
      */
     public function setAnime(Request $request, $url = null)
     {

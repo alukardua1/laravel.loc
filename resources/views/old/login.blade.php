@@ -6,13 +6,13 @@
                 <div class="modal-c-tabs">
                     <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#login" role="tab"><i
-                                    class="fas fa-user mr-1"></i>
+                            <a class="nav-link active" data-toggle="tab" href="#login" role="tab">
+                                <i class="fas fa-user mr-1"></i>
                                 Войти</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#register" role="tab"><i
-                                    class="fas fa-user-plus mr-1"></i>
+                            <a class="nav-link" data-toggle="tab" href="#register" role="tab">
+                                <i class="fas fa-user-plus mr-1"></i>
                                 Регистрация</a>
                         </li>
                     </ul>

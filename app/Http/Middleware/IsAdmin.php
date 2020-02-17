@@ -7,8 +7,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class IsAdmin
@@ -16,9 +16,9 @@ class IsAdmin
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure                  $next
-     * @param                            $group
+     * @param  Request  $request
+     * @param  Closure  $next
+     * @param  array  $group
      *
      * @return mixed
      */

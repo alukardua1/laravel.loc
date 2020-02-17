@@ -14,7 +14,8 @@
                             [{{$animePost->current_series}} из {{$animePost->count_series}}]
                         @endif
                         @if(Auth::user()->group_id == 1)
-                            <a target="_blank" href="{{route('admin.anime.edit', $animePost->id)}}" title="Редактировать {{$animePost->title}}"><i class="far fa-edit"></i></a>
+                            <a target="_blank" href="{{route('admin.anime.edit', $animePost->id)}}"
+                               title="Редактировать {{$animePost->title}}"><i class="far fa-edit"></i></a>
                         @endif
                     </strong>
                 </h3>
@@ -22,7 +23,7 @@
             <div class="col-md-1">
                 @if (Auth::check())
                     <favorite
-                        :post={{ $animePost->id }} :favorited={{ $animePost->favorited() ? 'true' : 'false' }}>
+                            :post={{ $animePost->id }} :favorited={{ $animePost->favorited() ? 'true' : 'false' }}>
                     </favorite>
                 @endif
             </div>
@@ -34,7 +35,7 @@
             @if (Auth::check())
                 <div class="col-md-12">
                     <votes :post={{ $animePost->id }}
-                        :votes={{ $animePost->votes() ? 'true' : 'false' }}></votes>
+                            :votes={{ $animePost->votes() ? 'true' : 'false' }}></votes>
                 </div>
             @endif
         </div>

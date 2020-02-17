@@ -18,7 +18,7 @@ use Composer\DependencyResolver\Request;
 class UserObserver
 {
     /**
-     * @param  \App\Models\User  $user Updating user
+     * @param  User  $user  Updating user
      */
     public function updating(User $user)
     {

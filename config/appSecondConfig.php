@@ -6,9 +6,9 @@
  */
 
 return [
-    'theme'           => 'old',
-    'paginate'        => 10,
-    'nameSite'        => 'AnimeFree',
+    'theme' => 'old',
+    'paginate' => 10,
+    'nameSite' => 'AnimeFree',
     'descriptionSite' => 'Смотреть аниме в русской озвучке',
-    'paginateAdmin'   => 50,
+    'paginateAdmin' => 50,
 ];

@@ -25,9 +25,8 @@
     <link href="{{ asset('theme/'.$theme.'/css/owl.theme.default.css') }}" rel="stylesheet">
     <link href="{{ asset('images/favicon.ico') }}" rel="shortcut icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Bangers|Stalinist+One|Teko|Lobster|Marck+Script|Russo+One|Playfair+Display:700,900"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bangers|Stalinist+One|Teko|Lobster|Marck+Script|Russo+One|Playfair+Display:700,900"
+          rel="stylesheet">
 </head>
 <body class="force-overflow">
 <div id="app">
@@ -49,35 +48,42 @@
         <div class="nav-scroller py-1 mb-2">
             <ul class="nav nav-pills nav-fill">
                 <li class="nav-item">
-                    <a class="nav-link" href="/top-100.html"><i class="fas fa-medal"></i><i class="fas fa-medal"></i><i
-                            class="fas fa-medal"></i> ТОП-100 <i class="fas fa-medal"></i><i class="fas fa-medal"></i><i
-                            class="fas fa-medal"></i></a>
+                    <a class="nav-link" href="/top-100.html">
+                        <i class="fas fa-medal"></i>
+                        <i class="fas fa-medal"></i>
+                        <i class="fas fa-medal"></i>
+                        ТОП-100
+                        <i class="fas fa-medal"></i>
+                        <i class="fas fa-medal"></i>
+                        <i class="fas fa-medal"></i>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('custom', ['variable'=>'ongoing', 'custom'=>'released'])}}"><i class="fas fa-tv"></i> Онгоинги</a>
+                    <a class="nav-link" href="{{route('custom', ['variable'=>'ongoing', 'custom'=>'released'])}}">
+                        <i class="fas fa-tv"></i> Онгоинги</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="page/pravoobladatelyam"><i class="fab fa-studiovinari"></i>
-                        Правообладателям</a>
+                    <a class="nav-link" href="page/pravoobladatelyam">
+                        <i class="fab fa-studiovinari"></i> Правообладателям</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="page/rules"><i class="fas fa-book"></i> Правила</a>
                 </li>
                 <li class="nav-item">
-                    <a id="modalActivate" class="nav-link" data-toggle="modal" data-target="#studios"><i
-                            class="fab fa-studiovinari"></i> Студии</a>
+                    <a id="modalActivate" class="nav-link" data-toggle="modal" data-target="#studios">
+                        <i class="fab fa-studiovinari"></i> Студии</a>
                 </li>
                 <li class="nav-item">
-                    <a id="modalActivate" class="nav-link" data-toggle="modal" data-target="#scoring"><i
-                            class="fas fa-language"></i> Озвучивание</a>
+                    <a id="modalActivate" class="nav-link" data-toggle="modal" data-target="#scoring">
+                        <i class="fas fa-language"></i> Озвучивание</a>
                 </li>
                 <li class="nav-item">
-                    <a id="modalActivate" class="nav-link" data-toggle="modal" data-target="#year"><i
-                            class="far fa-calendar-alt"></i> Год выпуска</a>
+                    <a id="modalActivate" class="nav-link" data-toggle="modal" data-target="#year">
+                        <i class="far fa-calendar-alt"></i> Год выпуска</a>
                 </li>
                 <li class="nav-item">
-                    <a id="modalActivate" class="nav-link" data-toggle="modal" data-target="#genre"><i
-                            class="fas fa-bars"></i> Жанры</a>
+                    <a id="modalActivate" class="nav-link" data-toggle="modal" data-target="#genre">
+                        <i class="fas fa-bars"></i> Жанры</a>
                 </li>
             </ul>
         </div>
@@ -101,7 +107,7 @@
                 </div>
                 [/sort]--}}
                 @available('home')
-                    <search></search>
+                <search></search>
                 @endavailable
                 <section class="my-5">
                     @available('category.show')

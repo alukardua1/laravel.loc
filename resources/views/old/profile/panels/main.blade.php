@@ -15,8 +15,8 @@
     <div class="row" style="white-space: nowrap;">
         <div class="col-sm-10"><span class="title-info"><i class="far fa-calendar-alt"></i> Зарегистрирован </span>
         </div>
-        <div class="col-sm-2"><span
-                class="float-right">{{ Carbon\Carbon::parse($profile->created_at)->format('d.m.Y') }}</span></div>
+        <div class="col-sm-2">
+            <span class="float-right">{{ Carbon\Carbon::parse($profile->created_at)->format('d.m.Y') }}</span></div>
     </div>
     <div class="row" style="white-space: nowrap;">
         <div class="col-sm-10"><span class="title-info"><i class="far fa-calendar-alt"></i> Последняя активность </span>
@@ -25,8 +25,9 @@
     </div>
     <div class="row" style="white-space: nowrap;">
         <div class="col-sm-10"><span class="title-info"><i class="fas fa-users"></i> Группа </span></div>
-        <div class="col-sm-2"><span class="float-right" @if($profile->group_id == 1)style="color: red"
-                                    @elseif($profile->group_id == 2) style="color: green" @endif>{{ $profile->getGroup->title }}</span>
+        <div class="col-sm-2">
+            <span class="float-right" @if($profile->group_id == 1)style="color: red"
+                  @elseif($profile->group_id == 2) style="color: green" @endif>{{ $profile->getGroup->title }}</span>
         </div>
     </div>
     @if(empty($profile->allow_email))

@@ -11,7 +11,6 @@ namespace App\Repositories;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Traits\UsersTrait;
-use Hash;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -40,8 +39,7 @@ class UserRepository implements UserRepositoryInterface
 
     /**
      * @param  Request  $request
-     * @param                            $currentUser
-     *
+     * @param $currentUser
      * @return mixed
      */
     public function setUsers($request, $currentUser)

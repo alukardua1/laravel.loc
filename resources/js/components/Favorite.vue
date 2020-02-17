@@ -5,14 +5,14 @@
   -->
 
 <template>
-        <button v-if="isFavorited" @click.prevent="unFavorite(post)"
-           class="btn-floating btn-lg btn-danger float-right justify-content-top btn-sm"
-           data-toggle="tooltip" title="Убрать из закладок"><i class="far fa-heart"></i>
-        </button>
-        <button v-else @click.prevent="favorite(post)"
-           class="btn-floating btn-lg btn-default float-right justify-content-top btn-sm"
-           data-toggle="tooltip" title="Добавить в закладки"><i class="far fa-heart"></i>
-        </button>
+    <button v-if="isFavorited" @click.prevent="unFavorite(post)"
+            class="btn-floating btn-lg btn-danger float-right justify-content-top btn-sm"
+            data-toggle="tooltip" title="Убрать из закладок"><i class="far fa-heart"></i>
+    </button>
+    <button v-else @click.prevent="favorite(post)"
+            class="btn-floating btn-lg btn-default float-right justify-content-top btn-sm"
+            data-toggle="tooltip" title="Добавить в закладки"><i class="far fa-heart"></i>
+    </button>
 </template>
 
 <script>

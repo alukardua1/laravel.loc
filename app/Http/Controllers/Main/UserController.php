@@ -76,8 +76,7 @@ class UserController extends Controller
 
     /**
      * @param  UserRequest  $request
-     * @param                                  $currentUser
-     *
+     * @param $currentUser
      * @return RedirectResponse
      */
     public function update(UserRequest $request, $currentUser): RedirectResponse

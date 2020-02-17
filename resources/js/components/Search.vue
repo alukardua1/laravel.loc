@@ -9,7 +9,7 @@
         <input class="form-control form-control-sm mr-3 w-75" type="search" id="story" name="story"
                placeholder="Поиск по сайту..." aria-label="Поиск по сайту...">
         <button class="btn btn-outline-danger waves-effect m-0 px-3" type="submit"><i
-            class="fas fa-search"></i>
+                class="fas fa-search"></i>
             Найти
         </button>
     </form>

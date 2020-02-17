@@ -24,7 +24,7 @@ class CategoryController extends Controller
      *
      * @param $url
      *
-     * @return Factory|View
+     * @return Factory|View|void
      */
     public function view($url)
     {
@@ -32,7 +32,7 @@ class CategoryController extends Controller
         $categories = self::$categoryRepository->getCategory($url)->getParent();
 
         if (empty($animePost)) {
-            return view(self::$theme.'/errors.error')->withErrors(['msg' => "Категория {$url} не найдена"]);
+            return abort(404);
         }
 
         return view(self::$theme.'/home', compact('animePost', 'categories'));
