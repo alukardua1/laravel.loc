@@ -154,6 +154,7 @@ class AdminAnimeController extends AdminBaseController
     public function update(Request $request, $animeUrl): RedirectResponse
     {
         $updateAnime = self::$animeRepository->setAnime($request, $animeUrl);
+        dd(__METHOD__, $updateAnime);
         if ($updateAnime) {
             return redirect()->route('admin.anime.edit', $animeUrl);
         }

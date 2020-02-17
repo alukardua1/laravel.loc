@@ -59,20 +59,21 @@ class AnimeRepository implements AnimeRepositoryInterface
      */
     public function setAnime(Request $request, $url = null)
     {
+        //dd(__METHOD__, $request, $url);
         $update = [];
         $requestForm = $request->all();
         if ($url) {
-            $updateAnime = Anime::where('id', $url)->first()->touch();
+            $updateAnime = Anime::where('id', $url)->first();
         } else {
             $updateAnime = Anime::create($requestForm);
         }
-        //dd(__METHOD__, $updateAnime, $url);
         $updateAnime->fill($request->except('genre'));
         $updateAnime->save();
         $updateAnime->getCategory()->sync($request->genre);
         if ($request->hasFile('poster')) {
             $update = $this->uploadImages($updateAnime, $requestForm);
         }
+        $updateAnime->touch();
 
         return $updateAnime->update($update);
     }

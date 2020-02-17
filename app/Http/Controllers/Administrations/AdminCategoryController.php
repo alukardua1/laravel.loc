@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Administrations;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
+use Request;
 
 class AdminCategoryController extends AdminBaseController
 {
@@ -44,5 +45,25 @@ class AdminCategoryController extends AdminBaseController
         $category = self::$categoryRepository->getCategory($url, true)->first();
 
         return view('admin.category.edit', compact('category'));
+    }
+
+    public function update(Request $request, $url)
+    {
+        dd(__METHOD__, $request, $url);
+    }
+
+    public function create()
+    {
+        dd(__METHOD__);
+    }
+
+    public function store(Request $request)
+    {
+        dd(__METHOD__, $request);
+    }
+
+    public function delete($url)
+    {
+        dd(__METHOD__, $url);
     }
 }
