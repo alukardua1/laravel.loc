@@ -7,12 +7,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CreateCacheTrait;
 use App\Helpers\FunctionsHelpers;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CountryRepository;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CountryRepositoryInterface;
 use App\Repositories\Interfaces\CustomRepositoryInterface;
+use Cache;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -65,6 +67,7 @@ class Controller extends BaseController
     use DispatchesJobs;
     use FunctionsHelpers;
     use ValidatesRequests;
+    use CreateCacheTrait;
 
     /**
      * Controller constructor.
@@ -75,15 +78,34 @@ class Controller extends BaseController
         self::$categoryRepository = app(CategoryRepositoryInterface::class);
         self::$countryRepository = app(CountryRepositoryInterface::class);
 
-        self::$globalCategory = self::$categoryRepository->getCategory()->get();
+        if (Cache::has('globalCategory')) {
+            self::$globalCategory = Cache::get('globalCategory');
+        } else {
+            self::$globalCategory = self::setCache('globalCategory', self::$categoryRepository->getCategory()->get());
+        }
+        if (Cache::has('aired_season')) {
+            $year = Cache::get('aired_season');
+        } else {
+            $year = self::setCache('aired_season', self::$customRepository->getCustom('aired_season')->get());
+        }
+        if (Cache::has('tip')) {
+            $tip = Cache::get('tip');
+        } else {
+            $tip = self::setCache('tip', self::$customRepository->getCustom('tip')->get());
+        }
+        if (Cache::has('ongoing')) {
+            $carouselAnime = Cache::get('ongoing');
+        } else {
+            $carouselAnime = self::setCache(
+                'ongoing',
+                self::$customRepository->getCustom('*', 'released', 'ongoing')->get()
+            );
+        }
+
         self::$paginate = config('appSecondConfig.paginate');
         self::$theme = config('appSecondConfig.theme');
         self::$kind = FunctionsHelpers::$arrRating;
         $nameSite = config('appSecondConfig.nameSite');
-
-        $year = self::$customRepository->getCustom('aired_season')->get();
-        $tip = self::$customRepository->getCustom('tip')->get();
-        $carouselAnime = self::$customRepository->getCustom('*', 'released', 'ongoing')->get();
 
         View::share(
             [

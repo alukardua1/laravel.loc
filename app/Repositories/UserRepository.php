@@ -44,7 +44,6 @@ class UserRepository implements UserRepositoryInterface
      */
     public function setUsers($request, $currentUser)
     {
-        $userSave = [];
         if ($request->user()) {
             $updateUser = User::where('login', $currentUser)->first();
             $requestForm = $request->all();
@@ -54,14 +53,14 @@ class UserRepository implements UserRepositoryInterface
             }
 
             if (isset($requestForm['del_foto'])) {
-                $userSave = $this->deleteAvatar($updateUser, $requestForm);
+                $requestForm = $this->deleteAvatar($updateUser, $requestForm);
             }
 
             if ($request->hasFile('photo')) {
-                $userSave = $this->uploadAvatar($updateUser, $requestForm);
+                $requestForm = $this->uploadAvatar($updateUser, $requestForm);
             }
 
-            return $updateUser->update($userSave);
+            return $updateUser->update($requestForm);
         }
     }
 }

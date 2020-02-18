@@ -27,7 +27,14 @@ class CustomController extends Controller
      */
     public function loadCustom($columns, $variable)
     {
-        $animePost = self::$customRepository->getCustom('*', $columns, $variable)->paginate(self::$paginate);
+
+        if (\Cache::has('custom'))
+        {
+            $animePost = \Cache::get('custom');
+        }else{
+            $animePost = self::setCache('custom', self::$customRepository
+                ->getCustom('*', $columns, $variable)->paginate(self::$paginate));
+        }
 
         return view(self::$theme.'/home', compact('animePost'));
     }

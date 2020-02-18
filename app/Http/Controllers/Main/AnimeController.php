@@ -8,9 +8,11 @@
 namespace App\Http\Controllers\Main;
 
 
+use App\Helpers\CreateCacheTrait;
 use App\Helpers\FunctionsHelpers;
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
+use Cache;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
@@ -26,6 +28,7 @@ use Illuminate\View\View;
  */
 class AnimeController extends Controller
 {
+    use CreateCacheTrait;
     /**
      * @var AnimeRepositoryInterface
      */
@@ -49,7 +52,11 @@ class AnimeController extends Controller
      */
     public function index()
     {
-        $animePost = self::$animeRepository->getAnime()->paginate(self::$paginate);
+        if (Cache::has('allAnime')) {
+            $animePost = Cache::get('allAnime');
+        } else {
+            $animePost = self::setCache('allAnime', self::$animeRepository->getAnime()->paginate(self::$paginate));
+        }
 
         return view(self::$theme.'/home', compact('animePost'));
     }
@@ -66,8 +73,11 @@ class AnimeController extends Controller
         $uri = explode('-', $urlAnime);
         $stringUrl = preg_split("/[0-9]+-/", $urlAnime);
 
-        $animePost = self::$animeRepository->getAnime($uri[0])->first();
-
+        if (Cache::has('anime_'.$uri[0])) {
+            $animePost = Cache::get('anime_'.$uri[0]);
+        } else {
+            $animePost = self::setCache('anime_'.$uri[0], self::$animeRepository->getAnime($uri[0])->first());
+        }
         foreach (FunctionsHelpers::$arrDay as $key => $value) {
             if ($animePost->delivery_time >= $key) {
                 $animePost->day = $value;
