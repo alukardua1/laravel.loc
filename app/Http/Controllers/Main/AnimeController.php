@@ -8,8 +8,10 @@
 namespace App\Http\Controllers\Main;
 
 
+use App\Helpers\FunctionsHelpers;
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
+use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -65,6 +67,23 @@ class AnimeController extends Controller
         $stringUrl = preg_split("/[0-9]+-/", $urlAnime);
 
         $animePost = self::$animeRepository->getAnime($uri[0])->first();
+
+        foreach (FunctionsHelpers::$arrDay as $key => $value) {
+            if ($animePost->delivery_time >= $key) {
+                $animePost->day = $value;
+            }
+        }
+
+        foreach (FunctionsHelpers::$arrMsg as $key => $value) {
+            if (Carbon::parse($animePost->aired_on)->format('m') >= $key) {
+                if (Carbon::parse($animePost->aired_on)->format('m') == 12) {
+                    $year = Carbon::parse($animePost->aired_on)->format('Y') + 1;
+                    $animePost->seasons = $value.$year;
+                } else {
+                    $animePost->seasons = $value.Carbon::parse($animePost->aired_on)->format('Y');
+                }
+            }
+        }
 
         if (empty($animePost)) {
             return abort(404);

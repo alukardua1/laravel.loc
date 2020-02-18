@@ -103,9 +103,13 @@
                             <span itemprop="sdDatePublished" class="float-xl-right url">
                                 @if($animePost->delivery_time)
                                     в {{ \Carbon\Carbon::parse($animePost->delivery_time)->format('H:i') }}
+                                    {!! $animePost->day !!}
                                 @endif
                                 @if($animePost->tv_canal)
-                                    на {{ $animePost->tv_canal }}
+                                    на
+                                    <a href="{{route('custom', ['variable'=>$animePost->tv_canal, 'custom'=>'tv_canal'])}}">
+                                            {{ $animePost->tv_canal }}
+                                        </a>
                                 @endif
                             </span>
                     </div>
@@ -149,7 +153,7 @@
                     </div>
                     <div class="col-md-8">
                             <span itemprop="sdDatePublished" class="float-xl-right url">
-                                {{ $animePost->aired_season }}
+                                {{ $animePost->seasons }}
                             </span>
                     </div>
                 </div>
@@ -185,7 +189,9 @@
                     </div>
                     <div class="col-md-8">
                             <span itemprop="timeRequired" class="float-xl-right url">
-                                {{ $tipRu[$animePost->tip] }} ({{ $animePost->count_series }} эп.) {{ $animePost->duration }} мин.
+                                <a href="{{route('custom', ['variable'=>$animePost->tip, 'custom'=>'tip'])}}">
+                                    {{$tipRu[$animePost->tip]}}
+                                </a> ({{ $animePost->count_series }} эп.) {{ $animePost->duration }} мин.
                             </span>
                     </div>
                 </div>
