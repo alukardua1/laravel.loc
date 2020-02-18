@@ -28,16 +28,10 @@ class CategoryController extends Controller
      */
     public function view($url)
     {
-        if (\Cache::has('animePost')) {
-            $animePost = \Cache::get('animePost');
-        } else {
-            $animePost = self::setCache(
-                'animePost',
-                self::$categoryRepository
-                    ->getCategory($url)
-                    ->paginate(self::$paginate)
-            );
-        }
+        $animePost = self::$categoryRepository
+            ->getCategory($url)
+            ->paginate(self::$paginate);
+
         if (\Cache::has('categories')) {
             $categories = \Cache::get('categories');
         } else {

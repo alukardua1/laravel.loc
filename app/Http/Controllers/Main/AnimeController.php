@@ -52,11 +52,7 @@ class AnimeController extends Controller
      */
     public function index()
     {
-        if (Cache::has('allAnime')) {
-            $animePost = Cache::get('allAnime');
-        } else {
-            $animePost = self::setCache('allAnime', self::$animeRepository->getAnime()->paginate(self::$paginate));
-        }
+        $animePost = self::$animeRepository->getAnime()->paginate(self::$paginate);
 
         return view(self::$theme.'/home', compact('animePost'));
     }
