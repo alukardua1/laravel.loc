@@ -77,7 +77,7 @@ class AnimeRepository implements AnimeRepositoryInterface
             $update = $this->uploadImages($updateAnime, $requestForm);
         }
         $updateAnime->touch();
-        Cache::delete('allAnime');
+
         return $updateAnime->update($update);
     }
 
