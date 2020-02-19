@@ -11,14 +11,27 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\FavoritesRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
 
+/**
+ * Class FavoriteController
+ *
+ * @package App\Http\Controllers\Main
+ */
 class FavoriteController extends Controller
 {
+    /**
+     * @var \App\Repositories\Interfaces\FavoritesRepositoryInterface $favoriteRepository
+     */
     private static $favoriteRepository;
 
-    public function __construct(FavoritesRepositoryInterface $repository)
+    /**
+     * FavoriteController constructor.
+     *
+     * @param  \App\Repositories\Interfaces\FavoritesRepositoryInterface  $favoritesRepository
+     */
+    public function __construct(FavoritesRepositoryInterface $favoritesRepository)
     {
         parent::__construct();
-        self::$favoriteRepository = $repository;
+        self::$favoriteRepository = $favoritesRepository;
     }
 
     /**

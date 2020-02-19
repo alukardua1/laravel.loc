@@ -24,7 +24,7 @@
     <link href="{{ asset('theme/'.$theme.'/css/owl.carousel.css') }}" rel="stylesheet">
     <link href="{{ asset('theme/'.$theme.'/css/owl.theme.default.css') }}" rel="stylesheet">
     <link href="{{ asset('images/favicon.ico') }}" rel="shortcut icon">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bangers|Stalinist+One|Teko|Lobster|Marck+Script|Russo+One|Playfair+Display:700,900"
           rel="stylesheet">
 </head>
@@ -120,8 +120,7 @@
                     </div>
                 </section>
             </div>
-            <div class="col-lg-3 col-12 mt-1 wow fadeIn" data-wow-delay="0.2s"
-                 style="visibility: visible; animation-name: fadeIn; animation-delay: 0.2s;">
+            <div class="col-lg-3 col-12 mt-1 wow fadeIn">
                 <section class="section my-5">
                     <div class="card card-body pb-0">
                         <div class="single-post">

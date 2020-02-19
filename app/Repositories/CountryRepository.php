@@ -19,6 +19,8 @@ use App\Repositories\Interfaces\CountryRepositoryInterface;
 class CountryRepository implements CountryRepositoryInterface
 {
     /**
+     * Выбирает все записи
+     *
      * @param  array  $selectColumns
      *
      * @return mixed

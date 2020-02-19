@@ -12,6 +12,11 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 use Request;
 
+/**
+ * Class AdminCategoryController
+ *
+ * @package App\Http\Controllers\Administrations
+ */
 class AdminCategoryController extends AdminBaseController
 {
     /**
@@ -40,6 +45,11 @@ class AdminCategoryController extends AdminBaseController
         return view('admin.category.index', compact('category'));
     }
 
+    /**
+     * @param $url
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($url)
     {
         $category = self::$categoryRepository->getCategory($url, true)->first();
@@ -47,21 +57,34 @@ class AdminCategoryController extends AdminBaseController
         return view('admin.category.edit', compact('category'));
     }
 
+    /**
+     * @param  \Request  $request
+     * @param            $url
+     */
     public function update(Request $request, $url)
     {
         dd(__METHOD__, $request, $url);
     }
 
+    /**
+     *
+     */
     public function create()
     {
         dd(__METHOD__);
     }
 
+    /**
+     * @param  \Request  $request
+     */
     public function store(Request $request)
     {
         dd(__METHOD__, $request);
     }
 
+    /**
+     * @param $url
+     */
     public function delete($url)
     {
         dd(__METHOD__, $url);

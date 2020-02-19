@@ -19,7 +19,9 @@ use Storage;
 trait UsersTrait
 {
     /**
-     * @param  array  $updateUser  Current users
+     * Загружает аватар в профиль
+     *
+     * @param  array  $updateUser   Current users
      * @param  array  $requestForm  Request
      *
      * @return mixed Updated request
@@ -45,7 +47,9 @@ trait UsersTrait
     }
 
     /**
-     * @param  array  $updateUser  Current users
+     * Удаляет текущий аватар
+     *
+     * @param  array  $updateUser   Current users
      * @param  array  $requestForm  Request
      *
      * @return mixed|void Updated request
@@ -59,7 +63,9 @@ trait UsersTrait
     }
 
     /**
-     * @param  array  $updateUser  Current users
+     * Обновляет пароль
+     *
+     * @param  array  $updateUser   Current users
      * @param  array  $requestForm  Request
      *
      * @return string

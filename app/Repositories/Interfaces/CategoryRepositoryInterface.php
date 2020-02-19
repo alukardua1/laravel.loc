@@ -19,6 +19,7 @@ interface CategoryRepositoryInterface
      * @param  null  $url  Url default null
      *
      * @param  bool  $isAdmin
+     *
      * @return mixed
      */
     public function getCategory($url = null, $isAdmin = false);

@@ -13,7 +13,6 @@ use App\Helpers\FunctionsHelpers;
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use Cache;
-use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -38,12 +37,12 @@ class AnimeController extends Controller
     /**
      * AnimeController constructor.
      *
-     * @param  AnimeRepositoryInterface  $repository
+     * @param  \App\Repositories\Interfaces\AnimeRepositoryInterface  $animeRepository
      */
-    public function __construct(AnimeRepositoryInterface $repository)
+    public function __construct(AnimeRepositoryInterface $animeRepository)
     {
         parent::__construct();
-        self::$animeRepository = $repository;
+        self::$animeRepository = $animeRepository;
     }
 
     /**

@@ -36,6 +36,8 @@ class StaticPageController extends Controller
     }
 
     /**
+     * Выводит статическую страницу
+     *
      * @param $url
      *
      * @return Factory|View

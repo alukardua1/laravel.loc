@@ -43,9 +43,9 @@ class AdminAnimeController extends AdminBaseController
     /**
      * AdminAnimeController constructor.
      *
-     * @param  AnimeRepositoryInterface  $animeRepository
+     * @param  AnimeRepositoryInterface     $animeRepository
      * @param  CategoryRepositoryInterface  $categoryRepository
-     * @param  CountryRepositoryInterface  $countryRepository
+     * @param  CountryRepositoryInterface   $countryRepository
      */
     public function __construct(
         AnimeRepositoryInterface $animeRepository,
@@ -61,9 +61,9 @@ class AdminAnimeController extends AdminBaseController
     /**
      * Главная страница всех записей аниме
      *
-     * @return Factory|View
-     * @uses \App\Http\Controllers\Administrations\AdminBaseController::$paginate
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @var $animePost
+     * @uses \App\Http\Controllers\Administrations\AdminBaseController::$paginate
      */
     public function index()
     {
@@ -75,19 +75,18 @@ class AdminAnimeController extends AdminBaseController
     /**
      * Страница редактирования аниме
      *
-     * @param $animeUrl
+     * @param     $animeUrl
      *
-     * @return Factory|View
-     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @var array $tip
+     * @var array $rating
+     * @var mixed $category
+     * @var mixed $animePost
      * @uses \App\Helpers\FunctionsHelpers::$arrTip
      * @uses \App\Helpers\FunctionsHelpers::$arrRatings
      * @uses \App\Repositories\CategoryRepository
      * @uses \App\Repositories\AnimeRepository
      *
-     * @var array $tip
-     * @var array $rating
-     * @var mixed $category
-     * @var mixed $animePost
      */
     public function edit($animeUrl)
     {
@@ -103,17 +102,16 @@ class AdminAnimeController extends AdminBaseController
     /**
      * Добавление нового поста
      *
-     * @return Factory|View
-     *
-     * @uses \App\Helpers\FunctionsHelpers::$arrTip
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @var array $rating
+     * @var mixed $category
+     * @var mixed $animePost
+     * @var array $tip
      * @uses \App\Helpers\FunctionsHelpers::$arrRatings
      * @uses \App\Repositories\CategoryRepository
      * @uses \App\Repositories\AnimeRepository
      *
-     * @var array $tip
-     * @var array $rating
-     * @var mixed $category
-     * @var mixed $animePost
+     * @uses \App\Helpers\FunctionsHelpers::$arrTip
      */
     public function create()
     {
@@ -128,8 +126,9 @@ class AdminAnimeController extends AdminBaseController
     /**
      * Сохранение новой записи
      *
-     * @param  Request  $request
-     * @return RedirectResponse
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request): RedirectResponse
     {
@@ -144,12 +143,10 @@ class AdminAnimeController extends AdminBaseController
     /**
      * Процедура обновления записи
      *
-     * @param  Request  $request
-     * @param  string  $animeUrl
+     * @param  \Illuminate\Http\Request  $request
+     * @param                            $animeUrl
      *
-     * @return RedirectResponse
-     * @var  mixed $updateAnime
-     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $animeUrl): RedirectResponse
     {
@@ -162,8 +159,11 @@ class AdminAnimeController extends AdminBaseController
     }
 
     /**
+     * Удаление записи
+     *
      * @param $animeUrl
-     * @return RedirectResponse
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function delete($animeUrl)
     {

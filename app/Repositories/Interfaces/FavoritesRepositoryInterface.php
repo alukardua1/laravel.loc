@@ -10,18 +10,21 @@ namespace App\Repositories\Interfaces;
 
 /**
  * Interface FavoritesRepositoryInterface
+ *
  * @package App\Repositories\Interfaces
  */
 interface FavoritesRepositoryInterface
 {
     /**
      * @param $id
+     *
      * @return mixed
      */
     public function favorite($id);
 
     /**
      * @param $id
+     *
      * @return mixed
      */
     public function unFavorite($id);

@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use Cache;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -19,12 +20,13 @@ use Illuminate\View\View;
  */
 class CategoryController extends Controller
 {
+
     /**
      * Выводит аниме по категориям
      *
      * @param $url
      *
-     * @return Factory|View|void
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
      */
     public function view($url)
     {
@@ -32,8 +34,8 @@ class CategoryController extends Controller
             ->getCategory($url)
             ->paginate(self::$paginate);
 
-        if (\Cache::has('categories')) {
-            $categories = \Cache::get('categories');
+        if (Cache::has('categories')) {
+            $categories = Cache::get('categories');
         } else {
             $categories = self::setCache(
                 'categories',

@@ -26,6 +26,8 @@ class UserRepository implements UserRepositoryInterface
     use UsersTrait;
 
     /**
+     * Получает профиль пользователя
+     *
      * @param $userUrl
      *
      * @return Builder|Model|mixed|object|null
@@ -38,8 +40,11 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
+     * Сохраняет изменения в базу
+     *
      * @param  Request  $request
-     * @param $currentUser
+     * @param           $currentUser
+     *
      * @return mixed
      */
     public function setUsers($request, $currentUser)

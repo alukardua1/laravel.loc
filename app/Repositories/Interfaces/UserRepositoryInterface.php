@@ -18,14 +18,14 @@ use Illuminate\Http\Request;
 interface UserRepositoryInterface
 {
     /**
-     * @param  string  $userUrl  Url users
+     * @param $userUrl
      *
      * @return mixed
      */
     public function getUsers($userUrl);
 
     /**
-     * @param  Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param                            $currentUser
      *
      * @return mixed

@@ -109,15 +109,15 @@ class Controller extends BaseController
 
         View::share(
             [
-                'categoryAll' => self::$globalCategory,
+                'categoryAll'   => self::$globalCategory,
                 'carouselAnime' => $carouselAnime,
-                'yearCustom' => $this->customArr($year, 'aired_season'),
-                'tipRu' => FunctionsHelpers::$arrTip,
-                'tipFullRu' => FunctionsHelpers::$arrFullTip,
-                'tip' => $this->customArr($tip, 'tip'),
-                'theme' => self::$theme,
-                'kind' => self::$kind,
-                'nameSite' => $nameSite,
+                'yearCustom'    => $this->customArr($year, 'aired_season'),
+                'tipRu'         => FunctionsHelpers::$arrTip,
+                'tipFullRu'     => FunctionsHelpers::$arrFullTip,
+                'tip'           => $this->customArr($tip, 'tip'),
+                'theme'         => self::$theme,
+                'kind'          => self::$kind,
+                'nameSite'      => $nameSite,
             ]
         );
     }
@@ -125,7 +125,7 @@ class Controller extends BaseController
     /**
      * Обрабатывает поля для глобальных кустом
      *
-     * @param  array  $arr
+     * @param  array   $arr
      * @param  string  $keys
      *
      * @return array

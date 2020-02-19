@@ -11,16 +11,34 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\VoteRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
 
+/**
+ * Class VoteController
+ *
+ * @package App\Http\Controllers\Main
+ */
 class VoteController extends Controller
 {
+    /**
+     * @var \App\Repositories\Interfaces\VoteRepositoryInterface
+     */
     private static $voteRepository;
 
-    public function __construct(VoteRepositoryInterface $repository)
+    /**
+     * VoteController constructor.
+     *
+     * @param  \App\Repositories\Interfaces\VoteRepositoryInterface  $voteRepository
+     */
+    public function __construct(VoteRepositoryInterface $voteRepository)
     {
         parent::__construct();
-        self::$voteRepository = $repository;
+        self::$voteRepository = $voteRepository;
     }
 
+    /**
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function plusVotes($id): RedirectResponse
     {
         self::$voteRepository->plusVotes($id);
@@ -28,6 +46,11 @@ class VoteController extends Controller
         return back();
     }
 
+    /**
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function minusVotes($id): RedirectResponse
     {
         self::$voteRepository->minusVotes($id);

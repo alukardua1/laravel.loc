@@ -20,9 +20,10 @@ class CustomRepository implements CustomRepositoryInterface
 {
     /**
      * Вывод по кустом полю
+     *
      * @param  string  $select
-     * @param  null  $columns
-     * @param  null  $variable
+     * @param  null    $columns
+     * @param  null    $variable
      *
      * @return mixed
      * @todo решить проблему с ошибкой колумнс

@@ -13,6 +13,7 @@ use Auth;
 
 /**
  * Class VoteRepository
+ *
  * @package App\Repositories
  */
 class VoteRepository implements VoteRepositoryInterface

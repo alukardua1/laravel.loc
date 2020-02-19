@@ -60,6 +60,7 @@ class AnimeObserver
 
     /**
      * Создает ключевые слова для поста
+     *
      * @param       $contents
      * @param  int  $symbol
      * @param  int  $words

@@ -20,13 +20,17 @@ use Str;
 
 /**
  * Trait UploadImage
+ *
  * @package App\Traits
  */
 trait UploadImage
 {
     /**
+     * Загружает постер к записи
+     *
      * @param $updateAnime
      * @param $requestForm
+     *
      * @return mixed
      */
     public function uploadImages($updateAnime, $requestForm)

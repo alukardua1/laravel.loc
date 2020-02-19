@@ -13,12 +13,14 @@ use Auth;
 
 /**
  * Class FavoriteRepository
+ *
  * @package App\Repositories
  */
 class FavoriteRepository implements FavoritesRepositoryInterface
 {
     /**
      * @param $id
+     *
      * @return mixed|void
      */
     public function favorite($id)
@@ -28,6 +30,7 @@ class FavoriteRepository implements FavoritesRepositoryInterface
 
     /**
      * @param $id
+     *
      * @return mixed|void
      */
     public function unFavorite($id)

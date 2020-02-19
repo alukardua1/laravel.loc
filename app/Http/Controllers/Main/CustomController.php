@@ -20,7 +20,7 @@ use Illuminate\View\View;
 class CustomController extends Controller
 {
     /**
-     * @param  string  $columns  DB columns
+     * @param  string  $columns   DB columns
      * @param  string  $variable  Search variable
      *
      * @return Factory|View

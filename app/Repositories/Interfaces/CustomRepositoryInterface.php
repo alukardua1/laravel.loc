@@ -16,8 +16,8 @@ namespace App\Repositories\Interfaces;
 interface CustomRepositoryInterface
 {
     /**
-     * @param  mixed  $select  DB select columns
-     * @param  string  $columns  Selected columns db
+     * @param  mixed   $select    DB select columns
+     * @param  string  $columns   Selected columns db
      * @param  string  $variable  Search value
      *
      * @return mixed

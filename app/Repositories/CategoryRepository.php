@@ -24,6 +24,7 @@ class CategoryRepository implements CategoryRepositoryInterface
      * @param  null  $url
      *
      * @param  bool  $isAdmin
+     *
      * @return mixed
      */
     public function getCategory($url = null, $isAdmin = false)

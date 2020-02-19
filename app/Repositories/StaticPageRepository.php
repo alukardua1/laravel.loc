@@ -19,6 +19,8 @@ use App\Repositories\Interfaces\StaticPageRepositoryInterface;
 class StaticPageRepository implements StaticPageRepositoryInterface
 {
     /**
+     * Выводит текущую статическую страницу
+     *
      * @param  mixed  $url
      *
      * @return mixed

@@ -27,17 +27,20 @@ class AnimeRepository implements AnimeRepositoryInterface
     use UploadImage;
 
     /**
-     * @param  mixed  $url  Урл поста
-     * @param  bool  $isAdmin  Проверяет откуда запрос (сайт или админка)
+     * если $id пустой выводит все записи на сайте, $isAdmin если указан то выводит в админке, если $id указан то
+     * выведет одну запись
+     *
+     * @param  mixed  $id       id поста
+     * @param  bool   $isAdmin  Проверяет откуда запрос (сайт или админка)
      *
      * @return Builder
      */
-    public function getAnime($url = null, $isAdmin = false): Builder
+    public function getAnime($id = null, $isAdmin = false): Builder
     {
-        if ($url) {
+        if ($id) {
             /** выводит аниме по урл */
             return Anime::with(['getCategory'])
-                ->where('id', $url)
+                ->where('id', $id)
                 ->orderBy('created_at', 'DESC');
         }
         if ($isAdmin) {
@@ -52,21 +55,23 @@ class AnimeRepository implements AnimeRepositoryInterface
     }
 
     /**
-     * @param  Request  $request
-     * @param  null  $url
+     * Обновление и добавление записи в базу
+     *
+     * @param  Request  $request  запрос из формы
+     * @param  null     $id       id записи
      *
      * @return mixed
      * @throws InvalidArgumentException
      * @todo Попытатся перенести все в AnimeObserver
      *
      */
-    public function setAnime(Request $request, $url = null)
+    public function setAnime(Request $request, $id = null)
     {
         $update = [];
         $requestForm = $request->all();
-        if ($url) {
-            $updateAnime = Anime::where('id', $url)->first();
-            Cache::delete('anime_'.$url);
+        if ($id) {
+            $updateAnime = Anime::where('id', $id)->first();
+            Cache::delete('anime_'.$id);
         } else {
             $updateAnime = Anime::create($requestForm);
         }
@@ -82,16 +87,18 @@ class AnimeRepository implements AnimeRepositoryInterface
     }
 
     /**
-     * @param $url
+     * Удаляет запись из базы
+     *
+     * @param  mixed  $id  id записи
      *
      * @return mixed
      * @throws InvalidArgumentException
      */
-    public function delAnime($url)
+    public function delAnime($id)
     {
-        $deleteAnime = Anime::where('id', $url)->first();
+        $deleteAnime = Anime::where('id', $id)->first();
         $deleteAnime->getCategory()->detach();
-        Cache::delete('anime_'.$url);
+        Cache::delete('anime_'.$id);
 
         return $deleteAnime->delete();
     }
@@ -100,6 +107,7 @@ class AnimeRepository implements AnimeRepositoryInterface
      * Поиск по сайту
      *
      * @param  Request  $request
+     *
      * @return LengthAwarePaginator|mixed
      */
     public function getSearch(Request $request)

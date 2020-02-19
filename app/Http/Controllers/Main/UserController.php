@@ -40,7 +40,9 @@ class UserController extends Controller
 
 
     /**
-     * @param $userUrl
+     * Просмотр профиля пользователя $userUrl
+     *
+     * @param  string  $userUrl
      *
      * @return Factory|View
      */
@@ -64,6 +66,8 @@ class UserController extends Controller
     }
 
     /**
+     * Загружает временные зоны
+     *
      * @return array
      */
     private function loadCountryTimeZone(): array
@@ -80,8 +84,11 @@ class UserController extends Controller
 
 
     /**
+     * Обновление профиля $currentUser
+     *
      * @param  UserRequest  $request
-     * @param $currentUser
+     * @param  string       $currentUser
+     *
      * @return RedirectResponse
      */
     public function update(UserRequest $request, $currentUser): RedirectResponse
