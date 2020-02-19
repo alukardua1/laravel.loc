@@ -29,6 +29,7 @@ use Illuminate\View\View;
 class AnimeController extends Controller
 {
     use CreateCacheTrait;
+    use FunctionsHelpers;
     /**
      * @var AnimeRepositoryInterface
      */
@@ -74,22 +75,9 @@ class AnimeController extends Controller
         } else {
             $animePost = self::setCache('anime_'.$uri[0], self::$animeRepository->getAnime($uri[0])->first());
         }
-        foreach (FunctionsHelpers::$arrDay as $key => $value) {
-            if ($animePost->delivery_time >= $key) {
-                $animePost->day = $value;
-            }
-        }
+        $animePost->day = self::deliveryTime($animePost->delivery_time);
 
-        foreach (FunctionsHelpers::$arrMsg as $key => $value) {
-            if (Carbon::parse($animePost->aired_on)->format('m') >= $key) {
-                if (Carbon::parse($animePost->aired_on)->format('m') == 12) {
-                    $year = Carbon::parse($animePost->aired_on)->format('Y') + 1;
-                    $animePost->seasons = $value.$year;
-                } else {
-                    $animePost->seasons = $value.Carbon::parse($animePost->aired_on)->format('Y');
-                }
-            }
-        }
+        $animePost->seasons = self::airedSeason($animePost->aired_on);
 
         if (empty($animePost)) {
             return abort(404);

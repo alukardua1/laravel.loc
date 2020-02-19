@@ -11,5 +11,5 @@ return [
     'nameSite' => 'AnimeFree',
     'descriptionSite' => 'Смотреть аниме в русской озвучке',
     'paginateAdmin' => 50,
-    'ttlCache' => 30, //Количество дней кэша
+    'ttlCache' => 0, //Количество дней кэша
 ];

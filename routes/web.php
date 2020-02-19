@@ -22,39 +22,39 @@ Route::group(
     function () {
         /** Главная страница */
         Route::get('', 'AnimeController@index')->name('home');
+        /** Страница аниме */
         Route::group(
             ['prefix' => 'anime'],
             function () {
-                /** Страница аниме */
                 Route::get('{anime}', 'AnimeController@view')->name('anime');
             }
         );
+        /** Страница поиска */
         Route::group(
             ['prefix' => 'search'],
             function () {
-                /** Страница поиска */
                 Route::get('', 'AnimeController@search')->name('search');
             }
         );
+        /** Страница пользователя */
         Route::group(
             ['prefix' => 'user'],
             function () {
-                /** Страница пользователя */
                 Route::get('{user}', 'UserController@view')->name('profile')->middleware('auth');
                 Route::patch('{user}', 'UserController@update')->name('editProfile')->middleware('auth');
             }
         );
+        /** Страница категорий */
         Route::group(
             ['prefix' => 'category'],
             function () {
-                /** Страница категорий */
                 Route::get('{category}', 'CategoryController@view')->name('category');
             }
         );
+        /** Статическая страница */
         Route::group(
             ['prefix' => 'page'],
             function () {
-                /** Статическая страница */
                 Route::get('{page}', 'StaticPageController@view')->name('page');
             }
         );
@@ -65,7 +65,12 @@ Route::group(
         Route::post('/plusVotes/{id}', 'VoteController@plusVotes')->name('votes_plus');
         Route::post('/minusVotes/{id}', 'VoteController@minusVotes')->name('votes_minus');
         /** Выборки по полям */
-        Route::get('custom/{custom}/{variable}', 'CustomController@loadCustom')->name('custom');
+        Route::group(
+            ['prefix' => 'custom'],
+            function () {
+                Route::get('{custom}/{variable}', 'CustomController@loadCustom')->name('custom');
+            }
+        );
     }
 );
 
