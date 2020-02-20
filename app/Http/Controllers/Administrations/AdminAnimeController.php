@@ -11,6 +11,7 @@ use App\Helpers\FunctionsHelpers;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CountryRepositoryInterface;
+use App\Repositories\Interfaces\TranslateRepositoryInterface;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -41,21 +42,29 @@ class AdminAnimeController extends AdminBaseController
     protected static $countryRepository;
 
     /**
+     * @var TranslateRepositoryInterface
+     */
+    protected static $translateRepository;
+
+    /**
      * AdminAnimeController constructor.
      *
-     * @param  AnimeRepositoryInterface     $animeRepository
-     * @param  CategoryRepositoryInterface  $categoryRepository
-     * @param  CountryRepositoryInterface   $countryRepository
+     * @param  AnimeRepositoryInterface      $animeRepository
+     * @param  CategoryRepositoryInterface   $categoryRepository
+     * @param  CountryRepositoryInterface    $countryRepository
+     * @param  TranslateRepositoryInterface  $translateRepository
      */
     public function __construct(
         AnimeRepositoryInterface $animeRepository,
         CategoryRepositoryInterface $categoryRepository,
-        CountryRepositoryInterface $countryRepository
+        CountryRepositoryInterface $countryRepository,
+        TranslateRepositoryInterface $translateRepository
     ) {
         parent::__construct();
         self::$categoryRepository = $categoryRepository;
         self::$animeRepository = $animeRepository;
         self::$countryRepository = $countryRepository;
+        self::$translateRepository = $translateRepository;
     }
 
     /**
@@ -95,8 +104,9 @@ class AdminAnimeController extends AdminBaseController
         $category = self::$categoryRepository->getCategory()->get();
         $animePost = self::$animeRepository->getAnime($animeUrl)->first();
         $country = self::$countryRepository->getCountry(['id', 'title']);
+        $translate = self::$translateRepository->getTranslate();
 
-        return view('admin.anime.edit', compact('animePost', 'category', 'tip', 'rating', 'country'));
+        return view('admin.anime.edit', compact('animePost', 'category', 'tip', 'rating', 'country', 'translate'));
     }
 
     /**

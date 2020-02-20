@@ -223,19 +223,18 @@
             >Завершен
             </option>
         </select>
-        <select name="translate" class="mdb-select md-form">
-            {{--@todo Решить как выводить озвучку--}}
+        <select name="translate[]" class="mdb-select md-form" multiple>
             <option value="" disabled selected>Озвучка</option>
-            {{-- @foreach($category as $key => $value)
+             @foreach($translate as $key => $value)
                  <option
                      value="{{$value->id}}"
-                     @foreach($animePost->getCategory as $categoryAnime)
-                     @if($value->id === $categoryAnime->id)
+                     @foreach($animePost->getTranslate as $translateAnime)
+                     @if($value->id === $translateAnime->id)
                      selected
                      @endif
                      @endforeach
                  >{{$value->title}}</option>
-             @endforeach--}}
+             @endforeach
         </select>
         <div class="md-form">
             <input type="text" id="video" name="video" class="form-control"

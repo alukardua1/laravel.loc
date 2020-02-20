@@ -39,17 +39,17 @@ class AnimeRepository implements AnimeRepositoryInterface
     {
         if ($id) {
             /** выводит аниме по урл */
-            return Anime::with(['getCategory'])
+            return Anime::with(['getCategory', 'getUsers', 'getTranslate'])
                 ->where('id', $id)
                 ->orderBy('created_at', 'DESC');
         }
         if ($isAdmin) {
             /** выводит все аниме для админки */
-            return Anime::with(['getCategory', 'getUsers'])
+            return Anime::with(['getCategory', 'getUsers', 'getTranslate'])
                 ->orderBy('created_at', 'DESC');
         }
         /** выводит все аниме на сайте */
-        return Anime::with(['getCategory', 'getUsers'])
+        return Anime::with(['getCategory', 'getUsers', 'getTranslate'])
             ->where('posted_at', 1)
             ->orderBy('created_at', 'DESC');
     }
@@ -75,9 +75,18 @@ class AnimeRepository implements AnimeRepositoryInterface
         } else {
             $updateAnime = Anime::create($requestForm);
         }
-        $updateAnime->fill($request->except('genre'));
-        $updateAnime->save();
-        $updateAnime->getCategory()->sync($request->genre);
+        if ($request->genre)
+        {
+            $updateAnime->fill($request->except('genre'));
+            $updateAnime->save();
+            $updateAnime->getCategory()->sync($request->genre);
+        }
+        if ($request->translate)
+        {
+            $updateAnime->fill($request->except('translate'));
+            $updateAnime->save();
+            $updateAnime->getTranslate()->sync($request->translate);
+        }
         if ($request->hasFile('poster')) {
             $update = $this->uploadImages($updateAnime, $requestForm);
         }
@@ -98,6 +107,7 @@ class AnimeRepository implements AnimeRepositoryInterface
     {
         $deleteAnime = Anime::where('id', $id)->first();
         $deleteAnime->getCategory()->detach();
+        $deleteAnime->getTranslate()->deatach();
         Cache::delete('anime_'.$id);
 
         return $deleteAnime->delete();

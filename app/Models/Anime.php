@@ -77,6 +77,11 @@ class Anime extends Model
         return $this->belongsTo(Country::class, 'country_id');
     }
 
+    public function getTranslate()
+    {
+        return $this->belongsToMany(Translate::class);
+    }
+
     /**
      * @param $field
      *

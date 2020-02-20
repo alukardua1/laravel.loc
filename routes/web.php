@@ -71,6 +71,22 @@ Route::group(
                 Route::get('{custom}/{variable}', 'CustomController@loadCustom')->name('custom');
             }
         );
+        /** Люди */
+        Route::group(
+            ['prefix' => 'people'],
+            function () {
+                Route::get('', 'PeopleController@index')->name('peoples');
+                Route::get('{people}', 'PeopleController@view')->name('people');
+            }
+        );
+        /** Персонажи */
+        Route::group(
+            ['prefix' => 'character'],
+            function () {
+                Route::get('', 'CharacterController@index')->name('characters');
+                Route::get('{character}', 'CharacterController@view')->name('character');
+            }
+        );
     }
 );
 

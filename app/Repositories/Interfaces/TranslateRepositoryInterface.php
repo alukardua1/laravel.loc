@@ -15,5 +15,5 @@ namespace App\Repositories\Interfaces;
  */
 interface TranslateRepositoryInterface
 {
-
+    public function getTranslate($id = null);
 }

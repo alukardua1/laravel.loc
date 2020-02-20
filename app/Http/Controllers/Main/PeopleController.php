@@ -17,5 +17,13 @@ use Illuminate\Http\Request;
  */
 class PeopleController extends Controller
 {
-    //
+    public function index()
+    {
+        dd(__METHOD__);
+    }
+
+    public function view($people)
+    {
+        dd(__METHOD__, $people);
+    }
 }

@@ -17,5 +17,13 @@ use Illuminate\Http\Request;
  */
 class CharacterController extends Controller
 {
+    public function index()
+    {
+        dd(__METHOD__);
+    }
 
+    public function view($character)
+    {
+        dd(__METHOD__, $character);
+    }
 }

@@ -70,35 +70,68 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-eye"></i> About<i class="fas fa-angle-down rotate-icon"></i></a>
+                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-eye"></i> Персонажи
+                            <i class="fas fa-angle-down rotate-icon"></i></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="#" class="waves-effect">Introduction</a>
+                                <li><a href="#" class="waves-effect">Редактировать</a>
                                 </li>
-                                <li><a href="#" class="waves-effect">Monthly meetings</a>
+                                <li><a href="#" class="waves-effect">Добавить</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-envelope-o"></i> Contact me<i
-                                class="fas fa-angle-down rotate-icon"></i></a>
+                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-eye"></i> Люди
+                            <i class="fas fa-angle-down rotate-icon"></i></a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="#" class="waves-effect">FAQ</a>
+                                <li><a href="#" class="waves-effect">Редактировать</a>
                                 </li>
-                                <li><a href="#" class="waves-effect">Write a message</a>
+                                <li><a href="#" class="waves-effect">Добавить</a>
                                 </li>
-                                <li><a href="#" class="waves-effect">FAQ</a>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-eye"></i> Озвучка
+                            <i class="fas fa-angle-down rotate-icon"></i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#" class="waves-effect">Редактировать</a>
                                 </li>
-                                <li><a href="#" class="waves-effect">Write a message</a>
+                                <li><a href="#" class="waves-effect">Добавить</a>
                                 </li>
-                                <li><a href="#" class="waves-effect">FAQ</a>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-eye"></i> Студии
+                            <i class="fas fa-angle-down rotate-icon"></i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#" class="waves-effect">Редактировать</a>
                                 </li>
-                                <li><a href="#" class="waves-effect">Write a message</a>
+                                <li><a href="#" class="waves-effect">Добавить</a>
                                 </li>
-                                <li><a href="#" class="waves-effect">FAQ</a>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-eye"></i> Страны
+                            <i class="fas fa-angle-down rotate-icon"></i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#" class="waves-effect">Редактировать</a>
                                 </li>
-                                <li><a href="#" class="waves-effect">Write a message</a>
+                                <li><a href="#" class="waves-effect">Добавить</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-eye"></i> Пользователи
+                            <i class="fas fa-angle-down rotate-icon"></i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#" class="waves-effect">Редактировать</a>
+                                </li>
+                                <li><a href="#" class="waves-effect">Добавить</a>
                                 </li>
                             </ul>
                         </div>

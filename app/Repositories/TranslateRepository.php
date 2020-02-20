@@ -8,6 +8,7 @@
 namespace App\Repositories;
 
 
+use App\Models\Translate;
 use App\Repositories\Interfaces\TranslateRepositoryInterface;
 
 /**
@@ -17,5 +18,13 @@ use App\Repositories\Interfaces\TranslateRepositoryInterface;
  */
 class TranslateRepository implements TranslateRepositoryInterface
 {
-
+    public function getTranslate($id = null)
+    {
+        if ($id)
+        {
+            return abort(404);
+        }else{
+            return Translate::all();
+        }
+    }
 }
