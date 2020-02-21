@@ -33,7 +33,13 @@
                     </div>
                     <div class="col-lg-7 col-xl-8">
                         <div class="card-title">
-                            <h4 class="font-weight-bold mb-3 font-italic">в озвучке: </h4>
+                            <h4 class="font-weight-bold mb-3 font-italic">в озвучке:
+                                @foreach($post->getTranslate as $translate)
+                                    @if ($loop->last) {{ $translate->title }} @else
+                                        {{ $translate->title }},
+                                    @endif
+                                @endforeach
+                            </h4>
                             <p class="blog-post-meta">
                                 @foreach($post->getCategory as $category)
                                     @if ($loop->last) {{ $category->title }} @else

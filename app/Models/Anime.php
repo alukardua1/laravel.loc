@@ -64,9 +64,17 @@ class Anime extends Model
     /**
      * @return BelongsTo
      */
-    public function getUsers(): BelongsTo
+    public function getUser(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function getUsers()
+    {
+        return $this->belongsToMany(User::class);
     }
 
     /**
@@ -77,6 +85,9 @@ class Anime extends Model
         return $this->belongsTo(Country::class, 'country_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function getTranslate()
     {
         return $this->belongsToMany(Translate::class);

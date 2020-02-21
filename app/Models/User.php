@@ -78,4 +78,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Anime::class, 'votes')->withTimestamps();
     }
+
+    public function getAnime()
+    {
+        return $this->belongsToMany(Anime::class);
+    }
 }

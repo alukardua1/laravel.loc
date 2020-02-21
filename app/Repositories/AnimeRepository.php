@@ -39,17 +39,17 @@ class AnimeRepository implements AnimeRepositoryInterface
     {
         if ($id) {
             /** выводит аниме по урл */
-            return Anime::with(['getCategory', 'getUsers', 'getTranslate'])
+            return Anime::with(['getCategory', 'getUser', 'getTranslate'])
                 ->where('id', $id)
                 ->orderBy('created_at', 'DESC');
         }
         if ($isAdmin) {
             /** выводит все аниме для админки */
-            return Anime::with(['getCategory', 'getUsers', 'getTranslate'])
+            return Anime::with(['getCategory', 'getUser', 'getTranslate'])
                 ->orderBy('created_at', 'DESC');
         }
         /** выводит все аниме на сайте */
-        return Anime::with(['getCategory', 'getUsers', 'getTranslate'])
+        return Anime::with(['getCategory', 'getUser', 'getTranslate'])
             ->where('posted_at', 1)
             ->orderBy('created_at', 'DESC');
     }

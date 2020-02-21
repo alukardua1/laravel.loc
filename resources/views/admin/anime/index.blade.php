@@ -28,7 +28,7 @@
                                 @endif
                             @endforeach
                         </td>
-                        <td>{{$post->getUsers->login}}</td>
+                        <td>{{$post->getUser->login}}</td>
                         <td><a href="{{route('admin.anime.delete', $post->id)}}" aria-label="Удалить"><i class="fas fa-trash-alt"></i></a> </td>
                     </tr>
                     @endforeach

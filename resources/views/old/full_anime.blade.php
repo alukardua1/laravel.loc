@@ -30,7 +30,13 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h4 class="font-weight-bold mb-3 font-italic">в озвучке: </h4>
+                <h4 class="font-weight-bold mb-3 font-italic">в озвучке:
+                    @foreach($animePost->getTranslate as $translate)
+                        @if ($loop->last) {{ $translate->title }} @else
+                            {{ $translate->title }},
+                        @endif
+                    @endforeach
+                </h4>
             </div>
             @if (Auth::check())
                 <div class="col-md-12">

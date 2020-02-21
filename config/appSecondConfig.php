@@ -6,7 +6,7 @@
  */
 
 return [
-    'theme' => 'new',
+    'theme' => 'old',
     'paginate' => 10,
     'nameSite' => 'AnimeFree',
     'descriptionSite' => 'Смотреть аниме в русской озвучке',
