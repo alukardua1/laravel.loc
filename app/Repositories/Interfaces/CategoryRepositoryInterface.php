@@ -8,6 +8,8 @@
 namespace App\Repositories\Interfaces;
 
 
+use Request;
+
 /**
  * Interface CategoryRepositoryInterface
  *
@@ -23,4 +25,19 @@ interface CategoryRepositoryInterface
      * @return mixed
      */
     public function getCategory($url = null, $isAdmin = false);
+
+    /**
+     * @param  \Request  $request
+     * @param  null      $url
+     *
+     * @return mixed
+     */
+    public function setCategory(Request $request, $url = null);
+
+    /**
+     * @param $url
+     *
+     * @return mixed
+     */
+    public function delCategory($url);
 }

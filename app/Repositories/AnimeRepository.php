@@ -39,17 +39,17 @@ class AnimeRepository implements AnimeRepositoryInterface
     {
         if ($id) {
             /** выводит аниме по урл */
-            return Anime::with(['getCategory', 'getUser', 'getTranslate'])
+            return Anime::with(['getCategory', 'getUsers', 'getTranslate'])
                 ->where('id', $id)
                 ->orderBy('created_at', 'DESC');
         }
         if ($isAdmin) {
             /** выводит все аниме для админки */
-            return Anime::with(['getCategory', 'getUser', 'getTranslate'])
+            return Anime::with(['getCategory', 'getUsers', 'getTranslate'])
                 ->orderBy('created_at', 'DESC');
         }
         /** выводит все аниме на сайте */
-        return Anime::with(['getCategory', 'getUser', 'getTranslate'])
+        return Anime::with(['getCategory', 'getUsers', 'getTranslate'])
             ->where('posted_at', 1)
             ->orderBy('created_at', 'DESC');
     }
@@ -106,8 +106,8 @@ class AnimeRepository implements AnimeRepositoryInterface
     public function delAnime($id)
     {
         $deleteAnime = Anime::where('id', $id)->first();
-        $deleteAnime->getCategory()->detach();
-        $deleteAnime->getTranslate()->deatach();
+        $deleteAnime->getTranslate()->sync([]);
+        $deleteAnime->getCategory()->sync([]);
         Cache::delete('anime_'.$id);
 
         return $deleteAnime->delete();

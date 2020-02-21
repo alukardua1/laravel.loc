@@ -23,7 +23,7 @@ class Category extends Model
      */
     public function getAnime(): BelongsToMany
     {
-        return $this->belongsToMany(Anime::class)->withTimestamps();
+        return $this->belongsToMany(Anime::class);
     }
 
     /**

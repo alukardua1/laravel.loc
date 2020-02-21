@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 use App\Models\Category;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use Request;
 
 /**
  * Class CategoryRepository
@@ -51,5 +52,29 @@ class CategoryRepository implements CategoryRepositoryInterface
         }
         /** Возвращает количество постов для категории */
         return Category::withCount('getAnime');
+    }
+
+    /**
+     * @param  \Request  $request
+     * @param  null      $url
+     *
+     * @return mixed|void
+     */
+    public function setCategory(Request $request, $url = null)
+    {
+        // TODO: Implement setCategory() method.
+    }
+
+    /**
+     * @param string $url Url category
+     *
+     * @return mixed|void
+     */
+    public function delCategory($url)
+    {
+        $deleteCategory = Category::where('url', $url)->first();
+        $deleteCategory->getAnime()->sync([]);
+
+        return $deleteCategory->delete();
     }
 }

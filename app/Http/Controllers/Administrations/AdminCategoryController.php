@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Administrations;
 
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Request;
 
@@ -84,9 +85,17 @@ class AdminCategoryController extends AdminBaseController
 
     /**
      * @param $url
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($url)
+    public function delete($url): RedirectResponse
     {
-        dd(__METHOD__, $url);
+        $deleteCategory = self::$categoryRepository->delCategory($url);
+        if ($deleteCategory)
+        {
+            return redirect()->route('admin.category');
+        }
+
+        return back()->withErrors(['msg' => 'Ошибка удаления'])->withInput();
     }
 }

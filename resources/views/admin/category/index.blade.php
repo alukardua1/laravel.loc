@@ -15,7 +15,7 @@
                     <tr>
                         <td>{{$cat->id}}</td>
                         <td><a href="{{route('admin.category.edit', $cat->url)}}">{{$cat->title}}</a></td>
-                        <td><a href="#" aria-label="Удалить"><i class="fas fa-trash-alt"></i></a> </td>
+                        <td><a href="{{route('admin.category.delete', $cat->url)}}" aria-label="Удалить"><i class="fas fa-trash-alt"></i></a> </td>
                     @endforeach
             </tbody>
         </table>

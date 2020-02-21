@@ -64,17 +64,9 @@ class Anime extends Model
     /**
      * @return BelongsTo
      */
-    public function getUser(): BelongsTo
+    public function getUsers(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function getUsers()
-    {
-        return $this->belongsToMany(User::class);
     }
 
     /**

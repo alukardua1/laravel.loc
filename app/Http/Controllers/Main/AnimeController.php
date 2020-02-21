@@ -50,7 +50,7 @@ class AnimeController extends Controller
      *
      * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
         $animePost = self::$animeRepository->getAnime()->paginate(self::$paginate);
 
@@ -101,7 +101,7 @@ class AnimeController extends Controller
         $animePost = self::$animeRepository->getSearch($request)->paginate(self::$paginate);
 
         if (empty($animePost)) {
-            return view(self::$theme.'/errors.error')->withErrors(['msg' => "Ничего не найдено"]);
+            return view(self::$theme.'/errors.error')->withErrors(['msg' => 'Ничего не найдено']);
         }
 
         return view(self::$theme.'/home', compact('animePost'));

@@ -16,7 +16,6 @@
           <option value="\TYPO3\CMS\Core\Utility\DebugUtility::debug" />
           <option value="\Zend\Debug\Debug::dump" />
           <option value="\Zend\Di\Display\Console::export" />
-          <option value="dd" />
           <option value="debug_print_backtrace" />
           <option value="debug_zval_dump" />
           <option value="dpm" />
