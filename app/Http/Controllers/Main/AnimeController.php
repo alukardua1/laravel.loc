@@ -12,6 +12,7 @@ use App\Helpers\CreateCacheTrait;
 use App\Helpers\FunctionsHelpers;
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
+use App\Repositories\Interfaces\CommentsRepositoryInterface;
 use Cache;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
@@ -33,16 +34,19 @@ class AnimeController extends Controller
      * @var AnimeRepositoryInterface
      */
     private static $animeRepository;
+    private static $commentsRepository;
 
     /**
      * AnimeController constructor.
      *
-     * @param  \App\Repositories\Interfaces\AnimeRepositoryInterface  $animeRepository
+     * @param  \App\Repositories\Interfaces\AnimeRepositoryInterface     $animeRepository
+     * @param  \App\Repositories\Interfaces\CommentsRepositoryInterface  $commentsRepository
      */
-    public function __construct(AnimeRepositoryInterface $animeRepository)
+    public function __construct(AnimeRepositoryInterface $animeRepository, CommentsRepositoryInterface $commentsRepository)
     {
         parent::__construct();
         self::$animeRepository = $animeRepository;
+        self::$commentsRepository = $commentsRepository;
     }
 
     /**
@@ -74,6 +78,8 @@ class AnimeController extends Controller
         } else {
             $animePost = self::setCache('anime_'.$uri[0], self::$animeRepository->getAnime($uri[0])->first());
         }
+        $comments = self::$commentsRepository->getComments($uri[0]);
+        //dd(__METHOD__, $comments);
         $animePost->day = self::deliveryTime($animePost->delivery_time);
 
         $animePost->seasons = self::airedSeason($animePost->aired_on);
@@ -86,7 +92,7 @@ class AnimeController extends Controller
             return redirect('/anime/'.$animePost->id.'-'.$animePost->url);
         }
 
-        return view(self::$theme.'/full_anime', compact('animePost'));
+        return view(self::$theme.'/full_anime', compact('animePost', 'comments'));
     }
 
     /**

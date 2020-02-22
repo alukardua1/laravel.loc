@@ -128,4 +128,11 @@ class Anime extends Model
     {
         return $this->hasMany(Vote::class, 'anime_id');
     }
+
+    public function commentsCount()
+    {
+        return $this->hasMany(Comment::class)
+            ->selectRaw('anime_id, count(*) as aggregate')
+            ->groupBy('anime_id');
+    }
 }

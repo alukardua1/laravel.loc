@@ -15,5 +15,17 @@ namespace App\Repositories\Interfaces;
  */
 interface CommentsRepositoryInterface
 {
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function getComments($id);
 
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function setComments($id);
 }
