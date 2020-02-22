@@ -42,8 +42,10 @@ class AnimeController extends Controller
      * @param  \App\Repositories\Interfaces\AnimeRepositoryInterface     $animeRepository
      * @param  \App\Repositories\Interfaces\CommentsRepositoryInterface  $commentsRepository
      */
-    public function __construct(AnimeRepositoryInterface $animeRepository, CommentsRepositoryInterface $commentsRepository)
-    {
+    public function __construct(
+        AnimeRepositoryInterface $animeRepository,
+        CommentsRepositoryInterface $commentsRepository
+    ) {
         parent::__construct();
         self::$animeRepository = $animeRepository;
         self::$commentsRepository = $commentsRepository;
@@ -73,13 +75,12 @@ class AnimeController extends Controller
         $uri = explode('-', $urlAnime);
         $stringUrl = preg_split("/[0-9]+-/", $urlAnime);
 
-        if (Cache::has('anime_'.$uri[0])) {
-            $animePost = Cache::get('anime_'.$uri[0]);
-        } else {
-            $animePost = self::setCache('anime_'.$uri[0], self::$animeRepository->getAnime($uri[0])->first());
-        }
-        $comments = self::$commentsRepository->getComments($uri[0]);
-        //dd(__METHOD__, $comments);
+        $animePost = $this->getCache('anime_'.$uri[0], self::$animeRepository->getAnime($uri[0])->first());
+
+        $comments = $this->getCache('animeComments_'.$uri[0], self::$commentsRepository->getComments($uri[0]));
+
+        $commentsCount = $this->getCache('animeCommentsCount_'.$uri[0], self::$commentsRepository->countComments($uri[0]));
+
         $animePost->day = self::deliveryTime($animePost->delivery_time);
 
         $animePost->seasons = self::airedSeason($animePost->aired_on);
@@ -92,7 +93,16 @@ class AnimeController extends Controller
             return redirect('/anime/'.$animePost->id.'-'.$animePost->url);
         }
 
-        return view(self::$theme.'/full_anime', compact('animePost', 'comments'));
+        return view(self::$theme.'/full_anime', compact('animePost', 'comments', 'commentsCount'));
+    }
+
+    private function getCache($key, $value)
+    {
+        if (Cache::has($key)) {
+            return Cache::get($key);
+        } else {
+            return self::setCache($key, $value);
+        }
     }
 
     /**

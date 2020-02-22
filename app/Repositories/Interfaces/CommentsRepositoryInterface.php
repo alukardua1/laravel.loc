@@ -28,4 +28,11 @@ interface CommentsRepositoryInterface
      * @return mixed
      */
     public function setComments($id);
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function countComments($id);
 }

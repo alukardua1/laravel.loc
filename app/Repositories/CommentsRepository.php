@@ -45,6 +45,13 @@ class CommentsRepository implements CommentsRepositoryInterface
         return $result;
     }
 
+    public function countComments($id)
+    {
+       return Comment::where('anime_id', '=', $id)
+           ->with('getAnime')
+           ->count();
+    }
+
     /**
      * @param $id
      *
