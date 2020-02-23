@@ -100,9 +100,9 @@ class AnimeController extends Controller
     {
         if (Cache::has($key)) {
             return Cache::get($key);
-        } else {
-            return self::setCache($key, $value);
         }
+
+        return self::setCache($key, $value);
     }
 
     /**
