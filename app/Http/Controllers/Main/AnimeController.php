@@ -34,6 +34,9 @@ class AnimeController extends Controller
      * @var AnimeRepositoryInterface
      */
     private static $animeRepository;
+    /**
+     * @var \App\Repositories\Interfaces\CommentsRepositoryInterface
+     */
     private static $commentsRepository;
 
     /**
@@ -96,6 +99,12 @@ class AnimeController extends Controller
         return view(self::$theme.'/full_anime', compact('animePost', 'comments', 'commentsCount'));
     }
 
+    /**
+     * @param $key
+     * @param $value
+     *
+     * @return mixed
+     */
     private function getCache($key, $value)
     {
         if (Cache::has($key)) {

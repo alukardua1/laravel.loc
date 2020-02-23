@@ -92,6 +92,7 @@ Route::group(
             ['prefix' => 'comments'],
             function () {
                 Route::post('add', 'CommentController@addComments')->name('addComment');
+                Route::get('delete/{comment}', 'CommentController@deleteComment')->name('deleteComment');
             }
         );
     }

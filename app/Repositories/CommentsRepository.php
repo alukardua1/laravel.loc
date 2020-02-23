@@ -46,6 +46,11 @@ class CommentsRepository implements CommentsRepositoryInterface
         return $result;
     }
 
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
     public function countComments($id)
     {
        return Comment::where('anime_id', '=', $id)
@@ -62,5 +67,18 @@ class CommentsRepository implements CommentsRepositoryInterface
     public function setComments(Request $request, $id = null)
     {
         return Comment::create($request->all());
+    }
+
+    /**
+     * @param $id
+     *
+     * @return bool|mixed|null
+     * @throws \Exception
+     */
+    public function delComments($id)
+    {
+        $deleteComment = Comment::where('id', $id)->first();
+
+        return $deleteComment->delete();
     }
 }

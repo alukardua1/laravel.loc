@@ -37,5 +37,12 @@ interface CommentsRepositoryInterface
      *
      * @return mixed
      */
+    public function delComments($id);
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
     public function countComments($id);
 }

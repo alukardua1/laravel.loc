@@ -12,7 +12,7 @@
                 @csrf
                 <input type="hidden">
                 <section>
-                    <label for="comments">Комментарий</label>
+                    <label for="content">Комментарий</label>
                     <input type="hidden" id="user_id" name="user_id" value="{{Auth::user()->id}}">
                     <input type="hidden" id="anime_id" name="anime_id" value="{{$animePost->id}}">
                     <input type="hidden" id="parent_comment_id" name="parent_comment_id" value="0">
