@@ -8,6 +8,8 @@
 namespace App\Repositories\Interfaces;
 
 
+use Illuminate\Http\Request;
+
 /**
  * Interface CommentsRepositoryInterface
  *
@@ -23,11 +25,12 @@ interface CommentsRepositoryInterface
     public function getComments($id);
 
     /**
-     * @param $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param                            $id
      *
      * @return mixed
      */
-    public function setComments($id);
+    public function setComments(Request $request, $id = null);
 
     /**
      * @param $id

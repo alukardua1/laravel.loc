@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 use App\Models\Comment;
 use App\Repositories\Interfaces\CommentsRepositoryInterface;
+use Illuminate\Http\Request;
 
 /**
  * Class CommentsRepository
@@ -53,12 +54,13 @@ class CommentsRepository implements CommentsRepositoryInterface
     }
 
     /**
-     * @param $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param                            $id
      *
      * @return mixed|void
      */
-    public function setComments($id)
+    public function setComments(Request $request, $id = null)
     {
-        // TODO: Implement setComments() method.
+        return Comment::create($request->all());
     }
 }

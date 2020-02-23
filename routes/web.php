@@ -87,6 +87,13 @@ Route::group(
                 Route::get('{character}', 'CharacterController@view')->name('character');
             }
         );
+        /** Комментарии */
+        Route::group(
+            ['prefix' => 'comments'],
+            function () {
+                Route::post('add', 'CommentController@addComments')->name('addComment');
+            }
+        );
     }
 );
 

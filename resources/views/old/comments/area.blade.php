@@ -8,11 +8,16 @@
             @each($theme.'.comments.show', $comments, 'comment')
         </section>
         @if(Auth::user())
-            <form action="" class="md-form">
+            <form action="{{route('addComment')}}" method="post" class="md-form">
+                @csrf
                 <input type="hidden">
                 <section>
-                    <textarea id="comments" class="md-textarea form-control" rows="3"></textarea>
-                    <button type="button" class="btn btn-danger">Отправить</button>
+                    <label for="comments">Комментарий</label>
+                    <input type="hidden" id="user_id" name="user_id" value="{{Auth::user()->id}}">
+                    <input type="hidden" id="anime_id" name="anime_id" value="{{$animePost->id}}">
+                    <input type="hidden" id="parent_comment_id" name="parent_comment_id" value="0">
+                    <textarea name="content" id="comments" class="md-textarea form-control" rows="3"></textarea>
+                    <button type="submit" class="btn btn-danger">Отправить</button>
                 </section>
             </form>
         @endif

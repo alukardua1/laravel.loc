@@ -4,6 +4,7 @@
                                     asset('theme/'.$theme.'/images/no_avatar.png' )}}" alt="{{ $comment->getUser->login }}">
     <div class="media-body text-center text-md-left ml-md-3 ml-0">
         <input type="hidden" id="comment_{{ $comment->id }}" value="{{ $comment->id }}">
+        <input type="hidden" id="user_{{$comment->getUser->id}}" value="{{$comment->getUser->id}}">
         <p class="font-weight-bold my-0">
             {{ $comment->getUser->login }}
             <a href="" class="pull-right ml-1">
