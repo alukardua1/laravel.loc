@@ -63,11 +63,11 @@
                         <i class="fas fa-tv"></i> Онгоинги</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="page/pravoobladatelyam">
+                    <a class="nav-link" href="{{route('page', 'pravoobladatelyam')}}">
                         <i class="fab fa-studiovinari"></i> Правообладателям</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="page/rules"><i class="fas fa-book"></i> Правила</a>
+                    <a class="nav-link" href="{{route('page', 'rules')}}"><i class="fas fa-book"></i> Правила</a>
                 </li>
                 <li class="nav-item">
                     <a id="modalActivate" class="nav-link" data-toggle="modal" data-target="#studios">
