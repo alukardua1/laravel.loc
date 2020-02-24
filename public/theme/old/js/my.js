@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) by anime-free
+ * Date: 2020.
+ * User: Alukardua
+ */
+
 $("#carousel").owlCarousel({loop: true, items: 1, nav: false, dots: false, autoplay: true});
 
 $(document).ready(function() {
@@ -29,5 +35,9 @@ $(function () {
 $(function () {
     $('[data-toggle="popover"]').popover()
 });
+
+// $(function () {
+// $("#comment-text")
+// })
 
 new WOW().init();

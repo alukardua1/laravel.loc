@@ -30,18 +30,24 @@ class CommentsRepository implements CommentsRepositoryInterface
             ->with('getUser')
             ->get();
 
-        $result->transform(function ($comment) use ($result) {
-            // Добавляем к каждому комментарию дочерние комментарии.
-            $comment->children = $result->where('parent_comment_id', $comment->id);
+        $result->transform(
+            function ($comment) use ($result) {
+                // Добавляем к каждому комментарию дочерние комментарии.
+                $comment
+                    ->children = $result
+                    ->where('parent_comment_id', $comment->id);
 
-            return $comment;
-        });
+                return $comment;
+            }
+        );
 
 // Удаляем из коллекции комментарии у которых есть родители.
-        $result = $result->reject(function ($comment) {
-
-            return $comment->parent_comment_id !== 0;
-        });
+        $result = $result->reject(
+            function ($comment) {
+                return $comment
+                        ->parent_comment_id !== 0;
+            }
+        );
 
         return $result;
     }
@@ -53,9 +59,8 @@ class CommentsRepository implements CommentsRepositoryInterface
      */
     public function countComments($id)
     {
-       return Comment::where('anime_id', '=', $id)
-           ->with('getAnime')
-           ->count();
+        return Comment::where('anime_id', '=', $id)
+            ->count();
     }
 
     /**
@@ -77,8 +82,10 @@ class CommentsRepository implements CommentsRepositoryInterface
      */
     public function delComments($id)
     {
-        $deleteComment = Comment::where('id', $id)->first();
+        $deleteComment = Comment::where('id', $id)
+            ->first();
 
-        return $deleteComment->delete();
+        return $deleteComment
+            ->delete();
     }
 }

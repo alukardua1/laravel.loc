@@ -230,7 +230,7 @@
 <script src="{{ asset('theme/'.$theme.'/js/owl.carousel.js') }}" defer></script>
 <script src="{{ asset('theme/'.$theme.'/js/chosen.jquery.js') }}" defer></script>
 <script src="{{ asset('theme/'.$theme.'/js/my.js') }}" defer></script>
-<script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
-<script src="https://yastatic.net/share2/share.js"></script>
+{{--<script src="{{ asset('theme/'.$theme.'/js/tinymce/tinymce.min.js') }}"></script>
+<script>tinymce.init({selector: 'textarea'});</script>--}}
 </body>
 </html>
