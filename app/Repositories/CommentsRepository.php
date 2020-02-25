@@ -82,10 +82,16 @@ class CommentsRepository implements CommentsRepositoryInterface
      */
     public function delComments($id)
     {
+        $deleteComment = Comment::where('parent_comment_id', $id)->get();
+
+        foreach ($deleteComment as $comm)
+        {
+            $comm->delete();
+        }
+
         $deleteComment = Comment::where('id', $id)
             ->first();
 
-        return $deleteComment
-            ->delete();
+        return $deleteComment->delete();
     }
 }

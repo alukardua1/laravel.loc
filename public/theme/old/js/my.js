@@ -36,8 +36,4 @@ $(function () {
     $('[data-toggle="popover"]').popover()
 });
 
-// $(function () {
-// $("#comment-text")
-// })
-
 new WOW().init();
