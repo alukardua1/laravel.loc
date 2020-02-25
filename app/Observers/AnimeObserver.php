@@ -7,8 +7,8 @@
 
 namespace App\Observers;
 
-use App\Helpers\FunctionsHelpers;
 use App\Models\Anime;
+use App\Traits\FunctionsHelpers;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;

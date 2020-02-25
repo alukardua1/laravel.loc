@@ -53,7 +53,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12 md-form">
-            {{Form::textarea('signature', old((string)$profile->signature), ['id'=>'signature', 'rows'=>'3', 'class'=>'md-textarea form-control'])}}
+            {{Form::textarea('signature', (string)$profile->signature, ['id'=>'signature', 'rows'=>'3', 'class'=>'md-textarea form-control'])}}
             {{ Form::label('signature', 'Подпись',['class'=>'title-info']) }}
         </div>
     </div>

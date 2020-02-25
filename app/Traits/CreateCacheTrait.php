@@ -5,7 +5,7 @@
  * User: Alukardua
  */
 
-namespace App\Helpers;
+namespace App\Traits;
 
 
 use Cache;

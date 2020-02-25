@@ -136,6 +136,17 @@
                             </ul>
                         </div>
                     </li>
+                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-eye"></i> Статические страницы
+                            <i class="fas fa-angle-down rotate-icon"></i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#" class="waves-effect">Редактировать</a>
+                                </li>
+                                <li><a href="#" class="waves-effect">Добавить</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </li>
             <!--/. Side navigation links -->

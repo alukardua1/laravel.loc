@@ -7,13 +7,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\CreateCacheTrait;
-use App\Helpers\FunctionsHelpers;
 use App\Repositories\CategoryRepository;
 use App\Repositories\CountryRepository;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CountryRepositoryInterface;
 use App\Repositories\Interfaces\CustomRepositoryInterface;
+use App\Traits\CreateCacheTrait;
+use App\Traits\FunctionsHelpers;
 use Cache;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -31,34 +31,67 @@ use View;
 class Controller extends BaseController
 {
     /**
+     * Текущая тема шаблона
      * @var mixed
      */
     protected static $theme;
+
     /**
+     * Ограничение по возрасту
      * @var array $kind
      */
     private static $kind;
+
     /**
+     * Пагинация
      * @var int $paginate
      */
     protected static $paginate;
 
     /**
+     * Вывод категорий на сайте
      * @var array $globalCategory
      */
     private static $globalCategory;
 
     /**
-     * @var Application|mixed
+     * Вывод карусели
+     * @var mixed
+     */
+    protected static $carouselAnime;
+
+    /**
+     * Название сайта
+     * @var \Illuminate\Config\Repository|mixed
+     */
+    protected static $nameSite;
+
+    /**
+     * Вывод года
+     * @var array
+     */
+    protected static $yearCustom;
+
+    /**
+     * Вывод тип
+     * @var array
+     */
+    protected static $tip;
+
+    /**
+     * Кустом репозиторий
+     * @var \Illuminate\Contracts\Foundation\Application|mixed
      */
     protected static $customRepository;
 
     /**
+     * Репозиторий категорий
      * @var CategoryRepository|Application|mixed
      */
     protected static $categoryRepository;
 
     /**
+     * Репозиторий стран
      * @var CountryRepository|Application|mixed
      */
     protected static $countryRepository;
@@ -89,14 +122,14 @@ class Controller extends BaseController
             $year = self::setCache('aired_season', self::$customRepository->getCustom('aired_season')->get());
         }
         if (Cache::has('tip')) {
-            $tip = Cache::get('tip');
+            self::$tip = Cache::get('tip');
         } else {
-            $tip = self::setCache('tip', self::$customRepository->getCustom('tip')->get());
+            self::$tip = self::setCache('tip', self::$customRepository->getCustom('tip')->get());
         }
         if (Cache::has('ongoing')) {
-            $carouselAnime = Cache::get('ongoing');
+            self::$carouselAnime = Cache::get('ongoing');
         } else {
-            $carouselAnime = self::setCache(
+            self::$carouselAnime = self::setCache(
                 'ongoing',
                 self::$customRepository->getCustom('*', 'released', 'ongoing')->get()
             );
@@ -105,19 +138,21 @@ class Controller extends BaseController
         self::$paginate = config('appSecondConfig.paginate');
         self::$theme = config('appSecondConfig.theme');
         self::$kind = FunctionsHelpers::$arrRating;
-        $nameSite = config('appSecondConfig.nameSite');
+        self::$nameSite = config('appSecondConfig.nameSite');
+        self::$yearCustom = self::customArr($year, 'aired_season');
+        self::$tip = self::customArr(self::$tip, 'tip');
 
         View::share(
             [
                 'categoryAll'   => self::$globalCategory,
-                'carouselAnime' => $carouselAnime,
-                'yearCustom'    => $this->customArr($year, 'aired_season'),
+                'carouselAnime' => self::$carouselAnime,
+                'yearCustom'    => self::$yearCustom,
                 'tipRu'         => FunctionsHelpers::$arrTip,
                 'tipFullRu'     => FunctionsHelpers::$arrFullTip,
-                'tip'           => $this->customArr($tip, 'tip'),
+                'tip'           => self::$tip,
                 'theme'         => self::$theme,
                 'kind'          => self::$kind,
-                'nameSite'      => $nameSite,
+                'nameSite'      => self::$nameSite,
             ]
         );
     }
@@ -130,7 +165,7 @@ class Controller extends BaseController
      *
      * @return array
      */
-    private function customArr($arr, $keys): array
+    private static function customArr($arr, $keys): array
     {
         $result = [];
         foreach ($arr as $key => $value) {

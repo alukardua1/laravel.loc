@@ -9,9 +9,6 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use Cache;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 /**
  * Class CategoryController

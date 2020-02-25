@@ -8,11 +8,10 @@
 namespace App\Http\Controllers\Main;
 
 
-use App\Helpers\CreateCacheTrait;
-use App\Helpers\FunctionsHelpers;
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Repositories\Interfaces\CommentsRepositoryInterface;
+use App\Traits\CreateCacheTrait;
 use Cache;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
@@ -29,7 +28,6 @@ use Illuminate\View\View;
 class AnimeController extends Controller
 {
     use CreateCacheTrait;
-    use FunctionsHelpers;
     /**
      * @var AnimeRepositoryInterface
      */
@@ -42,7 +40,7 @@ class AnimeController extends Controller
     /**
      * AnimeController constructor.
      *
-     * @param  \App\Repositories\Interfaces\AnimeRepositoryInterface     $animeRepository
+     * @param  \App\Repositories\Interfaces\AnimeRepositoryInterface  $animeRepository
      * @param  \App\Repositories\Interfaces\CommentsRepositoryInterface  $commentsRepository
      */
     public function __construct(
@@ -77,16 +75,13 @@ class AnimeController extends Controller
     {
         $uri = explode('-', $urlAnime);
         $stringUrl = preg_split("/[0-9]+-/", $urlAnime);
-
-        $animePost = $this->getCache('anime_'.$uri[0], self::$animeRepository->getAnime($uri[0])->first());
-
-        $comments = $this->getCache('animeComments_'.$uri[0], self::$commentsRepository->getComments($uri[0]));
-
-        $commentsCount = $this->getCache('animeCommentsCount_'.$uri[0], self::$commentsRepository->countComments($uri[0]));
-
-        $animePost->day = self::deliveryTime($animePost->delivery_time);
-
-        $animePost->seasons = self::airedSeason($animePost->aired_on);
+        $animePost = self::getCache('anime_'.$uri[0], self::$animeRepository->getAnime($uri[0])->first());
+        $comments = self::getCache('animeComments_'.$uri[0], self::$commentsRepository->getComments($uri[0]));
+        $commentsCount = self::getCache(
+            'animeCommentsCount_'.$uri[0],
+            self::$commentsRepository->countComments($uri[0])
+        );
+        $animePost = self::currentRefactoring($animePost);
 
         if (empty($animePost)) {
             return abort(404);
@@ -100,12 +95,29 @@ class AnimeController extends Controller
     }
 
     /**
+     * Внесение дополнительного в пост
+     *
+     * @param $anime
+     *
+     * @return mixed
+     */
+    private static function currentRefactoring($anime)
+    {
+        $anime->day = self::deliveryTime($anime->delivery_time);
+        $anime->seasons = self::airedSeason($anime->aired_on);
+
+        return $anime;
+    }
+
+    /**
+     * Проверка наличия кэша страницы на сайте
+     *
      * @param $key
      * @param $value
      *
      * @return mixed
      */
-    private function getCache($key, $value)
+    private static function getCache($key, $value)
     {
         if (Cache::has($key)) {
             return Cache::get($key);

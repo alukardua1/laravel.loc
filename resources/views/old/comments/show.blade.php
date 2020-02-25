@@ -22,7 +22,7 @@
                 </strong>
             @endif
         </p>
-        <p class="note note-light">{{$comment->content}}</p>
+        <p class="z-depth-1 note note-light">{{$comment->content}}</p>
         @if($comment->getUser->signature)
             <p class="note note-info">{{$comment->getUser->signature}}</p>
         @endif
