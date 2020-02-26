@@ -12,8 +12,6 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Repositories\Interfaces\CommentsRepositoryInterface;
 use App\Traits\CreateCacheTrait;
-use App\Traits\FunctionsHelpers;
-use Cache;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
