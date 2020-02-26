@@ -66,7 +66,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
-     * @param string $url Url category
+     * @param  string  $url  Url category
      *
      * @return mixed|void
      */

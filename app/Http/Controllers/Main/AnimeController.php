@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Repositories\Interfaces\CommentsRepositoryInterface;
 use App\Traits\CreateCacheTrait;
+use App\Traits\FunctionsHelpers;
 use Cache;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
@@ -28,6 +29,7 @@ use Illuminate\View\View;
 class AnimeController extends Controller
 {
     use CreateCacheTrait;
+
     /**
      * @var AnimeRepositoryInterface
      */
@@ -40,7 +42,7 @@ class AnimeController extends Controller
     /**
      * AnimeController constructor.
      *
-     * @param  \App\Repositories\Interfaces\AnimeRepositoryInterface  $animeRepository
+     * @param  \App\Repositories\Interfaces\AnimeRepositoryInterface     $animeRepository
      * @param  \App\Repositories\Interfaces\CommentsRepositoryInterface  $commentsRepository
      */
     public function __construct(
@@ -92,38 +94,6 @@ class AnimeController extends Controller
         }
 
         return view(self::$theme.'/full_anime', compact('animePost', 'comments', 'commentsCount'));
-    }
-
-    /**
-     * Внесение дополнительного в пост
-     *
-     * @param $anime
-     *
-     * @return mixed
-     */
-    private static function currentRefactoring($anime)
-    {
-        $anime->day = self::deliveryTime($anime->delivery_time);
-        $anime->seasons = self::airedSeason($anime->aired_on);
-
-        return $anime;
-    }
-
-    /**
-     * Проверка наличия кэша страницы на сайте
-     *
-     * @param $key
-     * @param $value
-     *
-     * @return mixed
-     */
-    private static function getCache($key, $value)
-    {
-        if (Cache::has($key)) {
-            return Cache::get($key);
-        }
-
-        return self::setCache($key, $value);
     }
 
     /**

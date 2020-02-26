@@ -14,6 +14,7 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * Class User
+ *
  * @package App\Models
  */
 class User extends Authenticatable
@@ -26,7 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'login', 'signature', 'country_id', 'photo', 'allow_email'
+        'name', 'email', 'password', 'login', 'signature', 'country_id', 'photo', 'allow_email',
     ];
 
     /**

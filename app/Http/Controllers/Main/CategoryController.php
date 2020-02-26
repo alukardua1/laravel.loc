@@ -31,16 +31,8 @@ class CategoryController extends Controller
             ->getCategory($url)
             ->paginate(self::$paginate);
 
-        if (Cache::has('categories')) {
-            $categories = Cache::get('categories');
-        } else {
-            $categories = self::setCache(
-                'categories',
-                self::$categoryRepository
-                    ->getCategory($url)
-                    ->getParent()
-            );
-        }
+        $categories = self::getCache('categories', self::$categoryRepository->getCategory($url)->getParent());
+
         if (empty($animePost)) {
             return abort(404);
         }

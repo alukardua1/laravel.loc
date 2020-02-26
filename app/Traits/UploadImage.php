@@ -5,12 +5,6 @@
  * User: Alukardua
  */
 
-/**
- * Created by PhpStorm
- * User: alukardua
- * Date: 08.02.2020
- */
-
 namespace App\Traits;
 
 

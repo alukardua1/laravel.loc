@@ -48,14 +48,8 @@ class UserController extends Controller
      */
     public function view($userUrl)
     {
-        if (Cache::has('user_'.$userUrl)) {
-            $profile = Cache::get('user_'.$userUrl);
-        } else {
-            $profile = self::setCache('user_'.$userUrl, self::$userRepository->getUsers($userUrl));
-        }
-
+        $profile = self::isCache('user_'.$userUrl, self::$userRepository->getUsers($userUrl));
         $countryArray = $this->loadCountryTimeZone()['countryArray'];
-
         $tz = $this->loadCountryTimeZone()['timeZone'];
 
         if (empty($profile)) {

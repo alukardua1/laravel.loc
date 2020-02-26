@@ -17,10 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     protected $fillable = [
-        'user_id',
-        'anime_id',
-        'parent_comment_id',
-        'content'
+        'user_id', 'anime_id', 'parent_comment_id', 'content',
     ];
 
     /**

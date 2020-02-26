@@ -32,66 +32,77 @@ class Controller extends BaseController
 {
     /**
      * Текущая тема шаблона
-     * @var mixed
+     *
+     * @var string $theme
      */
     protected static $theme;
 
     /**
      * Ограничение по возрасту
+     *
      * @var array $kind
      */
     private static $kind;
 
     /**
      * Пагинация
+     *
      * @var int $paginate
      */
     protected static $paginate;
 
     /**
      * Вывод категорий на сайте
+     *
      * @var array $globalCategory
      */
     private static $globalCategory;
 
     /**
      * Вывод карусели
-     * @var mixed
+     *
+     * @var mixed $carouselAnime
      */
     protected static $carouselAnime;
 
     /**
      * Название сайта
-     * @var \Illuminate\Config\Repository|mixed
+     *
+     * @var string $nameSite
      */
     protected static $nameSite;
 
     /**
      * Вывод года
-     * @var array
+     *
+     * @var array $yearCustom
      */
     protected static $yearCustom;
 
     /**
      * Вывод тип
-     * @var array
+     *
+     * @var array $tipCustom
      */
-    protected static $tip;
+    protected static $tipCustom;
 
     /**
      * Кустом репозиторий
+     *
      * @var \Illuminate\Contracts\Foundation\Application|mixed
      */
     protected static $customRepository;
 
     /**
      * Репозиторий категорий
+     *
      * @var CategoryRepository|Application|mixed
      */
     protected static $categoryRepository;
 
     /**
      * Репозиторий стран
+     *
      * @var CountryRepository|Application|mixed
      */
     protected static $countryRepository;
@@ -111,70 +122,33 @@ class Controller extends BaseController
         self::$categoryRepository = app(CategoryRepositoryInterface::class);
         self::$countryRepository = app(CountryRepositoryInterface::class);
 
-        if (Cache::has('globalCategory')) {
-            self::$globalCategory = Cache::get('globalCategory');
-        } else {
-            self::$globalCategory = self::setCache('globalCategory', self::$categoryRepository->getCategory()->get());
-        }
-        if (Cache::has('aired_season')) {
-            $year = Cache::get('aired_season');
-        } else {
-            $year = self::setCache('aired_season', self::$customRepository->getCustom('aired_season')->get());
-        }
-        if (Cache::has('tip')) {
-            self::$tip = Cache::get('tip');
-        } else {
-            self::$tip = self::setCache('tip', self::$customRepository->getCustom('tip')->get());
-        }
-        if (Cache::has('ongoing')) {
-            self::$carouselAnime = Cache::get('ongoing');
-        } else {
-            self::$carouselAnime = self::setCache(
-                'ongoing',
-                self::$customRepository->getCustom('*', 'released', 'ongoing')->get()
-            );
-        }
+        self::$globalCategory = self::getCache('globalCategory', self::$categoryRepository->getCategory()->get());
+        self::$yearCustom = self::getCache('aired_season', self::$customRepository->getCustom('aired_season')->get());
+        self::$tipCustom = self::getCache('tip', self::$customRepository->getCustom('tip')->get());
+        self::$carouselAnime = self::getCache(
+            'ongoing',
+            self::$customRepository->getCustom('*', 'released', 'ongoing')->get()
+        );
 
         self::$paginate = config('appSecondConfig.paginate');
         self::$theme = config('appSecondConfig.theme');
         self::$kind = FunctionsHelpers::$arrRating;
         self::$nameSite = config('appSecondConfig.nameSite');
-        self::$yearCustom = self::customArr($year, 'aired_season');
-        self::$tip = self::customArr(self::$tip, 'tip');
+        self::$yearCustom = self::customArr(self::$yearCustom, 'aired_season');
+        self::$tipCustom = self::customArr(self::$tipCustom, 'tip');
 
         View::share(
             [
-                'categoryAll'   => self::$globalCategory,
+                'categoryAll' => self::$globalCategory,
                 'carouselAnime' => self::$carouselAnime,
-                'yearCustom'    => self::$yearCustom,
-                'tipRu'         => FunctionsHelpers::$arrTip,
-                'tipFullRu'     => FunctionsHelpers::$arrFullTip,
-                'tip'           => self::$tip,
-                'theme'         => self::$theme,
-                'kind'          => self::$kind,
-                'nameSite'      => self::$nameSite,
+                'yearCustom' => self::$yearCustom,
+                'tipRu' => FunctionsHelpers::$arrTip,
+                'tipFullRu' => FunctionsHelpers::$arrFullTip,
+                'tip' => self::$tipCustom,
+                'theme' => self::$theme,
+                'kind' => self::$kind,
+                'nameSite' => self::$nameSite,
             ]
         );
-    }
-
-    /**
-     * Обрабатывает поля для глобальных кустом
-     *
-     * @param  array   $arr
-     * @param  string  $keys
-     *
-     * @return array
-     */
-    private static function customArr($arr, $keys): array
-    {
-        $result = [];
-        foreach ($arr as $key => $value) {
-            $result[] = $value[$keys];
-        }
-        $result = array_count_values($result);
-
-        krsort($result);
-
-        return $result;
     }
 }

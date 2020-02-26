@@ -20,10 +20,9 @@ class TranslateRepository implements TranslateRepositoryInterface
 {
     public function getTranslate($id = null)
     {
-        if ($id)
-        {
+        if ($id) {
             return abort(404);
-        }else{
+        } else {
             return Translate::all();
         }
     }

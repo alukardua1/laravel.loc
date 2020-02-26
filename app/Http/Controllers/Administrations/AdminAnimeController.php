@@ -7,15 +7,13 @@
 
 namespace App\Http\Controllers\Administrations;
 
-use App\Helpers\FunctionsHelpers;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CountryRepositoryInterface;
 use App\Repositories\Interfaces\TranslateRepositoryInterface;
-use Illuminate\Contracts\View\Factory;
+use App\Traits\FunctionsHelpers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 /**
  * Class AdminAnimeController
@@ -91,8 +89,8 @@ class AdminAnimeController extends AdminBaseController
      * @var array $rating
      * @var mixed $category
      * @var mixed $animePost
-     * @uses \App\Helpers\FunctionsHelpers::$arrTip
-     * @uses \App\Helpers\FunctionsHelpers::$arrRatings
+     * @uses FunctionsHelpers::$arrTip
+     * @uses FunctionsHelpers::$arrRatings
      * @uses \App\Repositories\CategoryRepository
      * @uses \App\Repositories\AnimeRepository
      *
@@ -117,11 +115,11 @@ class AdminAnimeController extends AdminBaseController
      * @var mixed $category
      * @var mixed $animePost
      * @var array $tip
-     * @uses \App\Helpers\FunctionsHelpers::$arrRatings
+     * @uses FunctionsHelpers::$arrRatings
      * @uses \App\Repositories\CategoryRepository
      * @uses \App\Repositories\AnimeRepository
+     * @uses FunctionsHelpers::$arrTip
      *
-     * @uses \App\Helpers\FunctionsHelpers::$arrTip
      */
     public function create()
     {

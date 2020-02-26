@@ -14,56 +14,48 @@
     <link href="{{ asset('theme/'.$theme.'/css/style.css') }}" rel="stylesheet">
 </head>
 <body>
-<div class="container-fluid">
-    <header class="mb-3 sticky-top">
-        <nav class="navbar navbar-expand-lg navbar-dark rgba-black-strong">
-            <a class="navbar-brand" href="/">{{config('appSecondConfig.nameSite')}}</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="basicExampleNav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                </ul>
-                <form class="form-inline">
-                    <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    </div>
-                </form>
-            </div>
-        </nav>
-    </header>
-    <main class="container">
-        <div class="row">
-            @yield('content')
+<header>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark black">
+        <a class="navbar-brand" href="{{route('home')}}">@yield('title')</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+            </ul>
+            {{--<form class="form-inline">
+                <div class="md-form my-0">
+                    <input class="form-control mr-sm-2" type="search" id="story" name="story" placeholder="Поиск по сайту..." aria-label="Поиск по сайту...">
+                </div>
+            </form>--}}
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item avatar dropdown">
+                    @include($theme.'.modules.login')
+                </li>
+            </ul>
         </div>
-    </main>
-    <footer>
+    </nav>
+</header>
+<main>
 
-    </footer>
-</div>
-<script src="{{ asset('theme/'.$theme.'/js/app.js') }}"></script>
+</main>
+<footer>
+
+</footer>
 <script src="{{ asset('theme/'.$theme.'/js/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ asset('theme/'.$theme.'/js/app.js') }}"></script>
 <script src="{{ asset('theme/'.$theme.'/js/popper.min.js') }}"></script>
 <script src="{{ asset('theme/'.$theme.'/js/mdb.min.js') }}"></script>
 </body>

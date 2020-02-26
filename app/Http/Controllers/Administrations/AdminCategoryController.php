@@ -91,8 +91,7 @@ class AdminCategoryController extends AdminBaseController
     public function delete($url): RedirectResponse
     {
         $deleteCategory = self::$categoryRepository->delCategory($url);
-        if ($deleteCategory)
-        {
+        if ($deleteCategory) {
             return redirect()->route('admin.category');
         }
 

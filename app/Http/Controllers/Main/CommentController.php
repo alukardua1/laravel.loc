@@ -42,8 +42,7 @@ class CommentController extends Controller
     public function addComments(Request $request)
     {
         $comment = self::$commentRepository->setComments($request);
-        if ($comment)
-        {
+        if ($comment) {
             return redirect()->back();
         }
         return view(self::$theme.'/errors.error')->withErrors(['msg' => 'Ошибка добавления комментария']);
@@ -57,8 +56,7 @@ class CommentController extends Controller
     public function deleteComment($id)
     {
         $comment = self::$commentRepository->delComments($id);
-        if ($comment)
-        {
+        if ($comment) {
             return redirect()->back();
         }
         return view(self::$theme.'/errors.error')->withErrors(['msg' => 'Ошибка удаления комментария']);

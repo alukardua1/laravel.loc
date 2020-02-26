@@ -18,7 +18,7 @@ class IsAdmin
      *
      * @param  Request  $request
      * @param  Closure  $next
-     * @param  array  $group
+     * @param  array    $group
      *
      * @return mixed
      */

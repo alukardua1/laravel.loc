@@ -75,14 +75,12 @@ class AnimeRepository implements AnimeRepositoryInterface
         } else {
             $updateAnime = Anime::create($requestForm);
         }
-        if ($request->genre)
-        {
+        if ($request->genre) {
             $updateAnime->fill($request->except('genre'));
             $updateAnime->save();
             $updateAnime->getCategory()->sync($request->genre);
         }
-        if ($request->translate)
-        {
+        if ($request->translate) {
             $updateAnime->fill($request->except('translate'));
             $updateAnime->save();
             $updateAnime->getTranslate()->sync($request->translate);
