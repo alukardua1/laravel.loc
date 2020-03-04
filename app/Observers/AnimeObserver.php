@@ -37,7 +37,7 @@ class AnimeObserver
     /**
      * @param  Anime  $anime
      *
-     * @todo Не забыть сменить $anime->metatitle, $anime->description
+     * @todo Не забыть сменить $anime->metatitle, $anime->description, дописать вариант логов изменения поста
      */
     public function creating(Anime $anime)
     {
