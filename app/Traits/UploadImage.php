@@ -19,34 +19,50 @@ use Str;
  */
 trait UploadImage
 {
-    /**
-     * Загружает постер к записи
-     *
-     * @param $updateAnime
-     * @param $requestForm
-     *
-     * @return mixed
-     */
-    public function uploadImages($updateAnime, $requestForm)
-    {
-        if (file_exists('public/anime/'.$updateAnime->poster)) {
-            $requestForm = $this->deleteAvatar($updateAnime, $requestForm);
-        }
+	/**
+	 * @var string
+	 */
+	private static $imgColumns        = 'poster';
+	private static $patchImgPublic    = 'public/anime/';
+	private static $imgName           = 'poster_';
+	private static $patchImgStorage   = 'storage/anime/';
+	private static $imgPostDir        = 'anime/';
+	private static $watermarkImg      = 'admin/images/watermark.png';
+	private static $watermarkPosition = 'bottom-right';
+	private static $watermarkX        = 10;
+	private static $watermarkY        = 10;
+	private static $patchSeparator    = '/';
 
-        $Extension = $requestForm['poster']->getClientOriginalExtension();
-        $fileName = 'poster_'.$updateAnime->id.'.'.$Extension;
+	/**
+	 * Загружает постер к записи
+	 *
+	 * @param $updateAnime
+	 * @param $requestForm
+	 *
+	 * @return mixed
+	 */
+	public function uploadImages($updateAnime, $requestForm)
+	{
+		if (file_exists(self::$patchImgPublic.$updateAnime->poster)) {
+			$requestForm = $this->deleteAvatar($updateAnime, $requestForm);
+		}
 
-        Storage::putFileAs(
-            'public/anime/'.Str::slug($updateAnime->title).'/',
-            $requestForm['poster'],
-            $fileName
-        );
+		$Extension = $requestForm[self::$imgColumns]->getClientOriginalExtension();
+		$fileName = self::$imgName.$updateAnime->id.'.'.$Extension;
 
-        $requestForm['poster'] = 'anime/'.Str::slug($updateAnime->title).'/'.$fileName;
-        $img = Image::make('storage/anime/'.Str::slug($updateAnime->title).'/'.$fileName);
-        $img->insert('admin/images/watermark.png', 'bottom-right', 10, 10);
-        $img->save('storage/anime/'.Str::slug($updateAnime->title).'/'.$fileName);
+		Storage::putFileAs(
+			self::$patchImgPublic.Str::slug($updateAnime->title).self::$patchSeparator,
+			$requestForm[self::$imgColumns],
+			$fileName
+		);
 
-        return $requestForm;
-    }
+		$requestForm[self::$imgColumns] = self::$imgPostDir.Str::slug(
+				$updateAnime->title
+			).self::$patchSeparator.$fileName;
+		$img = Image::make(self::$patchImgStorage.Str::slug($updateAnime->title).self::$patchSeparator.$fileName);
+		$img->insert(self::$watermarkImg, self::$watermarkPosition, self::$watermarkX, self::$watermarkY);
+		$img->save(self::$patchImgStorage.Str::slug($updateAnime->title).self::$patchSeparator.$fileName);
+
+		return $requestForm;
+	}
 }

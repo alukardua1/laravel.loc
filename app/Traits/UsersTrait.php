@@ -9,6 +9,7 @@ namespace App\Traits;
 
 
 use Hash;
+use Lang;
 use Storage;
 
 /**
@@ -18,63 +19,71 @@ use Storage;
  */
 trait UsersTrait
 {
-    /**
-     * Загружает аватар в профиль
-     *
-     * @param  array  $updateUser   Current users
-     * @param  array  $requestForm  Request
-     *
-     * @return mixed Updated request
-     */
-    public function uploadAvatar($updateUser, $requestForm)
-    {
-        if (file_exists('public/avatars/'.$updateUser->photo)) {
-            $requestForm = $this->deleteAvatar($updateUser, $requestForm);
-        }
+	private static $avatarColumns  = 'photo';
+	private static $avatarName     = 'photo_';
+	private static $patchAvatar    = 'public/avatars/';
+	private static $patchSeparator = '/';
+	private static $oldPass        = 'old_password';
+	private static $currentPass    = 'password';
+	private static $newPass        = 'new_password';
 
-        $Extension = $requestForm['photo']->getClientOriginalExtension();
-        $fileName = 'photo_'.$updateUser->id.'.'.$Extension;
+	/**
+	 * Загружает аватар в профиль
+	 *
+	 * @param  array  $updateUser   Current users
+	 * @param  array  $requestForm  Request
+	 *
+	 * @return mixed Updated request
+	 */
+	public function uploadAvatar($updateUser, $requestForm)
+	{
+		if (file_exists(self::$patchAvatar.$updateUser->photo)) {
+			$requestForm = $this->deleteAvatar($updateUser, $requestForm);
+		}
 
-        Storage::putFileAs(
-            'public/avatars/'.$updateUser->login.'/',
-            $requestForm['photo'],
-            $fileName
-        );
+		$Extension = $requestForm[self::$avatarColumns]->getClientOriginalExtension();
+		$fileName = self::$avatarName.$updateUser->id.'.'.$Extension;
 
-        $requestForm['photo'] = $updateUser->login.'/'.$fileName;
+		Storage::putFileAs(
+			self::$patchAvatar.$updateUser->login.self::$patchSeparator,
+			$requestForm[self::$avatarColumns],
+			$fileName
+		);
 
-        return $requestForm;
-    }
+		$requestForm[self::$avatarColumns] = $updateUser->login.self::$patchSeparator.$fileName;
 
-    /**
-     * Удаляет текущий аватар
-     *
-     * @param  array  $updateUser   Current users
-     * @param  array  $requestForm  Request
-     *
-     * @return mixed|void Updated request
-     */
-    public function deleteAvatar($updateUser, $requestForm)
-    {
-        Storage::delete('public/avatars/'.$updateUser->photo);
-        $requestForm['photo'] = '';
+		return $requestForm;
+	}
 
-        return $requestForm;
-    }
+	/**
+	 * Удаляет текущий аватар
+	 *
+	 * @param  array  $updateUser   Current users
+	 * @param  array  $requestForm  Request
+	 *
+	 * @return mixed|void Updated request
+	 */
+	public function deleteAvatar($updateUser, $requestForm)
+	{
+		Storage::delete(self::$patchAvatar.$updateUser->photo);
+		$requestForm[self::$avatarColumns] = '';
 
-    /**
-     * Обновляет пароль
-     *
-     * @param  array  $updateUser   Current users
-     * @param  array  $requestForm  Request
-     *
-     * @return string
-     */
-    public function updatePasswords($updateUser, $requestForm): string
-    {
-        if (Hash::check($requestForm['old_password'], $updateUser['password'])) {
-            return $requestForm['password'] = Hash::make($requestForm['new_password']);
-        }
-        return back()->withErrors(['msg' => 'Введите правильный пароль'])->withInput();
-    }
+		return $requestForm;
+	}
+
+	/**
+	 * Обновляет пароль
+	 *
+	 * @param  array  $updateUser   Current users
+	 * @param  array  $requestForm  Request
+	 *
+	 * @return string
+	 */
+	public function updatePasswords($updateUser, $requestForm): string
+	{
+		if (Hash::check($requestForm[self::$oldPass], $updateUser[self::$currentPass])) {
+			return $requestForm[self::$currentPass] = Hash::make($requestForm[self::$newPass]);
+		}
+		return back()->withErrors(['msg' => Lang::get('errors.passError')])->withInput();
+	}
 }

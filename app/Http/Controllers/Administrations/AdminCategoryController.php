@@ -20,81 +20,81 @@ use Request;
  */
 class AdminCategoryController extends AdminBaseController
 {
-    /**
-     * @var CategoryRepositoryInterface
-     */
-    protected static $categoryRepository;
+	/**
+	 * @var CategoryRepositoryInterface
+	 */
+	protected static $categoryRepository;
 
-    /**
-     * AdminCategoryController constructor.
-     *
-     * @param  CategoryRepositoryInterface  $repository
-     */
-    public function __construct(CategoryRepositoryInterface $repository)
-    {
-        parent::__construct();
-        self::$categoryRepository = $repository;
-    }
+	/**
+	 * AdminCategoryController constructor.
+	 *
+	 * @param  CategoryRepositoryInterface  $repository
+	 */
+	public function __construct(CategoryRepositoryInterface $repository)
+	{
+		parent::__construct();
+		self::$categoryRepository = $repository;
+	}
 
-    /**
-     * @return Factory|View
-     */
-    public function index()
-    {
-        $category = self::$categoryRepository->getCategory()->paginate(self::$paginate);
+	/**
+	 * @return Factory|View
+	 */
+	public function index()
+	{
+		$category = self::$categoryRepository->getCategory()->paginate(self::$paginate);
 
-        return view('admin.category.index', compact('category'));
-    }
+		return view('admin.category.index', compact('category'));
+	}
 
-    /**
-     * @param $url
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function edit($url)
-    {
-        $category = self::$categoryRepository->getCategory($url, true)->first();
+	/**
+	 * @param $url
+	 *
+	 * @return Factory|View
+	 */
+	public function edit($url)
+	{
+		$category = self::$categoryRepository->getCategory($url, true)->first();
 
-        return view('admin.category.edit', compact('category'));
-    }
+		return view('admin.category.edit', compact('category'));
+	}
 
-    /**
-     * @param  \Request  $request
-     * @param            $url
-     */
-    public function update(Request $request, $url)
-    {
-        dd(__METHOD__, $request, $url);
-    }
+	/**
+	 * @param  Request  $request
+	 * @param            $url
+	 */
+	public function update(Request $request, $url)
+	{
+		dd(__METHOD__, $request, $url);
+	}
 
-    /**
-     *
-     */
-    public function create()
-    {
-        dd(__METHOD__);
-    }
+	/**
+	 *
+	 */
+	public function create()
+	{
+		dd(__METHOD__);
+	}
 
-    /**
-     * @param  \Request  $request
-     */
-    public function store(Request $request)
-    {
-        dd(__METHOD__, $request);
-    }
+	/**
+	 * @param  Request  $request
+	 */
+	public function store(Request $request)
+	{
+		dd(__METHOD__, $request);
+	}
 
-    /**
-     * @param $url
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function delete($url): RedirectResponse
-    {
-        $deleteCategory = self::$categoryRepository->delCategory($url);
-        if ($deleteCategory) {
-            return redirect()->route('admin.category');
-        }
+	/**
+	 * @param $url
+	 *
+	 * @return RedirectResponse
+	 */
+	public function delete($url): RedirectResponse
+	{
+		$deleteCategory = self::$categoryRepository->delCategory($url);
+		if ($deleteCategory) {
+			return redirect()->route('admin.category');
+		}
 
-        return back()->withErrors(['msg' => 'Ошибка удаления'])->withInput();
-    }
+		return back()->withErrors(['msg' => 'Ошибка удаления'])->withInput();
+	}
 }

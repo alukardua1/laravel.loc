@@ -18,16 +18,16 @@ use App\Repositories\Interfaces\CountryRepositoryInterface;
  */
 class CountryRepository implements CountryRepositoryInterface
 {
-    /**
-     * Выбирает все записи
-     *
-     * @param  array  $selectColumns
-     *
-     * @return mixed
-     */
-    public function getCountry($selectColumns)
-    {
-        return Country::select($selectColumns)
-            ->get();
-    }
+	/**
+	 * Выбирает все записи
+	 *
+	 * @param  array  $selectColumns
+	 *
+	 * @return mixed
+	 */
+	public function getCountry($selectColumns)
+	{
+		return Country::select($selectColumns)
+			->get();
+	}
 }

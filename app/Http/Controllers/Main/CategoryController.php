@@ -8,7 +8,8 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
-use Cache;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 /**
  * Class CategoryController
@@ -18,25 +19,25 @@ use Cache;
 class CategoryController extends Controller
 {
 
-    /**
-     * Выводит аниме по категориям
-     *
-     * @param $url
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
-     */
-    public function view($url)
-    {
-        $animePost = self::$categoryRepository
-            ->getCategory($url)
-            ->paginate(self::$paginate);
+	/**
+	 * Выводит аниме по категориям
+	 *
+	 * @param $url
+	 *
+	 * @return Factory|View|void
+	 */
+	public function view($url)
+	{
+		$animePost = self::$categoryRepository
+			->getCategory($url)
+			->paginate(self::$paginate);
 
-        $categories = self::getCache('categories', self::$categoryRepository->getCategory($url)->getParent());
+		$categories = self::getCache('categories', self::$categoryRepository->getCategory($url)->getParent());
 
-        if (empty($animePost)) {
-            return abort(404);
-        }
+		if (empty($animePost)) {
+			return abort(404);
+		}
 
-        return view(self::$theme.'/home', compact('animePost', 'categories'));
-    }
+		return view(self::$theme.'/home', compact('animePost', 'categories'));
+	}
 }

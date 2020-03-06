@@ -18,19 +18,19 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Category extends Model
 {
-    /**
-     * @return BelongsToMany
-     */
-    public function getAnime(): BelongsToMany
-    {
-        return $this->belongsToMany(Anime::class);
-    }
+	/**
+	 * @return BelongsToMany
+	 */
+	public function getAnime(): BelongsToMany
+	{
+		return $this->belongsToMany(Anime::class);
+	}
 
-    /**
-     * @return HasOne
-     */
-    public function getCategory(): HasOne
-    {
-        return $this->hasOne(__CLASS__, 'id', 'id');
-    }
+	/**
+	 * @return HasOne
+	 */
+	public function getCategory(): HasOne
+	{
+		return $this->hasOne(__CLASS__, 'id', 'id');
+	}
 }

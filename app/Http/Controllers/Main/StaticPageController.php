@@ -19,37 +19,37 @@ use Illuminate\View\View;
  */
 class StaticPageController extends Controller
 {
-    /**
-     * @var StaticPageRepositoryInterface
-     */
-    private static $staticPageRepository;
+	/**
+	 * @var StaticPageRepositoryInterface
+	 */
+	private static $staticPageRepository;
 
-    /**
-     * StaticPageController constructor.
-     *
-     * @param  StaticPageRepositoryInterface  $repository
-     */
-    public function __construct(StaticPageRepositoryInterface $repository)
-    {
-        parent::__construct();
-        self::$staticPageRepository = $repository;
-    }
+	/**
+	 * StaticPageController constructor.
+	 *
+	 * @param  StaticPageRepositoryInterface  $repository
+	 */
+	public function __construct(StaticPageRepositoryInterface $repository)
+	{
+		parent::__construct();
+		self::$staticPageRepository = $repository;
+	}
 
-    /**
-     * Выводит статическую страницу
-     *
-     * @param $url
-     *
-     * @return Factory|View
-     */
-    public function view($url)
-    {
-        if (\Cache::has('page_'.$url)) {
-            $staticPage = \Cache::get('page_'.$url);
-        } else {
-            $staticPage = self::setCache('page_'.$url, self::$staticPageRepository->getStaticPage($url));
-        }
+	/**
+	 * Выводит статическую страницу
+	 *
+	 * @param $url
+	 *
+	 * @return Factory|View
+	 */
+	public function view($url)
+	{
+		if (\Cache::has('page_'.$url)) {
+			$staticPage = \Cache::get('page_'.$url);
+		} else {
+			$staticPage = self::setCache('page_'.$url, self::$staticPageRepository->getStaticPage($url));
+		}
 
-        return view(self::$theme.'/staticPage', compact('staticPage'));
-    }
+		return view(self::$theme.'/staticPage', compact('staticPage'));
+	}
 }

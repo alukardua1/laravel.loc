@@ -13,23 +13,24 @@ use Illuminate\Support\Facades\Auth;
 
 class IsAdmin
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  Request  $request
-     * @param  Closure  $next
-     * @param  array    $group
-     *
-     * @return mixed
-     */
-    public function handle($request, Closure $next, ...$group)
-    {
-        foreach ($group as $value) {
-            if (Auth::user()->group_id == $value) {
-                return $next($request);
-            }
-        }
+	/**
+	 * Handle an incoming request.
+	 *
+	 * @param  Request  $request
+	 * @param  Closure  $next
+	 * @param  array    $group
+	 *
+	 * @var             $value
+	 * @return mixed
+	 */
+	public function handle($request, Closure $next, ...$group)
+	{
+		foreach ($group as $value) {
+			if (Auth::user()->group_id == $value) {
+				return $next($request);
+			}
+		}
 
-        return redirect('404');
-    }
+		return redirect('404');
+	}
 }

@@ -18,27 +18,27 @@ use App\Repositories\Interfaces\CustomRepositoryInterface;
  */
 class CustomRepository implements CustomRepositoryInterface
 {
-    /**
-     * Вывод по кустом полю
-     *
-     * @param  string  $select
-     * @param  null    $columns
-     * @param  null    $variable
-     *
-     * @return mixed
-     * @todo решить проблему с ошибкой колумнс
-     */
-    public function getCustom($select = '*', $columns = null, $variable = null)
-    {
-        if ($columns) {
-            return Anime::select($select)
-                ->with(['getCategory'])
-                ->where($columns, $variable)
-                ->where('posted_at', 1)
-                ->orderBy('created_at', 'DESC');
-        }
-        return Anime::select($select)
-            ->where('posted_at', 1)
-            ->orderBy('created_at', 'DESC');
-    }
+	/**
+	 * Вывод по кустом полю
+	 *
+	 * @param  string  $select
+	 * @param  null    $columns
+	 * @param  null    $variable
+	 *
+	 * @return mixed
+	 * @todo решить проблему с ошибкой колумнс
+	 */
+	public function getCustom($select = '*', $columns = null, $variable = null)
+	{
+		if ($columns) {
+			return Anime::select($select)
+				->with(['getCategory'])
+				->where($columns, $variable)
+				->where('posted_at', 1)
+				->orderBy('created_at', 'DESC');
+		}
+		return Anime::select($select)
+			->where('posted_at', 1)
+			->orderBy('created_at', 'DESC');
+	}
 }

@@ -217,7 +217,7 @@
                         <span class="title-info">Рейтинг:</span>
                     </div>
                     <div class="col-md-8">
-                        {!! $kind[$animePost->rating] !!}
+                        <span class="float-xl-right">{{$kind[$animePost->rating]}}</span>
                     </div>
                 </div>
                 <div class="row">

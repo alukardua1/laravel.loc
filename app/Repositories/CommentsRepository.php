@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 use App\Models\Comment;
 use App\Repositories\Interfaces\CommentsRepositoryInterface;
+use Exception;
 use Illuminate\Http\Request;
 
 /**
@@ -19,78 +20,78 @@ use Illuminate\Http\Request;
  */
 class CommentsRepository implements CommentsRepositoryInterface
 {
-    /**
-     * @param $id
-     *
-     * @return mixed|void
-     */
-    public function getComments($id)
-    {
-        $result = Comment::where('anime_id', '=', $id)
-            ->with('getUser')
-            ->get();
+	/**
+	 * @param $id
+	 *
+	 * @return mixed|void
+	 */
+	public function getComments($id)
+	{
+		$result = Comment::where('anime_id', '=', $id)
+			->with('getUser')
+			->get();
 
-        $result->transform(
-            function ($comment) use ($result) {
-                // Добавляем к каждому комментарию дочерние комментарии.
-                $comment
-                    ->children = $result
-                    ->where('parent_comment_id', $comment->id);
+		$result->transform(
+			function ($comment) use ($result) {
+				// Добавляем к каждому комментарию дочерние комментарии.
+				$comment
+					->children = $result
+					->where('parent_comment_id', $comment->id);
 
-                return $comment;
-            }
-        );
+				return $comment;
+			}
+		);
 
-// Удаляем из коллекции комментарии у которых есть родители.
-        $result = $result->reject(
-            function ($comment) {
-                return $comment
-                        ->parent_comment_id !== 0;
-            }
-        );
+		// Удаляем из коллекции комментарии у которых есть родители.
+		$result = $result->reject(
+			function ($comment) {
+				return $comment
+						->parent_comment_id !== 0;
+			}
+		);
 
-        return $result;
-    }
+		return $result;
+	}
 
-    /**
-     * @param $id
-     *
-     * @return mixed
-     */
-    public function countComments($id)
-    {
-        return Comment::where('anime_id', '=', $id)
-            ->count();
-    }
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
+	public function countComments($id)
+	{
+		return Comment::where('anime_id', '=', $id)
+			->count();
+	}
 
-    /**
-     * @param  \Illuminate\Http\Request  $request
-     * @param                            $id
-     *
-     * @return mixed|void
-     */
-    public function setComments(Request $request, $id = null)
-    {
-        return Comment::create($request->all());
-    }
+	/**
+	 * @param  Request  $request
+	 * @param           $id
+	 *
+	 * @return mixed|void
+	 */
+	public function setComments(Request $request, $id = null)
+	{
+		return Comment::create($request->all());
+	}
 
-    /**
-     * @param $id
-     *
-     * @return bool|mixed|null
-     * @throws \Exception
-     */
-    public function delComments($id)
-    {
-        $deleteComment = Comment::where('parent_comment_id', $id)->get();
+	/**
+	 * @param $id
+	 *
+	 * @throws Exception
+	 * @return bool|mixed|null
+	 */
+	public function delComments($id)
+	{
+		$deleteComment = Comment::where('parent_comment_id', $id)->get();
 
-        foreach ($deleteComment as $comm) {
-            $comm->delete();
-        }
+		foreach ($deleteComment as $comm) {
+			$comm->delete();
+		}
 
-        $deleteComment = Comment::where('id', $id)
-            ->first();
+		$deleteComment = Comment::where('id', $id)
+			->first();
 
-        return $deleteComment->delete();
-    }
+		return $deleteComment->delete();
+	}
 }

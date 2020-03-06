@@ -20,206 +20,149 @@ use IntlDateFormatter;
  */
 trait FunctionsHelpers
 {
-    /**
-     * Сокращенная версия массива с типами
-     *
-     * @var array $arrTip
-     */
-    public static $arrTip = [
-        'tv'      => 'ТВ',
-        'movie'   => 'Фильм',
-        'ova'     => 'OVA',
-        'ona'     => 'ONA',
-        'special' => 'Спешл',
-        'music'   => 'Клип',
-    ];
+	/**
+	 * Приставка для сезона
+	 *
+	 * @var array $arrMsg
+	 */
+	public static $arrMsg = [
+		1  => 'зима - ',
+		3  => 'весна - ',
+		6  => 'лето - ',
+		9  => 'осень - ',
+		12 => 'зима - ',
+	];
 
-    /**
-     * Расширенная версия массива с типами
-     *
-     * @var array $arrFullTip
-     */
-    public static $arrFullTip = [
-        'tv'      => 'Телевизионная версия',
-        'movie'   => 'Полнометражный фильм',
-        'ova'     => 'Original Video Anime',
-        'ona'     => 'Original Network Anime',
-        'special' => 'Специальный выпуск',
-        'music'   => 'Музыкальное видео',
-    ];
+	/**
+	 * Показывает время сеанса
+	 *
+	 * @var array $arrDay
+	 */
+	public static $arrDay = [
+		8  => '<span style="color: green; ">[утренний сеанс]</span>',
+		12 => '<span style="color: #146867; ">[дневной сеанс]</span>',
+		17 => '<span style="color: blue; ">[вечерний сеанс]</span>',
+		23 => '<span style="color: #990000; ">[ночной сеанс]</span>',
+	];
 
-    /**
-     * Массив данных для вывода рейтинга видео
-     *
-     * @var array $arrRating
-     */
-    public static $arrRating = [
-        ''      => '<span class="float-xl-right">Рейтинг не указан</span>',
-        'none'  => '<span class="float-xl-right">Рейтинг не указан</span>',
-        'G'     => '<span class="float-xl-right">"G" - Нет возрастных ограничений</span>',
-        'PG'    => '<span class="float-xl-right">"PG" - Рекомендуется присутствие родителей</span>',
-        'PG-13' => '<span class="float-xl-right">"PG-13" - Детям до 13 лет просмотр не желателен</span>',
-        'R-17'  => '<span class="float-xl-right">"R" - Лицам до 17 лет обязательно присутствие взрослого</span>',
-        'R+'    => '<span class="float-xl-right">"R+" - Лицам до 17 лет просмотр запрещен</span>',
-    ];
+	/**
+	 * Возвращает временные зоны
+	 *
+	 * @return array getTimeZone()
+	 */
+	public static function getTimeZone(): array
+	{
+		$timeZone = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+		$tz = [];
+		$i = 0;
+		foreach ($timeZone as $key => $value) {
+			$formatter = new IntlDateFormatter(
+				'ru_RU',
+				IntlDateFormatter::FULL,
+				IntlDateFormatter::FULL,
+				$value,
+				IntlDateFormatter::GREGORIAN,
+				'(ZZZZ) VVV'
+			);
+			$tz[$i++] = $formatter->format(0);
+		}
 
-    /**
-     * Массив данных для вывода рейтинга видео в админке
-     *
-     * @var array $arrRatings
-     */
-    public static $arrRatings = [
-        'none'  => 'Рейтинг не указан',
-        'G'     => '"G" - Нет возрастных ограничений',
-        'PG'    => '"PG" - Рекомендуется присутствие родителей',
-        'PG-13' => '"PG-13" - Детям до 13 лет просмотр не желателен',
-        'R-17'  => '"R" - Лицам до 17 лет обязательно присутствие взрослого',
-        'R+'    => '"R+" - Лицам до 17 лет просмотр запрещен',
-    ];
+		return $tz;
+	}
 
-    /**
-     * Приставка для сезона
-     *
-     * @var array $arrMsg
-     */
-    public static $arrMsg = [
-        1  => 'зима - ',
-        3  => 'весна - ',
-        6  => 'лето - ',
-        9  => 'осень - ',
-        12 => 'зима - ',
-    ];
+	/**
+	 * Формирует поле сезон выхода
+	 *
+	 * @param  string  $aired_on
+	 *
+	 * @var string     $seasons
+	 * @return string
+	 */
+	public static function airedSeason($aired_on): string
+	{
+		$seasons = '';
+		foreach (self::$arrMsg as $key => $value) {
+			if (Carbon::parse($aired_on)->format('m') >= $key) {
+				if (Carbon::parse($aired_on)->format('m') == 12) {
+					$year = Carbon::parse($aired_on)->format('Y') + 1;
+					$seasons = $value.$year;
+				} else {
+					$seasons = $value.Carbon::parse($aired_on)->format('Y');
+				}
+			}
+		}
+		return $seasons;
+	}
 
-    /**
-     * Показывает время сеанса
-     *
-     * @var array $arrDay
-     */
-    public static $arrDay = [
-        8  => '<span style="color: green; ">[утренний сеанс]</span>',
-        12 => '<span style="color: #146867; ">[дневной сеанс]</span>',
-        17 => '<span style="color: blue; ">[вечерний сеанс]</span>',
-        23 => '<span style="color: #990000; ">[ночной сеанс]</span>',
-    ];
+	/**
+	 * Формирует поле описания времени суток
+	 *
+	 * @param  string  $time
+	 *
+	 * @var string     $day
+	 * @return mixed|string
+	 */
+	public static function deliveryTime($time)
+	{
+		$day = '';
+		foreach (self::$arrDay as $key => $value) {
+			if ($time >= $key) {
+				$day = $value;
+			}
+		}
+		return $day;
+	}
 
-    /**
-     * Возвращает временные зоны
-     *
-     * @return array getTimeZone()
-     */
-    public static function getTimeZone(): array
-    {
-        $timeZone = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
-        $tz = [];
-        $i = 0;
-        foreach ($timeZone as $key => $value) {
-            $formatter = new IntlDateFormatter(
-                'ru_RU',
-                IntlDateFormatter::FULL,
-                IntlDateFormatter::FULL,
-                $value,
-                IntlDateFormatter::GREGORIAN,
-                '(ZZZZ) VVV'
-            );
-            $tz[$i++] = $formatter->format(0);
-        }
+	/**
+	 * Проверка наличия кэша страницы на сайте
+	 *
+	 * @param $key
+	 * @param $value
+	 *
+	 * @return mixed
+	 */
+	public static function getCache($key, $value)
+	{
+		if (Cache::has($key)) {
+			return Cache::get($key);
+		}
 
-        return $tz;
-    }
+		return self::setCache($key, $value);
+	}
 
-    /**
-     * Формирует поле сезон выхода
-     *
-     * @param  string  $aired_on
-     *
-     * @return string
-     * @var string     $seasons
-     */
-    public static function airedSeason($aired_on): string
-    {
-        $seasons = '';
-        foreach (self::$arrMsg as $key => $value) {
-            if (Carbon::parse($aired_on)->format('m') >= $key) {
-                if (Carbon::parse($aired_on)->format('m') == 12) {
-                    $year = Carbon::parse($aired_on)->format('Y') + 1;
-                    $seasons = $value.$year;
-                } else {
-                    $seasons = $value.Carbon::parse($aired_on)->format('Y');
-                }
-            }
-        }
-        return $seasons;
-    }
+	/**
+	 * Внесение дополнительного в пост
+	 *
+	 * @param $anime
+	 *
+	 * @return mixed
+	 */
+	public static function currentRefactoring($anime)
+	{
+		$anime->day = self::deliveryTime($anime->delivery_time);
+		$anime->seasons = self::airedSeason($anime->aired_on);
 
-    /**
-     * Формирует поле описания времени суток
-     *
-     * @param  string  $time
-     *
-     * @return mixed|string
-     * @var string     $day
-     */
-    public static function deliveryTime($time)
-    {
-        $day = '';
-        foreach (self::$arrDay as $key => $value) {
-            if ($time >= $key) {
-                $day = $value;
-            }
-        }
-        return $day;
-    }
+		return $anime;
+	}
 
-    /**
-     * Проверка наличия кэша страницы на сайте
-     *
-     * @param $key
-     * @param $value
-     *
-     * @return mixed
-     */
-    public static function getCache($key, $value)
-    {
-        if (Cache::has($key)) {
-            return Cache::get($key);
-        }
+	/**
+	 * Обрабатывает поля для глобальных кустом
+	 *
+	 * @param  array   $arr
+	 * @param  string  $keys
+	 *
+	 * @return array
+	 */
+	public static function customArr($arr, $keys): array
+	{
+		$result = [];
+		foreach ($arr as $key => $value) {
+			$result[] = $value[$keys];
+		}
+		$result = array_count_values($result);
 
-        return self::setCache($key, $value);
-    }
+		krsort($result);
 
-    /**
-     * Внесение дополнительного в пост
-     *
-     * @param $anime
-     *
-     * @return mixed
-     */
-    public static function currentRefactoring($anime)
-    {
-        $anime->day = self::deliveryTime($anime->delivery_time);
-        $anime->seasons = self::airedSeason($anime->aired_on);
-
-        return $anime;
-    }
-
-    /**
-     * Обрабатывает поля для глобальных кустом
-     *
-     * @param  array   $arr
-     * @param  string  $keys
-     *
-     * @return array
-     */
-    public static function customArr($arr, $keys): array
-    {
-        $result = [];
-        foreach ($arr as $key => $value) {
-            $result[] = $value[$keys];
-        }
-        $result = array_count_values($result);
-
-        krsort($result);
-
-        return $result;
-    }
+		return $result;
+	}
 }

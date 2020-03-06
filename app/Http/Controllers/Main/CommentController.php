@@ -9,7 +9,10 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\CommentsRepositoryInterface;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 /**
  * Class CommentController
@@ -18,47 +21,47 @@ use Illuminate\Http\Request;
  */
 class CommentController extends Controller
 {
-    /**
-     * @var \App\Repositories\Interfaces\CommentsRepositoryInterface
-     */
-    private static $commentRepository;
+	/**
+	 * @var CommentsRepositoryInterface
+	 */
+	private static $commentRepository;
 
-    /**
-     * CommentController constructor.
-     *
-     * @param  \App\Repositories\Interfaces\CommentsRepositoryInterface  $commentsRepository
-     */
-    public function __construct(CommentsRepositoryInterface $commentsRepository)
-    {
-        parent::__construct();
-        self::$commentRepository = $commentsRepository;
-    }
+	/**
+	 * CommentController constructor.
+	 *
+	 * @param  CommentsRepositoryInterface  $commentsRepository
+	 */
+	public function __construct(CommentsRepositoryInterface $commentsRepository)
+	{
+		parent::__construct();
+		self::$commentRepository = $commentsRepository;
+	}
 
-    /**
-     * @param  \Illuminate\Http\Request  $request
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
-     */
-    public function addComments(Request $request)
-    {
-        $comment = self::$commentRepository->setComments($request);
-        if ($comment) {
-            return redirect()->back();
-        }
-        return view(self::$theme.'/errors.error')->withErrors(['msg' => 'Ошибка добавления комментария']);
-    }
+	/**
+	 * @param  Request  $request
+	 *
+	 * @return Factory|RedirectResponse|View
+	 */
+	public function addComments(Request $request)
+	{
+		$comment = self::$commentRepository->setComments($request);
+		if ($comment) {
+			return redirect()->back();
+		}
+		return view(self::$theme.'/errors.error')->withErrors(['msg' => 'Ошибка добавления комментария']);
+	}
 
-    /**
-     * @param $id
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
-     */
-    public function deleteComment($id)
-    {
-        $comment = self::$commentRepository->delComments($id);
-        if ($comment) {
-            return redirect()->back();
-        }
-        return view(self::$theme.'/errors.error')->withErrors(['msg' => 'Ошибка удаления комментария']);
-    }
+	/**
+	 * @param $id
+	 *
+	 * @return Factory|RedirectResponse|View
+	 */
+	public function deleteComment($id)
+	{
+		$comment = self::$commentRepository->delComments($id);
+		if ($comment) {
+			return redirect()->back();
+		}
+		return view(self::$theme.'/errors.error')->withErrors(['msg' => 'Ошибка удаления комментария']);
+	}
 }

@@ -18,15 +18,15 @@ use App\Repositories\Interfaces\StaticPageRepositoryInterface;
  */
 class StaticPageRepository implements StaticPageRepositoryInterface
 {
-    /**
-     * Выводит текущую статическую страницу
-     *
-     * @param  mixed  $url
-     *
-     * @return mixed
-     */
-    public function getStaticPage($url)
-    {
-        return StaticPage::where('url', $url)->first();
-    }
+	/**
+	 * Выводит текущую статическую страницу
+	 *
+	 * @param  mixed  $url
+	 *
+	 * @return mixed
+	 */
+	public function getStaticPage($url)
+	{
+		return StaticPage::where('url', $url)->first();
+	}
 }

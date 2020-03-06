@@ -26,89 +26,89 @@ use Illuminate\View\View;
  */
 class AnimeController extends Controller
 {
-    use CreateCacheTrait;
+	use CreateCacheTrait;
 
-    /**
-     * @var AnimeRepositoryInterface
-     */
-    private static $animeRepository;
-    /**
-     * @var \App\Repositories\Interfaces\CommentsRepositoryInterface
-     */
-    private static $commentsRepository;
+	/**
+	 * @var AnimeRepositoryInterface
+	 */
+	private static $animeRepository;
+	/**
+	 * @var CommentsRepositoryInterface
+	 */
+	private static $commentsRepository;
 
-    /**
-     * AnimeController constructor.
-     *
-     * @param  \App\Repositories\Interfaces\AnimeRepositoryInterface     $animeRepository
-     * @param  \App\Repositories\Interfaces\CommentsRepositoryInterface  $commentsRepository
-     */
-    public function __construct(
-        AnimeRepositoryInterface $animeRepository,
-        CommentsRepositoryInterface $commentsRepository
-    ) {
-        parent::__construct();
-        self::$animeRepository = $animeRepository;
-        self::$commentsRepository = $commentsRepository;
-    }
+	/**
+	 * AnimeController constructor.
+	 *
+	 * @param  AnimeRepositoryInterface     $animeRepository
+	 * @param  CommentsRepositoryInterface  $commentsRepository
+	 */
+	public function __construct(
+		AnimeRepositoryInterface $animeRepository,
+		CommentsRepositoryInterface $commentsRepository
+	) {
+		parent::__construct();
+		self::$animeRepository = $animeRepository;
+		self::$commentsRepository = $commentsRepository;
+	}
 
-    /**
-     * Главная страница аниме
-     *
-     * @return Renderable
-     */
-    public function index(): Renderable
-    {
-        $animePost = self::$animeRepository->getAnime()->paginate(self::$paginate);
+	/**
+	 * Главная страница аниме
+	 *
+	 * @return Renderable
+	 */
+	public function index(): Renderable
+	{
+		$animePost = self::$animeRepository->getAnime()->paginate(self::$paginate);
 
-        return view(self::$theme.'/home', compact('animePost'));
-    }
+		return view(self::$theme.'/home', compact('animePost'));
+	}
 
-    /**
-     * Страница аниме поста
-     *
-     * @param $urlAnime
-     *
-     * @return Factory|RedirectResponse|Redirector|View|void
-     */
-    public function view($urlAnime)
-    {
-        $uri = explode('-', $urlAnime);
-        $stringUrl = preg_split("/[0-9]+-/", $urlAnime);
-        $animePost = self::getCache('anime_'.$uri[0], self::$animeRepository->getAnime($uri[0])->first());
-        $comments = self::getCache('animeComments_'.$uri[0], self::$commentsRepository->getComments($uri[0]));
-        $commentsCount = self::getCache(
-            'animeCommentsCount_'.$uri[0],
-            self::$commentsRepository->countComments($uri[0])
-        );
-        $animePost = self::currentRefactoring($animePost);
+	/**
+	 * Страница аниме поста
+	 *
+	 * @param $urlAnime
+	 *
+	 * @return Factory|RedirectResponse|Redirector|View|void
+	 */
+	public function view($urlAnime)
+	{
+		$uri = explode('-', $urlAnime);
+		$stringUrl = preg_split("/[0-9]+-/", $urlAnime);
+		$animePost = self::getCache('anime_'.$uri[0], self::$animeRepository->getAnime($uri[0])->first());
+		$comments = self::getCache('animeComments_'.$uri[0], self::$commentsRepository->getComments($uri[0]));
+		$commentsCount = self::getCache(
+			'animeCommentsCount_'.$uri[0],
+			self::$commentsRepository->countComments($uri[0])
+		);
+		$animePost = self::currentRefactoring($animePost);
 
-        if (empty($animePost)) {
-            return abort(404);
-        }
+		if (empty($animePost)) {
+			return abort(404);
+		}
 
-        if ($stringUrl[1] != $animePost->url) {
-            return redirect('/anime/'.$animePost->id.'-'.$animePost->url);
-        }
+		if ($stringUrl[1] != $animePost->url) {
+			return redirect('/anime/'.$animePost->id.'-'.$animePost->url);
+		}
 
-        return view(self::$theme.'/full_anime', compact('animePost', 'comments', 'commentsCount'));
-    }
+		return view(self::$theme.'/full_anime', compact('animePost', 'comments', 'commentsCount'));
+	}
 
-    /**
-     * Поиск по сайту
-     *
-     * @param  Request  $request
-     *
-     * @return Factory|View
-     */
-    public function search(Request $request)
-    {
-        $animePost = self::$animeRepository->getSearch($request)->paginate(self::$paginate);
+	/**
+	 * Поиск по сайту
+	 *
+	 * @param  Request  $request
+	 *
+	 * @return Factory|View
+	 */
+	public function search(Request $request)
+	{
+		$animePost = self::$animeRepository->getSearch($request)->paginate(self::$paginate);
 
-        if (empty($animePost)) {
-            return view(self::$theme.'/errors.error')->withErrors(['msg' => 'Ничего не найдено']);
-        }
+		if (empty($animePost)) {
+			return view(self::$theme.'/errors.error')->withErrors(['msg' => 'Ничего не найдено']);
+		}
 
-        return view(self::$theme.'/home', compact('animePost'));
-    }
+		return view(self::$theme.'/home', compact('animePost'));
+	}
 }

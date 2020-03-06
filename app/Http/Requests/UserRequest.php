@@ -8,6 +8,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Lang;
 
 /**
  * Class UserRequest
@@ -46,16 +47,16 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-            'old_password.regex'         => 'Недопустимый формат нового пароля..',
-            'old_password.between'       => 'Старый пароль должен содержать от :min до :max символов..',
-            'new_password.regex'         => 'Недопустимый формат нового пароля..',
-            'new_password.same'          => 'Новый пароль и пароль подтверждения должны совпадать..',
-            'new_password.different'     => 'Новый пароль и старый пароль должны отличаться..',
-            'new_password.between'       => 'Новый пароль должен содержать от :min до :max символов..',
-            'confirm_password.regex'     => 'Недопустимый формат подтверждения пароля..',
-            'confirm_password.same'      => 'Пароль подтверждения и новый пароль должны совпадать..',
-            'confirm_password.different' => 'Пароль подтверждения и старый пароль должны отличаться..',
-            'confirm_password.between'   => 'Пароль подтверждения должен содержать от :min до :max символов..',
+            'old_password.regex'         => Lang::get('errors.old_password.regex'),
+            'old_password.between'       => Lang::get('errors.old_password.between'),
+            'new_password.regex'         => Lang::get('errors.new_password.regex'),
+            'new_password.same'          => Lang::get('errors.new_password.same'),
+            'new_password.different'     => Lang::get('errors.new_password.different'),
+            'new_password.between'       => Lang::get('errors.new_password.between'),
+            'confirm_password.regex'     => Lang::get('errors.confirm_password.regex'),
+            'confirm_password.same'      => Lang::get('errors.confirm_password.same'),
+            'confirm_password.different' => Lang::get('errors.confirm_password.different'),
+            'confirm_password.between'   => Lang::get('errors.confirm_password.between'),
         ];
     }
 }

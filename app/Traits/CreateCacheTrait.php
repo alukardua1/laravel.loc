@@ -17,24 +17,24 @@ use Cache;
  */
 trait CreateCacheTrait
 {
-    /**
-     * Создает кэш
-     *
-     * @param $key
-     * @param $post
-     *
-     * @return mixed
-     */
-    public static function setCache($key, $post)
-    {
-        $ttl = (int)config('appSecondConfig.ttlCache');
+	/**
+	 * Создает кэш
+	 *
+	 * @param $key
+	 * @param $post
+	 *
+	 * @return mixed
+	 */
+	public static function setCache($key, $post)
+	{
+		$ttl = (int)config('appSecondConfig.ttlCache');
 
-        return Cache::remember(
-            $key,
-            $ttl * 86400,
-            function () use ($post) {
-                return $post;
-            }
-        );
-    }
+		return Cache::remember(
+			$key,
+			$ttl * 86400,
+			function () use ($post) {
+				return $post;
+			}
+		);
+	}
 }

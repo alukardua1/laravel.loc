@@ -19,18 +19,18 @@ use Illuminate\View\View;
  */
 class CustomController extends Controller
 {
-    /**
-     * @param  string  $columns   DB columns
-     * @param  string  $variable  Search variable
-     *
-     * @return Factory|View
-     */
-    public function loadCustom($columns, $variable)
-    {
-        $animePost = self::$customRepository
-            ->getCustom('*', $columns, $variable)
-            ->paginate(self::$paginate);
+	/**
+	 * @param  string  $columns   DB columns
+	 * @param  string  $variable  Search variable
+	 *
+	 * @return Factory|View
+	 */
+	public function loadCustom($columns, $variable)
+	{
+		$animePost = self::$customRepository
+			->getCustom('*', $columns, $variable)
+			->paginate(self::$paginate);
 
-        return view(self::$theme.'/home', compact('animePost'));
-    }
+		return view(self::$theme.'/home', compact('animePost'));
+	}
 }

@@ -10,6 +10,7 @@ namespace App\Repositories;
 
 use App\Models\Translate;
 use App\Repositories\Interfaces\TranslateRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class TranslateRepository
@@ -18,12 +19,17 @@ use App\Repositories\Interfaces\TranslateRepositoryInterface;
  */
 class TranslateRepository implements TranslateRepositoryInterface
 {
-    public function getTranslate($id = null)
-    {
-        if ($id) {
-            return abort(404);
-        } else {
-            return Translate::all();
-        }
-    }
+	/**
+	 * @param  null  $id
+	 *
+	 * @return Translate[]|Collection|void
+	 */
+	public function getTranslate($id = null)
+	{
+		if ($id) {
+			return abort(404);
+		} else {
+			return Translate::all();
+		}
+	}
 }
