@@ -8,7 +8,7 @@
 namespace App\Repositories\Interfaces;
 
 
-use Request;
+use Illuminate\Http\Request;
 
 /**
  * Interface CategoryRepositoryInterface
@@ -27,7 +27,7 @@ interface CategoryRepositoryInterface
     public function getCategory($url = null, $isAdmin = false);
 
     /**
-     * @param  \Request  $request
+     * @param  Request  $request
      * @param  null      $url
      *
      * @return mixed

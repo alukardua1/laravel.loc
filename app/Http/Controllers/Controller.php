@@ -13,7 +13,7 @@ use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CountryRepositoryInterface;
 use App\Repositories\Interfaces\CustomRepositoryInterface;
 use App\Traits\CreateCacheTrait;
-use App\Traits\FunctionsHelpers;
+use App\Traits\FunctionsTrait;
 use Cache;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -110,7 +110,7 @@ class Controller extends BaseController
 
 	use AuthorizesRequests;
 	use DispatchesJobs;
-	use FunctionsHelpers;
+	use FunctionsTrait;
 	use ValidatesRequests;
 	use CreateCacheTrait;
 

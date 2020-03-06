@@ -41,12 +41,12 @@
 
         methods: {
             plusVote(post) {
-                axios.post('/plusVotes/' + post)
+                axios.post('/plus/' + post)
                     .then(response => this.isVoted = true)
                     .catch(response => console.log(response.data));
             },
             minusVote(post) {
-                axios.post('/minusVotes/' + post)
+                axios.post('/minus/' + post)
                     .then(response => this.isVoted = true)
                     .catch(response => console.log(response.data));
             },

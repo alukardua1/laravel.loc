@@ -11,7 +11,7 @@ use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CountryRepositoryInterface;
 use App\Repositories\Interfaces\TranslateRepositoryInterface;
-use App\Traits\FunctionsHelpers;
+use App\Traits\FunctionsTrait;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -25,7 +25,7 @@ use Lang;
  */
 class AdminAnimeController extends AdminBaseController
 {
-	use FunctionsHelpers;
+	use FunctionsTrait;
 
 	/**
 	 * @var CategoryRepositoryInterface
@@ -117,7 +117,7 @@ class AdminAnimeController extends AdminBaseController
 	 * @var array $tip
 	 * @uses CategoryRepository
 	 * @uses AnimeRepository
-	 * @uses FunctionsHelpers::$arrTip
+	 * @uses FunctionsTrait::$arrTip
 	 *
 	 * @return Factory|View
 	 */

@@ -41,7 +41,7 @@ class FavoriteController extends Controller
 	 *
 	 * @return RedirectResponse
 	 */
-	public function favorite($id): RedirectResponse
+	public function add($id): RedirectResponse
 	{
 		self::$favoriteRepository->favorite($id);
 
@@ -55,9 +55,10 @@ class FavoriteController extends Controller
 	 *
 	 * @return RedirectResponse
 	 */
-	public function unFavorite($id): RedirectResponse
+	public function delete($id): RedirectResponse
 	{
 		self::$favoriteRepository->unFavorite($id);
+
 		return back();
 	}
 }

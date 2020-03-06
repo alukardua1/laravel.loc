@@ -10,7 +10,7 @@ namespace App\Repositories;
 
 use App\Models\Anime;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
-use App\Traits\UploadImage;
+use App\Traits\UploadImageTrait;
 use Cache;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -24,7 +24,7 @@ use Psr\SimpleCache\InvalidArgumentException;
  */
 class AnimeRepository implements AnimeRepositoryInterface
 {
-    use UploadImage;
+    use UploadImageTrait;
 
     /**
      * если $id пустой выводит все записи на сайте, $isAdmin если указан то выводит в админке, если $id указан то

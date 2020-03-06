@@ -7,7 +7,6 @@
 
 namespace App\Http\Controllers\Administrations;
 
-use App\Http\Middleware\IsAdmin;
 use Illuminate\Routing\Controller as BaseController;
 
 /**

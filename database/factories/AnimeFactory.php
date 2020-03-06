@@ -10,7 +10,7 @@
 use App\Models\Anime;
 use Faker\Generator as Faker;
 
-//use App\Helpers\FunctionsHelpers;
+//use App\Helpers\FunctionsTrait;
 
 $factory->define(Anime::class, function (Faker $faker) {
     $title = $faker->sentence(rand(3, 8), true);

@@ -39,7 +39,7 @@ class VoteController extends Controller
 	 *
 	 * @return RedirectResponse
 	 */
-	public function plusVotes($id): RedirectResponse
+	public function plus($id): RedirectResponse
 	{
 		self::$voteRepository->plusVotes($id);
 
@@ -51,7 +51,7 @@ class VoteController extends Controller
 	 *
 	 * @return RedirectResponse
 	 */
-	public function minusVotes($id): RedirectResponse
+	public function minus($id): RedirectResponse
 	{
 		self::$voteRepository->minusVotes($id);
 

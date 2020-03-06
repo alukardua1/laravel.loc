@@ -14,11 +14,11 @@ use DateTimeZone;
 use IntlDateFormatter;
 
 /**
- * Trait FunctionsHelpers
+ * Trait FunctionsTrait
  *
  * @package App\Helpers
  */
-trait FunctionsHelpers
+trait FunctionsTrait
 {
 	/**
 	 * Приставка для сезона
@@ -164,5 +164,17 @@ trait FunctionsHelpers
 		krsort($result);
 
 		return $result;
+	}
+
+	public static function parseUrl($url)
+	{
+		$returnUrl = [];
+		$uri = explode('-', $url);
+		$stringUrl = preg_split("/[0-9]+-/", $url);
+
+		$returnUrl['uri'] = $uri;
+		$returnUrl['stringUrl'] = $stringUrl;
+
+		return $returnUrl;
 	}
 }

@@ -59,11 +59,11 @@ Route::group(
             }
         );
         /** Избранное */
-        Route::post('/favorite/{id}', 'FavoriteController@favorite')->name('favorite_add');
-        Route::post('/unfavorite/{id}', 'FavoriteController@unFavorite')->name('favorite_del');
+        Route::post('/add/{id}', 'FavoriteController@add')->name('favorite_add');
+        Route::post('/delete/{id}', 'FavoriteController@delete')->name('favorite_del');
         /** Голосование на сайте */
-        Route::post('/plusVotes/{id}', 'VoteController@plusVotes')->name('votes_plus');
-        Route::post('/minusVotes/{id}', 'VoteController@minusVotes')->name('votes_minus');
+        Route::post('/plus/{id}', 'VoteController@plus')->name('votes_plus');
+        Route::post('/minus/{id}', 'VoteController@minus')->name('votes_minus');
         /** Выборки по полям */
         Route::group(
             ['prefix' => 'custom'],
@@ -91,8 +91,8 @@ Route::group(
         Route::group(
             ['prefix' => 'comments'],
             function () {
-                Route::post('add', 'CommentController@addComments')->name('addComment');
-                Route::get('delete/{comment}', 'CommentController@deleteComment')->name('deleteComment');
+                Route::post('add', 'CommentController@add')->name('addComment');
+                Route::get('delete/{comment}', 'CommentController@delete')->name('deleteComment');
             }
         );
     }

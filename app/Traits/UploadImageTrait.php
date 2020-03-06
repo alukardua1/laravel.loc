@@ -13,11 +13,11 @@ use Storage;
 use Str;
 
 /**
- * Trait UploadImage
+ * Trait UploadImageTrait
  *
  * @package App\Traits
  */
-trait UploadImage
+trait UploadImageTrait
 {
 	/**
 	 * @var string

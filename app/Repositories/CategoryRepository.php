@@ -10,7 +10,7 @@ namespace App\Repositories;
 
 use App\Models\Category;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
-use Request;
+use Illuminate\Http\Request;
 
 /**
  * Class CategoryRepository

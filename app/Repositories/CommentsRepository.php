@@ -10,7 +10,7 @@ namespace App\Repositories;
 
 use App\Models\Comment;
 use App\Repositories\Interfaces\CommentsRepositoryInterface;
-use Exception;
+use Throwable;
 use Illuminate\Http\Request;
 
 /**
@@ -78,7 +78,7 @@ class CommentsRepository implements CommentsRepositoryInterface
 	/**
 	 * @param $id
 	 *
-	 * @throws Exception
+	 * @throws Throwable
 	 * @return bool|mixed|null
 	 */
 	public function delComments($id)

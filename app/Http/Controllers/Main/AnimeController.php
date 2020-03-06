@@ -73,13 +73,14 @@ class AnimeController extends Controller
 	 */
 	public function view($urlAnime)
 	{
-		$uri = explode('-', $urlAnime);
-		$stringUrl = preg_split("/[0-9]+-/", $urlAnime);
-		$animePost = self::getCache('anime_'.$uri[0], self::$animeRepository->getAnime($uri[0])->first());
-		$comments = self::getCache('animeComments_'.$uri[0], self::$commentsRepository->getComments($uri[0]));
+		$uri = self::parseUrl($urlAnime);
+		$idAnime = $uri['uri'][0];
+		$slugAnime = $uri['stringUrl'][1];
+		$animePost = self::getCache('anime_'.$idAnime, self::$animeRepository->getAnime($idAnime)->first());
+		$comments = self::getCache('animeComments_'.$idAnime, self::$commentsRepository->getComments($idAnime));
 		$commentsCount = self::getCache(
-			'animeCommentsCount_'.$uri[0],
-			self::$commentsRepository->countComments($uri[0])
+			'animeCommentsCount_'.$idAnime,
+			self::$commentsRepository->countComments($idAnime)
 		);
 		$animePost = self::currentRefactoring($animePost);
 
@@ -87,7 +88,7 @@ class AnimeController extends Controller
 			return abort(404);
 		}
 
-		if ($stringUrl[1] != $animePost->url) {
+		if ($slugAnime != $animePost->url) {
 			return redirect('/anime/'.$animePost->id.'-'.$animePost->url);
 		}
 

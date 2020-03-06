@@ -8,7 +8,7 @@
 namespace App\Observers;
 
 use App\Models\Anime;
-use App\Traits\FunctionsHelpers;
+use App\Traits\FunctionsTrait;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
@@ -21,7 +21,7 @@ use Illuminate\Support\Str;
  */
 class AnimeObserver
 {
-	use FunctionsHelpers;
+	use FunctionsTrait;
 
 	/**
 	 * @param  Anime  $anime
