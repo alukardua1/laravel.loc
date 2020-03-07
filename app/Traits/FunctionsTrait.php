@@ -116,8 +116,8 @@ trait FunctionsTrait
 	/**
 	 * Проверка наличия кэша страницы на сайте
 	 *
-	 * @param $key
-	 * @param $value
+	 * @param  string  $key
+	 * @param  mixed   $value
 	 *
 	 * @return mixed
 	 */
@@ -166,11 +166,17 @@ trait FunctionsTrait
 		return $result;
 	}
 
+	/**
+	 * @param $url
+	 *
+	 * @return array
+	 */
 	public static function parseUrl($url)
 	{
+		$pattern = "/[0-9]+-/";
 		$returnUrl = [];
 		$uri = explode('-', $url);
-		$stringUrl = preg_split("/[0-9]+-/", $url);
+		$stringUrl = preg_split($pattern, $url);
 
 		$returnUrl['uri'] = $uri;
 		$returnUrl['stringUrl'] = $stringUrl;

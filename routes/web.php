@@ -68,7 +68,7 @@ Route::group(
         Route::group(
             ['prefix' => 'custom'],
             function () {
-                Route::get('{custom}/{variable}', 'CustomController@loadCustom')->name('custom');
+                Route::get('{custom}/{variable}', 'CustomController@view')->name('custom');
             }
         );
         /** Люди */

@@ -293,7 +293,7 @@
                 </div>
             </div>--}}
             <div class="col-md-12">
-                 @include($theme . '.comments.area', ['comments' => $comments, 'commentsCount'=>$commentsCount])
+                 @include($theme . '.comments.area', ['comments' => $comm['com'], 'commentsCount'=>$comm['count']])
             </div>
     </article>
 @endsection

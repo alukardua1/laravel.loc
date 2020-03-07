@@ -37,6 +37,16 @@ class CommentController extends Controller
 		self::$commentRepository = $commentsRepository;
 	}
 
+	public function view($idAnime)
+	{
+		$comments['com'] = self::getCache('animeComments_'.$idAnime, self::$commentRepository->getComments($idAnime));
+		$comments['count'] = self::getCache(
+			'animeCommentsCount_'.$idAnime,
+			self::$commentRepository->countComments($idAnime)
+		);
+		return $comments;
+	}
+
 	/**
 	 * @param  Request  $request
 	 *

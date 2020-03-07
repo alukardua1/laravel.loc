@@ -10,7 +10,6 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
-use App\Repositories\Interfaces\CommentsRepositoryInterface;
 use App\Traits\CreateCacheTrait;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
@@ -32,24 +31,17 @@ class AnimeController extends Controller
 	 * @var AnimeRepositoryInterface
 	 */
 	private static $animeRepository;
-	/**
-	 * @var CommentsRepositoryInterface
-	 */
-	private static $commentsRepository;
 
 	/**
 	 * AnimeController constructor.
 	 *
-	 * @param  AnimeRepositoryInterface     $animeRepository
-	 * @param  CommentsRepositoryInterface  $commentsRepository
+	 * @param  AnimeRepositoryInterface  $animeRepository
 	 */
 	public function __construct(
-		AnimeRepositoryInterface $animeRepository,
-		CommentsRepositoryInterface $commentsRepository
+		AnimeRepositoryInterface $animeRepository
 	) {
 		parent::__construct();
 		self::$animeRepository = $animeRepository;
-		self::$commentsRepository = $commentsRepository;
 	}
 
 	/**
@@ -77,11 +69,8 @@ class AnimeController extends Controller
 		$idAnime = $uri['uri'][0];
 		$slugAnime = $uri['stringUrl'][1];
 		$animePost = self::getCache('anime_'.$idAnime, self::$animeRepository->getAnime($idAnime)->first());
-		$comments = self::getCache('animeComments_'.$idAnime, self::$commentsRepository->getComments($idAnime));
-		$commentsCount = self::getCache(
-			'animeCommentsCount_'.$idAnime,
-			self::$commentsRepository->countComments($idAnime)
-		);
+		$comm = app(CommentController::class)->view($idAnime);
+
 		$animePost = self::currentRefactoring($animePost);
 
 		if (empty($animePost)) {
@@ -92,7 +81,7 @@ class AnimeController extends Controller
 			return redirect('/anime/'.$animePost->id.'-'.$animePost->url);
 		}
 
-		return view(self::$theme.'/full_anime', compact('animePost', 'comments', 'commentsCount'));
+		return view(self::$theme.'/full_anime', compact('animePost', 'comm'));
 	}
 
 	/**

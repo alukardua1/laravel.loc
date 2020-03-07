@@ -25,7 +25,7 @@ class CustomController extends Controller
 	 *
 	 * @return Factory|View
 	 */
-	public function loadCustom($columns, $variable)
+	public function view($columns, $variable)
 	{
 		$animePost = self::$customRepository
 			->getCustom('*', $columns, $variable)

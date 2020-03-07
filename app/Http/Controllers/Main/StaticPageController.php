@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\StaticPageRepositoryInterface;
+use Cache;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 
@@ -44,11 +45,7 @@ class StaticPageController extends Controller
 	 */
 	public function view($url)
 	{
-		if (\Cache::has('page_'.$url)) {
-			$staticPage = \Cache::get('page_'.$url);
-		} else {
-			$staticPage = self::setCache('page_'.$url, self::$staticPageRepository->getStaticPage($url));
-		}
+		$staticPage = self::getCache('page_'.$url, self::$staticPageRepository->getStaticPage($url));
 
 		return view(self::$theme.'/staticPage', compact('staticPage'));
 	}
