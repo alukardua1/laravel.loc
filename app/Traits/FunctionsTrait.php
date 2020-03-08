@@ -183,4 +183,22 @@ trait FunctionsTrait
 
 		return $returnUrl;
 	}
+
+	/**
+	 * Загружает временные зоны и страны
+	 *
+	 * @param $countryRaw
+	 *
+	 * @return array
+	 */
+	public static function loadCountryTimeZone($countryRaw): array
+	{
+		$countryArray = [];
+		foreach ($countryRaw as $key => $value) {
+			$countryArray[$value['id']] = $value['title'];
+		}
+		$timeZone = self::getTimeZone();
+
+		return ['countryArray' => $countryArray, 'timeZone' => $timeZone];
+	}
 }

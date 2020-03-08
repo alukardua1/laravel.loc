@@ -19,14 +19,14 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            {{Form::select('country_id', (array)$countryArray, (string)$profile->country_id, ['id'=>'country', 'class'=>'mdb-select md-form colorful-select dropdown-info'])}}
+            {{Form::select('country_id', (array)$country['countryArray'], (string)$profile->country_id, ['id'=>'country', 'class'=>'mdb-select md-form colorful-select dropdown-info'])}}
             {{ Form::label('country', 'Страна проживания',['class'=>'title-info mdb-main-label']) }}
         </div>
     </div>
     {{--<div class="row">
         <div class="col-sm-12">
             <select id="time_zone" name="time_zone" class="mdb-select md-form colorful-select dropdown-primary">
-                @foreach($tz as $timeZoneEN => $timeZoneRU)
+                @foreach($country['timeZone'] as $timeZoneEN => $timeZoneRU)
                     <option value="{{ $timeZoneEN }}"
                             @if($profile->time_zone==$timeZoneEN) selected @endif>{{ $timeZoneRU }}
                     </option>

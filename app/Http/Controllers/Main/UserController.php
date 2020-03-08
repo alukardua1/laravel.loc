@@ -48,33 +48,14 @@ class UserController extends Controller
 	public function view($userUrl)
 	{
 		$profile = self::getCache('user_'.$userUrl, self::$userRepository->getUsers($userUrl));
-		$countryArray = $this->loadCountryTimeZone()['countryArray'];
-		$tz = $this->loadCountryTimeZone()['timeZone'];
+		$country = self::loadCountryTimeZone(self::$countryRepository->getCountry(['id', 'title']));
 
 		if (empty($profile)) {
 			return view(self::$theme.'/errors.profile')->withErrors(['msg' => "Пользователь {$userUrl} не найден"]);
 		}
 
-		return view(self::$theme.'/profile.profile', compact('profile', 'countryArray', 'tz'));
+		return view(self::$theme.'/profile.profile', compact('profile', 'country'));
 	}
-
-	/**
-	 * Загружает временные зоны
-	 *
-	 * @return array
-	 */
-	private function loadCountryTimeZone(): array
-	{
-		$countryArray = [];
-		$countryRaw = self::$countryRepository->getCountry(['id', 'title']);
-		foreach ($countryRaw as $key => $value) {
-			$countryArray[$value['id']] = $value['title'];
-		}
-		$timeZone = self::getTimeZone();
-
-		return ['countryArray' => $countryArray, 'timeZone' => $timeZone];
-	}
-
 
 	/**
 	 * Обновление профиля $currentUser
