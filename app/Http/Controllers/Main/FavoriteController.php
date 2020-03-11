@@ -37,7 +37,7 @@ class FavoriteController extends Controller
 	/**
 	 * Добавить в закладки
 	 *
-	 * @param $id
+	 * @param int $id
 	 *
 	 * @return RedirectResponse
 	 */
@@ -51,7 +51,7 @@ class FavoriteController extends Controller
 	/**
 	 * Убрать из закладок
 	 *
-	 * @param $id
+	 * @param int $id
 	 *
 	 * @return RedirectResponse
 	 */

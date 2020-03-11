@@ -28,8 +28,8 @@ class TranslateRepository implements TranslateRepositoryInterface
 	{
 		if ($id) {
 			return abort(404);
-		} else {
-			return Translate::all();
 		}
+
+		return Translate::all();
 	}
 }

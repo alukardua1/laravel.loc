@@ -12,9 +12,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Group
  *
+ * @property int    $id
+ * @property string $title
+ *
  * @package App\Models
  */
 class Group extends Model
 {
-    //
+	//
 }

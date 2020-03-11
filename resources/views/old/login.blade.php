@@ -23,6 +23,13 @@
                                 <div class="modal-body mb-1">
                                     <div class="md-form form-sm mb-5">
                                         <i class="fas fa-envelope prefix"></i>
+                                        <input type="text" name="login" id="email" class="form-control form-control-sm"
+                                               value="{{ old('login') }}">
+                                        <label data-error="wrong" data-success="right" for="login">Логин</label>
+                                    </div>
+
+                                    <div class="md-form form-sm mb-5">
+                                        <i class="fas fa-envelope prefix"></i>
                                         <input type="email" name="email" id="email" class="form-control form-control-sm"
                                                value="{{ old('email') }}">
                                         <label data-error="wrong" data-success="right" for="email">Email</label>

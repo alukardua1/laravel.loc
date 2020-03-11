@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 class CommentsRepository implements CommentsRepositoryInterface
 {
 	/**
-	 * @param $id
+	 * @param int $id
 	 *
 	 * @return mixed|void
 	 */
@@ -54,7 +54,7 @@ class CommentsRepository implements CommentsRepositoryInterface
 	}
 
 	/**
-	 * @param $id
+	 * @param int $id
 	 *
 	 * @return mixed
 	 */
@@ -65,8 +65,8 @@ class CommentsRepository implements CommentsRepositoryInterface
 	}
 
 	/**
-	 * @param  Request  $request
-	 * @param           $id
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param                            $id
 	 *
 	 * @return mixed|void
 	 */
@@ -76,15 +76,17 @@ class CommentsRepository implements CommentsRepositoryInterface
 	}
 
 	/**
-	 * @param $id
+	 * @param int $id
 	 *
 	 * @throws Throwable
 	 * @return bool|mixed|null
 	 */
 	public function delComments($id)
 	{
+		/** @var \App\Models\Comment $deleteComment */
 		$deleteComment = Comment::where('parent_comment_id', $id)->get();
 
+		/** @var \App\Models\Comment $comm */
 		foreach ($deleteComment as $comm) {
 			$comm->delete();
 		}

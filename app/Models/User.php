@@ -15,6 +15,16 @@ use Illuminate\Notifications\Notifiable;
 /**
  * Class User
  *
+ * @property int               $id
+ * @property string            $login
+ * @property string            $photo
+ * @property \App\Models\Group $getGroup
+ * @property int               $age
+ * @property mixed             $date_of_birth
+ * @property mixed             $created_at
+ * @property string            $group
+ * @property string            $register
+ *
  * @package App\Models
  */
 class User extends Authenticatable

@@ -11,6 +11,7 @@ namespace App\Repositories;
 use App\Models\Category;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
+use Throwable;
 
 /**
  * Class CategoryRepository
@@ -68,10 +69,12 @@ class CategoryRepository implements CategoryRepositoryInterface
 	/**
 	 * @param  string  $url  Url category
 	 *
-	 * @return mixed|void
+	 * @throws Throwable
+	 * @return bool|null
 	 */
 	public function delCategory($url)
 	{
+		/** @var \App\Models\Category $deleteCategory */
 		$deleteCategory = Category::where('url', $url)->first();
 		$deleteCategory->getAnime()->sync([]);
 

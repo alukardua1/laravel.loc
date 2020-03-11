@@ -36,7 +36,7 @@
         </div>
         <select name="genre[]" class="mdb-select md-form" multiple>
             <option value="" disabled selected>Выберите категорию</option>
-            @foreach($category as $key => $value)
+            @foreach($setAnime['category'] as $key => $value)
                 <option
                     value="{{$value->id}}"
                     @foreach($animePost->getCategory as $categoryAnime)
@@ -120,7 +120,7 @@
             <div class="col-6">
                 <select name="country_id" class="mdb-select md-form">
                     <option value="" disabled selected>Страна выпуска</option>
-                    @foreach($country as $key => $value)
+                    @foreach($setAnime['country'] as $key => $value)
                         <option value="{{$value->id}}"
                                 @if($value->id === $animePost->getCountry->id)
                                 selected
@@ -150,7 +150,7 @@
             <div class="col-3">
                 <select name="tip" class="mdb-select md-form">
                     <option value="" disabled selected>Тип аниме</option>
-                    @foreach($tip as $key => $value)
+                    @foreach($setAnime['tip'] as $key => $value)
                         <option value="{{$key}}"
                                 @if($key === $animePost->tip)
                                 selected
@@ -200,7 +200,7 @@
         {{--@todo Разобратся с преобразованием " в &quot--}}
         <select name="rating" class="mdb-select md-form">
             <option value="" disabled selected>Возрастное ограничение</option>
-            @foreach($rating as $key => $value)
+            @foreach($setAnime['rating'] as $key => $value)
                 <option value="{{$key}}"
                         @if($key === $animePost->rating)
                         selected
@@ -225,7 +225,7 @@
         </select>
         <select name="translate[]" class="mdb-select md-form" multiple>
             <option value="" disabled selected>Озвучка</option>
-             @foreach($translate as $key => $value)
+             @foreach($setAnime['translate'] as $key => $value)
                  <option
                      value="{{$value->id}}"
                      @foreach($animePost->getTranslate as $translateAnime)
@@ -240,6 +240,7 @@
             <input type="text" id="video" name="video" class="form-control"
                    value="{{$animePost->video}}">
             <label for="video" class="title-info">Ссылка на плеер</label>
+            <button id="searchVideo" class="btn btn-success">Найти ссылку</button>
         </div>
         <div class="form-check">
             <input type="hidden" name="posted_at" value="0">

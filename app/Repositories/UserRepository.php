@@ -34,16 +34,20 @@ class UserRepository implements UserRepositoryInterface
 	 */
 	public function getUsers($userUrl)
 	{
-		return User::with(['getGroup:id,title', 'getCountry:id,title'])
+		$user = User::with(['getGroup:id,title', 'getCountry:id,title'])
 			->where('login', $userUrl)
 			->first();
+		/** @var \App\Models\User $user */
+		$user = $this->refactoringUser($user);
+
+		return $user;
 	}
 
 	/**
 	 * Сохраняет изменения в базу
 	 *
-	 * @param  Request  $request
-	 * @param           $currentUser
+	 * @param  Request           $request
+	 * @param  $currentUser
 	 *
 	 * @return mixed
 	 */

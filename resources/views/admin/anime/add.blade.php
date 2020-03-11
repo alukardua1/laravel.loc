@@ -38,7 +38,7 @@
         </div>
         <select name="genre[]" class="mdb-select md-form" multiple>
             <option value="" disabled selected>Выберите категорию</option>
-            @foreach($category as $key => $value)
+            @foreach($setAnime['category'] as $key => $value)
                 <option value="{{$value->id}}">{{$value->title}}</option>
             @endforeach
         </select>
@@ -115,7 +115,7 @@
             <div class="col-6">
                 <select name="country_id" class="mdb-select md-form">
                     <option value="" disabled selected>Страна выпуска</option>
-                    @foreach($country as $key => $value)
+                    @foreach($setAnime['country'] as $key => $value)
                         <option value="{{$value->id}}">{{$value->title}}</option>
                     @endforeach
                 </select>
@@ -141,7 +141,7 @@
             <div class="col-3">
                 <select name="tip" class="mdb-select md-form">
                     <option value="" disabled selected>Тип аниме</option>
-                    @foreach($tip as $key => $value)
+                    @foreach($setAnime['tip'] as $key => $value)
                         <option value="{{$key}}">{{$value}}</option>
                     @endforeach
                 </select>
@@ -187,7 +187,7 @@
         {{--@todo Разобратся с преобразованием " в &quot--}}
         <select name="rating" class="mdb-select md-form">
             <option value="" disabled selected>Возрастное ограничение</option>
-            @foreach($rating as $key => $value)
+            @foreach($setAnime['rating'] as $key => $value)
                 <option value="{{$key}}">{!! html_entity_decode($value) !!}</option>
             @endforeach
         </select>
@@ -214,6 +214,7 @@
             <input type="text" id="video" name="video" class="form-control"
                    value="">
             <label for="video" class="title-info">Ссылка на плеер</label>
+            <button id="searchVideo" class="btn btn-success">Найти ссылку</button>
         </div>
         <div class="form-check">
             <input type="hidden" name="posted_at" value="0">

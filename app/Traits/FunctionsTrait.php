@@ -39,10 +39,10 @@ trait FunctionsTrait
 	 * @var array $arrDay
 	 */
 	public static $arrDay = [
-		8  => '<span style="color: green; ">[утренний сеанс]</span>',
-		12 => '<span style="color: #146867; ">[дневной сеанс]</span>',
-		17 => '<span style="color: blue; ">[вечерний сеанс]</span>',
-		23 => '<span style="color: #990000; ">[ночной сеанс]</span>',
+		8  => '<span class="green-text">[утренний сеанс]</span>',
+		12 => '<span class="cyan-text">[дневной сеанс]</span>',
+		17 => '<span class="blue-text">[вечерний сеанс]</span>',
+		23 => '<span class="deep-orange-text">[ночной сеанс]</span>',
 	];
 
 	/**
@@ -133,7 +133,7 @@ trait FunctionsTrait
 	/**
 	 * Внесение дополнительного в пост
 	 *
-	 * @param $anime
+	 * @param  \App\Models\Anime  $anime
 	 *
 	 * @return mixed
 	 */
@@ -167,11 +167,13 @@ trait FunctionsTrait
 	}
 
 	/**
+	 * Получение id и slug из url
+	 *
 	 * @param $url
 	 *
 	 * @return array
 	 */
-	public static function parseUrl($url)
+	public static function parseUrl($url): array
 	{
 		$pattern = "/[0-9]+-/";
 		$returnUrl = [];
@@ -187,7 +189,7 @@ trait FunctionsTrait
 	/**
 	 * Загружает временные зоны и страны
 	 *
-	 * @param $countryRaw
+	 * @param  \App\Models\Country  $countryRaw
 	 *
 	 * @return array
 	 */

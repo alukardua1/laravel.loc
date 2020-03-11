@@ -17,6 +17,15 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * Class Anime
  *
+ * @property int    id
+ * @property string title
+ * @property string url
+ * @property string day
+ * @property mixed  delivery_time
+ * @property string seasons
+ * @property mixed  aired_on
+ * @property string poster
+ *
  * @package App\Models
  */
 class Anime extends Model
@@ -57,7 +66,7 @@ class Anime extends Model
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	public function getTranslate()
+	public function getTranslate(): BelongsToMany
 	{
 		return $this->belongsToMany(Translate::class);
 	}
@@ -100,7 +109,7 @@ class Anime extends Model
 	 * @return HasMany
 	 * @todo Найти применение
 	 */
-	public function voteCount()
+	public function voteCount(): HasMany
 	{
 		return $this->hasMany(Vote::class, 'anime_id');
 	}
@@ -108,7 +117,7 @@ class Anime extends Model
 	/**
 	 * @return HasMany
 	 */
-	public function commentsCount()
+	public function commentsCount(): HasMany
 	{
 		return $this->hasMany(Comment::class)
 			->selectRaw('anime_id, count(*) as aggregate')

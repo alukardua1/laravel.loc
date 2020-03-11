@@ -10,7 +10,6 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Repositories\Interfaces\UserRepositoryInterface;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -43,7 +42,7 @@ class UserController extends Controller
 	 *
 	 * @param  string  $userUrl
 	 *
-	 * @return Factory|View
+	 * @return View|void
 	 */
 	public function view($userUrl)
 	{
@@ -51,7 +50,7 @@ class UserController extends Controller
 		$country = self::loadCountryTimeZone(self::$countryRepository->getCountry(['id', 'title']));
 
 		if (empty($profile)) {
-			return view(self::$theme.'/errors.profile')->withErrors(['msg' => "Пользователь {$userUrl} не найден"]);
+			return abort(404);
 		}
 
 		return view(self::$theme.'/profile.profile', compact('profile', 'country'));

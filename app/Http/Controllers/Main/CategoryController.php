@@ -22,7 +22,7 @@ class CategoryController extends Controller
 	/**
 	 * Выводит аниме по категориям
 	 *
-	 * @param $url
+	 * @param string $url
 	 *
 	 * @return Factory|View|void
 	 */

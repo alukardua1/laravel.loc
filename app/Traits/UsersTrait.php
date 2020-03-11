@@ -8,6 +8,7 @@
 namespace App\Traits;
 
 
+use Carbon\Carbon;
 use Hash;
 use Lang;
 use Storage;
@@ -30,8 +31,8 @@ trait UsersTrait
 	/**
 	 * Загружает аватар в профиль
 	 *
-	 * @param  array  $updateUser   Current users
-	 * @param  array  $requestForm  Request
+	 * @param  \App\Models\User  $updateUser   Current users
+	 * @param  array             $requestForm  Request
 	 *
 	 * @return mixed Updated request
 	 */
@@ -58,12 +59,12 @@ trait UsersTrait
 	/**
 	 * Удаляет текущий аватар
 	 *
-	 * @param  array  $updateUser   Current users
-	 * @param  array  $requestForm  Request
+	 * @param  \App\Models\User  $updateUser   Current users
+	 * @param  array             $requestForm  Request
 	 *
-	 * @return mixed|void Updated request
+	 * @return array
 	 */
-	public function deleteAvatar($updateUser, $requestForm)
+	private function deleteAvatar($updateUser, $requestForm): array
 	{
 		Storage::delete(self::$patchAvatar.$updateUser->photo);
 		$requestForm[self::$avatarColumns] = '';
@@ -74,8 +75,8 @@ trait UsersTrait
 	/**
 	 * Обновляет пароль
 	 *
-	 * @param  array  $updateUser   Current users
-	 * @param  array  $requestForm  Request
+	 * @param  \App\Models\User  $updateUser   Current users
+	 * @param  array             $requestForm  Request
 	 *
 	 * @return string
 	 */
@@ -85,5 +86,33 @@ trait UsersTrait
 			return $requestForm[self::$currentPass] = Hash::make($requestForm[self::$newPass]);
 		}
 		return back()->withErrors(['msg' => Lang::get('errors.passError')])->withInput();
+	}
+
+	/**
+	 * @param  \App\Models\User  $user
+	 *
+	 * @return mixed
+	 */
+	public function refactoringUser($user)
+	{
+		switch ($user->getGroup->id) {
+			case 1:
+				$user->group = "<p class=\"red-text\">{$user->getGroup->title}</p>";
+				break;
+			case 2:
+				$user->group = "<p class=\"green-text\">{$user->getGroup->title}</p>";
+				break;
+			case 3:
+				$user->group = "<p class=\"brown-text\">{$user->getGroup->title}</p>";
+				break;
+		}
+		$user->age = Carbon::now()->diffInYears($user->date_of_birth);
+		if (!isset($user->name)) {
+			$user->name = Lang::get('errors.noInputs');
+		}
+		$user->date_of_birth = Carbon::parse($user->date_of_birth)->format('d.m.Y');
+		$user->register = Carbon::parse($user->created_at)->format('d.m.Y');
+
+		return $user;
 	}
 }

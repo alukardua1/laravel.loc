@@ -31,6 +31,7 @@ class AnimeController extends Controller
 	 * @var AnimeRepositoryInterface
 	 */
 	private static $animeRepository;
+	private static $animePost;
 
 	/**
 	 * AnimeController constructor.
@@ -59,12 +60,13 @@ class AnimeController extends Controller
 	/**
 	 * Страница аниме поста
 	 *
-	 * @param $urlAnime
+	 * @param string $urlAnime
 	 *
 	 * @return Factory|RedirectResponse|Redirector|View|void
 	 */
 	public function view($urlAnime)
 	{
+		/** @var \App\Models\Anime $animePost */
 		$uri = self::parseUrl($urlAnime);
 		$idAnime = $uri['uri'][0];
 		$slugAnime = $uri['stringUrl'][1];
@@ -77,7 +79,7 @@ class AnimeController extends Controller
 			return abort(404);
 		}
 
-		if ($slugAnime != $animePost->url) {
+		if ($slugAnime !== $animePost->url) {
 			return redirect('/anime/'.$animePost->id.'-'.$animePost->url);
 		}
 

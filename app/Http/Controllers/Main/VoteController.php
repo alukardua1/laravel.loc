@@ -35,7 +35,7 @@ class VoteController extends Controller
 	}
 
 	/**
-	 * @param $id
+	 * @param int $id
 	 *
 	 * @return RedirectResponse
 	 */
@@ -47,7 +47,7 @@ class VoteController extends Controller
 	}
 
 	/**
-	 * @param $id
+	 * @param int $id
 	 *
 	 * @return RedirectResponse
 	 */

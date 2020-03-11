@@ -20,8 +20,8 @@ trait CreateCacheTrait
 	/**
 	 * Создает кэш
 	 *
-	 * @param $key
-	 * @param $post
+	 * @param string $key
+	 * @param mixed $post
 	 *
 	 * @return mixed
 	 */

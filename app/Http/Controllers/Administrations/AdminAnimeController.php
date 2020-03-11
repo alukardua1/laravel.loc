@@ -71,7 +71,7 @@ class AdminAnimeController extends AdminBaseController
 	/**
 	 * Главная страница всех записей аниме
 	 *
-	 * @var $animePost
+	 * @var \App\Models\Anime $animePost
 	 * @uses AdminBaseController::$paginate
 	 * @return Factory|View
 	 */
@@ -85,50 +85,30 @@ class AdminAnimeController extends AdminBaseController
 	/**
 	 * Страница редактирования аниме
 	 *
-	 * @param     $animeUrl
+	 * @param  string         $animeUrl
 	 *
-	 * @var array $tip
-	 * @var array $rating
-	 * @var mixed $category
-	 * @var mixed $animePost
-	 * @uses CategoryRepository
-	 * @uses AnimeRepository
+	 * @var \App\Models\Anime $animePost
 	 *
 	 * @return Factory|View
 	 */
 	public function edit($animeUrl)
 	{
-		$tip = Lang::get('attributes.minTip');
-		$rating = Lang::get('attributes.rating');
-		$category = self::$categoryRepository->getCategory()->get();
+		$setAnime = self::setAnimeAdmin();
 		$animePost = self::$animeRepository->getAnime($animeUrl)->first();
-		$country = self::$countryRepository->getCountry(['id', 'title']);
-		$translate = self::$translateRepository->getTranslate();
 
-		return view('admin.anime.edit', compact('animePost', 'category', 'tip', 'rating', 'country', 'translate'));
+		return view('admin.anime.edit', compact('animePost', 'setAnime'));
 	}
 
 	/**
 	 * Добавление нового поста
 	 *
-	 * @var array $rating
-	 * @var mixed $category
-	 * @var mixed $animePost
-	 * @var array $tip
-	 * @uses CategoryRepository
-	 * @uses AnimeRepository
-	 * @uses FunctionsTrait::$arrTip
-	 *
 	 * @return Factory|View
 	 */
 	public function create()
 	{
-		$tip = Lang::get('attributes.minTip');
-		$rating = Lang::get('attributes.rating');
-		$category = self::$categoryRepository->getCategory()->get();
-		$country = self::$countryRepository->getCountry(['id', 'title']);
+		$setAnime = self::setAnimeAdmin();
 
-		return view('admin.anime.add', compact('category', 'tip', 'rating', 'country'));
+		return view('admin.anime.add', compact('setAnime'));
 	}
 
 	/**
@@ -152,7 +132,7 @@ class AdminAnimeController extends AdminBaseController
 	 * Процедура обновления записи
 	 *
 	 * @param  Request  $request
-	 * @param           $animeUrl
+	 * @param  string   $animeUrl
 	 *
 	 * @return RedirectResponse
 	 */
@@ -169,7 +149,7 @@ class AdminAnimeController extends AdminBaseController
 	/**
 	 * Удаление записи
 	 *
-	 * @param $animeUrl
+	 * @param  string  $animeUrl
 	 *
 	 * @return RedirectResponse
 	 */
@@ -180,5 +160,16 @@ class AdminAnimeController extends AdminBaseController
 			return redirect()->route('admin.anime');
 		}
 		return back()->withErrors(['msg' => 'Ошибка удаления'])->withInput();
+	}
+
+	public static function setAnimeAdmin()
+	{
+		$setAnime['category'] = self::$categoryRepository->getCategory()->get();
+		$setAnime['country'] = self::$countryRepository->getCountry(['id', 'title']);
+		$setAnime['translate'] = self::$translateRepository->getTranslate();
+		$setAnime['tip'] = Lang::get('attributes.minTip');
+		$setAnime['rating'] = Lang::get('attributes.rating');
+
+		return $setAnime;
 	}
 }

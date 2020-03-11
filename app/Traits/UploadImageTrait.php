@@ -36,8 +36,8 @@ trait UploadImageTrait
 	/**
 	 * Загружает постер к записи
 	 *
-	 * @param $updateAnime
-	 * @param $requestForm
+	 * @param  \App\Models\Anime         $updateAnime
+	 * @param  \Illuminate\Http\Request  $requestForm
 	 *
 	 * @return mixed
 	 */

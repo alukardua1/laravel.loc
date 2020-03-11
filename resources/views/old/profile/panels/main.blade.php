@@ -5,18 +5,24 @@
     </div>
     <div class="row" style="white-space: nowrap;">
         <div class="col-sm-10"><span class="title-info"><i class="far fa-user"></i> Имя </span></div>
-        <div class="col-sm-2"><span class="float-right">{{isset($profile->name)? $profile->name:'Не указано'}}</span>
+        <div class="col-sm-2"><span class="float-right">{{ $profile->name }}</span>
         </div>
     </div>
     <div class="row" style="white-space: nowrap;">
         <div class="col-sm-10"><span class="title-info"><i class="fas fa-globe"></i> Страна </span></div>
         <div class="col-sm-2"><span class="float-right">{{ $profile->getCountry->title }}</span></div>
     </div>
+    @if(($profile->group_id == 1)or(Auth::user()))
+        <div class="row" style="white-space: nowrap;">
+            <div class="col-sm-10"><span class="title-info"><i class="fas fa-globe"></i> Дата рождения (доступно только администраторам)</span></div>
+            <div class="col-sm-2"><span class="float-right">{{ $profile->date_of_birth }}</span></div>
+        </div>
+    @endif
     <div class="row" style="white-space: nowrap;">
         <div class="col-sm-10"><span class="title-info"><i class="far fa-calendar-alt"></i> Зарегистрирован </span>
         </div>
         <div class="col-sm-2">
-            <span class="float-right">{{ Carbon\Carbon::parse($profile->created_at)->format('d.m.Y') }}</span></div>
+            <span class="float-right">{{ $profile->register }}</span></div>
     </div>
     <div class="row" style="white-space: nowrap;">
         <div class="col-sm-10"><span class="title-info"><i class="far fa-calendar-alt"></i> Последняя активность </span>
@@ -26,8 +32,7 @@
     <div class="row" style="white-space: nowrap;">
         <div class="col-sm-10"><span class="title-info"><i class="fas fa-users"></i> Группа </span></div>
         <div class="col-sm-2">
-            <span class="float-right" @if($profile->group_id == 1)style="color: red"
-                  @elseif($profile->group_id == 2) style="color: green" @endif>{{ $profile->getGroup->title }}</span>
+            <span class="float-right">{!! $profile->group !!}</span>
         </div>
     </div>
     @if(empty($profile->allow_email))

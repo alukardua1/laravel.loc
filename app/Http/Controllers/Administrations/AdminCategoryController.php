@@ -47,7 +47,7 @@ class AdminCategoryController extends AdminBaseController
 	}
 
 	/**
-	 * @param $url
+	 * @param string $url
 	 *
 	 * @return Factory|View
 	 */
@@ -60,7 +60,7 @@ class AdminCategoryController extends AdminBaseController
 
 	/**
 	 * @param  Request  $request
-	 * @param            $url
+	 * @param  string   $url
 	 */
 	public function update(Request $request, $url)
 	{
@@ -84,7 +84,7 @@ class AdminCategoryController extends AdminBaseController
 	}
 
 	/**
-	 * @param $url
+	 * @param  string  $url
 	 *
 	 * @return RedirectResponse
 	 */
