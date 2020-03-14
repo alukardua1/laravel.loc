@@ -38,12 +38,12 @@
             <option value="" disabled selected>Выберите категорию</option>
             @foreach($setAnime['category'] as $key => $value)
                 <option
-                    value="{{$value->id}}"
-                    @foreach($animePost->getCategory as $categoryAnime)
-                    @if($value->id === $categoryAnime->id)
-                    selected
-                    @endif
-                    @endforeach
+                        value="{{$value->id}}"
+                        @foreach($animePost->getCategory as $categoryAnime)
+                        @if($value->id === $categoryAnime->id)
+                        selected
+                        @endif
+                        @endforeach
                 >{{$value->title}}</option>
             @endforeach
         </select>
@@ -124,7 +124,7 @@
                         <option value="{{$value->id}}"
                                 @if($value->id === $animePost->getCountry->id)
                                 selected
-                            @endif
+                                @endif
                         >{{$value->title}}</option>
                     @endforeach
                 </select>
@@ -154,7 +154,7 @@
                         <option value="{{$key}}"
                                 @if($key === $animePost->tip)
                                 selected
-                            @endif
+                                @endif
                         >{{$value}}</option>
                     @endforeach
                 </select>
@@ -204,7 +204,7 @@
                 <option value="{{$key}}"
                         @if($key === $animePost->rating)
                         selected
-                    @endif
+                        @endif
                 >{!! html_entity_decode($value) !!}</option>
             @endforeach
         </select>
@@ -213,34 +213,38 @@
             <option value="ongoing"
                     @if('ongoing' === $animePost->released)
                     selected
-                @endif
+                    @endif
             >Онгоинг
             </option>
             <option value="released"
                     @if('released' === $animePost->released)
                     selected
-                @endif
+                    @endif
             >Завершен
             </option>
         </select>
         <select name="translate[]" class="mdb-select md-form" multiple>
             <option value="" disabled selected>Озвучка</option>
-             @foreach($setAnime['translate'] as $key => $value)
-                 <option
-                     value="{{$value->id}}"
-                     @foreach($animePost->getTranslate as $translateAnime)
-                     @if($value->id === $translateAnime->id)
-                     selected
-                     @endif
-                     @endforeach
-                 >{{$value->title}}</option>
-             @endforeach
+            @foreach($setAnime['translate'] as $key => $value)
+                <option
+                        value="{{$value->id}}"
+                        @foreach($animePost->getTranslate as $translateAnime)
+                        @if($value->id === $translateAnime->id)
+                        selected
+                        @endif
+                        @endforeach
+                >{{$value->title}}</option>
+            @endforeach
         </select>
         <div class="md-form">
             <input type="text" id="video" name="video" class="form-control"
                    value="{{$animePost->video}}">
             <label for="video" class="title-info">Ссылка на плеер</label>
-            <button id="searchVideo" class="btn btn-success">Найти ссылку</button>
+            <div id="searchVideo" class="btn btn-success" {{--onclick="window.location='{{ route('admin.parseCDN') }}'"--}}>Найти ссылку</div>
+            <div>
+                <ul  class="list-group" id="searchVideoRes">
+                </ul>
+            </div>
         </div>
         <div class="form-check">
             <input type="hidden" name="posted_at" value="0">

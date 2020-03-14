@@ -114,23 +114,6 @@ trait FunctionsTrait
 	}
 
 	/**
-	 * Проверка наличия кэша страницы на сайте
-	 *
-	 * @param  string  $key
-	 * @param  mixed   $value
-	 *
-	 * @return mixed
-	 */
-	public static function getCache($key, $value)
-	{
-		if (Cache::has($key)) {
-			return Cache::get($key);
-		}
-
-		return self::setCache($key, $value);
-	}
-
-	/**
 	 * Внесение дополнительного в пост
 	 *
 	 * @param  \App\Models\Anime  $anime
@@ -202,5 +185,22 @@ trait FunctionsTrait
 		$timeZone = self::getTimeZone();
 
 		return ['countryArray' => $countryArray, 'timeZone' => $timeZone];
+	}
+
+	public static function getCurl($url)
+	{
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $url);
+		curl_setopt($curl, CURLOPT_FAILONERROR, 1);
+		curl_setopt($curl, CURLOPT_USERAGENT,
+					"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0");
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 2);
+		curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+		curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
+		$data = curl_exec($curl);
+		curl_close($curl);
+
+		return $data;
 	}
 }

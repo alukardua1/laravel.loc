@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\CommentsRepositoryInterface;
+use Cache;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -44,11 +45,17 @@ class CommentController extends Controller
 	 */
 	public function view($idAnime)
 	{
-		$comments['com'] = self::getCache('animeComments_'.$idAnime, self::$commentRepository->getComments($idAnime));
-		$comments['count'] = self::getCache(
-			'animeCommentsCount_'.$idAnime,
-			self::$commentRepository->countComments($idAnime)
-		);
+		if (Cache::has('animeComments_'.$idAnime)) {
+			$comments['com'] = Cache::get('animeComments_'.$idAnime);
+		}else{
+			$comments['com'] = self::setCache('animeComments_'.$idAnime, self::$commentRepository->getComments($idAnime));
+		}
+		if (Cache::has('animeComments_'.$idAnime)) {
+			$comments['count'] = Cache::get('animeCommentsCount_'.$idAnime);
+		}else{
+			$comments['count'] = self::setCache('animeCommentsCount_'.$idAnime, self::$commentRepository->countComments($idAnime));
+		}
+
 		return $comments;
 	}
 

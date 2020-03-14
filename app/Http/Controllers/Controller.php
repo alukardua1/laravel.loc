@@ -123,13 +123,26 @@ class Controller extends BaseController
 		self::$categoryRepository = app(CategoryRepositoryInterface::class);
 		self::$countryRepository = app(CountryRepositoryInterface::class);
 
-		self::$globalCategory = self::getCache('globalCategory', self::$categoryRepository->getCategory()->get());
-		self::$yearCustom = self::getCache('aired_season', self::$customRepository->getCustom('aired_season')->get());
-		self::$tipCustom = self::getCache('tip', self::$customRepository->getCustom('tip')->get());
-		self::$carouselAnime = self::getCache(
-			'ongoing',
-			self::$customRepository->getCustom('*', 'released', 'ongoing')->get()
-		);
+		if (Cache::has('globalCategory')) {
+			self::$globalCategory = Cache::get('globalCategory');
+		}else{
+			self::$globalCategory = self::setCache('globalCategory', self::$categoryRepository->getCategory()->get());
+		}
+		if (Cache::has('aired_season')) {
+			self::$yearCustom = Cache::get('aired_season');
+		}else{
+			self::$yearCustom = self::setCache('aired_season', self::$customRepository->getCustom('aired_season')->get());
+		}
+		if (Cache::has('tip')) {
+			self::$tipCustom = Cache::get('tip');
+		}else{
+			self::$tipCustom = self::setCache('tip', self::$customRepository->getCustom('tip')->get());
+		}
+		if (Cache::has('ongoing')) {
+			self::$carouselAnime = Cache::get('ongoing');
+		}else{
+			self::$carouselAnime = self::setCache('ongoing', self::$customRepository->getCustom('*', 'released', 'ongoing')->get());
+		}
 
 		self::$paginate = config('appSecondConfig.paginate');
 		self::$theme = config('appSecondConfig.theme');

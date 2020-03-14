@@ -9,6 +9,7 @@ namespace App\Repositories;
 
 
 use App\Repositories\Interfaces\ParseVideoCDNRepositoryInterface;
+use App\Traits\FunctionsTrait;
 
 /**
  * Class ParseVideoCDNRepository
@@ -17,13 +18,26 @@ use App\Repositories\Interfaces\ParseVideoCDNRepositoryInterface;
  */
 class ParseVideoCDNRepository implements ParseVideoCDNRepositoryInterface
 {
+	use FunctionsTrait;
+
+	protected static $CDNVideo;
+	private static   $worldArtId = 1;
 
 	/**
-	 * @param $urlApi
+	 * @param $api
+	 *
+	 * @return mixed
 	 */
-	public function parseCurl($urlApi)
+	public function parseCurl($api)
 	{
-		// TODO: Implement parseCurl() method.
+		self::$CDNVideo = self::getCurl(
+			config('appSecondConfig.CDNUrl').config(
+				'appSecondConfig.CDNToken'
+			).'&worldart_animation_id='.$api
+		);
+		self::$CDNVideo = json_decode(self::$CDNVideo, true);
+
+		return self::$CDNVideo;
 	}
 
 	/**

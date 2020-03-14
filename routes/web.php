@@ -113,6 +113,7 @@ Route::group(
                 Route::get('add', 'AdminAnimeController@create')->name('admin.anime.add');
                 Route::patch('add', 'AdminAnimeController@store')->name('admin.anime.save');
                 Route::get('delete/{anime}', 'AdminAnimeController@delete')->name('admin.anime.delete');
+				Route::get('video', 'AdminAnimeController@CDNParse')->name('admin.parseCDN');
             }
         );
         /** Редактирование категорий */

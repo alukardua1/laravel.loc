@@ -11,6 +11,7 @@ use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CountryRepositoryInterface;
 use App\Repositories\Interfaces\TranslateRepositoryInterface;
+use App\Repositories\ParseVideoCDNRepository;
 use App\Traits\FunctionsTrait;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -47,25 +48,30 @@ class AdminAnimeController extends AdminBaseController
 	 */
 	protected static $translateRepository;
 
+	protected static $CDNVideo;
+
 	/**
 	 * AdminAnimeController constructor.
 	 *
-	 * @param  AnimeRepositoryInterface      $animeRepository
-	 * @param  CategoryRepositoryInterface   $categoryRepository
-	 * @param  CountryRepositoryInterface    $countryRepository
-	 * @param  TranslateRepositoryInterface  $translateRepository
+	 * @param  AnimeRepositoryInterface                   $animeRepository
+	 * @param  CategoryRepositoryInterface                $categoryRepository
+	 * @param  CountryRepositoryInterface                 $countryRepository
+	 * @param  TranslateRepositoryInterface               $translateRepository
+	 * @param  \App\Repositories\ParseVideoCDNRepository  $parseVideoCDNRepository
 	 */
 	public function __construct(
 		AnimeRepositoryInterface $animeRepository,
 		CategoryRepositoryInterface $categoryRepository,
 		CountryRepositoryInterface $countryRepository,
-		TranslateRepositoryInterface $translateRepository
+		TranslateRepositoryInterface $translateRepository,
+		ParseVideoCDNRepository $parseVideoCDNRepository
 	) {
 		parent::__construct();
 		self::$categoryRepository = $categoryRepository;
 		self::$animeRepository = $animeRepository;
 		self::$countryRepository = $countryRepository;
 		self::$translateRepository = $translateRepository;
+		self::$CDNVideo = $parseVideoCDNRepository;
 	}
 
 	/**
@@ -171,5 +177,11 @@ class AdminAnimeController extends AdminBaseController
 		$setAnime['rating'] = Lang::get('attributes.rating');
 
 		return $setAnime;
+	}
+
+	public function CDNParse()
+	{
+		return self::$CDNVideo->parseCurl($_GET['wa']);
+
 	}
 }

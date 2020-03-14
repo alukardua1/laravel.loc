@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Repositories\Interfaces\UserRepositoryInterface;
+use Cache;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -46,7 +47,13 @@ class UserController extends Controller
 	 */
 	public function view($userUrl)
 	{
-		$profile = self::getCache('user_'.$userUrl, self::$userRepository->getUsers($userUrl));
+		if (Cache::has('user_'.$userUrl))
+		{
+			$profile = Cache::get('user_'.$userUrl);
+		}else{
+			$profile = self::setCache('user_'.$userUrl, self::$userRepository->getUsers($userUrl));
+		}
+
 		$country = self::loadCountryTimeZone(self::$countryRepository->getCountry(['id', 'title']));
 
 		if (empty($profile)) {

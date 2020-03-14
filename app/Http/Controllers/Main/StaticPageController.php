@@ -45,7 +45,12 @@ class StaticPageController extends Controller
 	 */
 	public function view($url)
 	{
-		$staticPage = self::getCache('page_'.$url, self::$staticPageRepository->getStaticPage($url));
+		if (Cache::has('page_'.$url))
+		{
+			$staticPage = Cache::get('page_'.$url);
+		}else{
+			$staticPage = self::setCache('page_'.$url, self::$staticPageRepository->getStaticPage($url));
+		}
 
 		return view(self::$theme.'/staticPage', compact('staticPage'));
 	}

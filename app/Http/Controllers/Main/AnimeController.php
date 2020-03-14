@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Traits\CreateCacheTrait;
+use Cache;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -31,7 +32,6 @@ class AnimeController extends Controller
 	 * @var AnimeRepositoryInterface
 	 */
 	private static $animeRepository;
-	private static $animePost;
 
 	/**
 	 * AnimeController constructor.
@@ -52,6 +52,7 @@ class AnimeController extends Controller
 	 */
 	public function index(): Renderable
 	{
+		/** @var \App\Models\Anime $animePost */
 		$animePost = self::$animeRepository->getAnime()->paginate(self::$paginate);
 
 		return view(self::$theme.'/home', compact('animePost'));
@@ -70,7 +71,13 @@ class AnimeController extends Controller
 		$uri = self::parseUrl($urlAnime);
 		$idAnime = $uri['uri'][0];
 		$slugAnime = $uri['stringUrl'][1];
-		$animePost = self::getCache('anime_'.$idAnime, self::$animeRepository->getAnime($idAnime)->first());
+
+		if (Cache::has('anime_'.$idAnime)) {
+			$animePost = Cache::get('anime_'.$idAnime);
+		}else{
+			$animePost = self::setCache('anime_'.$idAnime, self::$animeRepository->getAnime($idAnime)->first());
+		}
+
 		$comm = app(CommentController::class)->view($idAnime);
 
 		$animePost = self::currentRefactoring($animePost);

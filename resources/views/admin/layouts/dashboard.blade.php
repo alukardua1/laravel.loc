@@ -21,7 +21,8 @@
             <!-- Logo -->
             <li>
                 <div class="logo-wrapper waves-light">
-                    <a href="#"><img src="https://mdbootstrap.com/img/logo/mdb-transparent.png" class="img-fluid flex-center"></a>
+                    <a href="#"><img src="https://mdbootstrap.com/img/logo/mdb-transparent.png"
+                                     class="img-fluid flex-center"></a>
                 </div>
             </li>
             <!--/. Logo -->
@@ -136,7 +137,8 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-eye"></i> Статические страницы
+                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fas fa-eye"></i> Статические
+                            страницы
                             <i class="fas fa-angle-down rotate-icon"></i></a>
                         <div class="collapsible-body">
                             <ul>
@@ -172,7 +174,8 @@
                 <a class="nav-link"><i class="far fa-comments"></i> <span class="clearfix d-none d-sm-inline-block">Support</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"><i class="fas fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Account</span></a>
+                <a class="nav-link"><i class="fas fa-user"></i> <span
+                            class="clearfix d-none d-sm-inline-block">Account</span></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -221,16 +224,16 @@
 <!-- Footer -->
 
 <script src="{{asset('admin/js/jquery-3.4.1.min.js')}}"></script>
-<script src="{{ asset('admin/js/popper.min.js') }}" ></script>
-<script src="{{ asset('admin/js/bootstrap.min.js') }}" ></script>
-<script src="{{ asset('admin/js/mdb.min.js') }}" ></script>
+<script src="{{ asset('admin/js/popper.min.js') }}"></script>
+<script src="{{ asset('admin/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('admin/js/mdb.min.js') }}"></script>
 <script src="{{asset('admin/js/tinymce/tinymce.min.js')}}"></script>
-<script>tinymce.init({selector:'textarea'});</script>
+<script>tinymce.init({selector: 'textarea'});</script>
 
 <script>
     $(".button-collapse").sideNav();
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.mdb-select').materialSelect();
     });
 
@@ -240,6 +243,27 @@
         showMonthsShort: true
     })
 </script>
+<script>
+    $('#searchVideo').click(function () {
+        var wa = $('#wa_id').val();
+        var i = 1;
+        $.ajax({
+                url: '{{ route('admin.parseCDN')}}',
+                type: "GET",
+                data: {wa:wa},
+                success: function (data) {
+                    console.log(data['results'], wa);
+                    $.each(data['results'], function (key, item){
+                        $('#searchVideoRes').append('<li id="item_'+i+++'" class="list-group-item">'+item['title']+
+                            '<span class="badge badge-primary">'+item['translation']['title']+'</span>' +
+                            '<div class="btn btn-default right" onclick="document.getElementById(\'video\').value =\''+item['link']+'\'">Вставить</div>' +
+                            '</li>');
+                    })
+                }
+            },
+        )
 
+    });
+</script>
 </body>
 </html>
