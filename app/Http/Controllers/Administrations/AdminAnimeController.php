@@ -48,16 +48,19 @@ class AdminAnimeController extends AdminBaseController
 	 */
 	protected static $translateRepository;
 
+	/**
+	 * @var ParseVideoCDNRepository
+	 */
 	protected static $CDNVideo;
 
 	/**
 	 * AdminAnimeController constructor.
 	 *
-	 * @param  AnimeRepositoryInterface                   $animeRepository
-	 * @param  CategoryRepositoryInterface                $categoryRepository
-	 * @param  CountryRepositoryInterface                 $countryRepository
-	 * @param  TranslateRepositoryInterface               $translateRepository
-	 * @param  \App\Repositories\ParseVideoCDNRepository  $parseVideoCDNRepository
+	 * @param  AnimeRepositoryInterface      $animeRepository
+	 * @param  CategoryRepositoryInterface   $categoryRepository
+	 * @param  CountryRepositoryInterface    $countryRepository
+	 * @param  TranslateRepositoryInterface  $translateRepository
+	 * @param  ParseVideoCDNRepository       $parseVideoCDNRepository
 	 */
 	public function __construct(
 		AnimeRepositoryInterface $animeRepository,
@@ -168,6 +171,11 @@ class AdminAnimeController extends AdminBaseController
 		return back()->withErrors(['msg' => 'Ошибка удаления'])->withInput();
 	}
 
+	/**
+	 * Дополнительные поля для админки
+	 *
+	 * @return mixed
+	 */
 	public static function setAnimeAdmin()
 	{
 		$setAnime['category'] = self::$categoryRepository->getCategory()->get();
@@ -179,9 +187,13 @@ class AdminAnimeController extends AdminBaseController
 		return $setAnime;
 	}
 
+	/**
+	 * Парсинг Видеобалансера
+	 *
+	 * @return mixed
+	 */
 	public function CDNParse()
 	{
 		return self::$CDNVideo->parseCurl($_GET['wa']);
-
 	}
 }

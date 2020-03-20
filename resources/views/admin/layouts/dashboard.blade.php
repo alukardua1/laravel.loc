@@ -245,10 +245,10 @@
 </script>
 <script>
     $('#searchVideo').click(function () {
-        var wa = $('#wa_id').val();
-        var i = 1;
+        const wa = $('#wa_id').val();
+        let i = 1;
         $.ajax({
-                url: '{{ route('admin.parseCDN')}}',
+                url: '{{ route('admin.parseCDN') }}',
                 type: "GET",
                 data: {wa:wa},
                 success: function (data) {
