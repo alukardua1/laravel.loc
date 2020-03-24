@@ -21,7 +21,7 @@
                             <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4">
                                 <div class="product-2">
                                     <img class="img-fluid wow fadeInUp" src="{{ isset($post->poster) ?
-                                     asset('storage/'. $post->poster): asset('theme/'.$theme.'/images/no_poster.jpg')}}"
+                                     asset('storage/anime/'. Str::slug($post->title).'/thumb/'. $post->poster): asset('theme/'.$theme.'/images/no_poster.jpg')}}"
                                          alt="{{ $post->title }}">
                                     <span class="sale-2 z-depth-1">{{ $tipFullRu[$post->tip] }}</span>
                                 </div>

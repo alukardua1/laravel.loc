@@ -3,7 +3,7 @@
         <div class="col-md-3">
             <div class="card-img">
                 <img class="img-fluid wow fadeInUp" src="{{ isset($animePost->poster) ?
-                                     asset('storage/'. $animePost->poster): asset('theme/'.$theme.'/images/no_poster.jpg')}}"
+                                     asset('storage/anime/'. Str::slug($animePost->title).'/thumb/'. $animePost->poster): asset('theme/'.$theme.'/images/no_poster.jpg')}}"
                      alt="{{ $animePost->title }}">
             </div>
         </div>

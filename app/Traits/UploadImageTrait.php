@@ -32,6 +32,9 @@ trait UploadImageTrait
 	private static $watermarkX        = 10;
 	private static $watermarkY        = 10;
 	private static $patchSeparator    = '/';
+	private static $thumb             = 'thumb/';
+	private static $imgWidth          = 232;
+	private static $imgHeight         = 322;
 
 	/**
 	 * Загружает постер к записи
@@ -43,25 +46,24 @@ trait UploadImageTrait
 	 */
 	public function uploadImages($updateAnime, $requestForm)
 	{
-		if (file_exists(self::$patchImgPublic.$updateAnime->poster)) {
-			$requestForm = $this->deleteAvatar($updateAnime, $requestForm);
-		}
+		$Extension = $requestForm[self::$imgColumns]->getClientOriginalExtension(
+		);                                                                                    //Получает расширение файла
+		$fileName = self::$imgName.$updateAnime->id.'.'.$Extension;                           // формирует имя файла
+		$pathImg = self::$patchImgPublic.Str::slug($updateAnime->title).self::$patchSeparator;//путь к большой картинке
+		$pathImgThumb = $pathImg.self::$thumb;                                                //путь к уменьшеной картинке
+		$pathImgSave = self::$patchImgStorage.Str::slug($updateAnime->title).self::$patchSeparator;
+		$pathImgSaveThumb = $pathImgSave.self::$thumb;
 
-		$Extension = $requestForm[self::$imgColumns]->getClientOriginalExtension();
-		$fileName = self::$imgName.$updateAnime->id.'.'.$Extension;
+		Storage::putFileAs($pathImg, $requestForm[self::$imgColumns], $fileName);     //запись картинки
+		Storage::putFileAs($pathImgThumb, $requestForm[self::$imgColumns], $fileName);//запись уменьшеной картинки
 
-		Storage::putFileAs(
-			self::$patchImgPublic.Str::slug($updateAnime->title).self::$patchSeparator,
-			$requestForm[self::$imgColumns],
-			$fileName
-		);
-
-		$requestForm[self::$imgColumns] = self::$imgPostDir.Str::slug(
-				$updateAnime->title
-			).self::$patchSeparator.$fileName;
-		$img = Image::make(self::$patchImgStorage.Str::slug($updateAnime->title).self::$patchSeparator.$fileName);
+		$requestForm[self::$imgColumns] = $fileName;//Запись в базу
+		$img = Image::make($pathImgSave.$fileName);
 		$img->insert(self::$watermarkImg, self::$watermarkPosition, self::$watermarkX, self::$watermarkY);
-		$img->save(self::$patchImgStorage.Str::slug($updateAnime->title).self::$patchSeparator.$fileName);
+		$img->save($pathImgSave.$fileName);
+		$imgThumb = Image::make($pathImgSaveThumb.$fileName);
+		$imgThumb->resize(self::$imgWidth, self::$imgHeight);
+		$imgThumb->save($pathImgSaveThumb.$fileName);
 
 		return $requestForm;
 	}
