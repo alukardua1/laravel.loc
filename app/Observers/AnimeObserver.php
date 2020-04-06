@@ -55,7 +55,7 @@ class AnimeObserver
 	 */
 	public function updated(Anime $anime): RedirectResponse
 	{
-		return redirect()->route('admin.anime.edit', $anime->id)->send();
+		return redirect()->route('admin.anime')->send();
 	}
 
 	/**

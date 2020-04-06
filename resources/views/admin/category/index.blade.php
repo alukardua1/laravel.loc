@@ -7,16 +7,28 @@
             <tr>
                 <th>#</th>
                 <th>Название</th>
+                <th>Родительская категория</th>
                 <th>Действия</th>
             </tr>
             </thead>
             <tbody>
             @foreach($category as $cat)
-                    <tr>
-                        <td>{{$cat->id}}</td>
-                        <td><a href="{{route('admin.category.edit', $cat->url)}}">{{$cat->title}}</a></td>
-                        <td><a href="{{route('admin.category.delete', $cat->url)}}" aria-label="Удалить"><i class="fas fa-trash-alt"></i></a> </td>
-                    @endforeach
+                <tr>
+                    <td>{{$cat->id}}</td>
+                    <td><a href="{{route('admin.category.edit', $cat->url)}}">{{$cat->title}}</a></td>
+                    <td>
+                        @foreach($allCategory as $key=>$value)
+                            @if($value->id === $cat->parent_id)
+                                {{$value->title}}
+                            @endif
+                        @endforeach
+                    </td>
+                    <td>
+                        <a href="{{route('admin.category.delete', $cat->url)}}" aria-label="Удалить">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+            @endforeach
             </tbody>
         </table>
     </div>

@@ -18,6 +18,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Category extends Model
 {
+	protected $fillable = [
+		'title', 'description', 'parent_id', 'url',
+	];
+
 	/**
 	 * @return BelongsToMany
 	 */
@@ -31,6 +35,11 @@ class Category extends Model
 	 */
 	public function getCategory(): HasOne
 	{
-		return $this->hasOne(__CLASS__, 'id', 'id');
+		return $this->hasOne(__CLASS__, 'id', 'parent_id');
 	}
+
+	/*public function getParentId(): HasOne
+	{
+		return
+	}*/
 }

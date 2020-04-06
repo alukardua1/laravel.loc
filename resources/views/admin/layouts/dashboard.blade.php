@@ -66,7 +66,7 @@
                             <ul>
                                 <li><a href="{{route('admin.category')}}" class="waves-effect">Редактировать</a>
                                 </li>
-                                <li><a href="#" class="waves-effect">Добавить</a>
+                                <li><a href="{{route('admin.category.add')}}" class="waves-effect">Добавить</a>
                                 </li>
                             </ul>
                         </div>

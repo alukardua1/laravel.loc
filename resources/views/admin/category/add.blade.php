@@ -1,30 +1,24 @@
 @extends('admin.layouts.dashboard')
-@section('title', 'Редактирование категории '.$category->title)
+@section('title', 'Добавление категории ')
 @section('content')
-    <form method="POST" action="{{ route('admin.category.update', $category->url) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.category.save') }}" enctype="multipart/form-data">
         @method('PATCH')
         @csrf
         <div class="md-form">
             <label for="title" class="title-info">Заголовок</label>
-            <input type="text" id="title" name="title" class="form-control" value="{{$category->title}}">
+            <input type="text" id="title" name="title" class="form-control" value="">
         </div>
 
         <select name="parent_id" class="mdb-select md-form">
             <option value="" disabled selected>Выберите родительскую категорию</option>
             <option value="0">Убрать родительскую категорию</option>
             @foreach($allCategory as $key => $value)
-                @if ($value->id <> $category->id)
-                <option value="{{$value->id}}"
-                        @if ($category->parent_id == $value->id)
-                        selected
-                        @endif
-                >{{$value->title}}</option>
-                @endif
+                    <option value="{{$value->id}}">{{$value->title}}</option>
             @endforeach
         </select>
         <div class="md-form">
             <textarea id="description" name="description" class="md-textarea form-control"
-                      rows="10">{{$category->description}}</textarea>
+                      rows="10"></textarea>
         </div>
         @endsection
         @section('footer')

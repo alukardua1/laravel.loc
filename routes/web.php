@@ -122,7 +122,7 @@ Route::group(
             function () {
                 Route::get('', 'AdminCategoryController@index')->name('admin.category');
                 Route::get('edit/{category}', 'AdminCategoryController@edit')->name('admin.category.edit');
-                Route::patch('edit/{category}', 'AdminCategoryController@edit')->name('admin.category.update');
+                Route::patch('edit/{category}', 'AdminCategoryController@update')->name('admin.category.update');
                 Route::get('add', 'AdminCategoryController@create')->name('admin.category.add');
                 Route::patch('add', 'AdminCategoryController@store')->name('admin.category.save');
                 Route::get('delete/{category}', 'AdminCategoryController@delete')->name('admin.category.delete');

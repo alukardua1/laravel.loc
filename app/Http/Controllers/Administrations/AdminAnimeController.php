@@ -150,7 +150,7 @@ class AdminAnimeController extends AdminBaseController
 		$updateAnime = self::$animeRepository->setAnime($request, $animeUrl);
 
 		if ($updateAnime) {
-			return redirect()->route('admin.anime.edit', $animeUrl);
+			return redirect()->route('admin.anime');
 		}
 		return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
 	}

@@ -33,12 +33,13 @@ class CategoryRepository implements CategoryRepositoryInterface
 	{
 		if ($url && $isAdmin) {
 			return Category::where('url', $url)
-				->select(['id', 'title', 'url']);
+				->with(['getCategory'])
+				->select(['id', 'title', 'url', 'parent_id', 'description']);
 		}
 		if ($url) {
 			/** @var mixed $result текущая категория */
 			$result = Category::where('url', $url)
-				->select(['id', 'title', 'url'])
+				->select(['id', 'title', 'url', 'parent_id', 'description'])
 				->first();
 			if ($result) {
 				/** @var mixed $anime все записи текущей категории если найдена категория */
@@ -57,13 +58,25 @@ class CategoryRepository implements CategoryRepositoryInterface
 
 	/**
 	 * @param  Request  $request
-	 * @param  null      $url
+	 * @param  string      $url
 	 *
 	 * @return mixed|void
 	 */
 	public function setCategory(Request $request, $url = null)
 	{
-		// TODO: Implement setCategory() method.
+		$requestForm = $request->all();
+		if ($url) {
+			$updateCategory = Category::where('url', $url)->first();
+		} else {
+			$updateCategory = Category::create($requestForm);
+		}
+		if ($request['parent_id']) {
+			$updateCategory->fill($request->except('parent_id'));
+			$updateCategory->save();
+		}
+		$updateCategory->touch();
+
+		return $updateCategory->update($requestForm);
 	}
 
 	/**

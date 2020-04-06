@@ -37,8 +37,7 @@
         <select name="genre[]" class="mdb-select md-form" multiple>
             <option value="" disabled selected>Выберите категорию</option>
             @foreach($setAnime['category'] as $key => $value)
-                <option
-                        value="{{$value->id}}"
+                <option value="{{$value->id}}"
                         @foreach($animePost->getCategory as $categoryAnime)
                         @if($value->id === $categoryAnime->id)
                         selected

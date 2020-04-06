@@ -8,8 +8,10 @@
 namespace App\Providers;
 
 use App\Models\Anime;
+use App\Models\Category;
 use App\Models\User;
 use App\Observers\AnimeObserver;
+use App\Observers\CategoryObserver;
 use App\Observers\UserObserver;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,5 +36,6 @@ class ObserverServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         Anime::observe(AnimeObserver::class);
+        Category::observe(CategoryObserver::class);
     }
 }
