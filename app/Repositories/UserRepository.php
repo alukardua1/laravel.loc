@@ -46,8 +46,8 @@ class UserRepository implements UserRepositoryInterface
 	/**
 	 * Сохраняет изменения в базу
 	 *
-	 * @param  Request           $request
-	 * @param  $currentUser
+	 * @param  Request  $request
+	 * @param           $currentUser
 	 *
 	 * @return mixed
 	 */

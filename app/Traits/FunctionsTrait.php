@@ -85,9 +85,9 @@ trait FunctionsTrait
 			if (Carbon::parse($aired_on)->format('m') >= $key) {
 				if (Carbon::parse($aired_on)->format('m') == 12) {
 					$year = Carbon::parse($aired_on)->format('Y') + 1;
-					$seasons = $value.$year;
+					$seasons = $value . $year;
 				} else {
-					$seasons = $value.Carbon::parse($aired_on)->format('Y');
+					$seasons = $value . Carbon::parse($aired_on)->format('Y');
 				}
 			}
 		}
@@ -192,8 +192,11 @@ trait FunctionsTrait
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_URL, $url);
 		curl_setopt($curl, CURLOPT_FAILONERROR, 1);
-		curl_setopt($curl, CURLOPT_USERAGENT,
-					"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0");
+		curl_setopt(
+			$curl,
+			CURLOPT_USERAGENT,
+			"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0"
+		);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 2);
 		curl_setopt($curl, CURLOPT_TIMEOUT, 30);

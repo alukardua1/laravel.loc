@@ -31,7 +31,7 @@ class AdminAnimeController extends AdminBaseController
 	/**
 	 * @var CategoryRepositoryInterface
 	 */
-	protected static $categoryRepository;
+	private static $categoryRepository;
 
 	/**
 	 * @var AnimeRepositoryInterface
@@ -41,17 +41,17 @@ class AdminAnimeController extends AdminBaseController
 	/**
 	 * @var CountryRepositoryInterface
 	 */
-	protected static $countryRepository;
+	private static $countryRepository;
 
 	/**
 	 * @var TranslateRepositoryInterface
 	 */
-	protected static $translateRepository;
+	private static $translateRepository;
 
 	/**
 	 * @var ParseVideoCDNRepository
 	 */
-	protected static $CDNVideo;
+	private static $CDNVideo;
 
 	/**
 	 * AdminAnimeController constructor.

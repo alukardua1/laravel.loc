@@ -31,9 +31,9 @@ class ParseVideoCDNRepository implements ParseVideoCDNRepositoryInterface
 	public function parseCurl($api)
 	{
 		self::$CDNVideo = self::getCurl(
-			config('appSecondConfig.CDNUrl').config(
+			config('appSecondConfig.CDNUrl') . config(
 				'appSecondConfig.CDNToken'
-			).'&worldart_animation_id='.$api
+			) . '&worldart_animation_id=' . $api
 		);
 		self::$CDNVideo = json_decode(self::$CDNVideo, true);
 

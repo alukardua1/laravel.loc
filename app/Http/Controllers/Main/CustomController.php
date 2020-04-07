@@ -31,6 +31,6 @@ class CustomController extends Controller
 			->getCustom('*', $columns, $variable)
 			->paginate(self::$paginate);
 
-		return view(self::$theme.'/home', compact('animePost'));
+		return view(self::$theme . '/home', compact('animePost'));
 	}
 }

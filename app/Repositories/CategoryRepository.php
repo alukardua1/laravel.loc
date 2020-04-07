@@ -31,15 +31,16 @@ class CategoryRepository implements CategoryRepositoryInterface
 	 */
 	public function getCategory($url = null, $isAdmin = false)
 	{
+		$select = ['id', 'title', 'url', 'parent_id', 'description'];
 		if ($url && $isAdmin) {
 			return Category::where('url', $url)
 				->with(['getCategory'])
-				->select(['id', 'title', 'url', 'parent_id', 'description']);
+				->select($select);
 		}
 		if ($url) {
 			/** @var mixed $result текущая категория */
 			$result = Category::where('url', $url)
-				->select(['id', 'title', 'url', 'parent_id', 'description'])
+				->select($select)
 				->first();
 			if ($result) {
 				/** @var mixed $anime все записи текущей категории если найдена категория */
@@ -57,8 +58,10 @@ class CategoryRepository implements CategoryRepositoryInterface
 	}
 
 	/**
+	 * Сохраняет категории
+	 *
 	 * @param  Request  $request
-	 * @param  string      $url
+	 * @param  string   $url
 	 *
 	 * @return mixed|void
 	 */
@@ -80,6 +83,8 @@ class CategoryRepository implements CategoryRepositoryInterface
 	}
 
 	/**
+	 * Удаляет категории
+	 *
 	 * @param  string  $url  Url category
 	 *
 	 * @throws Throwable

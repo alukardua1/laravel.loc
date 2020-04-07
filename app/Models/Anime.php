@@ -34,9 +34,32 @@ class Anime extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'title', 'content', 'poster', 'wa_id', 'shikimori_id', 'kp_id', 'mal_id', 'anidb_id', 'japanese', 'english',
-		'romaji', 'url', 'delivery_time', 'tv_canal', 'tip', 'count_series', 'duration', 'aired_on', 'released_on',
-		'rating', 'country_id', 'video', 'user_id', 'posted_at', 'released', 'current_series',
+		'title',
+		'content',
+		'poster',
+		'wa_id',
+		'shikimori_id',
+		'kp_id',
+		'mal_id',
+		'anidb_id',
+		'japanese',
+		'english',
+		'romaji',
+		'url',
+		'delivery_time',
+		'tv_canal',
+		'tip',
+		'count_series',
+		'duration',
+		'aired_on',
+		'released_on',
+		'rating',
+		'country_id',
+		'video',
+		'user_id',
+		'posted_at',
+		'released',
+		'current_series',
 	];
 
 	/**

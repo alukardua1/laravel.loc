@@ -47,23 +47,25 @@ trait UploadImageTrait
 	public function uploadImages($updateAnime, $requestForm)
 	{
 		$Extension = $requestForm[self::$imgColumns]->getClientOriginalExtension(
-		);                                                                                    //Получает расширение файла
-		$fileName = self::$imgName.$updateAnime->id.'.'.$Extension;                           // формирует имя файла
-		$pathImg = self::$patchImgPublic.Str::slug($updateAnime->title).self::$patchSeparator;//путь к большой картинке
-		$pathImgThumb = $pathImg.self::$thumb;                                                //путь к уменьшеной картинке
-		$pathImgSave = self::$patchImgStorage.Str::slug($updateAnime->title).self::$patchSeparator;
-		$pathImgSaveThumb = $pathImgSave.self::$thumb;
+		);                                                                                          //Получает расширение файла
+		$fileName = self::$imgName . $updateAnime->id . '.' . $Extension;                           // формирует имя файла
+		$pathImg = self::$patchImgPublic . Str::slug(
+				$updateAnime->title
+			) . self::$patchSeparator;                                                              //путь к большой картинке
+		$pathImgThumb = $pathImg . self::$thumb;                                                    //путь к уменьшеной картинке
+		$pathImgSave = self::$patchImgStorage . Str::slug($updateAnime->title) . self::$patchSeparator;
+		$pathImgSaveThumb = $pathImgSave . self::$thumb;
 
 		Storage::putFileAs($pathImg, $requestForm[self::$imgColumns], $fileName);     //запись картинки
 		Storage::putFileAs($pathImgThumb, $requestForm[self::$imgColumns], $fileName);//запись уменьшеной картинки
 
 		$requestForm[self::$imgColumns] = $fileName;//Запись в базу
-		$img = Image::make($pathImgSave.$fileName);
+		$img = Image::make($pathImgSave . $fileName);
 		$img->insert(self::$watermarkImg, self::$watermarkPosition, self::$watermarkX, self::$watermarkY);
-		$img->save($pathImgSave.$fileName);
-		$imgThumb = Image::make($pathImgSaveThumb.$fileName);
+		$img->save($pathImgSave . $fileName);
+		$imgThumb = Image::make($pathImgSaveThumb . $fileName);
 		$imgThumb->resize(self::$imgWidth, self::$imgHeight);
-		$imgThumb->save($pathImgSaveThumb.$fileName);
+		$imgThumb->save($pathImgSaveThumb . $fileName);
 
 		return $requestForm;
 	}

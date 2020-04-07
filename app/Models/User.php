@@ -15,15 +15,15 @@ use Illuminate\Notifications\Notifiable;
 /**
  * Class User
  *
- * @property int               $id
- * @property string            $login
- * @property string            $photo
- * @property \App\Models\Group $getGroup
- * @property int               $age
- * @property mixed             $date_of_birth
- * @property mixed             $created_at
- * @property string            $group
- * @property string            $register
+ * @property int    $id
+ * @property string $login
+ * @property string $photo
+ * @property Group  $getGroup
+ * @property int    $age
+ * @property mixed  $date_of_birth
+ * @property mixed  $created_at
+ * @property string $group
+ * @property string $register
  *
  * @package App\Models
  */
@@ -37,7 +37,14 @@ class User extends Authenticatable
 	 * @var array
 	 */
 	protected $fillable = [
-		'name', 'email', 'password', 'login', 'signature', 'country_id', 'photo', 'allow_email',
+		'name',
+		'email',
+		'password',
+		'login',
+		'signature',
+		'country_id',
+		'photo',
+		'allow_email',
 	];
 
 	/**
@@ -46,7 +53,8 @@ class User extends Authenticatable
 	 * @var array
 	 */
 	protected $hidden = [
-		'password', 'remember_token',
+		'password',
+		'remember_token',
 	];
 
 	/**

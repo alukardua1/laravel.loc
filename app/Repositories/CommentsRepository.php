@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 class CommentsRepository implements CommentsRepositoryInterface
 {
 	/**
-	 * @param int $id
+	 * @param  int  $id
 	 *
 	 * @return mixed|void
 	 */
@@ -32,11 +32,9 @@ class CommentsRepository implements CommentsRepositoryInterface
 			->get();
 
 		$result->transform(
-			function ($comment) use ($result) {
+			function($comment) use ($result) {
 				// Добавляем к каждому комментарию дочерние комментарии.
-				$comment
-					->children = $result
-					->where('parent_comment_id', $comment->id);
+				$comment->children = $result->where('parent_comment_id', $comment->id);
 
 				return $comment;
 			}
@@ -44,9 +42,8 @@ class CommentsRepository implements CommentsRepositoryInterface
 
 		// Удаляем из коллекции комментарии у которых есть родители.
 		$result = $result->reject(
-			function ($comment) {
-				return $comment
-						->parent_comment_id !== 0;
+			function($comment) {
+				return $comment->parent_comment_id !== 0;
 			}
 		);
 
@@ -54,14 +51,13 @@ class CommentsRepository implements CommentsRepositoryInterface
 	}
 
 	/**
-	 * @param int $id
+	 * @param  int  $id
 	 *
 	 * @return mixed
 	 */
 	public function countComments($id)
 	{
-		return Comment::where('anime_id', '=', $id)
-			->count();
+		return Comment::where('anime_id', '=', $id)->count();
 	}
 
 	/**
@@ -76,7 +72,7 @@ class CommentsRepository implements CommentsRepositoryInterface
 	}
 
 	/**
-	 * @param int $id
+	 * @param  int  $id
 	 *
 	 * @throws Throwable
 	 * @return bool|mixed|null
@@ -91,8 +87,7 @@ class CommentsRepository implements CommentsRepositoryInterface
 			$comm->delete();
 		}
 
-		$deleteComment = Comment::where('id', $id)
-			->first();
+		$deleteComment = Comment::where('id', $id)->first();
 
 		return $deleteComment->delete();
 	}

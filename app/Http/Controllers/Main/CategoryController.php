@@ -19,11 +19,12 @@ use Illuminate\View\View;
  */
 class CategoryController extends Controller
 {
+	private static $keyCache = 'categories';
 
 	/**
 	 * Выводит аниме по категориям
 	 *
-	 * @param string $url
+	 * @param  string  $url
 	 *
 	 * @return Factory|View|void
 	 */
@@ -33,16 +34,16 @@ class CategoryController extends Controller
 			->getCategory($url)
 			->paginate(self::$paginate);
 
-		if (Cache::has('categories')) {
-			$categories = Cache::get('categories');
-		}else{
-			$categories = self::setCache('categories', self::$categoryRepository->getCategory($url)->getParent());
+		if (Cache::has(self::$keyCache)) {
+			$categories = Cache::get(self::$keyCache);
+		} else {
+			$categories = self::setCache(self::$keyCache, self::$categoryRepository->getCategory($url)->getParent());
 		}
 
 		if (empty($animePost)) {
 			return abort(404);
 		}
 
-		return view(self::$theme.'/home', compact('animePost', 'categories'));
+		return view(self::$theme . '/home', compact('animePost', 'categories'));
 	}
 }

@@ -25,6 +25,7 @@ class UserController extends Controller
 	 * @var UserRepositoryInterface
 	 */
 	private static $userRepository;
+	private static $keyCache = 'user_';
 
 	/**
 	 * UserController constructor.
@@ -47,11 +48,10 @@ class UserController extends Controller
 	 */
 	public function view($userUrl)
 	{
-		if (Cache::has('user_'.$userUrl))
-		{
-			$profile = Cache::get('user_'.$userUrl);
-		}else{
-			$profile = self::setCache('user_'.$userUrl, self::$userRepository->getUsers($userUrl));
+		if (Cache::has(self::$keyCache . $userUrl)) {
+			$profile = Cache::get(self::$keyCache . $userUrl);
+		} else {
+			$profile = self::setCache(self::$keyCache . $userUrl, self::$userRepository->getUsers($userUrl));
 		}
 
 		$country = self::loadCountryTimeZone(self::$countryRepository->getCountry(['id', 'title']));
@@ -60,7 +60,7 @@ class UserController extends Controller
 			return abort(404);
 		}
 
-		return view(self::$theme.'/profile.profile', compact('profile', 'country'));
+		return view(self::$theme . '/profile.profile', compact('profile', 'country'));
 	}
 
 	/**

@@ -73,7 +73,7 @@ class AnimeRepository implements AnimeRepositoryInterface
 		$requestForm = $request->all();
 		if ($id) {
 			$updateAnime = Anime::where('id', $id)->first();
-			Cache::delete('anime_'.$id);
+			Cache::delete('anime_' . $id);
 		} else {
 			$updateAnime = Anime::create($requestForm);
 		}
@@ -111,7 +111,7 @@ class AnimeRepository implements AnimeRepositoryInterface
 		$deleteAnime = Anime::where('id', $id)->first();
 		$deleteAnime->getTranslate()->sync([]);
 		$deleteAnime->getCategory()->sync([]);
-		Cache::delete('anime_'.$id);
+		Cache::delete('anime_' . $id);
 
 		return $deleteAnime->delete();
 	}
@@ -126,10 +126,10 @@ class AnimeRepository implements AnimeRepositoryInterface
 	public function getSearch(Request $request)
 	{
 		return Anime::with(['getCategory'])
-			->orWhere('title', 'LIKE', '%'.$request->story.'%')
-			->orWhere('japanese', 'LIKE', '%'.$request->story.'%')
-			->orWhere('english', 'LIKE', '%'.$request->story.'%')
-			->orWhere('romaji', 'LIKE', '%'.$request->story.'%')
+			->orWhere('title', 'LIKE', '%' . $request->story . '%')
+			->orWhere('japanese', 'LIKE', '%' . $request->story . '%')
+			->orWhere('english', 'LIKE', '%' . $request->story . '%')
+			->orWhere('romaji', 'LIKE', '%' . $request->story . '%')
 			->orderBy('created_at', 'DESC');
 	}
 }

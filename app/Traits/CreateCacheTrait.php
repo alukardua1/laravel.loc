@@ -20,8 +20,8 @@ trait CreateCacheTrait
 	/**
 	 * Создает кэш
 	 *
-	 * @param string $key
-	 * @param mixed $post
+	 * @param  string  $key
+	 * @param  mixed   $post
 	 *
 	 * @return mixed
 	 */
@@ -32,7 +32,7 @@ trait CreateCacheTrait
 		return Cache::remember(
 			$key,
 			$ttl * 86400,
-			function () use ($post) {
+			function() use ($post) {
 				return $post;
 			}
 		);

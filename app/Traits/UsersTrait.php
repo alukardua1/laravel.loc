@@ -38,20 +38,20 @@ trait UsersTrait
 	 */
 	public function uploadAvatar($updateUser, $requestForm)
 	{
-		if (file_exists(self::$patchAvatar.$updateUser->photo)) {
+		if (file_exists(self::$patchAvatar . $updateUser->photo)) {
 			$requestForm = $this->deleteAvatar($updateUser, $requestForm);
 		}
 
 		$Extension = $requestForm[self::$avatarColumns]->getClientOriginalExtension();
-		$fileName = self::$avatarName.$updateUser->id.'.'.$Extension;
+		$fileName = self::$avatarName . $updateUser->id . '.' . $Extension;
 
 		Storage::putFileAs(
-			self::$patchAvatar.$updateUser->login.self::$patchSeparator,
+			self::$patchAvatar . $updateUser->login . self::$patchSeparator,
 			$requestForm[self::$avatarColumns],
 			$fileName
 		);
 
-		$requestForm[self::$avatarColumns] = $updateUser->login.self::$patchSeparator.$fileName;
+		$requestForm[self::$avatarColumns] = $updateUser->login . self::$patchSeparator . $fileName;
 
 		return $requestForm;
 	}
@@ -66,7 +66,7 @@ trait UsersTrait
 	 */
 	private function deleteAvatar($updateUser, $requestForm): array
 	{
-		Storage::delete(self::$patchAvatar.$updateUser->photo);
+		Storage::delete(self::$patchAvatar . $updateUser->photo);
 		$requestForm[self::$avatarColumns] = '';
 
 		return $requestForm;

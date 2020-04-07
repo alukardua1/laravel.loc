@@ -25,12 +25,14 @@ use App\Repositories\Interfaces\FavoritesRepositoryInterface;
 use App\Repositories\Interfaces\ParseVideoCDNRepositoryInterface;
 use App\Repositories\Interfaces\PeopleRepositoryInterface;
 use App\Repositories\Interfaces\StaticPageRepositoryInterface;
+use App\Repositories\Interfaces\StudiosRepositoryInterface;
 use App\Repositories\Interfaces\TranslateRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\Interfaces\VoteRepositoryInterface;
 use App\Repositories\ParseVideoCDNRepository;
 use App\Repositories\PeopleRepository;
 use App\Repositories\StaticPageRepository;
+use App\Repositories\StudiosRepository;
 use App\Repositories\TranslateRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\VoteRepository;
@@ -43,7 +45,7 @@ class RepositoryServiceProvider extends ServiceProvider
 	 *
 	 * @return void
 	 */
-	public function register():void
+	public function register(): void
 	{
 		$this->app->bind(
 			AnimeRepositoryInterface::class,
@@ -86,6 +88,10 @@ class RepositoryServiceProvider extends ServiceProvider
 			StaticPageRepository::class
 		);
 		$this->app->bind(
+			StudiosRepositoryInterface::class,
+			StudiosRepository::class
+		);
+		$this->app->bind(
 			TranslateRepositoryInterface::class,
 			TranslateRepository::class
 		);
@@ -104,7 +110,7 @@ class RepositoryServiceProvider extends ServiceProvider
 	 *
 	 * @return void
 	 */
-	public function boot():void
+	public function boot(): void
 	{
 		//
 	}

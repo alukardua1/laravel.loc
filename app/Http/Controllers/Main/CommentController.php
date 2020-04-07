@@ -26,6 +26,8 @@ class CommentController extends Controller
 	 * @var CommentsRepositoryInterface
 	 */
 	private static $commentRepository;
+	private static $keyCache      = 'animeComments_';
+	private static $keyCacheCount = 'animeCommentsCount_';
 
 	/**
 	 * CommentController constructor.
@@ -39,21 +41,27 @@ class CommentController extends Controller
 	}
 
 	/**
-	 * @param int $idAnime
+	 * @param  int  $idAnime
 	 *
 	 * @return mixed
 	 */
 	public function view($idAnime)
 	{
-		if (Cache::has('animeComments_'.$idAnime)) {
-			$comments['com'] = Cache::get('animeComments_'.$idAnime);
-		}else{
-			$comments['com'] = self::setCache('animeComments_'.$idAnime, self::$commentRepository->getComments($idAnime));
+		if (Cache::has(self::$keyCache . $idAnime)) {
+			$comments['com'] = Cache::get(self::$keyCache . $idAnime);
+		} else {
+			$comments['com'] = self::setCache(
+				self::$keyCache . $idAnime,
+				self::$commentRepository->getComments($idAnime)
+			);
 		}
-		if (Cache::has('animeComments_'.$idAnime)) {
-			$comments['count'] = Cache::get('animeCommentsCount_'.$idAnime);
-		}else{
-			$comments['count'] = self::setCache('animeCommentsCount_'.$idAnime, self::$commentRepository->countComments($idAnime));
+		if (Cache::has(self::$keyCache . $idAnime)) {
+			$comments['count'] = Cache::get(self::$keyCacheCount . $idAnime);
+		} else {
+			$comments['count'] = self::setCache(
+				self::$keyCacheCount . $idAnime,
+				self::$commentRepository->countComments($idAnime)
+			);
 		}
 
 		return $comments;
@@ -70,7 +78,7 @@ class CommentController extends Controller
 		if ($comment) {
 			return redirect()->back();
 		}
-		return view(self::$theme.'/errors.error')->withErrors(['msg' => 'Ошибка добавления комментария']);
+		return view(self::$theme . '/errors.error')->withErrors(['msg' => 'Ошибка добавления комментария']);
 	}
 
 	/**
@@ -84,6 +92,6 @@ class CommentController extends Controller
 		if ($comment) {
 			return redirect()->back();
 		}
-		return view(self::$theme.'/errors.error')->withErrors(['msg' => 'Ошибка удаления комментария']);
+		return view(self::$theme . '/errors.error')->withErrors(['msg' => 'Ошибка удаления комментария']);
 	}
 }

@@ -92,7 +92,7 @@ class AdminCategoryController extends AdminBaseController
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function store(Request $request)
+	public function store(Request $request): RedirectResponse
 	{
 		$updateCategory = self::$categoryRepository->setCategory($request);
 		if ($updateCategory) {

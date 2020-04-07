@@ -24,6 +24,7 @@ class StaticPageController extends Controller
 	 * @var StaticPageRepositoryInterface
 	 */
 	private static $staticPageRepository;
+	private static $keyCache = 'page_';
 
 	/**
 	 * StaticPageController constructor.
@@ -39,19 +40,18 @@ class StaticPageController extends Controller
 	/**
 	 * Выводит статическую страницу
 	 *
-	 * @param string $url
+	 * @param  string  $url
 	 *
 	 * @return Factory|View
 	 */
 	public function view($url)
 	{
-		if (Cache::has('page_'.$url))
-		{
-			$staticPage = Cache::get('page_'.$url);
-		}else{
-			$staticPage = self::setCache('page_'.$url, self::$staticPageRepository->getStaticPage($url));
+		if (Cache::has(self::$keyCache . $url)) {
+			$staticPage = Cache::get(self::$keyCache . $url);
+		} else {
+			$staticPage = self::setCache(self::$keyCache . $url, self::$staticPageRepository->getStaticPage($url));
 		}
 
-		return view(self::$theme.'/staticPage', compact('staticPage'));
+		return view(self::$theme . '/staticPage', compact('staticPage'));
 	}
 }

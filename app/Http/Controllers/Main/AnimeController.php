@@ -32,6 +32,7 @@ class AnimeController extends Controller
 	 * @var AnimeRepositoryInterface
 	 */
 	private static $animeRepository;
+	private static $keyCache = 'anime_';
 
 	/**
 	 * AnimeController constructor.
@@ -48,34 +49,34 @@ class AnimeController extends Controller
 	/**
 	 * Главная страница аниме
 	 *
+	 * @var \App\Models\Anime $animePost
 	 * @return Renderable
 	 */
 	public function index(): Renderable
 	{
-		/** @var \App\Models\Anime $animePost */
 		$animePost = self::$animeRepository->getAnime()->paginate(self::$paginate);
 
-		return view(self::$theme.'/home', compact('animePost'));
+		return view(self::$theme . '/home', compact('animePost'));
 	}
 
 	/**
 	 * Страница аниме поста
 	 *
-	 * @param string $urlAnime
+	 * @param  string         $urlAnime
 	 *
+	 * @var \App\Models\Anime $animePost
 	 * @return Factory|RedirectResponse|Redirector|View|void
 	 */
 	public function view($urlAnime)
 	{
-		/** @var \App\Models\Anime $animePost */
 		$uri = self::parseUrl($urlAnime);
 		$idAnime = $uri['uri'][0];
 		$slugAnime = $uri['stringUrl'][1];
 
-		if (Cache::has('anime_'.$idAnime)) {
-			$animePost = Cache::get('anime_'.$idAnime);
-		}else{
-			$animePost = self::setCache('anime_'.$idAnime, self::$animeRepository->getAnime($idAnime)->first());
+		if (Cache::has(self::$keyCache . $idAnime)) {
+			$animePost = Cache::get(self::$keyCache . $idAnime);
+		} else {
+			$animePost = self::setCache(self::$keyCache . $idAnime, self::$animeRepository->getAnime($idAnime)->first());
 		}
 
 		$comm = app(CommentController::class)->view($idAnime);
@@ -87,10 +88,10 @@ class AnimeController extends Controller
 		}
 
 		if ($slugAnime !== $animePost->url) {
-			return redirect('/anime/'.$animePost->id.'-'.$animePost->url);
+			return redirect('/anime/' . $animePost->id . '-' . $animePost->url);
 		}
 
-		return view(self::$theme.'/full_anime', compact('animePost', 'comm'));
+		return view(self::$theme . '/full_anime', compact('animePost', 'comm'));
 	}
 
 	/**
@@ -105,9 +106,9 @@ class AnimeController extends Controller
 		$animePost = self::$animeRepository->getSearch($request)->paginate(self::$paginate);
 
 		if (empty($animePost)) {
-			return view(self::$theme.'/errors.error')->withErrors(['msg' => 'Ничего не найдено']);
+			return view(self::$theme . '/errors.error')->withErrors(['msg' => 'Ничего не найдено']);
 		}
 
-		return view(self::$theme.'/home', compact('animePost'));
+		return view(self::$theme . '/home', compact('animePost'));
 	}
 }

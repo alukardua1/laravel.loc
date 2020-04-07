@@ -19,7 +19,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Category extends Model
 {
 	protected $fillable = [
-		'title', 'description', 'parent_id', 'url',
+		'title',
+		'description',
+		'parent_id',
+		'url',
 	];
 
 	/**
