@@ -27,6 +27,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string poster
  *
  * @package App\Models
+ * @method static create($requestForm)
+ * @method static where(string $string, $id)
+ * @method first()
  */
 class Anime extends Model
 {

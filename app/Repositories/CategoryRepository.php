@@ -88,7 +88,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 	 * @param  string  $url  Url category
 	 *
 	 * @throws Throwable
-	 * @return bool|null
+	 * @return mixed
 	 */
 	public function delCategory($url)
 	{

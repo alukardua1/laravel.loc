@@ -62,12 +62,15 @@ class AnimeRepository implements AnimeRepositoryInterface
 	 * @param  int                       $id       id записи
 	 *
 	 * @throws \Psr\SimpleCache\InvalidArgumentException
+	 *
 	 * @return mixed
 	 * @todo Попытатся перенести все в AnimeObserver
 	 */
 	public function setAnime(Request $request, $id = null)
 	{
-		/** @var \App\Models\Anime $updateAnime
+		/**
+		 * @var \App\Models\Anime $updateAnime
+		 * @var mixed             $requestForm
 		 */
 		$update = [];
 		$requestForm = $request->all();
@@ -107,8 +110,11 @@ class AnimeRepository implements AnimeRepositoryInterface
 	 */
 	public function delAnime($id)
 	{
-		/** @var \App\Models\Anime $deleteAnime */
-		$deleteAnime = Anime::where('id', $id)->first();
+		/**
+		 * @var \App\Models\Anime $deleteAnime
+		 */
+		$deleteAnime = Anime::where('id', $id);
+		$deleteAnime = $deleteAnime->first();
 		$deleteAnime->getTranslate()->sync([]);
 		$deleteAnime->getCategory()->sync([]);
 		Cache::delete('anime_' . $id);
@@ -125,11 +131,14 @@ class AnimeRepository implements AnimeRepositoryInterface
 	 */
 	public function getSearch(Request $request)
 	{
+		/**
+		 * @var mixed $request ->story
+		 */
 		return Anime::with(['getCategory'])
-			->orWhere('title', 'LIKE', '%' . $request->story . '%')
-			->orWhere('japanese', 'LIKE', '%' . $request->story . '%')
-			->orWhere('english', 'LIKE', '%' . $request->story . '%')
-			->orWhere('romaji', 'LIKE', '%' . $request->story . '%')
+			->orWhere('title', 'LIKE', "%{$request->story}%")
+			->orWhere('japanese', 'LIKE', "%{$request->story}%")
+			->orWhere('english', 'LIKE', "%{$request->story}%")
+			->orWhere('romaji', 'LIKE', "%{$request->story}%")
 			->orderBy('created_at', 'DESC');
 	}
 }
