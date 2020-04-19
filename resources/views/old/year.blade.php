@@ -11,7 +11,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <ul class="list-group my-4">
+                {!! $yearCustom->asUl(['class' => 'list-group list-group-flush my-4']) !!}
+                {{--<ul class="list-group my-4">
                     @foreach($yearCustom as  $key=>$value)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <a href="{{route('custom', ['variable'=>$key, 'custom'=>'aired_season'])}}">
@@ -24,7 +25,7 @@
                             </span>
                         </li>
                     @endforeach
-                </ul>
+                </ul>--}}
             </div>
         </div>
     </div>

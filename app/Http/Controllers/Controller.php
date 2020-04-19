@@ -74,13 +74,6 @@ class Controller extends BaseController
 	protected static $nameSite;
 
 	/**
-	 * Вывод года
-	 *
-	 * @var array $yearCustom
-	 */
-	protected static $yearCustom;
-
-	/**
 	 * Вывод тип
 	 *
 	 * @var array $tipCustom
@@ -123,16 +116,6 @@ class Controller extends BaseController
 		self::$categoryRepository = app(CategoryRepositoryInterface::class);
 		self::$countryRepository = app(CountryRepositoryInterface::class);
 
-		if (Cache::has('globalCategory')) {
-			self::$globalCategory = Cache::get('globalCategory');
-		}else{
-			self::$globalCategory = self::setCache('globalCategory', self::$categoryRepository->getCategory()->get());
-		}
-		if (Cache::has('aired_season')) {
-			self::$yearCustom = Cache::get('aired_season');
-		}else{
-			self::$yearCustom = self::setCache('aired_season', self::$customRepository->getCustom('aired_season')->get());
-		}
 		if (Cache::has('tip')) {
 			self::$tipCustom = Cache::get('tip');
 		}else{
@@ -148,14 +131,11 @@ class Controller extends BaseController
 		self::$theme = config('appSecondConfig.theme');
 		self::$kind = Lang::get('attributes.rating');
 		self::$nameSite = config('appSecondConfig.nameSite');
-		self::$yearCustom = self::customArr(self::$yearCustom, 'aired_season');
 		self::$tipCustom = self::customArr(self::$tipCustom, 'tip');
 
 		View::share(
 			[
-				'categoryAll'   => self::$globalCategory,
 				'carouselAnime' => self::$carouselAnime,
-				'yearCustom'    => self::$yearCustom,
 				'tipRu'         => Lang::get('attributes.minTip'),
 				'tipFullRu'     => Lang::get('attributes.fullTip'),
 				'tip'           => self::$tipCustom,

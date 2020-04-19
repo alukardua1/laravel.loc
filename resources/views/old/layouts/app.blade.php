@@ -128,7 +128,6 @@
                                 <strong>Тип</strong>
                             </p>
                             <ul class="list-group my-4">
-
                                 @foreach($tip as $key => $value)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <a href='{{route('custom', ['variable'=>$key, 'custom'=>'tip'])}}'>
