@@ -21,12 +21,12 @@
                             <form method="post" action="{{ route('login') }}">
                                 @csrf
                                 <div class="modal-body mb-1">
-                                    <div class="md-form form-sm mb-5">
+                                    {{--<div class="md-form form-sm mb-5">
                                         <i class="fas fa-envelope prefix"></i>
                                         <input type="text" name="login" id="email" class="form-control form-control-sm"
                                                value="{{ old('login') }}">
                                         <label data-error="wrong" data-success="right" for="login">Логин</label>
-                                    </div>
+                                    </div>--}}
 
                                     <div class="md-form form-sm mb-5">
                                         <i class="fas fa-envelope prefix"></i>
@@ -139,7 +139,7 @@
             {{ Auth::user()->login }}
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-            @if(Auth::user()->group_id == 1)
+            @if(Auth::user()->group_id === 1)
                 <a class="dropdown-item" href="{!! route('admin') !!}" target="_blank">Админпанель</a>
             @endif
             <a class="dropdown-item" href="{!! route('profile', Auth::user()->login) !!}">Мой профиль</a>

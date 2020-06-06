@@ -212,7 +212,7 @@
 </main>
 <!--Main Layout-->
 <!-- Footer -->
-<footer class="page-footer font-small black">
+<footer class="page-footer font-small black bottom">
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">© 2020 Copyright:

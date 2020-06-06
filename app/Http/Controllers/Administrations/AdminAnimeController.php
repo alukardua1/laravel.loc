@@ -26,174 +26,173 @@ use Lang;
  */
 class AdminAnimeController extends AdminBaseController
 {
-	use FunctionsTrait;
+    use FunctionsTrait;
 
-	/**
-	 * @var CategoryRepositoryInterface
-	 */
-	private static $categoryRepository;
+    /**
+     * @var CategoryRepositoryInterface
+     */
+    private static $categoryRepository;
 
-	/**
-	 * @var AnimeRepositoryInterface
-	 */
-	private static $animeRepository;
+    /**
+     * @var AnimeRepositoryInterface
+     */
+    private static $animeRepository;
 
-	/**
-	 * @var CountryRepositoryInterface
-	 */
-	private static $countryRepository;
+    /**
+     * @var CountryRepositoryInterface
+     */
+    private static $countryRepository;
 
-	/**
-	 * @var TranslateRepositoryInterface
-	 */
-	private static $translateRepository;
+    /**
+     * @var TranslateRepositoryInterface
+     */
+    private static $translateRepository;
 
-	/**
-	 * @var ParseVideoCDNRepository
-	 */
-	private static $CDNVideo;
+    /**
+     * @var ParseVideoCDNRepository
+     */
+    private static $CDNVideo;
 
-	/**
-	 * AdminAnimeController constructor.
-	 *
-	 * @param  AnimeRepositoryInterface      $animeRepository
-	 * @param  CategoryRepositoryInterface   $categoryRepository
-	 * @param  CountryRepositoryInterface    $countryRepository
-	 * @param  TranslateRepositoryInterface  $translateRepository
-	 * @param  ParseVideoCDNRepository       $parseVideoCDNRepository
-	 */
-	public function __construct(
-		AnimeRepositoryInterface $animeRepository,
-		CategoryRepositoryInterface $categoryRepository,
-		CountryRepositoryInterface $countryRepository,
-		TranslateRepositoryInterface $translateRepository,
-		ParseVideoCDNRepository $parseVideoCDNRepository
-	) {
-		parent::__construct();
-		self::$categoryRepository = $categoryRepository;
-		self::$animeRepository = $animeRepository;
-		self::$countryRepository = $countryRepository;
-		self::$translateRepository = $translateRepository;
-		self::$CDNVideo = $parseVideoCDNRepository;
-	}
+    /**
+     * AdminAnimeController constructor.
+     *
+     * @param  AnimeRepositoryInterface      $animeRepository
+     * @param  CategoryRepositoryInterface   $categoryRepository
+     * @param  CountryRepositoryInterface    $countryRepository
+     * @param  TranslateRepositoryInterface  $translateRepository
+     * @param  ParseVideoCDNRepository       $parseVideoCDNRepository
+     */
+    public function __construct(
+        AnimeRepositoryInterface $animeRepository,
+        CategoryRepositoryInterface $categoryRepository,
+        CountryRepositoryInterface $countryRepository,
+        TranslateRepositoryInterface $translateRepository,
+        ParseVideoCDNRepository $parseVideoCDNRepository
+    ) {
+        parent::__construct();
+        self::$categoryRepository = $categoryRepository;
+        self::$animeRepository = $animeRepository;
+        self::$countryRepository = $countryRepository;
+        self::$translateRepository = $translateRepository;
+        self::$CDNVideo = $parseVideoCDNRepository;
+    }
 
-	/**
-	 * Главная страница всех записей аниме
-	 *
-	 * @var \App\Models\Anime $animePost
-	 * @uses AdminBaseController::$paginate
-	 * @return Factory|View
-	 */
-	public function index()
-	{
-		$animePost = self::$animeRepository->getAnime(null, true)->paginate(self::$paginate);
+    /**
+     * Главная страница всех записей аниме
+     *
+     * @var \App\Models\Anime $animePost
+     * @uses AdminBaseController::$paginate
+     * @return Factory|View
+     */
+    public function index()
+    {
+        $animePost = self::$animeRepository->getAnime(null, true)->paginate(self::$paginate);
 
-		return view('admin.anime.index', compact('animePost'));
-	}
+        return view('admin.anime.index', compact('animePost'));
+    }
 
-	/**
-	 * Страница редактирования аниме
-	 *
-	 * @param  string         $animeUrl
-	 *
-	 * @var \App\Models\Anime $animePost
-	 *
-	 * @return Factory|View
-	 */
-	public function edit($animeUrl)
-	{
-		$setAnime = self::setAnimeAdmin();
-		$animePost = self::$animeRepository->getAnime($animeUrl)->first();
+    /**
+     * Страница редактирования аниме
+     *
+     * @param  string         $animeUrl
+     *
+     * @var \App\Models\Anime $animePost
+     *
+     * @return Factory|View
+     */
+    public function edit($animeUrl)
+    {
+        $setAnime = self::setAnimeAdmin();
+        $animePost = self::$animeRepository->getAnime($animeUrl)->first();
 
-		return view('admin.anime.edit', compact('animePost', 'setAnime'));
-	}
+        return view('admin.anime.edit', compact('animePost', 'setAnime'));
+    }
 
-	/**
-	 * Добавление нового поста
-	 *
-	 * @return Factory|View
-	 */
-	public function create()
-	{
-		$setAnime = self::setAnimeAdmin();
+    /**
+     * Дополнительные поля для админки
+     *
+     * @return mixed
+     */
+    public static function setAnimeAdmin()
+    {
+        $setAnime['category'] = self::$categoryRepository->getCategory()->get();
+        $setAnime['country'] = self::$countryRepository->getCountry(['id', 'title']);
+        $setAnime['translate'] = self::$translateRepository->getTranslate();
+        $setAnime['tip'] = Lang::get('attributes.minTip');
+        $setAnime['rating'] = Lang::get('attributes.rating');
 
-		return view('admin.anime.add', compact('setAnime'));
-	}
+        return $setAnime;
+    }
 
-	/**
-	 * Сохранение новой записи
-	 *
-	 * @param  Request  $request
-	 *
-	 * @return RedirectResponse
-	 */
-	public function store(Request $request): RedirectResponse
-	{
-		$updateAnime = self::$animeRepository->setAnime($request);
-		if ($updateAnime) {
-			return redirect()->route('admin.anime');
-		}
-		return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
-	}
+    /**
+     * Добавление нового поста
+     *
+     * @return Factory|View
+     */
+    public function create()
+    {
+        $setAnime = self::setAnimeAdmin();
 
+        return view('admin.anime.add', compact('setAnime'));
+    }
 
-	/**
-	 * Процедура обновления записи
-	 *
-	 * @param  Request  $request
-	 * @param  string   $animeUrl
-	 *
-	 * @return RedirectResponse
-	 */
-	public function update(Request $request, $animeUrl): RedirectResponse
-	{
-		$updateAnime = self::$animeRepository->setAnime($request, $animeUrl);
+    /**
+     * Сохранение новой записи
+     *
+     * @param  Request  $request
+     *
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
+    {
+        $updateAnime = self::$animeRepository->setAnime($request);
+        if ($updateAnime) {
+            return redirect()->route('admin.anime');
+        }
+        return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
+    }
 
-		if ($updateAnime) {
-			return redirect()->route('admin.anime');
-		}
-		return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
-	}
+    /**
+     * Процедура обновления записи
+     *
+     * @param  Request  $request
+     * @param  string   $animeUrl
+     *
+     * @return RedirectResponse
+     */
+    public function update(Request $request, $animeUrl): RedirectResponse
+    {
+        $updateAnime = self::$animeRepository->setAnime($request, $animeUrl);
 
-	/**
-	 * Удаление записи
-	 *
-	 * @param  string  $animeUrl
-	 *
-	 * @return RedirectResponse
-	 */
-	public function delete($animeUrl): RedirectResponse
-	{
-		$updateAnime = self::$animeRepository->delAnime($animeUrl);
-		if ($updateAnime) {
-			return redirect()->route('admin.anime');
-		}
-		return back()->withErrors(['msg' => 'Ошибка удаления'])->withInput();
-	}
+        if ($updateAnime) {
+            return redirect()->route('admin.anime');
+        }
+        return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
+    }
 
-	/**
-	 * Дополнительные поля для админки
-	 *
-	 * @return mixed
-	 */
-	public static function setAnimeAdmin()
-	{
-		$setAnime['category'] = self::$categoryRepository->getCategory()->get();
-		$setAnime['country'] = self::$countryRepository->getCountry(['id', 'title']);
-		$setAnime['translate'] = self::$translateRepository->getTranslate();
-		$setAnime['tip'] = Lang::get('attributes.minTip');
-		$setAnime['rating'] = Lang::get('attributes.rating');
+    /**
+     * Удаление записи
+     *
+     * @param  string  $animeUrl
+     *
+     * @return RedirectResponse
+     */
+    public function delete($animeUrl): RedirectResponse
+    {
+        $updateAnime = self::$animeRepository->delAnime($animeUrl);
+        if ($updateAnime) {
+            return redirect()->route('admin.anime');
+        }
+        return back()->withErrors(['msg' => 'Ошибка удаления'])->withInput();
+    }
 
-		return $setAnime;
-	}
-
-	/**
-	 * Парсинг Видеобалансера
-	 *
-	 * @return mixed
-	 */
-	public function CDNParse()
-	{
-		return self::$CDNVideo->parseCurl($_GET['wa']);
-	}
+    /**
+     * Парсинг Видеобалансера
+     *
+     * @return mixed
+     */
+    public function CDNParse()
+    {
+        return self::$CDNVideo->parseCurl($_GET['wa']);
+    }
 }

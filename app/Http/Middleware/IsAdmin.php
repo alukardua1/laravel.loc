@@ -8,11 +8,13 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class IsAdmin
+class IsAdmin extends Middleware
 {
+	private static $user;
 	/**
 	 * Handle an incoming request.
 	 *
@@ -25,12 +27,13 @@ class IsAdmin
 	 */
 	public function handle($request, Closure $next, ...$group)
 	{
-		foreach ($group as $value) {
-			if (Auth::user()->group_id == $value) {
-				return $next($request);
-			}
+		self::$user = Auth::user();
+
+		if (in_array(self::$user->group_id, $group, false))
+		{
+			return $next($request);
 		}
 
-		return redirect('404');
+		return abort(404);
 	}
 }
