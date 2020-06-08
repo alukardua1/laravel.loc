@@ -47,4 +47,11 @@ interface AnimeRepositoryInterface
      * @return mixed
      */
     public function getSearch(Request $request);
+
+    /**
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return mixed
+     */
+    public function sortAnime(Request $request);
 }

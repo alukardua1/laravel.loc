@@ -18,4 +18,23 @@ use App\Repositories\Interfaces\CharacterRepositoryInterface;
 class CharacterRepository implements CharacterRepositoryInterface
 {
 
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function getCharacter($id)
+    {
+        return "Hello Character!!";
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function setCharacter($id)
+    {
+        return "Hello Character!!";
+    }
 }

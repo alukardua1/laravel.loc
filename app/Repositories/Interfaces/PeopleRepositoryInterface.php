@@ -15,5 +15,15 @@ namespace App\Repositories\Interfaces;
  */
 interface PeopleRepositoryInterface
 {
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */public function getPeople($id);
 
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */public function setPeople($id);
 }

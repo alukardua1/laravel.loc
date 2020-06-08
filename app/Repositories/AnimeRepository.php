@@ -141,4 +141,9 @@ class AnimeRepository implements AnimeRepositoryInterface
 			->orWhere('romaji', 'LIKE', "%{$request->story}%")
 			->orderBy('created_at', 'DESC');
 	}
+
+	public function sortAnime(Request $request)
+    {
+        // TODO: Implement sortAnime() method.
+    }
 }

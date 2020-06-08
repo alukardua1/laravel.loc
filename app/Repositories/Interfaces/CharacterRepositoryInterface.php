@@ -15,5 +15,17 @@ namespace App\Repositories\Interfaces;
  */
 interface CharacterRepositoryInterface
 {
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function getCharacter($id);
 
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function setCharacter($id);
 }

@@ -18,4 +18,19 @@ use App\Repositories\Interfaces\PeopleRepositoryInterface;
 class PeopleRepository implements PeopleRepositoryInterface
 {
 
+    /**
+     * @inheritDoc
+     */
+    public function getPeople($id)
+    {
+        // TODO: Implement getPeople() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setPeople($id)
+    {
+        // TODO: Implement setPeople() method.
+    }
 }

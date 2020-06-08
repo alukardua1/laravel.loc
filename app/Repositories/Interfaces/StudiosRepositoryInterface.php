@@ -8,7 +8,21 @@
 namespace App\Repositories\Interfaces;
 
 
+/**
+ * Interface StudiosRepositoryInterface
+ *
+ * @package App\Repositories\Interfaces
+ */
 interface StudiosRepositoryInterface
 {
-	public function getStudio();
+    /**
+     * @return mixed
+     */
+    public function getStudio();
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */public function setStudio($id);
 }
