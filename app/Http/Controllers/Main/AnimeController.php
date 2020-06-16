@@ -39,9 +39,8 @@ class AnimeController extends Controller
 	 *
 	 * @param  AnimeRepositoryInterface  $animeRepository
 	 */
-	public function __construct(
-		AnimeRepositoryInterface $animeRepository
-	) {
+	public function __construct(AnimeRepositoryInterface $animeRepository)
+	{
 		parent::__construct();
 		self::$animeRepository = $animeRepository;
 	}

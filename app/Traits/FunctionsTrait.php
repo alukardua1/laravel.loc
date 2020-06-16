@@ -8,11 +8,11 @@
 namespace App\Traits;
 
 
-use Cache;
 use Carbon\Carbon;
 use DateTimeZone;
 use IntlDateFormatter;
 
+const USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'; //Обьявление USER_AGENT для CURL
 /**
  * Trait FunctionsTrait
  *
@@ -46,28 +46,37 @@ trait FunctionsTrait
 	];
 
 	/**
-	 * Возвращает временные зоны
+	 * Внесение дополнительного в пост
 	 *
-	 * @return array getTimeZone()
+	 * @param  \App\Models\Anime  $anime
+	 *
+	 * @return mixed
 	 */
-	public static function getTimeZone(): array
+	public static function currentRefactoring($anime)
 	{
-		$timeZone = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
-		$tz = [];
-		$i = 0;
-		foreach ($timeZone as $key => $value) {
-			$formatter = new IntlDateFormatter(
-				'ru_RU',
-				IntlDateFormatter::FULL,
-				IntlDateFormatter::FULL,
-				$value,
-				IntlDateFormatter::GREGORIAN,
-				'(ZZZZ) VVV'
-			);
-			$tz[$i++] = $formatter->format(0);
-		}
+		$anime->day = self::deliveryTime($anime->delivery_time);
+		$anime->seasons = self::airedSeason($anime->aired_on);
 
-		return $tz;
+		return $anime;
+	}
+
+	/**
+	 * Формирует поле описания времени суток
+	 *
+	 * @param  string  $time
+	 *
+	 * @var string     $day
+	 * @return mixed|string
+	 */
+	public static function deliveryTime($time)
+	{
+		$day = '';
+		foreach (self::$arrDay as $key => $value) {
+			if ($time >= $key) {
+				$day = $value;
+			}
+		}
+		return $day;
 	}
 
 	/**
@@ -92,40 +101,6 @@ trait FunctionsTrait
 			}
 		}
 		return $seasons;
-	}
-
-	/**
-	 * Формирует поле описания времени суток
-	 *
-	 * @param  string  $time
-	 *
-	 * @var string     $day
-	 * @return mixed|string
-	 */
-	public static function deliveryTime($time)
-	{
-		$day = '';
-		foreach (self::$arrDay as $key => $value) {
-			if ($time >= $key) {
-				$day = $value;
-			}
-		}
-		return $day;
-	}
-
-	/**
-	 * Внесение дополнительного в пост
-	 *
-	 * @param  \App\Models\Anime  $anime
-	 *
-	 * @return mixed
-	 */
-	public static function currentRefactoring($anime)
-	{
-		$anime->day = self::deliveryTime($anime->delivery_time);
-		$anime->seasons = self::airedSeason($anime->aired_on);
-
-		return $anime;
 	}
 
 	/**
@@ -187,16 +162,37 @@ trait FunctionsTrait
 		return ['countryArray' => $countryArray, 'timeZone' => $timeZone];
 	}
 
+	/**
+	 * Возвращает временные зоны
+	 *
+	 * @return array getTimeZone()
+	 */
+	public static function getTimeZone(): array
+	{
+		$timeZone = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+		$tz = [];
+		$i = 0;
+		foreach ($timeZone as $key => $value) {
+			$formatter = new IntlDateFormatter(
+				'ru_RU',
+				IntlDateFormatter::FULL,
+				IntlDateFormatter::FULL,
+				$value,
+				IntlDateFormatter::GREGORIAN,
+				'(ZZZZ) VVV'
+			);
+			$tz[$i++] = $formatter->format(0);
+		}
+
+		return $tz;
+	}
+
 	public static function getCurl($url)
 	{
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_URL, $url);
 		curl_setopt($curl, CURLOPT_FAILONERROR, 1);
-		curl_setopt(
-			$curl,
-			CURLOPT_USERAGENT,
-			"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0"
-		);
+		curl_setopt($curl, CURLOPT_USERAGENT, USER_AGENT);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 2);
 		curl_setopt($curl, CURLOPT_TIMEOUT, 30);

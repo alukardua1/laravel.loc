@@ -50,18 +50,12 @@ class CommentController extends Controller
 		if (Cache::has(self::$keyCache . $idAnime)) {
 			$comments['com'] = Cache::get(self::$keyCache . $idAnime);
 		} else {
-			$comments['com'] = self::setCache(
-				self::$keyCache . $idAnime,
-				self::$commentRepository->getComments($idAnime)
-			);
+			$comments['com'] = self::setCache(self::$keyCache . $idAnime, self::$commentRepository->getComments($idAnime));
 		}
 		if (Cache::has(self::$keyCache . $idAnime)) {
 			$comments['count'] = Cache::get(self::$keyCacheCount . $idAnime);
 		} else {
-			$comments['count'] = self::setCache(
-				self::$keyCacheCount . $idAnime,
-				self::$commentRepository->countComments($idAnime)
-			);
+			$comments['count'] = self::setCache(self::$keyCacheCount . $idAnime, self::$commentRepository->countComments($idAnime));
 		}
 
 		return $comments;

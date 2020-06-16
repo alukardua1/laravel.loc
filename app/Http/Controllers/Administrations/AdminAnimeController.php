@@ -149,6 +149,7 @@ class AdminAnimeController extends AdminBaseController
         if ($updateAnime) {
             return redirect()->route('admin.anime');
         }
+
         return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
     }
 
@@ -167,6 +168,7 @@ class AdminAnimeController extends AdminBaseController
         if ($updateAnime) {
             return redirect()->route('admin.anime');
         }
+
         return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
     }
 
@@ -183,6 +185,7 @@ class AdminAnimeController extends AdminBaseController
         if ($updateAnime) {
             return redirect()->route('admin.anime');
         }
+
         return back()->withErrors(['msg' => 'Ошибка удаления'])->withInput();
     }
 

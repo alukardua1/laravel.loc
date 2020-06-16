@@ -23,6 +23,7 @@
     "predis/predis": "^1.1"
   },
   "require-dev": {
+    "roave/security-advisories": "dev-master",
     "barryvdh/laravel-debugbar": "^3.2",
     "barryvdh/laravel-ide-helper": "^2.6",
     "facade/ignition": "^2.0",

@@ -29,10 +29,7 @@ trait CreateCacheTrait
 	{
 		$ttl = (int)config('appSecondConfig.ttlCache');
 
-		return Cache::remember(
-			$key,
-			$ttl * 86400,
-			function() use ($post) {
+		return Cache::remember($key, $ttl * 86400, function() use ($post) {
 				return $post;
 			}
 		);

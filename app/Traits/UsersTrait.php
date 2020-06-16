@@ -45,11 +45,7 @@ trait UsersTrait
 		$Extension = $requestForm[self::$avatarColumns]->getClientOriginalExtension();
 		$fileName = self::$avatarName . $updateUser->id . '.' . $Extension;
 
-		Storage::putFileAs(
-			self::$patchAvatar . $updateUser->login . self::$patchSeparator,
-			$requestForm[self::$avatarColumns],
-			$fileName
-		);
+		Storage::putFileAs(self::$patchAvatar . $updateUser->login . self::$patchSeparator, $requestForm[self::$avatarColumns], $fileName);
 
 		$requestForm[self::$avatarColumns] = $updateUser->login . self::$patchSeparator . $fileName;
 

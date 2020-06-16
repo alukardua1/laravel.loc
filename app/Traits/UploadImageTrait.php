@@ -22,19 +22,19 @@ trait UploadImageTrait
 	/**
 	 * @var string
 	 */
-	private static $imgColumns        = 'poster';
-	private static $patchImgPublic    = 'public/anime/';
-	private static $imgName           = 'poster_';
-	private static $patchImgStorage   = 'storage/anime/';
-	private static $imgPostDir        = 'anime/';
-	private static $watermarkImg      = 'admin/images/watermark.png';
-	private static $watermarkPosition = 'bottom-right';
-	private static $watermarkX        = 10;
-	private static $watermarkY        = 10;
-	private static $patchSeparator    = '/';
-	private static $thumb             = 'thumb/';
-	private static $imgWidth          = 232;
-	private static $imgHeight         = 322;
+	private static $imgColumns        = 'poster'; //Столбец в бвзе данных
+	private static $patchImgPublic    = 'public/anime/'; //Путь к картинке
+	private static $imgName           = 'poster_'; //префикс
+	private static $patchImgStorage   = 'storage/anime/'; //Путь сохранения
+	private static $imgPostDir        = 'anime/'; //папка сохранения
+	private static $watermarkImg      = 'admin/images/watermark.png'; //ватемарк
+	private static $watermarkPosition = 'bottom-right'; //положение ватемарк @todo перенести в настройки
+	private static $watermarkX        = 10; //координаты ватемарк @todo перенести в настройки
+	private static $watermarkY        = 10; //координаты ватемарк @todo перенести в настройки
+	private static $patchSeparator    = '/'; //разделитель директорий @todo перенести в настройки
+	private static $thumb             = 'thumb/'; //превью
+	private static $imgWidth          = 232; //размеры @todo перенести в настройки
+	private static $imgHeight         = 322; //размеры @todo перенести в настройки
 
 	/**
 	 * Загружает постер к записи
@@ -46,12 +46,9 @@ trait UploadImageTrait
 	 */
 	public function uploadImages($updateAnime, $requestForm)
 	{
-		$Extension = $requestForm[self::$imgColumns]->getClientOriginalExtension(
-		);                                                                                          //Получает расширение файла
+		$Extension = $requestForm[self::$imgColumns]->getClientOriginalExtension();                  //Получает расширение файла
 		$fileName = self::$imgName . $updateAnime->id . '.' . $Extension;                           // формирует имя файла
-		$pathImg = self::$patchImgPublic . Str::slug(
-				$updateAnime->title
-			) . self::$patchSeparator;                                                              //путь к большой картинке
+		$pathImg = self::$patchImgPublic . Str::slug($updateAnime->title) . self::$patchSeparator; //путь к большой картинке
 		$pathImgThumb = $pathImg . self::$thumb;                                                    //путь к уменьшеной картинке
 		$pathImgSave = self::$patchImgStorage . Str::slug($updateAnime->title) . self::$patchSeparator;
 		$pathImgSaveThumb = $pathImgSave . self::$thumb;
