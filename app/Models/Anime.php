@@ -17,14 +17,20 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * Class Anime
  *
- * @property int    id
- * @property string title
- * @property string url
- * @property string day
- * @property mixed  delivery_time
- * @property string seasons
- * @property mixed  aired_on
- * @property string poster
+ * @property int                id
+ * @property string             title
+ * @property string             url
+ * @property string             day
+ * @property mixed              delivery_time
+ * @property string             seasons
+ * @property mixed              aired_on
+ * @property string             poster
+ * @property bool|mixed         posted_at
+ * @property mixed|string       description
+ * @property false|mixed|string keywords
+ * @property mixed|string       metatitle
+ * @property mixed|string       aired_season
+ * @property mixed              content
  *
  * @package App\Models
  * @method static create($requestForm)

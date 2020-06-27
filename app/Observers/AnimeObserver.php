@@ -26,7 +26,7 @@ class AnimeObserver
 	/**
 	 * @param  Anime  $anime
 	 */
-	public function updating(Anime $anime)
+	public function updating(Anime $anime): void
 	{
 		$anime->url = Str::slug($anime->title);
 		$anime->posted_at = request()->posted_at ? true : false;
@@ -39,7 +39,7 @@ class AnimeObserver
 	 *
 	 * @todo Не забыть сменить $anime->metatitle, $anime->description, дописать вариант логов изменения поста
 	 */
-	public function creating(Anime $anime)
+	public function creating(Anime $anime): void
 	{
 		$anime->url = Str::slug($anime->title);
 		$anime->metatitle = $anime->title;

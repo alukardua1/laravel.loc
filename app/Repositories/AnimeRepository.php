@@ -13,7 +13,6 @@ use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Traits\UploadImageTrait;
 use Cache;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Concerns\BuildsQueries;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Psr\SimpleCache\InvalidArgumentException;
@@ -132,7 +131,7 @@ class AnimeRepository implements AnimeRepositoryInterface
 	public function getSearch(Request $request)
 	{
 		/**
-		 * @var mixed $request ->story
+		 * @var mixed $request->story
 		 */
 		return Anime::with(['getCategory'])
 			->orWhere('title', 'LIKE', "%{$request->story}%")
@@ -142,8 +141,14 @@ class AnimeRepository implements AnimeRepositoryInterface
 			->orderBy('created_at', 'DESC');
 	}
 
+	/**
+	 * @param  \Illuminate\Http\Request  $request
+	 *
+	 * @return mixed|void
+	 * @todo решить нужна ли сортировка для пользователей
+	 */
 	public function sortAnime(Request $request)
-    {
-        // TODO: Implement sortAnime() method.
-    }
+	{
+		// TODO: Implement sortAnime() method.
+	}
 }

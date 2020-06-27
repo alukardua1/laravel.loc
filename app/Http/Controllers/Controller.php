@@ -39,6 +39,7 @@ class Controller extends BaseController
 	protected static $theme;
 	/**
 	 * Пагинация
+	 * количество постов на странице задается в конфиге
 	 *
 	 * @var int $paginate
 	 */

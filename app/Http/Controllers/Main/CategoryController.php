@@ -19,6 +19,9 @@ use Illuminate\View\View;
  */
 class CategoryController extends Controller
 {
+	/**
+	 * @var string $keyCache ключ для создания кэша
+	 */
 	private static $keyCache = 'categories';
 
 	/**

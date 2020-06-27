@@ -32,12 +32,15 @@ class AnimeController extends Controller
 	 * @var AnimeRepositoryInterface
 	 */
 	private static $animeRepository;
+	/**
+	 * @var string $keyCache ключ для создания кэша
+	 */
 	private static $keyCache = 'anime_';
 
 	/**
 	 * AnimeController constructor.
 	 *
-	 * @param  AnimeRepositoryInterface  $animeRepository
+	 * @param  AnimeRepositoryInterface  $animeRepository  репозиторий постов аниме
 	 */
 	public function __construct(AnimeRepositoryInterface $animeRepository)
 	{
@@ -61,15 +64,18 @@ class AnimeController extends Controller
 	/**
 	 * Страница аниме поста
 	 *
-	 * @param  string         $urlAnime
+	 * @param  string         $urlAnime  Урл страницы поста
 	 *
-	 * @var \App\Models\Anime $animePost
+	 * @var \App\Models\Anime $animePost масив новости из базы
 	 * @return Factory|RedirectResponse|Redirector|View|void
 	 */
 	public function view($urlAnime)
 	{
+		/** @var mixed $uri масив урл после разбивки */
 		$uri = self::parseUrl($urlAnime);
+		/** @var string $idAnime ID из урл */
 		$idAnime = $uri['uri'][0];
+		/** @var string $slugAnime Slug из урл */
 		$slugAnime = $uri['stringUrl'][1];
 
 		if (Cache::has(self::$keyCache . $idAnime)) {

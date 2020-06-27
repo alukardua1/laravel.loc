@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * Class Category
  *
+ * @property mixed|string url
+ * @property mixed        title
  * @package App\Models
  */
 class Category extends Model

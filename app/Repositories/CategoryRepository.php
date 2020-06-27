@@ -20,12 +20,23 @@ use Throwable;
  */
 class CategoryRepository implements CategoryRepositoryInterface
 {
+
+	/**
+	 * @var string $setUrl Столбец поиска
+	 */
+	private static $setUrl = 'url';
+
+	/**
+	 * @var string $parentId Проверка родительской категории
+	 */
+	private static $parentId = 'parent_id';
+
 	/**
 	 * Выводит все записи категории
 	 *
-	 * @param  null  $url
+	 * @param  null  $url      Урл категории
 	 *
-	 * @param  bool  $isAdmin
+	 * @param  bool  $isAdmin  Проверяет админка или нет
 	 *
 	 * @return mixed
 	 */
@@ -33,13 +44,13 @@ class CategoryRepository implements CategoryRepositoryInterface
 	{
 		$select = ['id', 'title', 'url', 'parent_id', 'description'];
 		if ($url && $isAdmin) {
-			return Category::where('url', $url)
+			return Category::where(self::$setUrl, $url)
 				->with(['getCategory'])
 				->select($select);
 		}
 		if ($url) {
 			/** @var mixed $result текущая категория */
-			$result = Category::where('url', $url)
+			$result = Category::where(self::$setUrl, $url)
 				->select($select)
 				->first();
 			if ($result) {
@@ -60,8 +71,10 @@ class CategoryRepository implements CategoryRepositoryInterface
 	/**
 	 * Сохраняет категории
 	 *
-	 * @param  Request  $request
-	 * @param  string   $url
+	 * @param  Request  $request     Запрос POST
+	 * @param  string   $url         Урл категории
+	 *
+	 * @var mixed       $requestForm Весь запрос
 	 *
 	 * @return mixed|void
 	 */
@@ -69,12 +82,12 @@ class CategoryRepository implements CategoryRepositoryInterface
 	{
 		$requestForm = $request->all();
 		if ($url) {
-			$updateCategory = Category::where('url', $url)->first();
+			$updateCategory = Category::where(self::$setUrl, $url)->first();
 		} else {
 			$updateCategory = Category::create($requestForm);
 		}
-		if ($request['parent_id']) {
-			$updateCategory->fill($request->except('parent_id'));
+		if ($request[self::$parentId]) {
+			$updateCategory->fill($request->except(self::$parentId));
 			$updateCategory->save();
 		}
 		$updateCategory->touch();
@@ -93,7 +106,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 	public function delCategory($url)
 	{
 		/** @var \App\Models\Category $deleteCategory */
-		$deleteCategory = Category::where('url', $url)->first();
+		$deleteCategory = Category::where(self::$setUrl, $url)->first();
 		$deleteCategory->getAnime()->sync([]);
 
 		return $deleteCategory->delete();
