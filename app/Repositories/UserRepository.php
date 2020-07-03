@@ -26,6 +26,11 @@ class UserRepository implements UserRepositoryInterface
 	use UsersTrait;
 
 	/**
+	 * @var string[]
+	 */
+	private static $withTable = ['getGroup:id,title', 'getCountry:id,title'];
+
+	/**
 	 * Получает профиль пользователя
 	 *
 	 * @param $userUrl
@@ -34,7 +39,7 @@ class UserRepository implements UserRepositoryInterface
 	 */
 	public function getUsers($userUrl)
 	{
-		$user = User::with(['getGroup:id,title', 'getCountry:id,title'])
+		$user = User::with(self::$withTable)
 			->where('login', $userUrl)
 			->first();
 		/** @var \App\Models\User $user */

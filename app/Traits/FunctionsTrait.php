@@ -12,7 +12,8 @@ use Carbon\Carbon;
 use DateTimeZone;
 use IntlDateFormatter;
 
-const USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'; //Обьявление USER_AGENT для CURL
+//const USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'; //Обьявление USER_AGENT для CURL
+
 /**
  * Trait FunctionsTrait
  *
@@ -20,7 +21,7 @@ const USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/2010
  */
 trait FunctionsTrait
 {
-	/**
+		/**
 	 * Приставка для сезона
 	 *
 	 * @var array $arrMsg
@@ -31,8 +32,7 @@ trait FunctionsTrait
 		6  => 'лето - ',
 		9  => 'осень - ',
 		12 => 'зима - ',
-	];
-
+	]; //Обьявление USER_AGENT для CURL
 	/**
 	 * Показывает время сеанса
 	 *
@@ -44,6 +44,7 @@ trait FunctionsTrait
 		17 => '<span class="blue-text">[вечерний сеанс]</span>',
 		23 => '<span class="deep-orange-text">[ночной сеанс]</span>',
 	];
+protected static $userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0';
 
 	/**
 	 * Внесение дополнительного в пост
@@ -137,10 +138,13 @@ trait FunctionsTrait
 		$returnUrl = [];
 		$uri = explode('-', $url);
 		$stringUrl = preg_split($pattern, $url);
-
 		$returnUrl['uri'] = $uri;
-		$returnUrl['stringUrl'] = $stringUrl;
-
+		if (count($stringUrl) == 2) {
+			$returnUrl['stringUrl'] = $stringUrl;
+		} else {
+			$returnUrl['stringUrl'] = ['1'=>'','2'=>''];
+		}
+		//dd(__METHOD__, $returnUrl);
 		return $returnUrl;
 	}
 
@@ -192,7 +196,7 @@ trait FunctionsTrait
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_URL, $url);
 		curl_setopt($curl, CURLOPT_FAILONERROR, 1);
-		curl_setopt($curl, CURLOPT_USERAGENT, USER_AGENT);
+		curl_setopt($curl, CURLOPT_USERAGENT, self::$userAgent);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 2);
 		curl_setopt($curl, CURLOPT_TIMEOUT, 30);

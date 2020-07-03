@@ -27,6 +27,11 @@ class AnimeRepository implements AnimeRepositoryInterface
 	use UploadImageTrait;
 
 	/**
+	 * @var string[]
+	 */
+	private static $withTable = ['getCategory', 'getUsers', 'getTranslate'];
+
+	/**
 	 * если $id пустой выводит все записи на сайте, $isAdmin если указан то выводит в админке, если $id указан то
 	 * выведет одну запись
 	 *
@@ -39,17 +44,17 @@ class AnimeRepository implements AnimeRepositoryInterface
 	{
 		if ($id) {
 			/** выводит аниме по урл */
-			return Anime::with(['getCategory', 'getUsers', 'getTranslate'])
+			return Anime::with(self::$withTable)
 				->where('id', $id)
 				->orderBy('created_at', 'DESC');
 		}
 		if ($isAdmin) {
 			/** выводит все аниме для админки */
-			return Anime::with(['getCategory', 'getUsers', 'getTranslate'])
+			return Anime::with(self::$withTable)
 				->orderBy('created_at', 'DESC');
 		}
 		/** выводит все аниме на сайте */
-		return Anime::with(['getCategory', 'getUsers', 'getTranslate'])
+		return Anime::with(self::$withTable)
 			->where('posted_at', 1)
 			->orderBy('created_at', 'DESC');
 	}

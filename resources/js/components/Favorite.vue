@@ -39,13 +39,13 @@
 
         methods: {
             favorite(post) {
-                axios.post('/add/' + post)
+                axios.post('/favorites_add/' + post)
                     .then(response => this.isFavorited = true)
                     .catch(response => console.log(response.data));
             },
 
             unFavorite(post) {
-                axios.post('/delete/' + post)
+                axios.post('/favorites_del/' + post)
                     .then(response => this.isFavorited = false)
                     .catch(response => console.log(response.data));
             }

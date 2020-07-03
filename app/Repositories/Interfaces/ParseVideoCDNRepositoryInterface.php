@@ -10,7 +10,7 @@ namespace App\Repositories\Interfaces;
 
 interface ParseVideoCDNRepositoryInterface
 {
-	public function parseCurl($api);
+	public function parseCurl($arr);
 
 	public function parseData();
 }

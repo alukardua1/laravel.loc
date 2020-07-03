@@ -104,14 +104,14 @@ class AnimeController extends Controller
 	 *
 	 * @param  Request  $request
 	 *
-	 * @return Factory|View
+	 * @return Factory|RedirectResponse|Redirector|View|void
 	 */
 	public function search(Request $request)
 	{
 		$animePost = self::$animeRepository->getSearch($request)->paginate(self::$paginate);
 
 		if (empty($animePost)) {
-			return view(self::$theme . '/errors.error')->withErrors(['msg' => 'Ничего не найдено']);
+			return abort(404);
 		}
 
 		return view(self::$theme . '/home', compact('animePost'));

@@ -103,6 +103,7 @@ class AdminAnimeController extends AdminBaseController
     public function edit($animeUrl)
     {
         $setAnime = self::setAnimeAdmin();
+
         $animePost = self::$animeRepository->getAnime($animeUrl)->first();
 
         return view('admin.anime.edit', compact('animePost', 'setAnime'));
@@ -196,6 +197,9 @@ class AdminAnimeController extends AdminBaseController
      */
     public function CDNParse()
     {
-        return self::$CDNVideo->parseCurl($_GET['wa']);
+	    $arr = json_decode($_GET['arr'], true);
+	    //$arr = ['wa'=>9917, 'shiki'=>38408];
+
+        return self::$CDNVideo->parseCurl($arr);
     }
 }
