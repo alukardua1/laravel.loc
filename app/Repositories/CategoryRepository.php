@@ -42,30 +42,36 @@ class CategoryRepository implements CategoryRepositoryInterface
 	 */
 	public function getCategory($url = null, $isAdmin = false)
 	{
-		$select = ['id', 'title', 'url', 'parent_id', 'description'];
 		if ($url && $isAdmin) {
-			return Category::where(self::$setUrl, $url)
-				->with(['getCategory'])
-				->select($select);
+			return $this->getApiCategory($url)
+				->with(['getCategory']);
 		}
 		if ($url) {
-			/** @var mixed $result текущая категория */
-			$result = Category::where(self::$setUrl, $url)
-				->select($select)
-				->first();
-			if ($result) {
-				/** @var mixed $anime все записи текущей категории если найдена категория */
-				$anime = $result->getAnime()
+			if ($this->getApiCategory($url)->first()) {
+				return $this->getApiCategory($url)
+					->first()
+					->getAnime()
 					->with(['getCategory', 'getUsers:id,login'])
 					->orderBy('created_at', 'DESC');
-
-				return $anime;
 			}
 			/** Возвращает ошибку 404 если категория не найдена */
 			return abort(404);
 		}
 		/** Возвращает количество постов для категории */
 		return Category::withCount('getAnime');
+	}
+
+	public function getApiCategory($url = null)
+	{
+		$select = ['id', 'title', 'url', 'parent_id', 'description'];
+		if ($url) {
+			return Category::where(self::$setUrl, $url)
+				->select($select)
+				->withCount('getAnime');
+		}
+
+		return Category::select($select)
+			->withCount('getAnime');
 	}
 
 	/**

@@ -12,11 +12,12 @@
 
 require('./bootstrap');
 import Vue from 'vue';
-import { BootstrapVue, IconsPlugin, FormSelectPlugin } from 'bootstrap-vue';
+import { BootstrapVue, IconsPlugin, FormSelectPlugin, ButtonPlugin } from 'bootstrap-vue';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(FormSelectPlugin);
+Vue.use(ButtonPlugin);
 
 window.Vue = require('vue');
 
@@ -36,6 +37,7 @@ Vue.component('favorite', require('./components/Favorite').default);
 Vue.component('votes', require('./components/Votes').default);
 Vue.component('search', require('./components/Search').default);
 Vue.component('category-select', require('./components/CategorySelect').default);
+Vue.component('button-form-admin', require('./components/ButtonPostFormAdmin').default)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

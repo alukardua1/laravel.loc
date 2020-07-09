@@ -20,11 +20,12 @@ class AnimeApiController extends BaseApiController
 
 	public function index()
     {
-
+	    return response($category = self::$animeRepository->getAnime()->get()->jsonSerialize(), Response::HTTP_OK);
     }
 
     public function view($id)
     {
+    	//dd(__METHOD__, $id);
 	    return response($category = self::$animeRepository->getAnime($id)->first()->jsonSerialize(), Response::HTTP_OK);
     }
 }

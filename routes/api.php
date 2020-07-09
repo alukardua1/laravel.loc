@@ -23,10 +23,12 @@ use Illuminate\Http\Request;
 });*/
 
 Route::group(
-	['namespace' => 'Api'], function ()
+	['namespace' => 'Api', 'prefix'=>'v1'], function ()
 {
 	Route::get('category', 'GenreApiController@index');
+	Route::get('category/{url}', 'GenreApiController@view');
 	Route::get('anime/{id}', 'AnimeApiController@view');
+	Route::get('anime', 'AnimeApiController@index');
 }
 
 );

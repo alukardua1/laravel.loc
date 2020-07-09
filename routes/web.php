@@ -59,11 +59,11 @@ Route::group(
             }
         );
         /** Избранное */
-        Route::post('/favorites_add/{id}', 'FavoriteController@add')->name('favorite_add');
-        Route::post('/favorites_del/{id}', 'FavoriteController@delete')->name('favorite_del');
+        Route::post('/favorites_add/{id}', 'FavoriteController@add')->name('favorite_add')->middleware('auth');
+        Route::post('/favorites_del/{id}', 'FavoriteController@delete')->name('favorite_del')->middleware('auth');
         /** Голосование на сайте */
-        Route::post('/plus/{id}', 'VoteController@plus')->name('votes_plus');
-        Route::post('/minus/{id}', 'VoteController@minus')->name('votes_minus');
+        Route::post('/plus/{id}', 'VoteController@plus')->name('votes_plus')->middleware('auth');
+        Route::post('/minus/{id}', 'VoteController@minus')->name('votes_minus')->middleware('auth');
         /** Выборки по полям */
         Route::group(
             ['prefix' => 'custom'],
@@ -91,43 +91,12 @@ Route::group(
         Route::group(
             ['prefix' => 'comments'],
             function () {
-                Route::post('add', 'CommentController@addComment')->name('addComment');
-                Route::get('delete/{comment}', 'CommentController@deleteComment')->name('deleteComment');
+                Route::post('add', 'CommentController@store')->name('addComment')->middleware('auth');
+                Route::get('delete/{comment}', 'CommentController@delete')->name('deleteComment')->middleware('auth');
             }
         );
     }
 );
 
-Route::group(
-    ['namespace' => 'Administrations', 'prefix' => 'administrations/administrator'],
-    function () {
-        /** Главная страница админки */
-        Route::get('', 'AdminController@index')->name('admin');
-        /** Редактирование аниме */
-        Route::group(
-            ['prefix' => 'anime'],
-            function () {
-                Route::get('', 'AdminAnimeController@index')->name('admin.anime');
-                Route::get('edit/{anime}', 'AdminAnimeController@edit')->name('admin.anime.edit');
-                Route::patch('edit/{anime}', 'AdminAnimeController@update')->name('admin.anime.update');
-                Route::get('add', 'AdminAnimeController@create')->name('admin.anime.add');
-                Route::patch('add', 'AdminAnimeController@store')->name('admin.anime.save');
-                Route::get('delete/{anime}', 'AdminAnimeController@delete')->name('admin.anime.delete');
-				Route::get('video', 'AdminAnimeController@CDNParse')->name('admin.parseCDN');
-            }
-        );
-        /** Редактирование категорий */
-        Route::group(
-            ['prefix' => 'category'],
-            function () {
-                Route::get('', 'AdminCategoryController@index')->name('admin.category');
-                Route::get('edit/{category}', 'AdminCategoryController@edit')->name('admin.category.edit');
-                Route::patch('edit/{category}', 'AdminCategoryController@update')->name('admin.category.update');
-                Route::get('add', 'AdminCategoryController@create')->name('admin.category.add');
-                Route::patch('add', 'AdminCategoryController@store')->name('admin.category.save');
-                Route::get('delete/{category}', 'AdminCategoryController@delete')->name('admin.category.delete');
-            }
-        );
-    }
-);
+
 //Route::get('/home', 'HomeController@index')->name('home');

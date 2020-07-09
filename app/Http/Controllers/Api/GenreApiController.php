@@ -21,9 +21,13 @@ class GenreApiController extends BaseApiController
 
     public function index()
     {
-	    //$category = self::$categoryRepository->getCategory()->get();
-	    return response($category = self::$categoryRepository->getCategory()->get()->jsonSerialize(), Response::HTTP_OK);
-    	/*$category = self::$categoryRepository->getCategory()->get();
-    	return $category;*/
+	    $category = self::$categoryRepository->getApiCategory()->get()->jsonSerialize();
+	    return response($category, Response::HTTP_OK);
+    }
+
+    public function view($url)
+    {
+	    $category = self::$categoryRepository->getApiCategory($url)->first()->jsonSerialize();
+	    return response($category, Response::HTTP_OK);
     }
 }

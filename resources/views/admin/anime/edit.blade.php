@@ -243,8 +243,9 @@
 	</form>
 @endsection
 @section('footer')
-		<button class="btn btn-success btn-rounded" type="submit" form="data">Сохранить</button>
+	<button-form-admin :patch='{{ json_encode(route('admin.anime')) }}'></button-form-admin>
+		{{--<button class="btn btn-success btn-rounded" type="submit" form="data">Сохранить</button>
 		<button class="btn btn-danger btn-rounded" type="button"
 				onclick="window.location='{{ route('admin.anime') }}'">Отменить
-		</button>
+		</button>--}}
 @endsection

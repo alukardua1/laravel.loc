@@ -66,7 +66,7 @@ class CommentController extends Controller
 	 *
 	 * @return Factory|RedirectResponse|View
 	 */
-	public function addComment(Request $request)
+	public function store(Request $request)
 	{
 		$comment = self::$commentRepository->setComments($request);
 		if ($comment) {
@@ -80,7 +80,7 @@ class CommentController extends Controller
 	 *
 	 * @return Factory|RedirectResponse|View
 	 */
-	public function deleteComment($id)
+	public function delete($id)
 	{
 		$comment = self::$commentRepository->delComments($id);
 		if ($comment) {

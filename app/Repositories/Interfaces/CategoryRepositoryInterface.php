@@ -26,6 +26,8 @@ interface CategoryRepositoryInterface
      */
     public function getCategory($url = null, $isAdmin = false);
 
+    public function getApiCategory($url = null);
+
     /**
      * @param  Request  $request
      * @param  null      $url
