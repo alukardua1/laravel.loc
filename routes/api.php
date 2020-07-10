@@ -25,10 +25,16 @@ use Illuminate\Http\Request;
 Route::group(
 	['namespace' => 'Api', 'prefix'=>'v1'], function ()
 {
-	Route::get('category', 'GenreApiController@index');
-	Route::get('category/{url}', 'GenreApiController@view');
-	Route::get('anime/{id}', 'AnimeApiController@view');
-	Route::get('anime', 'AnimeApiController@index');
+	Route::group(['prefix'=>'category'], function ()
+	{
+		Route::get('', 'GenreApiController@index');
+		Route::get('{url}', 'GenreApiController@view');
+	});
+	Route::group(['prefix'=>'anime'], function ()
+	{
+		Route::get('{id}', 'AnimeApiController@view');
+		Route::get('', 'AnimeApiController@index');
+	});
 }
 
 );

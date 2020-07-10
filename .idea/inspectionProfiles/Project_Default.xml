@@ -29,6 +29,7 @@
           <option value="print_r" />
           <option value="var_dump" />
           <option value="var_export" />
+          <option value="wp_die" />
           <option value="xdebug_break" />
           <option value="xdebug_call_class" />
           <option value="xdebug_call_file" />

@@ -206,4 +206,14 @@ protected static $userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0)
 
 		return $data;
 	}
+
+	public function api404()
+	{
+		$data = [
+			'message'=>'Страница не найдена',
+			'code'=>404,
+		];
+
+		return $data;
+	}
 }

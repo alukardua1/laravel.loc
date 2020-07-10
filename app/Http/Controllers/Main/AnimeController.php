@@ -74,29 +74,34 @@ class AnimeController extends Controller
 		/** @var mixed $uri масив урл после разбивки */
 		$uri = self::parseUrl($urlAnime);
 		/** @var string $idAnime ID из урл */
-		$idAnime = $uri['uri'][0];
+		$idAnime = (integer)$uri['uri'][0];
 		/** @var string $slugAnime Slug из урл */
 		$slugAnime = $uri['stringUrl'][1];
 
-		if (Cache::has(self::$keyCache . $idAnime)) {
-			$animePost = Cache::get(self::$keyCache . $idAnime);
-		} else {
-			$animePost = self::setCache(self::$keyCache . $idAnime, self::$animeRepository->getAnime($idAnime)->first());
+		if ($idAnime>0)
+		{
+			if (Cache::has(self::$keyCache . $idAnime)) {
+				$animePost = Cache::get(self::$keyCache . $idAnime);
+			} else {
+				$animePost = self::setCache(self::$keyCache . $idAnime, self::$animeRepository->getAnime($idAnime)->first());
+			}
+
+			$comm = app(CommentController::class)->view($idAnime);
+
+			$animePost = self::currentRefactoring($animePost);
+
+			if (empty($animePost)) {
+				return abort(404);
+			}
+
+			if ($slugAnime !== $animePost->url) {
+				return redirect('/anime/' . $animePost->id . '-' . $animePost->url);
+			}
+
+			return view(self::$theme . '/full_anime', compact('animePost', 'comm'));
 		}
 
-		$comm = app(CommentController::class)->view($idAnime);
-
-		$animePost = self::currentRefactoring($animePost);
-
-		if (empty($animePost)) {
-			return abort(404);
-		}
-
-		if ($slugAnime !== $animePost->url) {
-			return redirect('/anime/' . $animePost->id . '-' . $animePost->url);
-		}
-
-		return view(self::$theme . '/full_anime', compact('animePost', 'comm'));
+		return abort(404);
 	}
 
 	/**

@@ -29,7 +29,7 @@ class AnimeRepository implements AnimeRepositoryInterface
 	/**
 	 * @var string[]
 	 */
-	private static $withTable = ['getCategory', 'getUsers', 'getTranslate'];
+	private static $withTable = ['getCategory', 'getUsers', 'getTranslate', 'getCountry'];
 
 	/**
 	 * если $id пустой выводит все записи на сайте, $isAdmin если указан то выводит в админке, если $id указан то
