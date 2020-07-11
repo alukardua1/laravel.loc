@@ -46,7 +46,7 @@ class UserController extends Controller
 	 *
 	 * @return View|void
 	 */
-	public function view($userUrl)
+	public function show($userUrl)
 	{
 		if (Cache::has(self::$keyCache . $userUrl)) {
 			$profile = Cache::get(self::$keyCache . $userUrl);

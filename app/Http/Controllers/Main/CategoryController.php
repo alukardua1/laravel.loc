@@ -31,7 +31,7 @@ class CategoryController extends Controller
 	 *
 	 * @return Factory|View|void
 	 */
-	public function view($url)
+	public function show($url)
 	{
 		$animePost = self::$categoryRepository
 			->getCategory($url)

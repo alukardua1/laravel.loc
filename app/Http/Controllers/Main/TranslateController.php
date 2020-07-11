@@ -17,5 +17,13 @@ use Illuminate\Http\Request;
  */
 class TranslateController extends Controller
 {
-    //
+    public function index()
+    {
+    	echo 'Translate full';
+    }
+
+    public function show($translate)
+    {
+    	echo $translate;
+    }
 }

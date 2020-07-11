@@ -14,12 +14,12 @@ Route::group(
 		Route::group(
 			['prefix' => 'anime'],
 			function () {
-				Route::get('', 'AdminAnimeController@index')->name('admin.anime');
+				Route::get('', 'AdminAnimeController@index')->name('admin.anime.index');
 				Route::get('edit/{anime}', 'AdminAnimeController@edit')->name('admin.anime.edit');
 				Route::patch('edit/{anime}', 'AdminAnimeController@update')->name('admin.anime.update');
-				Route::get('add', 'AdminAnimeController@create')->name('admin.anime.add');
-				Route::patch('add', 'AdminAnimeController@store')->name('admin.anime.save');
-				Route::get('delete/{anime}', 'AdminAnimeController@delete')->name('admin.anime.delete');
+				Route::get('add', 'AdminAnimeController@create')->name('admin.anime.create');
+				Route::patch('add', 'AdminAnimeController@store')->name('admin.anime.store');
+				Route::get('delete/{anime}', 'AdminAnimeController@destroy')->name('admin.anime.destroy');
 				Route::get('video', 'AdminAnimeController@CDNParse')->name('admin.parseCDN');
 			}
 		);

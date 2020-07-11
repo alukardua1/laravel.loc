@@ -22,7 +22,7 @@ class CharacterController extends Controller
         dd(__METHOD__);
     }
 
-    public function view($character)
+    public function show($character)
     {
         dd(__METHOD__, $character);
     }

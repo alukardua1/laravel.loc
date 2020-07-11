@@ -1,7 +1,7 @@
 @extends('admin.layouts.dashboard')
 @section('title', 'Добавление аниме')
 @section('content')
-    <form method="POST" action="{{ route('admin.anime.save') }}"
+    <form method="POST" action="{{ route('admin.anime.store') }}"
           enctype="multipart/form-data">
         @method('PATCH')
         @csrf
@@ -224,9 +224,6 @@
         </div>
         @endsection
         @section('footer')
-            <button class="btn btn-success btn-rounded" type="submit">Сохранить</button>
-            <button class="btn btn-danger btn-rounded" type="button"
-                    onclick="window.location='{{ route('admin.anime') }}'">Отменить
-            </button>
+            <button-form-admin :patch='{{ json_encode(route('admin.anime.index')) }}'></button-form-admin>
     </form>
 @endsection

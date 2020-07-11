@@ -16,6 +16,7 @@ class GenreApiController extends BaseApiController
 
     public function __construct(CategoryRepositoryInterface $repository)
     {
+	    parent::__construct();
 	    self::$categoryRepository = $repository;
     }
 
@@ -25,7 +26,7 @@ class GenreApiController extends BaseApiController
 	    return response($category, Response::HTTP_OK);
     }
 
-    public function view($url)
+    public function show($url)
     {
 	    $category = self::$categoryRepository->getApiCategory($url)->first()->jsonSerialize();
 	    return response($category, Response::HTTP_OK);

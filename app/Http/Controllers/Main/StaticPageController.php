@@ -44,7 +44,7 @@ class StaticPageController extends Controller
 	 *
 	 * @return Factory|View
 	 */
-	public function view($url)
+	public function show($url)
 	{
 		if (Cache::has(self::$keyCache . $url)) {
 			$staticPage = Cache::get(self::$keyCache . $url);

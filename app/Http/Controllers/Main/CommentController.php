@@ -45,7 +45,7 @@ class CommentController extends Controller
 	 *
 	 * @return mixed
 	 */
-	public function view($idAnime)
+	public function show($idAnime)
 	{
 		if (Cache::has(self::$keyCache . $idAnime)) {
 			$comments['com'] = Cache::get(self::$keyCache . $idAnime);

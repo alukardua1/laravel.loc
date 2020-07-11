@@ -32,6 +32,8 @@ class AnimeController extends Controller
 	 * @var AnimeRepositoryInterface
 	 */
 	private static $animeRepository;
+
+	private static $commentController;
 	/**
 	 * @var string $keyCache ключ для создания кэша
 	 */
@@ -46,6 +48,7 @@ class AnimeController extends Controller
 	{
 		parent::__construct();
 		self::$animeRepository = $animeRepository;
+		self::$commentController = app(CommentController::class);
 	}
 
 	/**
@@ -69,39 +72,33 @@ class AnimeController extends Controller
 	 * @var \App\Models\Anime $animePost масив новости из базы
 	 * @return Factory|RedirectResponse|Redirector|View|void
 	 */
-	public function view($urlAnime)
+	public function show($urlAnime)
 	{
 		/** @var mixed $uri масив урл после разбивки */
 		$uri = self::parseUrl($urlAnime);
 		/** @var string $idAnime ID из урл */
-		$idAnime = (integer)$uri['uri'][0];
+		$idAnime = $uri['uri'][0];
 		/** @var string $slugAnime Slug из урл */
 		$slugAnime = $uri['stringUrl'][1];
 
-		if ($idAnime>0)
-		{
-			if (Cache::has(self::$keyCache . $idAnime)) {
-				$animePost = Cache::get(self::$keyCache . $idAnime);
-			} else {
-				$animePost = self::setCache(self::$keyCache . $idAnime, self::$animeRepository->getAnime($idAnime)->first());
-			}
-
-			$comm = app(CommentController::class)->view($idAnime);
-
-			$animePost = self::currentRefactoring($animePost);
-
-			if (empty($animePost)) {
-				return abort(404);
-			}
-
-			if ($slugAnime !== $animePost->url) {
-				return redirect('/anime/' . $animePost->id . '-' . $animePost->url);
-			}
-
-			return view(self::$theme . '/full_anime', compact('animePost', 'comm'));
+		if (Cache::has(self::$keyCache . $idAnime)) {
+			$animePost = Cache::get(self::$keyCache . $idAnime);
+		} else {
+			$animePost = self::setCache(self::$keyCache . $idAnime, self::$animeRepository->getAnime($idAnime)->first());
 		}
 
-		return abort(404);
+		if (empty($animePost)) {
+			return abort(404);
+		}
+
+		$comm = self::$commentController->show($idAnime);
+		$animePost = self::currentRefactoring($animePost);
+
+		if ($slugAnime !== $animePost->url) {
+			return redirect('/anime/' . $animePost->id . '-' . $animePost->url, 301);
+		}
+
+		return view(self::$theme . '/full_anime', compact('animePost', 'comm'));
 	}
 
 	/**

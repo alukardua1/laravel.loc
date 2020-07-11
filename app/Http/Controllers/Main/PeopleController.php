@@ -22,7 +22,7 @@ class PeopleController extends Controller
         dd(__METHOD__);
     }
 
-    public function view($people)
+    public function show($people)
     {
         dd(__METHOD__, $people);
     }

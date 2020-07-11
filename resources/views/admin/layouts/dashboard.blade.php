@@ -54,9 +54,9 @@
 							<i class="fas fa-angle-down rotate-icon"></i></a>
 						<div class="collapsible-body">
 							<ul>
-								<li><a href="{{route('admin.anime')}}" class="waves-effect">Редактировать</a>
+								<li><a href="{{route('admin.anime.index')}}" class="waves-effect">Редактировать</a>
 								</li>
-								<li><a href="{{route('admin.anime.add')}}" class="waves-effect">Добавить</a>
+								<li><a href="{{route('admin.anime.create')}}" class="waves-effect">Добавить</a>
 								</li>
 							</ul>
 						</div>

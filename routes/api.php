@@ -5,8 +5,6 @@
  * User: Alukardua
  */
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,18 +21,22 @@ use Illuminate\Http\Request;
 });*/
 
 Route::group(
-	['namespace' => 'Api', 'prefix'=>'v1'], function ()
-{
-	Route::group(['prefix'=>'category'], function ()
-	{
-		Route::get('', 'GenreApiController@index');
-		Route::get('{url}', 'GenreApiController@view');
-	});
-	Route::group(['prefix'=>'anime'], function ()
-	{
-		Route::get('{id}', 'AnimeApiController@view');
-		Route::get('', 'AnimeApiController@index');
-	});
-}
+	['namespace' => 'Api', 'prefix' => 'v1'],
+	function () {
+		Route::group(
+			['prefix' => 'category'],
+			function () {
+				Route::get('', 'GenreApiController@index');
+				Route::get('{url}', 'GenreApiController@show');
+			}
+		);
+		Route::group(
+			['prefix' => 'anime'],
+			function () {
+				Route::get('{id}', 'AnimeApiController@show');
+				Route::get('', 'AnimeApiController@index');
+			}
+		);
+	}
 
 );

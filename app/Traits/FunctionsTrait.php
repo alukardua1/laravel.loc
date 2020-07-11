@@ -136,9 +136,11 @@ protected static $userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0)
 	{
 		$pattern = "/[0-9]+-/";
 		$returnUrl = [];
+		$url = urlencode($url);
 		$uri = explode('-', $url);
 		$stringUrl = preg_split($pattern, $url);
 		$returnUrl['uri'] = $uri;
+		//dd(__METHOD__, $uri, $stringUrl, $returnUrl);
 		if (count($stringUrl) == 2) {
 			$returnUrl['stringUrl'] = $stringUrl;
 		} else {
@@ -203,16 +205,6 @@ protected static $userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0)
 		curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
 		$data = curl_exec($curl);
 		curl_close($curl);
-
-		return $data;
-	}
-
-	public function api404()
-	{
-		$data = [
-			'message'=>'Страница не найдена',
-			'code'=>404,
-		];
 
 		return $data;
 	}

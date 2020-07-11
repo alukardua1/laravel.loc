@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers\Administrations;
 
+use App\Http\Controllers\Api\AnimeApiController;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CountryRepositoryInterface;
@@ -180,11 +181,11 @@ class AdminAnimeController extends AdminBaseController
      *
      * @return RedirectResponse
      */
-    public function delete($animeUrl): RedirectResponse
+    public function destroy($animeUrl): RedirectResponse
     {
         $updateAnime = self::$animeRepository->delAnime($animeUrl);
         if ($updateAnime) {
-            return redirect()->route('admin.anime');
+            return redirect()->route('admin.anime.index');
         }
 
         return back()->withErrors(['msg' => 'Ошибка удаления'])->withInput();
