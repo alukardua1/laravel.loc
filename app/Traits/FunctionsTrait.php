@@ -8,6 +8,8 @@
 namespace App\Traits;
 
 
+use App\Models\Anime;
+use App\Models\Country;
 use Carbon\Carbon;
 use DateTimeZone;
 use IntlDateFormatter;
@@ -21,7 +23,7 @@ use IntlDateFormatter;
  */
 trait FunctionsTrait
 {
-		/**
+	/**
 	 * Приставка для сезона
 	 *
 	 * @var array $arrMsg
@@ -44,12 +46,15 @@ trait FunctionsTrait
 		17 => '<span class="blue-text">[вечерний сеанс]</span>',
 		23 => '<span class="deep-orange-text">[ночной сеанс]</span>',
 	];
-protected static $userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0';
+	/**
+	 * @var string
+	 */
+	protected static $userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0';
 
 	/**
 	 * Внесение дополнительного в пост
 	 *
-	 * @param  \App\Models\Anime  $anime
+	 * @param  Anime  $anime
 	 *
 	 * @return mixed
 	 */
@@ -88,12 +93,12 @@ protected static $userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0)
 	 * @var string     $seasons
 	 * @return string
 	 */
-	public static function airedSeason($aired_on): string
+	public static function airedSeason($aired_on)
 	{
 		$seasons = '';
 		foreach (self::$arrMsg as $key => $value) {
 			if (Carbon::parse($aired_on)->format('m') >= $key) {
-				if (Carbon::parse($aired_on)->format('m') == 12) {
+				if (Carbon::parse($aired_on)->format('m') === 12) {
 					$year = Carbon::parse($aired_on)->format('Y') + 1;
 					$seasons = $value . $year;
 				} else {
@@ -112,7 +117,7 @@ protected static $userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0)
 	 *
 	 * @return array
 	 */
-	public static function customArr($arr, $keys): array
+	public static function customArr($arr, $keys)
 	{
 		$result = [];
 		foreach ($arr as $key => $value) {
@@ -126,38 +131,13 @@ protected static $userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0)
 	}
 
 	/**
-	 * Получение id и slug из url
-	 *
-	 * @param $url
-	 *
-	 * @return array
-	 */
-	public static function parseUrl($url): array
-	{
-		$pattern = "/[0-9]+-/";
-		$returnUrl = [];
-		$url = urlencode($url);
-		$uri = explode('-', $url);
-		$stringUrl = preg_split($pattern, $url);
-		$returnUrl['uri'] = $uri;
-		//dd(__METHOD__, $uri, $stringUrl, $returnUrl);
-		if (count($stringUrl) == 2) {
-			$returnUrl['stringUrl'] = $stringUrl;
-		} else {
-			$returnUrl['stringUrl'] = ['1'=>'','2'=>''];
-		}
-		//dd(__METHOD__, $returnUrl);
-		return $returnUrl;
-	}
-
-	/**
 	 * Загружает временные зоны и страны
 	 *
-	 * @param  \App\Models\Country  $countryRaw
+	 * @param  Country  $countryRaw
 	 *
 	 * @return array
 	 */
-	public static function loadCountryTimeZone($countryRaw): array
+	public static function loadCountryTimeZone($countryRaw)
 	{
 		$countryArray = [];
 		foreach ($countryRaw as $key => $value) {
@@ -171,7 +151,7 @@ protected static $userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0)
 	/**
 	 * Возвращает временные зоны
 	 *
-	 * @return array getTimeZone()
+	 * @return array
 	 */
 	public static function getTimeZone(): array
 	{
@@ -193,6 +173,11 @@ protected static $userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0)
 		return $tz;
 	}
 
+	/**
+	 * @param  string  $url
+	 *
+	 * @return mixed
+	 */
 	public static function getCurl($url)
 	{
 		$curl = curl_init();

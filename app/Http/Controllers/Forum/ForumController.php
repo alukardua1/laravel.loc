@@ -31,26 +31,31 @@ class ForumController extends BaseForumController
 
     public function showPost($category, $post)
     {
-	    echo "This Forum {$category} {$post}!!!";
+	    echo "This Forum post {$category} {$post}!!!";
     }
 
-	public function editPost($post)
+	public function editPost($category, $post)
 	{
-		echo "This Forum {$post}!!!";
+		echo "This Forum edit post {$category} {$post}!!!";
+	}
+
+	public function createPost($category, Request $request)
+	{
+		echo "This Forum create {$category} , {$request}";
 	}
 
     public function storePost($category, Request $request)
     {
-    	echo "{$category} , {$request}";
+    	echo "This Forum store {$category} , {$request}";
     }
 
 	public function updatePost($category, $post, Request $request)
 	{
-		echo "{$category}, {$post}, {$request}";
+		echo "This Forum update {$category}, {$post}, {$request}";
 	}
 
 	public function deletePost($category, $post)
 	{
-		echo "{$category}, {$post}";
+		echo "This Forum delete {$category}, {$post}";
 	}
 }

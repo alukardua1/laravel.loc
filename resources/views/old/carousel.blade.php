@@ -23,7 +23,7 @@
                     @endforeach
                 </p>
                 <p class="text-muted">{!! Str::limit($animePost->content, 300) !!}</p>
-                <a class="font-weight-bold" href="{{ route('anime', $animePost->id.'-'.$animePost->url) }}">
+                <a class="font-weight-bold" href="{{ route('anime', [$animePost->id, $animePost->url]) }}">
                     Смотреть
                     <i class="fas fa-angle-right ml-2"></i>
                 </a>

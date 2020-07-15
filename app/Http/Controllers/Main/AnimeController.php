@@ -18,6 +18,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * Class AnimeController
@@ -67,34 +68,28 @@ class AnimeController extends Controller
 	/**
 	 * Страница аниме поста
 	 *
-	 * @param  string         $urlAnime  Урл страницы поста
+	 * @param $id
+	 * @param $slug
 	 *
-	 * @var \App\Models\Anime $animePost масив новости из базы
 	 * @return Factory|RedirectResponse|Redirector|View|void
 	 */
-	public function show($urlAnime)
+	public function show($id, $slug)
 	{
-		/** @var mixed $uri масив урл после разбивки */
-		$uri = self::parseUrl($urlAnime);
-		/** @var string $idAnime ID из урл */
-		$idAnime = $uri['uri'][0];
-		/** @var string $slugAnime Slug из урл */
-		$slugAnime = $uri['stringUrl'][1];
-
-		if (Cache::has(self::$keyCache . $idAnime)) {
-			$animePost = Cache::get(self::$keyCache . $idAnime);
+		if (Cache::has(self::$keyCache . $id)) {
+			$animePost = Cache::get(self::$keyCache . $id);
 		} else {
-			$animePost = self::setCache(self::$keyCache . $idAnime, self::$animeRepository->getAnime($idAnime)->first());
+			$animePost = self::setCache(self::$keyCache . $id, self::$animeRepository->getAnime($id)->first());
 		}
 
 		if (empty($animePost)) {
 			return abort(404);
 		}
 
-		$comm = self::$commentController->show($idAnime);
+		$comm = self::$commentController->show($id);
 		$animePost = self::currentRefactoring($animePost);
+		//dd(__METHOD__, $animePost);
 
-		if ($slugAnime !== $animePost->url) {
+		if ($slug !== $animePost->url) {
 			return redirect('/anime/' . $animePost->id . '-' . $animePost->url, 301);
 		}
 

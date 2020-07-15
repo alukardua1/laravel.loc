@@ -42,9 +42,4 @@ class Category extends Model
 	{
 		return $this->hasOne(__CLASS__, 'id', 'parent_id');
 	}
-
-	/*public function getParentId(): HasOne
-	{
-		return
-	}*/
 }

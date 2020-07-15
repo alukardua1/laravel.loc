@@ -26,7 +26,7 @@ Route::group(
 		Route::group(
 			['prefix' => 'anime'],
 			function () {
-				Route::get('{anime}', 'AnimeController@show')->name('anime');
+				Route::get('{id}-{slug}', 'AnimeController@show')->name('anime');
 			}
 		);
 		/** Страница поиска */

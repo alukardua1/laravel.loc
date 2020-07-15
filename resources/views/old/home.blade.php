@@ -50,7 +50,7 @@
                         </div>
                         <div class="card-text">
                             <p class="dark-grey-text">{!! Str::limit($post->content, 300) !!}</p>
-                            <a href="{{ route('anime', $post->id.'-'.$post->url) }}"
+                            <a href="{{ route('anime', [$post->id, $post->url]) }}"
                                class="btn btn-success">Смотреть...</a>
                         </div>
                     </div>

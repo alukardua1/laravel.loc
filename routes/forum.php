@@ -10,9 +10,10 @@ Route::group(['namespace' => 'Forum'],
 		Route::get('', 'ForumController@index')->name('forum.index');
 		Route::get('{category}', 'ForumController@showCategory')->name('forum.category');
 		Route::get('{category}/{post}', 'ForumController@showPost')->name('forum.post');
-		Route::post('{category}/add/{post}', 'ForumController@storePost')->name('forum.post.add');
+		Route::post('{category}/add', 'ForumController@createPost')->name('forum.post.create');
+		Route::post('{category}/add', 'ForumController@storePost')->name('forum.post.store');
 		Route::get('{category}/edit/{post}', 'ForumController@editPost')->name('forum.post.edit');
-		Route::post('{category}/update/{post}', 'ForumController@updatePost')->name('forum.post.edit');
+		Route::post('{category}/update/{post}', 'ForumController@updatePost')->name('forum.post.update');
 		Route::get('{category}/delete/{post}', 'ForumController@deletePost')->name('forum.post.delete');
 	}
 );
