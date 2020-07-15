@@ -26,7 +26,7 @@ Route::group(
 		Route::group(
 			['prefix' => 'anime'],
 			function () {
-				Route::get('{id}-{slug}', 'AnimeController@show')->name('anime');
+				Route::get('{id}-{slug?}', 'AnimeController@show')->name('anime')->where('id', '[0-9]+');
 			}
 		);
 		/** Страница поиска */
@@ -76,7 +76,7 @@ Route::group(
 			['prefix' => 'people'],
 			function () {
 				Route::get('', 'PeopleController@index')->name('peoples');
-				Route::get('{people}', 'PeopleController@show')->name('people');
+				Route::get('{id}-{people}', 'PeopleController@show')->name('people')->where('id', '[0-9]+');
 			}
 		);
 		/** Персонажи */
@@ -84,7 +84,7 @@ Route::group(
 			['prefix' => 'character'],
 			function () {
 				Route::get('', 'CharacterController@index')->name('characters');
-				Route::get('{character}', 'CharacterController@show')->name('character');
+				Route::get('{id}-{character}', 'CharacterController@show')->name('character')->where('id', '[0-9]+');
 			}
 		);
 		/** Комментарии */
@@ -99,7 +99,7 @@ Route::group(
 		Route::group(
 			['prefix' => 'translate'],
 			function () {
-				Route::get('{translate}', 'TranslateController@show')->name('translate');
+				Route::get('{id}-{translate}', 'TranslateController@show')->name('translate')->where('id', '[0-9]+');
 			}
 		);
 	}
