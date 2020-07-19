@@ -17,11 +17,11 @@ use Composer\DependencyResolver\Request;
  */
 class UserObserver
 {
-	/**
-	 * @param  User  $user  Updating user
-	 */
-	public function updating(User $user)
-	{
-		$user['allow_email'] = request()->allow_email ? true : false;
-	}
+    /**
+     * @param User $user Updating user
+     */
+    public function updating(User $user)
+    {
+        $user['allow_email'] = request()->allow_email ? true : false;
+    }
 }

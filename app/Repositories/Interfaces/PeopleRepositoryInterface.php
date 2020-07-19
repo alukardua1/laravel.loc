@@ -19,11 +19,13 @@ interface PeopleRepositoryInterface
      * @param $id
      *
      * @return mixed
-     */public function getPeople($id);
+     */
+    public function getPeople($id);
 
     /**
      * @param $id
      *
      * @return mixed
-     */public function setPeople($id);
+     */
+    public function setPeople($id);
 }

@@ -8,9 +8,22 @@
 namespace App\Repositories\Interfaces;
 
 
+/**
+ * Interface ParseVideoCDNRepositoryInterface
+ *
+ * @package App\Repositories\Interfaces
+ */
 interface ParseVideoCDNRepositoryInterface
 {
-	public function parseCurl($arr);
+    /**
+     * @param $arr
+     *
+     * @return mixed
+     */
+    public function parseCurl($arr);
 
-	public function parseData();
+    /**
+     * @return mixed
+     */
+    public function parseData();
 }

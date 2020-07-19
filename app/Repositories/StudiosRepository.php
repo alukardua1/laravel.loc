@@ -22,9 +22,9 @@ class StudiosRepository implements StudiosRepositoryInterface
      * @return mixed|void
      */
     public function getStudio()
-	{
-		// TODO: Implement getStudio() method.
-	}
+    {
+        // TODO: Implement getStudio() method.
+    }
 
     /**
      * @param $id

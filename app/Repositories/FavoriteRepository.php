@@ -18,23 +18,23 @@ use Auth;
  */
 class FavoriteRepository implements FavoritesRepositoryInterface
 {
-	/**
-	 * @param $id
-	 *
-	 * @return mixed|void
-	 */
-	public function favorite($id)
-	{
-		Auth::user()->favorites()->attach($id);
-	}
+    /**
+     * @param $id
+     *
+     * @return mixed|void
+     */
+    public function favorite($id)
+    {
+        Auth::user()->favorites()->attach($id);
+    }
 
-	/**
-	 * @param $id
-	 *
-	 * @return mixed|void
-	 */
-	public function unFavorite($id)
-	{
-		Auth::user()->favorites()->detach($id);
-	}
+    /**
+     * @param $id
+     *
+     * @return mixed|void
+     */
+    public function unFavorite($id)
+    {
+        Auth::user()->favorites()->detach($id);
+    }
 }

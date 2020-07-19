@@ -24,5 +24,6 @@ interface StudiosRepositoryInterface
      * @param $id
      *
      * @return mixed
-     */public function setStudio($id);
+     */
+    public function setStudio($id);
 }

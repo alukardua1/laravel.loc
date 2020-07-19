@@ -8,6 +8,7 @@
 namespace App\Observers;
 
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
 use Str;
 
 /**
@@ -17,27 +18,27 @@ use Str;
  */
 class CategoryObserver
 {
-	/**
-	 * @param  \App\Models\Category  $category
-	 */
-	public function updating(Category $category)
-	{
-		$category->url = Str::slug($category->title);
-	}
+    /**
+     * @param Category $category
+     */
+    public function updating(Category $category)
+    {
+        $category->url = Str::slug($category->title);
+    }
 
-	/**
-	 * @param  \App\Models\Category  $category
-	 */
-	public function creating(Category $category)
-	{
-		$category->url = Str::slug($category->title);
-	}
+    /**
+     * @param Category $category
+     */
+    public function creating(Category $category)
+    {
+        $category->url = Str::slug($category->title);
+    }
 
-	/**
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function updated()
-	{
-		return redirect()->route('admin.category')->send();
-	}
+    /**
+     * @return RedirectResponse
+     */
+    public function updated()
+    {
+        return redirect()->route('admin.category')->send();
+    }
 }

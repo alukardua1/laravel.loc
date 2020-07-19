@@ -17,29 +17,31 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property mixed|string url
  * @property mixed        title
  * @package App\Models
+ * @method static withCount(string $string)
+ * @method static where(string $string, $category)
  */
 class Category extends Model
 {
-	protected $fillable = [
-		'title',
-		'description',
-		'parent_id',
-		'url',
-	];
+    protected $fillable = [
+        'title',
+        'description',
+        'parent_id',
+        'url',
+    ];
 
-	/**
-	 * @return BelongsToMany
-	 */
-	public function getAnime(): BelongsToMany
-	{
-		return $this->belongsToMany(Anime::class);
-	}
+    /**
+     * @return BelongsToMany
+     */
+    public function getAnime(): BelongsToMany
+    {
+        return $this->belongsToMany(Anime::class);
+    }
 
-	/**
-	 * @return HasOne
-	 */
-	public function getCategory(): HasOne
-	{
-		return $this->hasOne(__CLASS__, 'id', 'parent_id');
-	}
+    /**
+     * @return HasOne
+     */
+    public function getCategory(): HasOne
+    {
+        return $this->hasOne(__CLASS__, 'id', 'parent_id');
+    }
 }

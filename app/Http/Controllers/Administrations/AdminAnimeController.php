@@ -7,7 +7,7 @@
 
 namespace App\Http\Controllers\Administrations;
 
-use App\Http\Controllers\Api\AnimeApiController;
+use App\Models\Anime;
 use App\Repositories\Interfaces\AnimeRepositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\CountryRepositoryInterface;
@@ -57,11 +57,11 @@ class AdminAnimeController extends AdminBaseController
     /**
      * AdminAnimeController constructor.
      *
-     * @param  AnimeRepositoryInterface      $animeRepository
-     * @param  CategoryRepositoryInterface   $categoryRepository
-     * @param  CountryRepositoryInterface    $countryRepository
-     * @param  TranslateRepositoryInterface  $translateRepository
-     * @param  ParseVideoCDNRepository       $parseVideoCDNRepository
+     * @param AnimeRepositoryInterface     $animeRepository
+     * @param CategoryRepositoryInterface  $categoryRepository
+     * @param CountryRepositoryInterface   $countryRepository
+     * @param TranslateRepositoryInterface $translateRepository
+     * @param ParseVideoCDNRepository      $parseVideoCDNRepository
      */
     public function __construct(
         AnimeRepositoryInterface $animeRepository,
@@ -81,9 +81,9 @@ class AdminAnimeController extends AdminBaseController
     /**
      * Главная страница всех записей аниме
      *
-     * @var \App\Models\Anime $animePost
-     * @uses AdminBaseController::$paginate
      * @return Factory|View
+     * @uses AdminBaseController::$paginate
+     * @var Anime $animePost
      */
     public function index()
     {
@@ -95,11 +95,11 @@ class AdminAnimeController extends AdminBaseController
     /**
      * Страница редактирования аниме
      *
-     * @param  string         $animeUrl
-     *
-     * @var \App\Models\Anime $animePost
+     * @param string $animeUrl
      *
      * @return Factory|View
+     * @var Anime    $animePost
+     *
      */
     public function edit($animeUrl)
     {
@@ -141,7 +141,7 @@ class AdminAnimeController extends AdminBaseController
     /**
      * Сохранение новой записи
      *
-     * @param  Request  $request
+     * @param Request $request
      *
      * @return RedirectResponse
      */
@@ -158,8 +158,8 @@ class AdminAnimeController extends AdminBaseController
     /**
      * Процедура обновления записи
      *
-     * @param  Request  $request
-     * @param  string   $animeUrl
+     * @param Request $request
+     * @param string  $animeUrl
      *
      * @return RedirectResponse
      */
@@ -177,7 +177,7 @@ class AdminAnimeController extends AdminBaseController
     /**
      * Удаление записи
      *
-     * @param  string  $animeUrl
+     * @param string $animeUrl
      *
      * @return RedirectResponse
      */
@@ -198,8 +198,7 @@ class AdminAnimeController extends AdminBaseController
      */
     public function CDNParse()
     {
-	    $arr = json_decode($_GET['arr'], true);
-	    //$arr = ['wa'=>9917, 'shiki'=>38408];
+        $arr = json_decode($_GET['arr'], true);
 
         return self::$CDNVideo->parseCurl($arr);
     }

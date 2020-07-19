@@ -20,38 +20,38 @@ use Illuminate\View\View;
  */
 class StaticPageController extends Controller
 {
-	/**
-	 * @var StaticPageRepositoryInterface
-	 */
-	private static $staticPageRepository;
-	private static $keyCache = 'page_';
+    /**
+     * @var StaticPageRepositoryInterface
+     */
+    private static $staticPageRepository;
+    private static $keyCache = 'page_';
 
-	/**
-	 * StaticPageController constructor.
-	 *
-	 * @param  StaticPageRepositoryInterface  $repository
-	 */
-	public function __construct(StaticPageRepositoryInterface $repository)
-	{
-		parent::__construct();
-		self::$staticPageRepository = $repository;
-	}
+    /**
+     * StaticPageController constructor.
+     *
+     * @param StaticPageRepositoryInterface $repository
+     */
+    public function __construct(StaticPageRepositoryInterface $repository)
+    {
+        parent::__construct();
+        self::$staticPageRepository = $repository;
+    }
 
-	/**
-	 * Выводит статическую страницу
-	 *
-	 * @param  string  $url
-	 *
-	 * @return Factory|View
-	 */
-	public function show($url)
-	{
-		if (Cache::has(self::$keyCache . $url)) {
-			$staticPage = Cache::get(self::$keyCache . $url);
-		} else {
-			$staticPage = self::setCache(self::$keyCache . $url, self::$staticPageRepository->getStaticPage($url));
-		}
+    /**
+     * Выводит статическую страницу
+     *
+     * @param string $url
+     *
+     * @return Factory|View
+     */
+    public function show($url)
+    {
+        if (Cache::has(self::$keyCache . $url)) {
+            $staticPage = Cache::get(self::$keyCache . $url);
+        } else {
+            $staticPage = self::setCache(self::$keyCache . $url, self::$staticPageRepository->getStaticPage($url));
+        }
 
-		return view(self::$theme . '/staticPage', compact('staticPage'));
-	}
+        return view(self::$theme . '/staticPage', compact('staticPage'));
+    }
 }

@@ -18,47 +18,47 @@ use Illuminate\Http\RedirectResponse;
  */
 class FavoriteController extends Controller
 {
-	/**
-	 * @var FavoritesRepositoryInterface $favoriteRepository
-	 */
-	private static $favoriteRepository;
+    /**
+     * @var FavoritesRepositoryInterface $favoriteRepository
+     */
+    private static $favoriteRepository;
 
-	/**
-	 * FavoriteController constructor.
-	 *
-	 * @param  FavoritesRepositoryInterface  $favoritesRepository
-	 */
-	public function __construct(FavoritesRepositoryInterface $favoritesRepository)
-	{
-		parent::__construct();
-		self::$favoriteRepository = $favoritesRepository;
-	}
+    /**
+     * FavoriteController constructor.
+     *
+     * @param FavoritesRepositoryInterface $favoritesRepository
+     */
+    public function __construct(FavoritesRepositoryInterface $favoritesRepository)
+    {
+        parent::__construct();
+        self::$favoriteRepository = $favoritesRepository;
+    }
 
-	/**
-	 * Добавить в закладки
-	 *
-	 * @param  int  $id
-	 *
-	 * @return RedirectResponse
-	 */
-	public function add($id): RedirectResponse
-	{
-		self::$favoriteRepository->favorite($id);
+    /**
+     * Добавить в закладки
+     *
+     * @param int $id
+     *
+     * @return RedirectResponse
+     */
+    public function add($id): RedirectResponse
+    {
+        self::$favoriteRepository->favorite($id);
 
-		return back();
-	}
+        return back();
+    }
 
-	/**
-	 * Убрать из закладок
-	 *
-	 * @param  int  $id
-	 *
-	 * @return RedirectResponse
-	 */
-	public function delete($id): RedirectResponse
-	{
-		self::$favoriteRepository->unFavorite($id);
+    /**
+     * Убрать из закладок
+     *
+     * @param int $id
+     *
+     * @return RedirectResponse
+     */
+    public function delete($id): RedirectResponse
+    {
+        self::$favoriteRepository->unFavorite($id);
 
-		return back();
-	}
+        return back();
+    }
 }

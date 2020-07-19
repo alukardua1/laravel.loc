@@ -17,26 +17,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Comment extends Model
 {
-	protected $fillable = [
-		'user_id',
-		'anime_id',
-		'parent_comment_id',
-		'content',
-	];
+    protected $fillable = [
+        'user_id',
+        'anime_id',
+        'parent_comment_id',
+        'content',
+    ];
 
-	/**
-	 * @return BelongsTo
-	 */
-	public function getAnime(): BelongsTo
-	{
-		return $this->belongsTo(Anime::class);
-	}
+    /**
+     * @return BelongsTo
+     */
+    public function getAnime(): BelongsTo
+    {
+        return $this->belongsTo(Anime::class);
+    }
 
-	/**
-	 * @return BelongsTo
-	 */
-	public function getUser(): BelongsTo
-	{
-		return $this->belongsTo(User::class, 'user_id', 'id');
-	}
+    /**
+     * @return BelongsTo
+     */
+    public function getUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

@@ -10,6 +10,11 @@ namespace App\Repositories\Interfaces;
 
 use Illuminate\Http\Request;
 
+/**
+ * Interface MainRepositoryInterface
+ *
+ * @package App\Repositories\Interfaces
+ */
 interface MainRepositoryInterface
 {
     /**

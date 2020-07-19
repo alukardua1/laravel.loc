@@ -9,6 +9,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Vote
+ *
+ * @package App\Models
+ */
 class Vote extends Model
 {
     //

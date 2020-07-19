@@ -72,11 +72,9 @@ class MainRepository implements MainRepositoryInterface
      */
     public function getCategory($category)
     {
-        $result = Category::where('url', $category)
+        return Category::where('url', $category)
             ->select(['id', 'title', 'url', 'description'])
             ->first();
-
-        return $result;
     }
 
     /**
@@ -88,11 +86,9 @@ class MainRepository implements MainRepositoryInterface
      */
     public function getFullAnime($anime)
     {
-        $result = Anime::with(['getCategory', 'getUsers:id,login', 'getCountry'])
+        return Anime::with(['getCategory', 'getUsers:id,login', 'getCountry'])
             ->where('url', $anime)
             ->first();
-
-        return $result;
     }
 
     /**
@@ -104,42 +100,38 @@ class MainRepository implements MainRepositoryInterface
      */
     public function getUsers($user)
     {
-        $result = User::with(['getGroup:id,title', 'getCountry:id,title'])
+        return User::with(['getGroup:id,title', 'getCountry:id,title'])
             ->where('login', $user)
             ->first();
-
-        return $result;
     }
 
     /**
      * Получает все страны
      *
+     * @param $selectRows
+     *
      * @return mixed
      */
     public function getCountry($selectRows)
     {
-        $result = Country::select($selectRows)
+        return Country::select($selectRows)
             ->get();
-
-        return $result;
     }
 
     /**
      * Поиск по сайту
      *
-     * @param  Request  $request
-     * @param                            $paginate
+     * @param Request $request
+     * @param         $paginate
      *
      * @return LengthAwarePaginator|mixed
      */
     public function getSearch(Request $request, $paginate)
     {
-        $result = Anime::with(['getCategory'])
-            ->orWhere('title', 'LIKE', '%'.$request->story.'%')
+        return Anime::with(['getCategory'])
+            ->orWhere('title', 'LIKE', '%' . $request->story . '%')
             ->orderBy('created_at', 'DESC')
             ->paginate($paginate);
-
-        return $result;
     }
 
     /**
@@ -172,11 +164,9 @@ class MainRepository implements MainRepositoryInterface
      */
     public function getCustom($columns, $custom, $paginate)
     {
-        $result = Anime::with(['getCategory'])
+        return Anime::with(['getCategory'])
             ->where($columns, $custom)
             ->orderBy('created_at', 'DESC')
             ->paginate($paginate);
-//dd(__METHOD__, $result, $columns, $custom, $paginate);
-        return $result;
     }
 }

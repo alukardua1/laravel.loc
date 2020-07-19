@@ -21,64 +21,64 @@ use Illuminate\View\View;
  */
 class UserController extends Controller
 {
-	/**
-	 * @var UserRepositoryInterface
-	 */
-	private static $userRepository;
-	private static $keyCache = 'user_';
+    /**
+     * @var UserRepositoryInterface
+     */
+    private static $userRepository;
+    private static $keyCache = 'user_';
 
-	/**
-	 * UserController constructor.
-	 *
-	 * @param  UserRepositoryInterface  $repository
-	 */
-	public function __construct(UserRepositoryInterface $repository)
-	{
-		parent::__construct();
-		self::$userRepository = $repository;
-	}
+    /**
+     * UserController constructor.
+     *
+     * @param UserRepositoryInterface $repository
+     */
+    public function __construct(UserRepositoryInterface $repository)
+    {
+        parent::__construct();
+        self::$userRepository = $repository;
+    }
 
 
-	/**
-	 * Просмотр профиля пользователя $userUrl
-	 *
-	 * @param  string  $userUrl
-	 *
-	 * @return View|void
-	 */
-	public function show($userUrl)
-	{
-		if (Cache::has(self::$keyCache . $userUrl)) {
-			$profile = Cache::get(self::$keyCache . $userUrl);
-		} else {
-			$profile = self::setCache(self::$keyCache . $userUrl, self::$userRepository->getUsers($userUrl));
-		}
+    /**
+     * Просмотр профиля пользователя $userUrl
+     *
+     * @param string $userUrl
+     *
+     * @return View|void
+     */
+    public function show($userUrl)
+    {
+        if (Cache::has(self::$keyCache . $userUrl)) {
+            $profile = Cache::get(self::$keyCache . $userUrl);
+        } else {
+            $profile = self::setCache(self::$keyCache . $userUrl, self::$userRepository->getUsers($userUrl));
+        }
 
-		$country = self::loadCountryTimeZone(self::$countryRepository->getCountry(['id', 'title']));
+        $country = self::loadCountryTimeZone(self::$countryRepository->getCountry(['id', 'title']));
 
-		if (empty($profile)) {
-			return abort(404);
-		}
+        if (empty($profile)) {
+            return abort(404);
+        }
 
-		return view(self::$theme . '/profile.profile', compact('profile', 'country'));
-	}
+        return view(self::$theme . '/profile.profile', compact('profile', 'country'));
+    }
 
-	/**
-	 * Обновление профиля $currentUser
-	 *
-	 * @param  UserRequest  $request
-	 * @param  string       $currentUser
-	 *
-	 * @return RedirectResponse
-	 */
-	public function update(UserRequest $request, $currentUser): RedirectResponse
-	{
-		$requestUser = self::$userRepository->setUsers($request, $currentUser);
+    /**
+     * Обновление профиля $currentUser
+     *
+     * @param UserRequest $request
+     * @param string      $currentUser
+     *
+     * @return RedirectResponse
+     */
+    public function update(UserRequest $request, $currentUser): RedirectResponse
+    {
+        $requestUser = self::$userRepository->setUsers($request, $currentUser);
 
-		if ($requestUser) {
-			return redirect()->route('profile', $currentUser);
-		}
+        if ($requestUser) {
+            return redirect()->route('profile', $currentUser);
+        }
 
-		return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
-	}
+        return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
+    }
 }

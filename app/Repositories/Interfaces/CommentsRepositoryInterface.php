@@ -17,32 +17,32 @@ use Illuminate\Http\Request;
  */
 interface CommentsRepositoryInterface
 {
-	/**
-	 * @param $id
-	 *
-	 * @return mixed
-	 */
-	public function getComments($id);
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function getComments($id);
 
-	/**
-	 * @param  Request  $request
-	 * @param           $id
-	 *
-	 * @return mixed
-	 */
-	public function setComments(Request $request, $id = null);
+    /**
+     * @param Request   $request
+     * @param           $id
+     *
+     * @return mixed
+     */
+    public function setComments(Request $request, $id = null);
 
-	/**
-	 * @param $id
-	 *
-	 * @return mixed
-	 */
-	public function delComments($id);
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function delComments($id);
 
-	/**
-	 * @param $id
-	 *
-	 * @return mixed
-	 */
-	public function countComments($id);
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function countComments($id);
 }

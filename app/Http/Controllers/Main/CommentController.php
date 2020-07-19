@@ -22,70 +22,76 @@ use Illuminate\View\View;
  */
 class CommentController extends Controller
 {
-	/**
-	 * @var CommentsRepositoryInterface
-	 */
-	private static $commentRepository;
-	private static $keyCache      = 'animeComments_';
-	private static $keyCacheCount = 'animeCommentsCount_';
+    /**
+     * @var CommentsRepositoryInterface
+     */
+    private static $commentRepository;
+    private static $keyCache = 'animeComments_';
+    private static $keyCacheCount = 'animeCommentsCount_';
 
-	/**
-	 * CommentController constructor.
-	 *
-	 * @param  CommentsRepositoryInterface  $commentsRepository
-	 */
-	public function __construct(CommentsRepositoryInterface $commentsRepository)
-	{
-		parent::__construct();
-		self::$commentRepository = $commentsRepository;
-	}
+    /**
+     * CommentController constructor.
+     *
+     * @param CommentsRepositoryInterface $commentsRepository
+     */
+    public function __construct(CommentsRepositoryInterface $commentsRepository)
+    {
+        parent::__construct();
+        self::$commentRepository = $commentsRepository;
+    }
 
-	/**
-	 * @param  int  $idAnime
-	 *
-	 * @return mixed
-	 */
-	public function show($idAnime)
-	{
-		if (Cache::has(self::$keyCache . $idAnime)) {
-			$comments['com'] = Cache::get(self::$keyCache . $idAnime);
-		} else {
-			$comments['com'] = self::setCache(self::$keyCache . $idAnime, self::$commentRepository->getComments($idAnime));
-		}
-		if (Cache::has(self::$keyCache . $idAnime)) {
-			$comments['count'] = Cache::get(self::$keyCacheCount . $idAnime);
-		} else {
-			$comments['count'] = self::setCache(self::$keyCacheCount . $idAnime, self::$commentRepository->countComments($idAnime));
-		}
+    /**
+     * @param int $idAnime
+     *
+     * @return mixed
+     */
+    public function show($idAnime)
+    {
+        if (Cache::has(self::$keyCache . $idAnime)) {
+            $comments['com'] = Cache::get(self::$keyCache . $idAnime);
+        } else {
+            $comments['com'] = self::setCache(
+                self::$keyCache . $idAnime,
+                self::$commentRepository->getComments($idAnime)
+            );
+        }
+        if (Cache::has(self::$keyCache . $idAnime)) {
+            $comments['count'] = Cache::get(self::$keyCacheCount . $idAnime);
+        } else {
+            $comments['count'] = self::setCache(
+                self::$keyCacheCount . $idAnime,
+                self::$commentRepository->countComments($idAnime)
+            );
+        }
 
-		return $comments;
-	}
+        return $comments;
+    }
 
-	/**
-	 * @param  Request  $request
-	 *
-	 * @return Factory|RedirectResponse|View
-	 */
-	public function store(Request $request)
-	{
-		$comment = self::$commentRepository->setComments($request);
-		if ($comment) {
-			return redirect()->back();
-		}
-		return view(self::$theme . '/errors.error')->withErrors(['msg' => 'Ошибка добавления комментария']);
-	}
+    /**
+     * @param Request $request
+     *
+     * @return Factory|RedirectResponse|View
+     */
+    public function store(Request $request)
+    {
+        $comment = self::$commentRepository->setComments($request);
+        if ($comment) {
+            return redirect()->back();
+        }
+        return view(self::$theme . '/errors.error')->withErrors(['msg' => 'Ошибка добавления комментария']);
+    }
 
-	/**
-	 * @param $id
-	 *
-	 * @return Factory|RedirectResponse|View
-	 */
-	public function delete($id)
-	{
-		$comment = self::$commentRepository->delComments($id);
-		if ($comment) {
-			return redirect()->back();
-		}
-		return view(self::$theme . '/errors.error')->withErrors(['msg' => 'Ошибка удаления комментария']);
-	}
+    /**
+     * @param $id
+     *
+     * @return Factory|RedirectResponse|View
+     */
+    public function delete($id)
+    {
+        $comment = self::$commentRepository->delComments($id);
+        if ($comment) {
+            return redirect()->back();
+        }
+        return view(self::$theme . '/errors.error')->withErrors(['msg' => 'Ошибка удаления комментария']);
+    }
 }

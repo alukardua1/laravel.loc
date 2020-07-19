@@ -17,11 +17,17 @@ use Illuminate\Http\Request;
  */
 class CharacterController extends Controller
 {
+    /**
+     *
+     */
     public function index()
     {
         dd(__METHOD__);
     }
 
+    /**
+     * @param $character
+     */
     public function show($character)
     {
         dd(__METHOD__, $character);

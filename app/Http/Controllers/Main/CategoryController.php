@@ -19,34 +19,34 @@ use Illuminate\View\View;
  */
 class CategoryController extends Controller
 {
-	/**
-	 * @var string $keyCache ключ для создания кэша
-	 */
-	private static $keyCache = 'categories';
+    /**
+     * @var string $keyCache ключ для создания кэша
+     */
+    private static $keyCache = 'categories';
 
-	/**
-	 * Выводит аниме по категориям
-	 *
-	 * @param  string  $url
-	 *
-	 * @return Factory|View|void
-	 */
-	public function show($url)
-	{
-		$animePost = self::$categoryRepository
-			->getCategory($url)
-			->paginate(self::$paginate);
+    /**
+     * Выводит аниме по категориям
+     *
+     * @param string $url
+     *
+     * @return Factory|View|void
+     */
+    public function show($url)
+    {
+        $animePost = self::$categoryRepository
+            ->getCategory($url)
+            ->paginate(self::$paginate);
 
-		if (Cache::has(self::$keyCache)) {
-			$categories = Cache::get(self::$keyCache);
-		} else {
-			$categories = self::setCache(self::$keyCache, self::$categoryRepository->getCategory($url)->getParent());
-		}
+        if (Cache::has(self::$keyCache)) {
+            $categories = Cache::get(self::$keyCache);
+        } else {
+            $categories = self::setCache(self::$keyCache, self::$categoryRepository->getCategory($url)->getParent());
+        }
 
-		if (empty($animePost)) {
-			return abort(404);
-		}
+        if (empty($animePost)) {
+            return abort(404);
+        }
 
-		return view(self::$theme . '/home', compact('animePost', 'categories'));
-	}
+        return view(self::$theme . '/home', compact('animePost', 'categories'));
+    }
 }

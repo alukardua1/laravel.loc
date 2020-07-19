@@ -17,13 +17,13 @@ use Illuminate\View\View;
  */
 class AdminController extends AdminBaseController
 {
-	/**
-	 * @return Factory|View
-	 */
-	public function index()
-	{
-		$anime = [];
+    /**
+     * @return Factory|View
+     */
+    public function index()
+    {
+        $anime = [];
 
-		return view('admin.main', compact('anime'));
-	}
+        return view('admin.main', compact('anime'));
+    }
 }

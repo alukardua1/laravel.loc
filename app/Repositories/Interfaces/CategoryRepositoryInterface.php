@@ -18,9 +18,9 @@ use Illuminate\Http\Request;
 interface CategoryRepositoryInterface
 {
     /**
-     * @param  null  $url  Url default null
+     * @param null $url Url default null
      *
-     * @param  bool  $isAdmin
+     * @param bool $isAdmin
      *
      * @return mixed
      */
@@ -29,8 +29,8 @@ interface CategoryRepositoryInterface
     public function getApiCategory($url = null);
 
     /**
-     * @param  Request  $request
-     * @param  null      $url
+     * @param Request $request
+     * @param null    $url
      *
      * @return mixed
      */

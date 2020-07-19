@@ -17,11 +17,17 @@ use Illuminate\Http\Request;
  */
 class PeopleController extends Controller
 {
+    /**
+     *
+     */
     public function index()
     {
         dd(__METHOD__);
     }
 
+    /**
+     * @param $people
+     */
     public function show($people)
     {
         dd(__METHOD__, $people);

@@ -9,6 +9,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Favorites
+ *
+ * @package App\Models
+ */
 class Favorites extends Model
 {
     //

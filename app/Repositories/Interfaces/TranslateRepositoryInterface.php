@@ -15,10 +15,10 @@ namespace App\Repositories\Interfaces;
  */
 interface TranslateRepositoryInterface
 {
-	/**
-	 * @param  null  $id
-	 *
-	 * @return mixed
-	 */
-	public function getTranslate($id = null);
+    /**
+     * @param null $id
+     *
+     * @return mixed
+     */
+    public function getTranslate($id = null);
 }

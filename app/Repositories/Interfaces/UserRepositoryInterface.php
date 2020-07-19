@@ -24,9 +24,10 @@ interface UserRepositoryInterface
      */
     public function getUsers($userUrl);
 
+
     /**
-     * @param  Request  $request
-     * @param                            $currentUser
+     * @param Request $request
+     * @param         $currentUser
      *
      * @return mixed
      */

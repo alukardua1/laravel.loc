@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class StaticPage
  *
  * @package App\Models
+ * @method static where(string $string, $url)
  */
 class StaticPage extends Model
 {

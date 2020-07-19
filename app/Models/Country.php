@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Country
  *
  * @package App\Models
+ * @method static select(array $selectColumns)
  */
 class Country extends Model
 {

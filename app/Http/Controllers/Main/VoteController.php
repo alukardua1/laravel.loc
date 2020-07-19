@@ -18,43 +18,43 @@ use Illuminate\Http\RedirectResponse;
  */
 class VoteController extends Controller
 {
-	/**
-	 * @var VoteRepositoryInterface
-	 */
-	private static $voteRepository;
+    /**
+     * @var VoteRepositoryInterface
+     */
+    private static $voteRepository;
 
-	/**
-	 * VoteController constructor.
-	 *
-	 * @param  VoteRepositoryInterface  $voteRepository
-	 */
-	public function __construct(VoteRepositoryInterface $voteRepository)
-	{
-		parent::__construct();
-		self::$voteRepository = $voteRepository;
-	}
+    /**
+     * VoteController constructor.
+     *
+     * @param VoteRepositoryInterface $voteRepository
+     */
+    public function __construct(VoteRepositoryInterface $voteRepository)
+    {
+        parent::__construct();
+        self::$voteRepository = $voteRepository;
+    }
 
-	/**
-	 * @param  int  $id
-	 *
-	 * @return RedirectResponse
-	 */
-	public function plus($id): RedirectResponse
-	{
-		self::$voteRepository->plusVotes($id);
+    /**
+     * @param int $id
+     *
+     * @return RedirectResponse
+     */
+    public function plus($id): RedirectResponse
+    {
+        self::$voteRepository->plusVotes($id);
 
-		return back();
-	}
+        return back();
+    }
 
-	/**
-	 * @param  int  $id
-	 *
-	 * @return RedirectResponse
-	 */
-	public function minus($id): RedirectResponse
-	{
-		self::$voteRepository->minusVotes($id);
+    /**
+     * @param int $id
+     *
+     * @return RedirectResponse
+     */
+    public function minus($id): RedirectResponse
+    {
+        self::$voteRepository->minusVotes($id);
 
-		return back();
-	}
+        return back();
+    }
 }

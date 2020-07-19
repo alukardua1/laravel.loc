@@ -19,17 +19,17 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class TranslateRepository implements TranslateRepositoryInterface
 {
-	/**
-	 * @param  null  $id
-	 *
-	 * @return Translate[]|Collection|void
-	 */
-	public function getTranslate($id = null)
-	{
-		if ($id) {
-			return abort(404);
-		}
+    /**
+     * @param null $id
+     *
+     * @return Translate[]|Collection|void
+     */
+    public function getTranslate($id = null)
+    {
+        if ($id) {
+            return abort(404);
+        }
 
-		return Translate::all();
-	}
+        return Translate::all();
+    }
 }

@@ -16,7 +16,7 @@ namespace App\Repositories\Interfaces;
 interface StaticPageRepositoryInterface
 {
     /**
-     * @param  mixed  $url  Url static page
+     * @param mixed $url Url static page
      *
      * @return mixed
      */
