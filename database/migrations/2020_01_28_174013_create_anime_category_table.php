@@ -1,4 +1,9 @@
 <?php
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,13 +19,11 @@ class CreateAnimeCategoryTable extends Migration
     public function up()
     {
         Schema::create('anime_category', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('anime_id');
-            $table->unsignedBigInteger('category_id');
+            $table->id();
+            $table->foreignId('anime_id');
+            $table->foreignId('category_id');
             $table->timestamps();
 
-            $table->foreign('anime_id')->references('id')->on('animes');
-            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

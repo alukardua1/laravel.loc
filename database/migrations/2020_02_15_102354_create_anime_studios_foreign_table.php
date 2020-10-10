@@ -1,9 +1,9 @@
 <?php
-/**
- * Copyright (c) by anime-free
- * Date: 2020.
- * User: Alukardua
- */
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,13 +19,10 @@ class CreateAnimeStudiosForeignTable extends Migration
     public function up()
     {
         Schema::create('anime_studios_foreign', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('anime_id');
-            $table->unsignedBigInteger('anime_studios_id');
+            $table->id();
+            $table->foreignId('anime_id');
+            $table->foreignId('anime_studios_id');
             $table->timestamps();
-
-            $table->foreign('anime_id')->references('id')->on('animes');
-            $table->foreign('anime_studios_id')->references('id')->on('anime_studios');
         });
     }
 

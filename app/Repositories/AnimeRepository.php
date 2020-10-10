@@ -1,9 +1,9 @@
 <?php
-/**
- * Copyright (c) by anime-free
- * Date: 2020.
- * User: Alukardua
- */
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 namespace App\Repositories;
 
@@ -35,7 +35,7 @@ class AnimeRepository implements AnimeRepositoryInterface
      * если $id пустой выводит все записи на сайте, $isAdmin если указан то выводит в админке, если $id указан то
      * выведет одну запись
      *
-     * @param int  $id      id поста
+     * @param null $id      id поста
      * @param bool $isAdmin Проверяет откуда запрос (сайт или админка)
      *
      * @return Builder
@@ -63,11 +63,10 @@ class AnimeRepository implements AnimeRepositoryInterface
      * Обновление и добавление записи в базу
      *
      * @param \Illuminate\Http\Request $request запрос из формы
-     * @param int                      $id      id записи
+     * @param null                     $id      id записи
      *
      * @return mixed
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     *
      * @todo Попытатся перенести все в AnimeObserver
      */
     public function setAnime(Request $request, $id = null)

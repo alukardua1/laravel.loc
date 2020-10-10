@@ -1,9 +1,9 @@
 <?php
-/**
- * Copyright (c) by anime-free
- * Date: 2020.
- * User: Alukardua
- */
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,13 +19,10 @@ class CreatePeopleJobsTable extends Migration
     public function up()
     {
         Schema::create('people_jobs', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('people_id');
-            $table->unsignedBigInteger('job_id');
+            $table->id();
+            $table->foreignId('people_id');
+            $table->foreignId('job_id');
             $table->timestamps();
-
-            $table->foreign('people_id')->references('id')->on('peoples');
-            $table->foreign('job_id')->references('id')->on('jobs');
         });
     }
 

@@ -1,4 +1,9 @@
 <?php
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,13 +19,10 @@ class CreateCharacterPeopleTable extends Migration
     public function up()
     {
         Schema::create('character_people', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('character_id');
-            $table->unsignedBigInteger('people_id');
+            $table->id();
+            $table->foreignId('character_id');
+            $table->foreignId('people_id');
             $table->timestamps();
-
-            $table->foreign('character_id')->references('id')->on('characters');
-            $table->foreign('people_id')->references('id')->on('peoples');
         });
     }
 

@@ -1,9 +1,9 @@
 <?php
-/**
- * Copyright (c) by anime-free
- * Date: 2020.
- * User: Alukardua
- */
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,8 +19,8 @@ class CreatePeoplesTable extends Migration
     public function up()
     {
         Schema::create('peoples', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name')->unique();
+            $table->id();
+            $table->string('name');
             $table->string('url');
             $table->string('photo')->nullable();
             $table->string('eng_name')->nullable();

@@ -1,6 +1,12 @@
 <?php
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 
 class UsersSeeder extends Seeder
@@ -19,7 +25,7 @@ class UsersSeeder extends Seeder
                 'group_id'          => '1',
                 'email'             => 'prizrack30@gmail.com',
                 'email_verified_at' => now(),
-                'password'          => bcrypt('12345678'),
+                'password'          => Hash::make('12345678'),
                 'remember_token'    => Str::random(10),
             ],
         ];

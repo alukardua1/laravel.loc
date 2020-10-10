@@ -1,9 +1,9 @@
 <?php
-/**
- * Copyright (c) by anime-free
- * Date: 2020.
- * User: Alukardua
- */
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 return [
     'imgColumns'        => 'poster',
@@ -23,7 +23,7 @@ return [
         'Height' => 322,
     ],
     'extension' => [
-        'jpg', 'png', 'bmp',
+        'jpg', 'png', 'bmp', 'webp'
     ]
 
 ];

@@ -1,12 +1,14 @@
 <?php
-/**
- * Copyright (c) by anime-free
- * Date: 2020.
- * User: Alukardua
- */
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 namespace App\Traits;
 
+
+use http\Url;
 
 /**
  * Trait ShowApiPost
@@ -19,7 +21,8 @@ trait ShowApiPost
 
 	public function __construct()
 	{
-		self::$urlSite = url('/');
+		//self::$urlSite = url('/');
+        self::$urlSite = env('APP_URL', '/');
 	}
 
 	/**
@@ -66,7 +69,7 @@ trait ShowApiPost
                 'shikimori'   => $this->externalLinks('shikimori', $data['shikimori_id'], 'https://shikimori.one/animes/'),
                 'kinopoisk'   => $this->externalLinks('kinopoisk', $data['kp_id'], 'https://www.kinopoisk.ru/series/'),
                 'myanimelist' => $this->externalLinks('myanimelist', $data['mal_id'], 'http://myanimelist.net/anime/'),
-                'anime_db'    => $this->externalLinks('anime_db', $data['anidb_id'], 'https://anidb.net/perl-bin/animedb.pl?show=anime&aid='),
+                'anidb'    => $this->externalLinks('anime_db', $data['anidb_id'], 'https://anidb.net/perl-bin/animedb.pl?show=anime&aid='),
             ],
             'content'        => $data['content'],
             'trailer'        => null,

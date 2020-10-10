@@ -1,9 +1,9 @@
 <?php
-/**
- * Copyright (c) by anime-free
- * Date: 2020.
- * User: Alukardua
- */
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,9 +19,9 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('group_id')->default(3);
-            $table->unsignedBigInteger('country_id')->default(1);
+            $table->id();
+            $table->foreignId('group_id')->default(3);
+            $table->foreignId('country_id')->default(1);
             $table->string('login')->unique();
             $table->string('name')->nullable();
             $table->string('email')->unique();
@@ -33,9 +33,6 @@ class CreateUsersTable extends Migration
             $table->text('signature')->nullable();
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('group_id')->references('id')->on('groups');
-            $table->foreign('country_id')->references('id')->on('countries');
         });
     }
 

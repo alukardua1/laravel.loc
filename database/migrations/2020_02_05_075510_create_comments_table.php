@@ -1,4 +1,9 @@
 <?php
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,15 +19,13 @@ class CreateCommentsTable extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('anime_id');
-            $table->unsignedBigInteger('parent_comment_id')->default(0);
+            $table->id();
+            $table->foreignId('user_id');
+            $table->foreignId('anime_id');
+            $table->integer('parent_comment_id')->default(0);
             $table->text('content');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('anime_id')->references('id')->on('animes');
         });
     }
 
