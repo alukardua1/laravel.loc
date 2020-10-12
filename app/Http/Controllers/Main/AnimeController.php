@@ -1,9 +1,9 @@
 <?php
-/**
- * Copyright (c) by anime-free
- * Date: 2020.
- * User: Alukardua
- */
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 namespace App\Http\Controllers\Main;
 
@@ -61,9 +61,14 @@ class AnimeController extends Controller
      *
      * @return Renderable
      */
-    public function index(): Renderable
+    public function index(Request $request): Renderable
     {
-        $animePost = self::$animeRepository->getAnime()->paginate(self::$paginate);
+        $page = 'page_' . $request->get('page', 1);
+        if (Cache::has(self::$keyCache . $page)) {
+            $posts = Cache::get(self::$keyCache . $page);
+        } else {
+            $posts = self::setCache(self::$keyCache . $page, self::$animeRepository->getAnime()->paginate(self::$paginate));
+        }
 
         return view(self::$theme . '/home', compact('animePost'));
     }

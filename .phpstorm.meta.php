@@ -1,4 +1,10 @@
 <?php
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
+
 // @formatter:off
 
 namespace PHPSTORM_META {
@@ -44,7 +50,6 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
             'Illuminate\Console\Scheduling\ScheduleFinishCommand' => \Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
             'Illuminate\Console\Scheduling\ScheduleRunCommand' => \Illuminate\Console\Scheduling\ScheduleRunCommand::class,
-            'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
@@ -229,7 +234,6 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
             'Illuminate\Console\Scheduling\ScheduleFinishCommand' => \Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
             'Illuminate\Console\Scheduling\ScheduleRunCommand' => \Illuminate\Console\Scheduling\ScheduleRunCommand::class,
-            'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
@@ -414,7 +418,6 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
             'Illuminate\Console\Scheduling\ScheduleFinishCommand' => \Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
             'Illuminate\Console\Scheduling\ScheduleRunCommand' => \Illuminate\Console\Scheduling\ScheduleRunCommand::class,
-            'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
@@ -599,7 +602,6 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
             'Illuminate\Console\Scheduling\ScheduleFinishCommand' => \Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
             'Illuminate\Console\Scheduling\ScheduleRunCommand' => \Illuminate\Console\Scheduling\ScheduleRunCommand::class,
-            'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
@@ -784,7 +786,6 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
             'Illuminate\Console\Scheduling\ScheduleFinishCommand' => \Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
             'Illuminate\Console\Scheduling\ScheduleRunCommand' => \Illuminate\Console\Scheduling\ScheduleRunCommand::class,
-            'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
@@ -969,7 +970,6 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
             'Illuminate\Console\Scheduling\ScheduleFinishCommand' => \Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
             'Illuminate\Console\Scheduling\ScheduleRunCommand' => \Illuminate\Console\Scheduling\ScheduleRunCommand::class,
-            'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
@@ -1154,7 +1154,6 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
             'Illuminate\Console\Scheduling\ScheduleFinishCommand' => \Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
             'Illuminate\Console\Scheduling\ScheduleRunCommand' => \Illuminate\Console\Scheduling\ScheduleRunCommand::class,
-            'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
@@ -1339,7 +1338,6 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
             'Illuminate\Console\Scheduling\ScheduleFinishCommand' => \Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
             'Illuminate\Console\Scheduling\ScheduleRunCommand' => \Illuminate\Console\Scheduling\ScheduleRunCommand::class,
-            'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
@@ -1524,7 +1522,6 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
             'Illuminate\Console\Scheduling\ScheduleFinishCommand' => \Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
             'Illuminate\Console\Scheduling\ScheduleRunCommand' => \Illuminate\Console\Scheduling\ScheduleRunCommand::class,
-            'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
@@ -1709,7 +1706,6 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
             'Illuminate\Console\Scheduling\ScheduleFinishCommand' => \Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
             'Illuminate\Console\Scheduling\ScheduleRunCommand' => \Illuminate\Console\Scheduling\ScheduleRunCommand::class,
-            'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
@@ -1894,7 +1890,6 @@ namespace PHPSTORM_META {
             'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
             'Illuminate\Console\Scheduling\ScheduleFinishCommand' => \Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
             'Illuminate\Console\Scheduling\ScheduleRunCommand' => \Illuminate\Console\Scheduling\ScheduleRunCommand::class,
-            'Illuminate\Console\Scheduling\ScheduleWorkCommand' => \Illuminate\Console\Scheduling\ScheduleWorkCommand::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
             'Illuminate\Contracts\Console\Kernel' => \App\Console\Kernel::class,
