@@ -1,12 +1,13 @@
 <?php
-/**
- * Copyright (c) by anime-free
- * Date: 2020.
- * User: Alukardua
- */
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -30,6 +31,7 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends Authenticatable
 {
+    use HasFactory;
     use Notifiable;
 
     /**

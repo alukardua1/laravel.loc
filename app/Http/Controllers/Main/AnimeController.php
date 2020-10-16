@@ -65,9 +65,9 @@ class AnimeController extends Controller
     {
         $page = 'page_' . $request->get('page', 1);
         if (Cache::has(self::$keyCache . $page)) {
-            $posts = Cache::get(self::$keyCache . $page);
+            $animePost = Cache::get(self::$keyCache . $page);
         } else {
-            $posts = self::setCache(self::$keyCache . $page, self::$animeRepository->getAnime()->paginate(self::$paginate));
+            $animePost = self::setCache(self::$keyCache . $page, self::$animeRepository->getAnime()->paginate(self::$paginate));
         }
 
         return view(self::$theme . '/home', compact('animePost'));

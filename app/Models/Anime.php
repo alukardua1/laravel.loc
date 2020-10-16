@@ -1,13 +1,14 @@
 <?php
-/**
- * Copyright (c) by anime-free
- * Date: 2020.
- * User: Alukardua
- */
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 namespace App\Models;
 
 use Auth;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -40,6 +41,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Anime extends Model
 {
+    use HasFactory;
     /**
      * @var array
      */

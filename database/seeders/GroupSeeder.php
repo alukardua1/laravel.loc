@@ -5,11 +5,12 @@
  * Author: Alukard                                                            *
  ******************************************************************************/
 
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Seeder;
+namespace Database\Seeders;
 
-class UsersSeeder extends Seeder
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class GroupSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,17 +21,16 @@ class UsersSeeder extends Seeder
     {
         $data = [
             [
-                'login'             => 'admin',
-                'name'              => '',
-                'group_id'          => '1',
-                'email'             => 'prizrack30@gmail.com',
-                'email_verified_at' => now(),
-                'password'          => Hash::make('12345678'),
-                'remember_token'    => Str::random(10),
+                'title' => 'Администратор',
+            ],
+            [
+                'title' => 'Модератор',
+            ],
+            [
+                'title' => 'Пользователь',
             ],
         ];
 
-        DB::table('users')->insert($data);
-        factory(User::class, 10)->create();
+        DB::table('groups')->insert($data);
     }
 }
