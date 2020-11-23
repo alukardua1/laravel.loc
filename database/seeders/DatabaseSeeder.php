@@ -7,8 +7,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Anime;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,14 +18,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-        $this->call(GroupSeeder::class);
-        $this->call(CountriesSeeder::class);
+        // \App\Models\User::factory(10)->create();
+
         $this->call(UsersSeeder::class);
-        User::factory()->count(10)->create();
+        $this->call(KindSeeder::class);
         $this->call(CategorySeeder::class);
-        Anime::factory()->count(100)->create();
-        //factory(Anime::class, 100)->create();
+        $this->call(AnimeSeeder::class);
         $this->call(AnimeCategorySeeder::class);
+        $this->call(StudiosSeeder::class);
     }
 }

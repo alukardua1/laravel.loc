@@ -7,31 +7,31 @@
 
 namespace Database\Seeders;
 
-use App\Repository\Interfaces\DLEParse;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class AnimeCategorySeeder extends Seeder
 {
-    protected $animeCategory;
-
-    public function __construct(DLEParse $DLEParse)
-    {
-        $this->animeCategory = $DLEParse;
-    }
-
     /**
      * Run the database seeds.
      *
      * @return void
+     * @throws \Exception
      */
     public function run()
     {
-        $post = $this->animeCategory->parsePostCategory();
+        $categories = [];
 
-        foreach ($post as $value)
-        {
-            DB::table('anime_category')->insert($value);
+        for ($i = 1; $i <= 300; $i++) {
+
+            //$parentId = ($i > 4) ? rand(1, 4) : 1;
+
+            $categories[] = [
+                'anime_id' => random_int(1, 100),
+                'category_id'   => random_int(1, 10),
+            ];
         }
+
+        DB::table('anime_category')->insert($categories);
     }
 }

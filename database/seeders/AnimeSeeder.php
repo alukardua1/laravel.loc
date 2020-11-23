@@ -11,15 +11,14 @@ use App\Repository\Interfaces\DLEParse;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class AnimeCategorySeeder extends Seeder
+class AnimeSeeder extends Seeder
 {
-    protected $animeCategory;
+    protected $anime;
 
     public function __construct(DLEParse $DLEParse)
     {
-        $this->animeCategory = $DLEParse;
+        $this->anime = $DLEParse;
     }
-
     /**
      * Run the database seeds.
      *
@@ -27,11 +26,11 @@ class AnimeCategorySeeder extends Seeder
      */
     public function run()
     {
-        $post = $this->animeCategory->parsePostCategory();
+        $post = $this->anime->parsePost();
 
         foreach ($post as $value)
         {
-            DB::table('anime_category')->insert($value);
+            DB::table('animes')->insert($value);
         }
     }
 }

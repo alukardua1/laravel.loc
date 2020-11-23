@@ -7,31 +7,27 @@
 
 namespace Database\Seeders;
 
-use App\Repository\Interfaces\DLEParse;
+use App\Models\Anime;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class AnimeCategorySeeder extends Seeder
+class DatabaseSeeder extends Seeder
 {
-    protected $animeCategory;
-
-    public function __construct(DLEParse $DLEParse)
-    {
-        $this->animeCategory = $DLEParse;
-    }
-
     /**
-     * Run the database seeds.
+     * Seed the application's database.
      *
      * @return void
      */
     public function run()
     {
-        $post = $this->animeCategory->parsePostCategory();
-
-        foreach ($post as $value)
-        {
-            DB::table('anime_category')->insert($value);
-        }
+        // $this->call(UsersTableSeeder::class);
+        $this->call(GroupSeeder::class);
+        $this->call(CountriesSeeder::class);
+        $this->call(UsersSeeder::class);
+        User::factory()->count(10)->create();
+        $this->call(CategorySeeder::class);
+        Anime::factory()->count(100)->create();
+        //factory(Anime::class, 100)->create();
+        $this->call(AnimeCategorySeeder::class);
     }
 }

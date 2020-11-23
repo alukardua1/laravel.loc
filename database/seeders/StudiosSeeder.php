@@ -7,17 +7,17 @@
 
 namespace Database\Seeders;
 
-use App\Repository\Interfaces\DLEParse;
+use App\Repository\DLEParseRepository;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class AnimeCategorySeeder extends Seeder
+class StudiosSeeder extends Seeder
 {
-    protected $animeCategory;
+    protected $studiosRepository;
 
-    public function __construct(DLEParse $DLEParse)
+    public function __construct(DLEParseRepository $DLEParseRepository)
     {
-        $this->animeCategory = $DLEParse;
+        $this->studiosRepository = $DLEParseRepository;
     }
 
     /**
@@ -27,11 +27,9 @@ class AnimeCategorySeeder extends Seeder
      */
     public function run()
     {
-        $post = $this->animeCategory->parsePostCategory();
-
-        foreach ($post as $value)
-        {
-            DB::table('anime_category')->insert($value);
+        $studios = $this->studiosRepository->parseStudio();
+        foreach ($studios as $studio) {
+            DB::table('studios')->insert($studio);
         }
     }
 }

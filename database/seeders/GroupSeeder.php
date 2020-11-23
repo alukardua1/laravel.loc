@@ -20,17 +20,10 @@ class GroupSeeder extends Seeder
     public function run()
     {
         $data = [
-            [
-                'title' => 'Администратор',
-            ],
-            [
-                'title' => 'Модератор',
-            ],
-            [
-                'title' => 'Пользователь',
-            ],
+          ['title' => 'Администратор'],
+          ['title' => 'Модератор'],
+          ['title' => 'Пользователь'],
         ];
-
         DB::table('groups')->insert($data);
     }
 }

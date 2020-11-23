@@ -7,12 +7,19 @@
 
 namespace Database\Seeders;
 
+use App\Repository\Interfaces\DLEParse;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class CategorySeeder extends Seeder
 {
+    protected $category;
+
+    public function __construct(DLEParse $DLEParse)
+    {
+        $this->category = $DLEParse;
+    }
+
     /**
      * Run the database seeds.
      *
@@ -20,18 +27,12 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $categories = [];
-
-        for ($i = 0; $i <= 10; $i++) {
-            $cName = 'Категория #'.$i;
-            //$parentId = ($i > 4) ? rand(1, 4) : 1;
-
-            $categories[] = [
-                'title' => $cName,
-                'url'   => Str::slug($cName),
-            ];
+        $categorys = $this->category->parseCategory();
+        foreach ($categorys as $cat)
+        {
+            $data = $cat;
         }
 
-        DB::table('categories')->insert($categories);
+        DB::table('categories')->insert($categorys);
     }
 }

@@ -7,19 +7,13 @@
 
 namespace Database\Seeders;
 
-use App\Repository\Interfaces\DLEParse;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
-class AnimeCategorySeeder extends Seeder
+class UsersSeeder extends Seeder
 {
-    protected $animeCategory;
-
-    public function __construct(DLEParse $DLEParse)
-    {
-        $this->animeCategory = $DLEParse;
-    }
-
     /**
      * Run the database seeds.
      *
@@ -27,11 +21,18 @@ class AnimeCategorySeeder extends Seeder
      */
     public function run()
     {
-        $post = $this->animeCategory->parsePostCategory();
+        $data = [
+            [
+                'login'             => 'admin',
+                'name'              => '',
+                'group_id'          => '1',
+                'email'             => 'prizrack30@gmail.com',
+                'email_verified_at' => now(),
+                'password'          => Hash::make('12345678'),
+                'remember_token'    => Str::random(10),
+            ],
+        ];
 
-        foreach ($post as $value)
-        {
-            DB::table('anime_category')->insert($value);
-        }
+        DB::table('users')->insert($data);
     }
 }

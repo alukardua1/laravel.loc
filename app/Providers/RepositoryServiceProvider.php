@@ -1,9 +1,9 @@
 <?php
-/**
- * Copyright (c) by anime-free
- * Date: 2020.
- * User: Alukardua
- */
+/******************************************************************************
+ * Copyright (c) by anime-free                                                *
+ * Date: 2020.                                                                *
+ * Author: Alukard                                                            *
+ ******************************************************************************/
 
 namespace App\Providers;
 
@@ -36,6 +36,8 @@ use App\Repositories\StudiosRepository;
 use App\Repositories\TranslateRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\VoteRepository;
+use App\Repository\DLEParseRepository;
+use App\Repository\Interfaces\DLEParse;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -103,6 +105,10 @@ class RepositoryServiceProvider extends ServiceProvider
 			VoteRepositoryInterface::class,
 			VoteRepository::class
 		);
+		$this->app->bind(
+		    DLEParse::class,
+            DLEParseRepository::class
+        );
 	}
 
 	/**
